@@ -1,11 +1,17 @@
 var user = require('../models').user;
 
-exports.getUser = async function (orm) {
+exports.getUser = async function (userid) {
     try {
-        var result = user.findOne(orm).then(res=>res);
+        var result = await user.findOne({
+            where:{
+                userid: userid
+            }
+        })
+        .then(res=>res.dataValues)
+        .catch(err=>{throw Error(err)})
         return result;
     } catch (e) {
         console.log(e);
-        throw Error('Error while getUser');
+        // throw Error('Error while getUser');
     }
 }

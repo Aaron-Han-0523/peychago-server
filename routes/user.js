@@ -6,7 +6,7 @@ var userController = require('../controllers/user');
 /* GET users listing. */
 router
   .get('/', function (req, res, next) {
-    res.send('respond with a resource');
+    res.render('pages/user');
   })
   .get('/login', (req, res, next) => {
     res.render('user/login');
