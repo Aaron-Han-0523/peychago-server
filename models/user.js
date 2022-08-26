@@ -22,11 +22,17 @@ module.exports = function(sequelize, DataTypes) {
     phone: {
       type: DataTypes.CHAR(25),
       allowNull: false,
+      validate:{
+        isDecimal: true,
+      },
       comment: "전화번호"
     },
     email: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate:{
+        isEmail:true,
+      },
       comment: "이메일 주소"
     },
     permission1: {
