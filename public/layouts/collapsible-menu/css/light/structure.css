@@ -784,7 +784,7 @@ body .navbar .dark-mode, body:not(.dark) .navbar .dark-mode {
   width: 84px;
 }
 .sidebar-closed > .sidebar-wrapper:hover {
-  width: 255px;
+  width: 320px;
 }
 .sidebar-closed > .sidebar-wrapper:hover span.sidebar-label {
   display: inline-block;

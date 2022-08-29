@@ -749,7 +749,7 @@ body .navbar .dark-mode, body:not(.dark) .navbar .dark-mode {
 ===============
 */
 .sidebar-wrapper {
-  width: 255px;
+  width: 320px;
   position: fixed;
   z-index: 1030;
   transition: width 0.6s;
@@ -784,7 +784,7 @@ body .navbar .dark-mode, body:not(.dark) .navbar .dark-mode {
   width: 84px;
 }
 .sidebar-closed > .sidebar-wrapper:hover {
-  width: 255px;
+  width: 320px;
 }
 .sidebar-closed > .sidebar-wrapper:hover span.sidebar-label {
   display: inline-block;
@@ -1401,8 +1401,8 @@ body.alt-menu #content {
   }
 
   body.alt-menu .sidebar-closed > .sidebar-wrapper {
-    width: 255px;
-    left: -255px;
+    width: 320px;
+    left: -320px;
   }
 
   .main-container {

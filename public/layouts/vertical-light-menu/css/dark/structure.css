@@ -707,7 +707,7 @@ body.dark .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .d
   height: 18px;
 }
 body.dark .sidebar-wrapper {
-  width: 255px;
+  width: 320px;
   position: fixed;
   z-index: 1030;
   transition: width 0.6s;
@@ -739,7 +739,7 @@ body.dark .sidebar-closed > .sidebar-wrapper {
   width: 84px;
 }
 body.dark .sidebar-closed > .sidebar-wrapper:hover {
-  width: 255px;
+  width: 320px;
   box-shadow: 6px 0 10px 0 rgba(0, 0, 0, 0.14), 1px 0px 18px 0 rgba(0, 0, 0, 0.12), 3px 0 5px -1px rgba(0, 0, 0, 0.2);
 }
 body.dark .sidebar-closed > .sidebar-wrapper:hover span.sidebar-label {
@@ -1332,8 +1332,8 @@ body.dark.alt-menu #content {
     display: flex;
   }
   body.alt-menu .sidebar-closed > .sidebar-wrapper {
-    width: 255px;
-    left: -255px;
+    width: 320px;
+    left: -320px;
   }
   body.dark .main-container {
     padding: 0;
