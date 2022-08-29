@@ -4,8 +4,8 @@
     "password": "root",
     "database": "admin_page",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "secret" : "wewunvb34097bh%(%)9dm348n"
+    "dialect": "mysql"
+    ,"cookie_secure": false
   },
   "test": {
     "username": "root",
@@ -20,5 +20,6 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
+    ,"cookie_secure": false
   }
 }

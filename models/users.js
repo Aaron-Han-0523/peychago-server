@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('user', {
+  return sequelize.define('users', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
@@ -22,52 +22,53 @@ module.exports = function(sequelize, DataTypes) {
     phone: {
       type: DataTypes.CHAR(25),
       allowNull: false,
-      validate:{
-        isDecimal: true,
-      },
       comment: "전화번호"
     },
     email: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.CHAR(25),
       allowNull: false,
-      validate:{
-        isEmail:true,
-      },
       comment: "이메일 주소"
     },
     permission1: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "공지사항 권한"
     },
     permission2: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "후기 권한"
     },
     permission3: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "입금 내역 권한"
     },
     permission4: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "이미지 세팅 권한"
     },
     permission5: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "차량 정보 권한"
     },
     permission6: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "부자재 권한"
     },
     permission7: {
-      type: DataTypes.BOOLEAN,
+      type: "BIT(4)",
       allowNull: false,
+      defaultValue: "b'0'",
       comment: "폐차 파트너 권한"
     },
     note: {
@@ -90,6 +91,7 @@ module.exports = function(sequelize, DataTypes) {
     createDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
     updateDate: {
@@ -99,7 +101,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     deleteDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "삭제일"
     },
     custom1: {
@@ -119,7 +121,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'user',
+    tableName: 'users',
     timestamps: false,
     indexes: [
       {

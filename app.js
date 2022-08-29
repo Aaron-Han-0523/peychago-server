@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config/config.json')[env];
 
@@ -9,7 +11,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/user');
+var usersRouter = require('./routes/users');
 
 let sequelize = require('./models/index').sequelize;
 sequelize.sync();
@@ -31,10 +33,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // set the secret key variable for jwt
-app.set('jwt-secret', config.secret)
+app.set('secret_key', process.env.SECRET_KEY)
+
+// set the cookie option : secure
+app.set('cookie-secure', config.cookie_secure)
+
+// console.log(app)
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use('/users', usersRouter);
 app.get('/notice', (req,res,next)=>res.render('pages/notice'))
 app.get('/review', (req,res,next)=>res.render('pages/review'))
 app.get('/export-request', (req,res,next)=>res.render('pages/export-request'))

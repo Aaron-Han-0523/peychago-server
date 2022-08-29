@@ -1,8 +1,10 @@
-const userService = require('../services/user')
+const userService = require('../services/users')
 const jwt = require('jsonwebtoken')
 
 exports.login = async function (req, res, next) {
     const body = req.body;
+    const secret = req.app.get('secret_key');
+
     console.log(body)
     console.log("try", body.userID, "login");
 
@@ -11,11 +13,22 @@ exports.login = async function (req, res, next) {
 
     if (user) {
         if (user.password == body.userPassword) {
-            console.log('login 성공')
-            res.cookie("id", user.userid, {
-                expires: new Date(Date.now() + 60 * 60 * 24), // 하루
-                httpOnly: true,
+            delete user.password;
+            console.log('secret_key :', secret)
+            const token = await jwt.sign(user, secret, {
+                algorithm: 'HS512',
+                expiresIn: '4h',
             })
+
+            console.log(token)
+            res.cookie('jwt', token, {
+                httpOnly: true,
+                secure: req.app.secure,
+            })
+            // return res.status(201).json({
+            //     result: 'ok',
+            //     token
+            // })
             return res.redirect('/')
         } else {
             console.log('비밀번호 불일치')
@@ -26,3 +39,5 @@ exports.login = async function (req, res, next) {
         return res.send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
     }
 }
+
+// expor
