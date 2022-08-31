@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 var imageSettingController = require('../controllers/imageSetting');
+const jwt = require('../services/jwt')
 
 /* GET imageSetting listing. */
 router
-  .get('/', (req, res, next) => res.render('imageSetting/index'))
-  .get('/add', (req, res, next) => res.render('imageSetting/add'))
-  .post('/add', imageSettingController.add)
-  .get('/edit', (req, res, next) => res.render('imageSetting/edit'))
-  .post('/edit', imageSettingController.edit)
-  .delete('/', imageSettingController.delete)
+  .get('/', jwt.verifyToken, (req, res, next) => res.json('imageSetting/index'))
+  .get('/add', jwt.verifyToken, (req, res, next) => res.json('imageSetting/add'))
+  .post('/add', jwt.verifyToken, imageSettingController.add)
+  .get('/edit', jwt.verifyToken, (req, res, next) => res.json('imageSetting/edit'))
+  .post('/edit', jwt.verifyToken, imageSettingController.edit)
+  .delete('/', jwt.verifyToken, imageSettingController.delete)
 
 module.exports = router;

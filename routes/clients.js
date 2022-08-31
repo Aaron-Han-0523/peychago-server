@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 var clientsController = require('../controllers/clients');
+const jwt = require('../services/jwt')
 
 /* GET clients listing. */
 router
-  .get('/', (req, res, next) => res.render('clients/index'))
-  .get('/add', (req, res, next) => res.render('clients/add'))
-  .post('/add', clientsController.add)
-  .get('/edit', (req, res, next) => res.render('clients/edit'))
-  .post('/edit', clientsController.edit)
-  .delete('/', clientsController.delete)
+  .get('/', jwt.verifyToken, (req, res, next) => res.json('clients/index'))
+  .get('/add', jwt.verifyToken, (req, res, next) => res.json('clients/add'))
+  .post('/add', jwt.verifyToken, clientsController.add)
+  .get('/edit', jwt.verifyToken, (req, res, next) => res.json('clients/edit'))
+  .post('/edit', jwt.verifyToken, clientsController.edit)
+  .delete('/', jwt.verifyToken, clientsController.delete)
 
 module.exports = router;

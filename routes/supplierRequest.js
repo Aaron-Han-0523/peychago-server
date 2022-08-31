@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 var supplierRequestController = require('../controllers/supplierRequest');
+const jwt = require('../services/jwt')
 
 /* GET supplierRequest listing. */
 router
-  .get('/', (req, res, next) => res.render('supplierRequest/index'))
-  .get('/add', (req, res, next) => res.render('supplierRequest/add'))
-  .post('/add', supplierRequestController.add)
-  .get('/edit', (req, res, next) => res.render('supplierRequest/edit'))
-  .post('/edit', supplierRequestController.edit)
-  .delete('/', supplierRequestController.delete)
+  .get('/', jwt.verifyToken, (req, res, next) => res.json('supplierRequest/index'))
+  .get('/add', jwt.verifyToken, (req, res, next) => res.json('supplierRequest/add'))
+  .post('/add', jwt.verifyToken, supplierRequestController.add)
+  .get('/edit', jwt.verifyToken, (req, res, next) => res.json('supplierRequest/edit'))
+  .post('/edit', jwt.verifyToken, supplierRequestController.edit)
+  .delete('/', jwt.verifyToken, supplierRequestController.delete)
 
 module.exports = router;

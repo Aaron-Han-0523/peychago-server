@@ -1,5 +1,5 @@
 const userService = require('../services/users')
-const jwt = require('jsonwebtoken')
+const jwt = require('../services/jwt')
 
 exports.login = async function (req, res, next) {
     const body = req.body;
@@ -15,10 +15,7 @@ exports.login = async function (req, res, next) {
         if (user.password == body.password) {
             delete user.password;
             console.log('secret_key :', secret)
-            const token = await jwt.sign(user, secret, {
-                algorithm: 'HS512',
-                expiresIn: '4h',
-            })
+            const token = await jwt.createToken(user);
 
             console.log(token)
             res.cookie('jwt', token, {
@@ -41,7 +38,7 @@ exports.login = async function (req, res, next) {
 }
 
 exports.add = async (req, res, next) => {
-    res.render('users/add');
+    res.json('users/add');
 }
 
 exports.edit = async (req, res, next) => {

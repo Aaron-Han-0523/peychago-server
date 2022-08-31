@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 var disposalRequestController = require('../controllers/disposalRequest');
+const jwt = require('../services/jwt')
 
 /* GET disposalRequest listing. */
 router
-  .get('/', (req, res, next) => res.render('disposalRequest/index'))
-  .get('/add', (req, res, next) => res.render('disposalRequest/add'))
-  .post('/add', disposalRequestController.add)
-  .get('/edit', (req, res, next) => res.render('disposalRequest/edit'))
-  .post('/edit', disposalRequestController.edit)
-  .delete('/', disposalRequestController.delete)
+  .get('/', jwt.verifyToken, (req, res, next) => res.json('disposalRequest/index'))
+  .get('/add', jwt.verifyToken, (req, res, next) => res.json('disposalRequest/add'))
+  .post('/add', jwt.verifyToken, disposalRequestController.add)
+  .get('/edit', jwt.verifyToken, (req, res, next) => res.json('disposalRequest/edit'))
+  .post('/edit', jwt.verifyToken, disposalRequestController.edit)
+  .delete('/', jwt.verifyToken, disposalRequestController.delete)
 
 module.exports = router;

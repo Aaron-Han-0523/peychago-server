@@ -65,6 +65,8 @@ app.use('/imageSetting', imageSettingRouter)
 app.use('/carInformation', carInfoRouter)
 app.use('/subsidiaryMaterial', materialRouter)
 app.use('/supplierUsers', supplierUsersRouter)
+app.use('/clients', clientsRouter)
+app.use('/process', processRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
