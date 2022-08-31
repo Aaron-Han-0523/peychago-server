@@ -6,13 +6,13 @@ exports.login = async function (req, res, next) {
     const secret = req.app.get('secret_key');
 
     console.log(body)
-    console.log("try", body.userID, "login");
+    console.log("try", body.user_id, "login");
 
-    const user = await userService.getUser(body.userID)
+    const user = await userService.getUser(body.user_id)
     console.log(user)
 
     if (user) {
-        if (user.password == body.userPassword) {
+        if (user.password == body.password) {
             delete user.password;
             console.log('secret_key :', secret)
             const token = await jwt.sign(user, secret, {
@@ -23,7 +23,7 @@ exports.login = async function (req, res, next) {
             console.log(token)
             res.cookie('jwt', token, {
                 httpOnly: true,
-                secure: req.app.secure,
+                secure: req.app.get('cookie-secure'),
             })
             // return res.status(201).json({
             //     result: 'ok',
@@ -40,4 +40,26 @@ exports.login = async function (req, res, next) {
     }
 }
 
-// expor
+exports.add = async (req, res, next) => {
+    res.render('users/add');
+}
+
+exports.edit = async (req, res, next) => {
+  
+}
+
+exports.index = async (req, res, next) => {
+  
+}
+
+exports.detail = async (req, res, next) => {
+  
+}
+
+exports.delete = async (req, res, next) => {
+  
+}
+
+exports.changePassword = async (req, res, next) => {
+  
+}

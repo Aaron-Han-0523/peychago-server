@@ -1,17 +1,17 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('users', {
-    id: {
+    users_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
-      comment: "사용자 id"
+      comment: "사용자 식별번호"
     },
     userid: {
       type: DataTypes.STRING(200),
       allowNull: false,
-      comment: "사용자 userid",
+      comment: "아이디",
       unique: "userid_UNIQUE"
     },
     password: {
@@ -19,15 +19,20 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "비밀번호"
     },
+    userName: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "이름"
+    },
     phone: {
       type: DataTypes.CHAR(25),
       allowNull: false,
-      comment: "전화번호"
+      comment: "연락처"
     },
     email: {
       type: DataTypes.CHAR(25),
       allowNull: false,
-      comment: "이메일 주소"
+      comment: "이메일"
     },
     permission1: {
       type: "BIT(4)",
@@ -78,7 +83,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "메모"
     },
     createUser: {
-      type: DataTypes.CHAR(25),
+      type: DataTypes.CHAR(15),
       allowNull: false,
       comment: "생성자"
     },
@@ -107,17 +112,17 @@ module.exports = function(sequelize, DataTypes) {
     custom1: {
       type: DataTypes.STRING(200),
       allowNull: true,
-      comment: "예비"
+      comment: "custom1"
     },
     custom2: {
       type: DataTypes.STRING(200),
       allowNull: true,
-      comment: "예비"
+      comment: "custom2"
     },
     custom3: {
       type: DataTypes.STRING(200),
       allowNull: true,
-      comment: "예비"
+      comment: "custom3"
     }
   }, {
     sequelize,
@@ -129,15 +134,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
-        ]
-      },
-      {
-        name: "id_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id" },
+          { name: "users_id" },
         ]
       },
       {
@@ -146,6 +143,14 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "userid" },
+        ]
+      },
+      {
+        name: "id_UNIQUE",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "users_id" },
         ]
       },
     ]

@@ -11,6 +11,17 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
+var carInfoRouter = require('./routes/carInfo');
+var clientsRouter = require('./routes/clients');
+var disposalRequestRouter = require('./routes/disposalRequest');
+var exportRequestRouter = require('./routes/exportRequest');
+var imageSettingRouter = require('./routes/imageSetting');
+var materialRouter = require('./routes/material');
+var noticeRouter = require('./routes/notice');
+var processRouter = require('./routes/process');
+var reviewRouter = require('./routes/review');
+var supplierRequestRouter = require('./routes/supplierRequest');
+var supplierUsersRouter = require('./routes/supplierUsers');
 var usersRouter = require('./routes/users');
 
 let sequelize = require('./models/index').sequelize;
@@ -40,18 +51,20 @@ app.set('cookie-secure', config.cookie_secure)
 
 // console.log(app)
 
+// 추가사항
+// clientsRouter
+// processRouter
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.get('/notice', (req,res,next)=>res.render('pages/notice'))
-app.get('/review', (req,res,next)=>res.render('pages/review'))
-app.get('/export-request', (req,res,next)=>res.render('pages/export-request'))
-app.get('/disposal-request', (req,res,next)=>res.render('pages/disposal-request'))
-app.get('/supplier-request', (req,res,next)=>res.render('pages/supplier-request'))
-app.get('/image-setting', (req,res,next)=>res.render('pages/image-setting'))
-app.get('/car-information', (req,res,next)=>res.render('pages/car-information'))
-app.get('/subsidiary-material', (req,res,next)=>res.render('pages/subsidiary-material'))
-app.get('/supplier-user', (req,res,next)=>res.render('pages/supplier-user'))
-app.get('/change-password', (req,res,next)=>res.render('pages/change-password'))
+app.use('/notice', noticeRouter)
+app.use('/review', reviewRouter)
+app.use('/exportRequest', exportRequestRouter)
+app.use('/disposalRequest', disposalRequestRouter)
+app.use('/supplierRequest', supplierRequestRouter)
+app.use('/imageSetting', imageSettingRouter)
+app.use('/carInformation', carInfoRouter)
+app.use('/subsidiaryMaterial', materialRouter)
+app.use('/supplierUsers', supplierUsersRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
