@@ -1,4 +1,4 @@
-
+const clientLogService = require('../Services/clientLog');
 
 exports.add = async (req, res, next) => {
 

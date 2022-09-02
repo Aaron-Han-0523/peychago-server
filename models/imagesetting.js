@@ -4,19 +4,23 @@ module.exports = function(sequelize, DataTypes) {
     imagesetting_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      comment: "이미지세팅 식별번호"
     },
     custom1: {
       type: DataTypes.STRING(200),
-      allowNull: true
+      allowNull: true,
+      comment: "예비1"
     },
     custom2: {
       type: DataTypes.STRING(200),
-      allowNull: true
+      allowNull: true,
+      comment: "예비2"
     },
     custom3: {
       type: DataTypes.STRING(200),
-      allowNull: true
+      allowNull: true,
+      comment: "예비3"
     }
   }, {
     sequelize,
@@ -25,6 +29,14 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "imagesetting_id" },
+        ]
+      },
+      {
+        name: "ImageSetting_PK",
         unique: true,
         using: "BTREE",
         fields: [

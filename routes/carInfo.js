@@ -1,16 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var carInfoController = require('../controllers/carInfo');
+const carInfoController = require('../controllers/carInfo');
 const jwt = require('../services/jwt')
 
 /* GET carinfo listing. */
 router
-  .get('/', jwt.verifyToken, (req, res, next) => res.json('carInfo/index'))
+  .get('/', jwt.verifyToken, carInfoController.index)
   .get('/add', jwt.verifyToken, (req, res, next) => res.json('carInfo/add'))
   .post('/add', jwt.verifyToken, carInfoController.add)
-  .get('/edit', jwt.verifyToken, (req, res, next) => res.json('carInfo/edit'))
-  .post('/edit', jwt.verifyToken, carInfoController.edit)
-  .delete('/', jwt.verifyToken, carInfoController.delete)
+  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.json('carInfo/edit'))
+  .put('/edit/:id', jwt.verifyToken, carInfoController.edit)
+  .delete('/:id', jwt.verifyToken, carInfoController.delete)
 
 module.exports = router;

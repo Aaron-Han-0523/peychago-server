@@ -9,6 +9,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var carInfoRouter = require('./routes/carInfo');
@@ -29,6 +30,9 @@ sequelize.sync();
 
 var app = express();
 
+// 헤더 정보 숨기기
+app.disable('x-powered-by');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -42,6 +46,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// app.use(cors());
+// app.use(cors({ exposedHeaders: 'jwt' }));
 
 // set the secret key variable for jwt
 app.set('secret_key', process.env.SECRET_KEY)
@@ -49,24 +55,24 @@ app.set('secret_key', process.env.SECRET_KEY)
 // set the cookie option : secure
 app.set('cookie-secure', config.cookie_secure)
 
-// console.log(app)
+console.log(app)
 
 // 추가사항
 // clientsRouter
 // processRouter
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/notice', noticeRouter)
-app.use('/review', reviewRouter)
-app.use('/exportRequest', exportRequestRouter)
-app.use('/disposalRequest', disposalRequestRouter)
-app.use('/supplierRequest', supplierRequestRouter)
-app.use('/imageSetting', imageSettingRouter)
-app.use('/carInformation', carInfoRouter)
-app.use('/subsidiaryMaterial', materialRouter)
-app.use('/supplierUsers', supplierUsersRouter)
-app.use('/clients', clientsRouter)
-app.use('/process', processRouter)
+app.use('/notice', noticeRouter);
+app.use('/review', reviewRouter);
+app.use('/exportRequest', exportRequestRouter);
+app.use('/disposalRequest', disposalRequestRouter);
+app.use('/supplierRequest', supplierRequestRouter);
+app.use('/imageSetting', imageSettingRouter);
+app.use('/carInfo', carInfoRouter);
+app.use('/material', materialRouter);
+app.use('/supplierUsers', supplierUsersRouter);
+app.use('/clients', clientsRouter);
+app.use('/process', processRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

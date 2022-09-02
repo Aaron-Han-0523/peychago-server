@@ -1,19 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var noticeController = require('../controllers/notice');
+const noticeController = require('../controllers/notice');
 const jwt = require('../services/jwt')
 
 /* GET notice listing. */
 router
-  .get('/', jwt.verifyToken, (req, res, next) => {
-    console.log('공지사항으로 이동');
-    res.json('notice/index');
-  })
+  .get('/', jwt.verifyToken, noticeController.index)
   .get('/add', jwt.verifyToken, (req, res, next) => res.json('notice/add'))
   .post('/add', jwt.verifyToken, noticeController.add)
-  .get('/edit', jwt.verifyToken, (req, res, next) => res.json('notice/edit'))
-  .post('/edit', jwt.verifyToken, noticeController.edit)
-  .delete('/', jwt.verifyToken, noticeController.delete)
+  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.json('notice/edit'))
+  .put('/edit/:id', jwt.verifyToken, noticeController.edit)
+  .delete('/:id', jwt.verifyToken, noticeController.delete)
 
 module.exports = router;

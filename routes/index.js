@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-let userService = require('../services/users');
+const userService = require('../services/users');
 const jwt = require('../services/jwt')
 
 /* GET home page. */

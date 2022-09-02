@@ -1,4 +1,4 @@
-
+const imageSettingService = require('../Services/imageSetting');
 
 exports.add = async (req, res, next) => {
 

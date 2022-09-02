@@ -10,7 +10,7 @@ var _notice = require("./notice");
 var _process = require("./process");
 var _review = require("./review");
 var _supplierrequest = require("./supplierrequest");
-var _supplieruser = require("./supplieruser");
+var _supplieruserlog = require("./supplieruserlog");
 var _supplierusers = require("./supplierusers");
 var _userlog = require("./userlog");
 var _users = require("./users");
@@ -27,7 +27,7 @@ function initModels(sequelize) {
   var process = _process(sequelize, DataTypes);
   var review = _review(sequelize, DataTypes);
   var supplierrequest = _supplierrequest(sequelize, DataTypes);
-  var supplieruser = _supplieruser(sequelize, DataTypes);
+  var supplieruserlog = _supplieruserlog(sequelize, DataTypes);
   var supplierusers = _supplierusers(sequelize, DataTypes);
   var userlog = _userlog(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
@@ -45,7 +45,7 @@ function initModels(sequelize) {
     process,
     review,
     supplierrequest,
-    supplieruser,
+    supplieruserlog,
     supplierusers,
     userlog,
     users,

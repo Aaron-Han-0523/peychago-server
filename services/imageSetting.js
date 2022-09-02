@@ -1,21 +1,9 @@
-
-
-exports.create = async () => {
-
-}
-
-exports.update = async () => {
-  
-}
+const imageSetting = require('../models').imageSetting;
 
 exports.allRead = async () => {
   
 }
 
 exports.readOne = async () => {
-  
-}
-
-exports.delete = async () => {
   
 }

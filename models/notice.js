@@ -1,54 +1,40 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('notice', {
-    id: {
+    notice_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       comment: "공지사항 식별번호"
-    },
-    title: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      comment: "제목"
-    },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      comment: "내용"
-    },
-    type: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      comment: "타입 top\/bottom\/norma"
-    },
-    link: {
-      type: DataTypes.STRING(500),
-      allowNull: true,
-      comment: "공지사항 링크"
     },
     createUser: {
       type: DataTypes.CHAR(15),
       allowNull: false,
       comment: "생성자"
     },
+    createDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "생성일"
+    },
     updateUser: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.CHAR(15),
       allowNull: true,
       comment: "수정자"
     },
-    createDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      comment: "생성일"
-    },
     updateDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true,
       comment: "수정일"
     },
+    deleteUser: {
+      type: DataTypes.CHAR(15),
+      allowNull: true,
+      comment: "삭제자"
+    },
     deleteDate: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true,
       comment: "삭제일"
     },
@@ -66,11 +52,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true,
       comment: "예비3"
-    },
-    users_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      comment: "사용자 식별번호"
     }
   }, {
     sequelize,
@@ -82,7 +63,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "notice_id" },
+        ]
+      },
+      {
+        name: "Notice_PK",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "notice_id" },
         ]
       },
     ]

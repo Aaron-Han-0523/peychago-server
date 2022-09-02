@@ -1,11 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('userlog', {
-    userlog_id: {
+  return sequelize.define('supplieruserlog', {
+    SupplierUserLog_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      comment: "사용자로그 식별번호"
+      comment: "협력사로그 식별번호"
     },
     custom1: {
       type: DataTypes.STRING(200),
@@ -28,15 +28,15 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
-    users_id: {
+    supplierUsers_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      comment: "사용자 식별번호"
+      comment: "협력사 식별번호"
     }
   }, {
     sequelize,
-    tableName: 'userlog',
+    tableName: 'supplieruserlog',
     timestamps: false,
     indexes: [
       {
@@ -44,17 +44,17 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "userlog_id" },
-          { name: "users_id" },
+          { name: "SupplierUserLog_id" },
+          { name: "supplierUsers_id" },
         ]
       },
       {
-        name: "Userlog_PK",
+        name: "SupplierUserLog_PK",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "userlog_id" },
-          { name: "users_id" },
+          { name: "SupplierUserLog_id" },
+          { name: "supplierUsers_id" },
         ]
       },
     ]

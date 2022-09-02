@@ -35,10 +35,7 @@ exports.verifyToken = (req, res, next) => {
         // console.log(decoded)
         delete decoded.iat
         delete decoded.exp
-        const token = jwt.sign(decoded, secret, {
-            algorithm: 'HS512',
-            expiresIn: '4h',
-        })
+        const token = this.createToken(decoded)
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: req.app.get('cookie-secure'),

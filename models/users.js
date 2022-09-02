@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: false,
       comment: "아이디",
-      unique: "userid_UNIQUE"
+      unique: "Usersrid_UNIQUE"
     },
     password: {
       type: DataTypes.STRING(200),
@@ -88,7 +88,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "생성자"
     },
     updateUser: {
-      type: DataTypes.CHAR(25),
+      type: DataTypes.CHAR(15),
       allowNull: true,
       defaultValue: "",
       comment: "수정자"
@@ -103,6 +103,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "수정일"
+    },
+    deleteUser: {
+      type: DataTypes.CHAR(15),
+      allowNull: true,
+      comment: "삭제자"
     },
     deleteDate: {
       type: DataTypes.DATE,
@@ -138,19 +143,11 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "userid_UNIQUE",
+        name: "Usersrid_UNIQUE",
         unique: true,
         using: "BTREE",
         fields: [
           { name: "userid" },
-        ]
-      },
-      {
-        name: "id_UNIQUE",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "users_id" },
         ]
       },
     ]

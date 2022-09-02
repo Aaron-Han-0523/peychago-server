@@ -11,8 +11,6 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let datas = [];
-
     let admin = {
       users_id: 0,
       userid: "admin",
@@ -30,28 +28,8 @@ module.exports = {
       createUser: "admin",
       createDate: new Date(),
     }
-    datas.push(admin);
 
-    let test = {
-      userid: "test",
-      password: "test1",
-      userName: "test2",
-      phone: "111-1111-1111",
-      email: "test3@example.com",
-      permission1: 0b0000,
-      permission2: 0b0000,
-      permission3: 0b0000,
-      permission4: 0b0000,
-      permission5: 0b0000,
-      permission6: 0b0000,
-      permission7: 0b0000,
-      createUser: "admin",
-      createDate: new Date(),
-    }
-    datas.push(test);
-
-
-    return queryInterface.bulkInsert('users', datas, {});
+    await queryInterface.bulkInsert('users', [admin], {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -61,7 +39,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkDelete('users', null, {});
+    await queryInterface.bulkDelete('users', null, {});
 
   }
 };

@@ -1,4 +1,4 @@
-
+const noticeService = require('../Services/notice');
 
 exports.add = async (req, res, next) => {
 
@@ -9,7 +9,7 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-  
+    return res.json('notice/index');
 }
 
 exports.detail = async (req, res, next) => {

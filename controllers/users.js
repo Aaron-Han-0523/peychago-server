@@ -1,4 +1,4 @@
-const userService = require('../services/users')
+const usersService = require('../services/users')
 const jwt = require('../services/jwt')
 
 exports.login = async function (req, res, next) {
@@ -8,8 +8,8 @@ exports.login = async function (req, res, next) {
     console.log(body)
     console.log("try", body.user_id, "login");
 
-    const user = await userService.getUser(body.user_id)
-    console.log(user)
+    const user = await usersService.getUser(body.user_id)
+    // console.log(user)
 
     if (user) {
         if (user.password == body.password) {
@@ -18,6 +18,9 @@ exports.login = async function (req, res, next) {
             const token = await jwt.createToken(user);
 
             console.log(token)
+            // res.header('Access-Control-Expose-Headers', 'jwt');
+            // res.header('jwt', token);
+
             res.cookie('jwt', token, {
                 httpOnly: true,
                 secure: req.app.get('cookie-secure'),
@@ -46,7 +49,7 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-  
+    return res.json('users/index');
 }
 
 exports.detail = async (req, res, next) => {
