@@ -15,8 +15,7 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
-        createUser:`clients${1}`
-        ,createDate: new Date(),
+        createDate: new Date(),
       }
       datas.push(obj)
     }

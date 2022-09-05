@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET_KEY
 
-exports.verifyToken = (req, res, next) => {
+exports.verifyToken = async (req, res, next) => {
     console.log('verify token')
+    console.log('Request url :', req.url)
 
     // read the token from header or url 
     const token = req.cookies.jwt
@@ -10,8 +11,8 @@ exports.verifyToken = (req, res, next) => {
     // console.log(token)
 
     // token does not exist
-    if(!token) {
-        console.log('no token')
+    if (!token) {
+        console.log('no token', req.ip)
         // return res.status(403).json({
         //     success: false,
         //     message: 'not logged in'
@@ -23,19 +24,22 @@ exports.verifyToken = (req, res, next) => {
     const p = new Promise(
         (resolve, reject) => {
             jwt.verify(token, secret, (err, decoded) => {
-                if(err) reject(err)
+                if (err) reject(err)
                 resolve(decoded)
             })
         }
     )
 
     // process the promise
-    p.then((decoded)=>{
-        req.userInfo = decoded
+    p.then(async (decoded) => {
         // console.log(decoded)
-        delete decoded.iat
-        delete decoded.exp
-        const token = this.createToken(decoded)
+        delete decoded.iat;
+        delete decoded.exp;
+        req.userInfo = decoded;
+
+        const token = await this.createToken(decoded);
+        // console.log(token);
+
         res.cookie('jwt', token, {
             httpOnly: true,
             secure: req.app.get('cookie-secure'),

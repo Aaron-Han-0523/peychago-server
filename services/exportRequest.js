@@ -1,10 +1,12 @@
-const exportRequest = require('../models').exportRequest;
+const exportRequest = require('../models').exportrequest;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    exportRequest
+    return await exportRequest
         .create({
-            createUser: obj.createUser,
-            createDate: new Date()
+            createUser: obj.user,
+            createDate: new Date(),
         }, {
             fields: ['createUser', 'createDate']
         })
@@ -13,13 +15,14 @@ exports.create = async (obj) => {
             return result;
         })
         .catch((err) => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         });
 }
 
 exports.update = async (obj) => {
-    exportRequest
+    console.log("update obj :", obj)
+    return await exportRequest
         .update({
             updateUser: obj.user,
             updateDate: new Date()
@@ -28,21 +31,21 @@ exports.update = async (obj) => {
         })
         .then(result => {
             console.log("exportRequest update success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }
 
 exports.allRead = async () => {
-    exportRequest
+    // console.log('all exportRequest read');
+
+    return await exportRequest
         .findAndCountAll({
             where: {
-                deleteDate: {
-                    [Op.ne]: null
-                }
+                deleteDate: null
             },
             order: [
                 ['exportRequest_id', 'DESC']
@@ -50,33 +53,30 @@ exports.allRead = async () => {
         })
         .then(result => {
             console.log("exportRequest 'count' and 'rows' read success");
+            console.log("data count :", result.count)
             return result;
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
 exports.readOne = async (id) => {
-    exportRequest
-        .fineOne({
-            where: {
-                exportRequest_id: id
-            }
-        })
+    return await exportRequest
+        .findByPk(id)
         .then(result => {
             console.log(`exportRequest_id-${id} find success`);
             return result
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
-exports.delete = async () => {
-    exportRequest
+exports.delete = async (obj) => {
+    return await exportRequest
         .update({
             deleteUser: obj.user,
             deleteDate: new Date()
@@ -85,10 +85,10 @@ exports.delete = async () => {
         })
         .then(result => {
             console.log("exportRequest delete success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }

@@ -1,10 +1,12 @@
-const supplierRequest = require('../models').supplierRequest;
+const supplierRequest = require('../models').supplierrequest;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    supplierRequest
+    return await supplierRequest
         .create({
-            createUser: obj.createUser,
-            createDate: new Date()
+            createUser: obj.user,
+            createDate: new Date(),
         }, {
             fields: ['createUser', 'createDate']
         })
@@ -13,13 +15,14 @@ exports.create = async (obj) => {
             return result;
         })
         .catch((err) => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         });
 }
 
 exports.update = async (obj) => {
-    supplierRequest
+    console.log("update obj :", obj)
+    return await supplierRequest
         .update({
             updateUser: obj.user,
             updateDate: new Date()
@@ -28,21 +31,21 @@ exports.update = async (obj) => {
         })
         .then(result => {
             console.log("supplierRequest update success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }
 
 exports.allRead = async () => {
-    supplierRequest
+    // console.log('all supplierRequest read');
+
+    return await supplierRequest
         .findAndCountAll({
             where: {
-                deleteDate: {
-                    [Op.ne]: null
-                }
+                deleteDate: null
             },
             order: [
                 ['supplierRequest_id', 'DESC']
@@ -50,33 +53,30 @@ exports.allRead = async () => {
         })
         .then(result => {
             console.log("supplierRequest 'count' and 'rows' read success");
+            console.log("data count :", result.count)
             return result;
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
 exports.readOne = async (id) => {
-    supplierRequest
-        .fineOne({
-            where: {
-                supplierRequest_id: id
-            }
-        })
+    return await supplierRequest
+        .findByPk(id)
         .then(result => {
             console.log(`supplierRequest_id-${id} find success`);
             return result
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
-exports.delete = async () => {
-    supplierRequest
+exports.delete = async (obj) => {
+    return await supplierRequest
         .update({
             deleteUser: obj.user,
             deleteDate: new Date()
@@ -85,10 +85,10 @@ exports.delete = async () => {
         })
         .then(result => {
             console.log("supplierRequest delete success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }

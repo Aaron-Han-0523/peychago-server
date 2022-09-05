@@ -15,7 +15,7 @@ module.exports = {
       users_id: 0,
       userid: "admin",
       password: "admin",
-      userName: "admin",
+      userName: "관리자",
       phone: "000-0000-0000",
       email: "admin@page.com",
       permission1: 0b1111,

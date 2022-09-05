@@ -1,10 +1,12 @@
-const carInfo = require('../models').carInfo;
+const carInfo = require('../models').carinfo;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    carInfo
+    return await carInfo
         .create({
-            createUser: obj.createUser,
-            createDate: new Date()
+            createUser: obj.user,
+            createDate: new Date(),
         }, {
             fields: ['createUser', 'createDate']
         })
@@ -13,13 +15,14 @@ exports.create = async (obj) => {
             return result;
         })
         .catch((err) => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         });
 }
 
 exports.update = async (obj) => {
-    carInfo
+    console.log("update obj :", obj)
+    return await carInfo
         .update({
             updateUser: obj.user,
             updateDate: new Date()
@@ -28,21 +31,21 @@ exports.update = async (obj) => {
         })
         .then(result => {
             console.log("carInfo update success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }
 
 exports.allRead = async () => {
-    carInfo
+    // console.log('all carinfo read');
+
+    return await carInfo
         .findAndCountAll({
             where: {
-                deleteDate: {
-                    [Op.ne]: null
-                }
+                deleteDate: null
             },
             order: [
                 ['carInfo_id', 'DESC']
@@ -50,33 +53,30 @@ exports.allRead = async () => {
         })
         .then(result => {
             console.log("carInfo 'count' and 'rows' read success");
+            console.log("data count :", result.count)
             return result;
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
 exports.readOne = async (id) => {
-    carInfo
-        .fineOne({
-            where: {
-                carInfo_id: id
-            }
-        })
+    return await carInfo
+        .findByPk(id)
         .then(result => {
             console.log(`carInfo_id-${id} find success`);
             return result
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
-exports.delete = async () => {
-    carInfo
+exports.delete = async (obj) => {
+    return await carInfo
         .update({
             deleteUser: obj.user,
             deleteDate: new Date()
@@ -85,10 +85,10 @@ exports.delete = async () => {
         })
         .then(result => {
             console.log("carInfo delete success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }

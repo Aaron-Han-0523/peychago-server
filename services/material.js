@@ -1,10 +1,12 @@
 const material = require('../models').material;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    material
+    return await material
         .create({
-            createUser: obj.createUser,
-            createDate: new Date()
+            createUser: obj.user,
+            createDate: new Date(),
         }, {
             fields: ['createUser', 'createDate']
         })
@@ -13,13 +15,14 @@ exports.create = async (obj) => {
             return result;
         })
         .catch((err) => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         });
 }
 
 exports.update = async (obj) => {
-    material
+    console.log("update obj :", obj)
+    return await material
         .update({
             updateUser: obj.user,
             updateDate: new Date()
@@ -28,21 +31,21 @@ exports.update = async (obj) => {
         })
         .then(result => {
             console.log("material update success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }
 
 exports.allRead = async () => {
-    material
+    // console.log('all material read');
+
+    return await material
         .findAndCountAll({
             where: {
-                deleteDate: {
-                    [Op.ne]: null
-                }
+                deleteDate: null
             },
             order: [
                 ['material_id', 'DESC']
@@ -50,33 +53,30 @@ exports.allRead = async () => {
         })
         .then(result => {
             console.log("material 'count' and 'rows' read success");
+            console.log("data count :", result.count)
             return result;
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
 exports.readOne = async (id) => {
-    material
-        .fineOne({
-            where: {
-                material_id: id
-            }
-        })
+    return await material
+        .findByPk(id)
         .then(result => {
             console.log(`material_id-${id} find success`);
             return result
         })
         .catch(err => {
-            console.error(err);
-            return err;
+            // console.error(err);
+            throw new Error(err);
         })
 }
 
-exports.delete = async () => {
-    material
+exports.delete = async (obj) => {
+    return await material
         .update({
             deleteUser: obj.user,
             deleteDate: new Date()
@@ -85,10 +85,10 @@ exports.delete = async () => {
         })
         .then(result => {
             console.log("material delete success");
-            return result;
+            return result.pop();
         })
         .catch(err => {
-            console.log(err);
-            return err;
+            // console.log(err);
+            throw new Error(err);
         })
 }

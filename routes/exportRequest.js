@@ -12,5 +12,6 @@ router
   .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.json('exportRequest/edit'))
   .put('/edit/:id', jwt.verifyToken, exportRequestController.edit)
   .delete('/:id', jwt.verifyToken, exportRequestController.delete)
+  .get('/:id', jwt.verifyToken, exportRequestController.detail)
 
 module.exports = router;

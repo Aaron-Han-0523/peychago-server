@@ -15,7 +15,7 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
-        createUser:`notice${1}`
+        createUser:`notice${i}`
         ,createDate: new Date(),
       }
       datas.push(obj)

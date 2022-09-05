@@ -1,9 +1,11 @@
-const userLog = require('../models').userLog;
+const userLog = require('../models').userlog;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
-exports.create = async (obj) => {
+exports.create = (obj) => {
     userLog
         .create({
-            createUser: obj.createUser,
+            createUser: obj.user,
             createDate: new Date()
         }, {
             fields: ['createUser', 'createDate']
@@ -14,6 +16,6 @@ exports.create = async (obj) => {
         })
         .catch((err) => {
             console.error(err);
-            return err;
+            throw new Error(err)
         });
 }
