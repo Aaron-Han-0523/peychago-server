@@ -2,10 +2,44 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('clients', {
     clients_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "고객 식별번호"
+    },
+    clientName: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+      comment: "고객명"
+    },
+    phone: {
+      type: DataTypes.STRING(15),
+      allowNull: false,
+      comment: "연락처"
+    },
+    carNumber: {
+      type: DataTypes.STRING(15),
+      allowNull: false,
+      comment: "차량번호"
+    },
+    carInfo_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true,
+      comment: "차량 정보 식별번호",
+      references: {
+        model: 'carinfo',
+        key: 'carInfo_id'
+      }
+    },
+    supplierUsers_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true,
+      comment: "협력사 식별번호",
+      references: {
+        model: 'supplierusers',
+        key: 'supplierUsers_id'
+      }
     },
     createDate: {
       type: DataTypes.DATE,
@@ -47,11 +81,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "Clients_PK",
-        unique: true,
+        name: "Clients_FK1",
         using: "BTREE",
         fields: [
-          { name: "clients_id" },
+          { name: "carInfo_id" },
+        ]
+      },
+      {
+        name: "Clients_FK",
+        using: "BTREE",
+        fields: [
+          { name: "supplierUsers_id" },
         ]
       },
     ]

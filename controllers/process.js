@@ -8,7 +8,7 @@ exports.add = async (req, res, next) => {
   try {
       let result = await processService.create(body);
       // console.log("result :",result);
-      return res.redirect('/process');
+      return res.status(201).redirect('/process');
   }
   catch (e) {
       console.error(e);

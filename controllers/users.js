@@ -76,7 +76,7 @@ exports.add = async (req, res, next) => {
     try {
         let result = await usersService.create(body);
         // console.log("result :",result);
-        return res.redirect('/users');
+        return res.status(201).redirect('/users');
     }
     catch (e) {
         console.error(e);

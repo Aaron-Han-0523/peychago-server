@@ -1,20 +1,41 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('material', {
-    material_id: {
-      type: DataTypes.INTEGER,
+  return sequelize.define('subsidiary', {
+    Subsidiary_id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "부자재 식별번호"
     },
+    name: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "부품명"
+    },
+    unit: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "단위"
+    },
+    price: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "가격"
+    },
+    note: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
+      comment: "메모"
+    },
     createUser: {
       type: DataTypes.CHAR(15),
-      allowNull: false,
+      allowNull: true,
       comment: "생성자"
     },
     createDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
       comment: "생성일"
     },
@@ -55,7 +76,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'material',
+    tableName: 'subsidiary',
     timestamps: false,
     indexes: [
       {
@@ -63,15 +84,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "material_id" },
-        ]
-      },
-      {
-        name: "Material_PK",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "material_id" },
+          { name: "Subsidiary_id" },
         ]
       },
     ]

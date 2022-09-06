@@ -8,7 +8,7 @@ exports.add = async (req, res, next) => {
     try {
         let result = await supplierUsersService.create(body);
         // console.log("result :",result);
-        return res.redirect('/supplierUsers');
+        return res.status(201).redirect('/supplierUsers');
     }
     catch (e) {
         console.error(e);

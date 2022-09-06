@@ -15,6 +15,9 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
+        clientName: `client${i}`,
+        phone: `${i}${i}${i}-${i}${i}${i}${i}-${i}${i}${i}${i}`,
+        carNumber: `서울${i}${i} 가${i}${i}${i}${i}`,
         createDate: new Date(),
       }
       datas.push(obj)

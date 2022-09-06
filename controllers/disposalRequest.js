@@ -8,7 +8,7 @@ exports.add = async (req, res, next) => {
   try {
       let result = await disposalRequestService.create(body);
       // console.log("result :",result);
-      return res.redirect('/disposalRequest');
+      return res.status(201).redirect('/disposalRequest');
   }
   catch (e) {
       console.error(e);

@@ -8,7 +8,7 @@ exports.add = async (req, res, next) => {
     try {
         let result = await reviewService.create(body);
         // console.log("result :",result);
-        return res.redirect('/review');
+        return res.status(201).redirect('/review');
     }
     catch (e) {
         console.error(e);

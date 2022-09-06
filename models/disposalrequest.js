@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('disposalrequest', {
     disposalRequest_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "폐차 견적 식별번호"
@@ -60,14 +61,6 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "disposalRequest_id" },
-        ]
-      },
-      {
-        name: "DisposalRequest_PK",
         unique: true,
         using: "BTREE",
         fields: [

@@ -2,10 +2,46 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('carinfo', {
     carInfo_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "차량 정보 식별번호"
+    },
+    maker: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "차량브랜드명"
+    },
+    model: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "모델"
+    },
+    detailModel: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "상세모델"
+    },
+    yearModel: {
+      type: DataTypes.STRING(4),
+      allowNull: false,
+      comment: "연식모델"
+    },
+    autoTotalPrice: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "자동 계산 가격"
+    },
+    manualTotalPrice: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "수동 계산 가격"
+    },
+    note: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "노트"
     },
     createUser: {
       type: DataTypes.CHAR(15),
@@ -60,14 +96,6 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "carInfo_id" },
-        ]
-      },
-      {
-        name: "CarInfo_PK",
         unique: true,
         using: "BTREE",
         fields: [

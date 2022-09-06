@@ -12,7 +12,6 @@ module.exports = {
      * }], {});
     */
     let admin = {
-      users_id: 0,
       userid: "admin",
       password: "admin",
       userName: "관리자",

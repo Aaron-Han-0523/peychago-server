@@ -2,56 +2,61 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('process', {
     process_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "진행 상황 식별번호"
     },
-    createUser: {
-      type: DataTypes.CHAR(15),
+    clients_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      comment: "생성자"
+      primaryKey: true,
+      comment: "고객 식별번호",
+      references: {
+        model: 'clients',
+        key: 'clients_id'
+      }
     },
-    createDate: {
-      type: DataTypes.DATE,
+    status: {
+      type: DataTypes.TINYINT,
       allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "생성일"
+      comment: "진행단계"
     },
-    updateUser: {
-      type: DataTypes.CHAR(15),
-      allowNull: true,
-      comment: "수정자"
-    },
-    updateDate: {
+    date1: {
       type: DataTypes.DATE,
       allowNull: true,
-      comment: "수정일"
+      comment: "status1 date"
     },
-    deleteUser: {
-      type: DataTypes.CHAR(15),
-      allowNull: true,
-      comment: "삭제자"
-    },
-    deleteDate: {
+    date2: {
       type: DataTypes.DATE,
       allowNull: true,
-      comment: "삭제일"
+      comment: "status2 date"
     },
-    custom1: {
-      type: DataTypes.STRING(200),
+    date3: {
+      type: DataTypes.DATE,
       allowNull: true,
-      comment: "예비1"
+      comment: "status3 date"
     },
-    custom2: {
-      type: DataTypes.STRING(200),
+    date4: {
+      type: DataTypes.DATE,
       allowNull: true,
-      comment: "예비2"
+      comment: "status4 date"
     },
-    custom3: {
-      type: DataTypes.STRING(200),
+    date5: {
+      type: DataTypes.DATE,
       allowNull: true,
-      comment: "예비3"
+      comment: "status5 date"
+    },
+    date6: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "status6 date"
+    },
+    date7: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "status7 date"
     }
   }, {
     sequelize,
@@ -64,14 +69,14 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "process_id" },
+          { name: "clients_id" },
         ]
       },
       {
-        name: "Process_PK",
-        unique: true,
+        name: "Process_FK",
         using: "BTREE",
         fields: [
-          { name: "process_id" },
+          { name: "clients_id" },
         ]
       },
     ]

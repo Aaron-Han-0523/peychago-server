@@ -2,10 +2,31 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('notice', {
     notice_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "공지사항 식별번호"
+    },
+    title: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      comment: "제목"
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      comment: "내용"
+    },
+    type: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      comment: "타입"
+    },
+    link: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
+      comment: "링크"
     },
     createUser: {
       type: DataTypes.CHAR(15),
@@ -60,14 +81,6 @@ module.exports = function(sequelize, DataTypes) {
     indexes: [
       {
         name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "notice_id" },
-        ]
-      },
-      {
-        name: "Notice_PK",
         unique: true,
         using: "BTREE",
         fields: [

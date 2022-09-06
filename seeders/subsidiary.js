@@ -15,13 +15,13 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
-        createUser:`process${i}`
+        createUser:`subsidiary${i}`
         ,createDate: new Date(),
       }
       datas.push(obj)
     }
 
-    await queryInterface.bulkInsert('process', datas, {});
+    await queryInterface.bulkInsert('subsidiary', datas, {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -31,6 +31,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('process', null, {});
+    await queryInterface.bulkDelete('subsidiary', null, {});
   }
 };

@@ -2,10 +2,27 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('userlog', {
     userlog_id: {
-      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "사용자로그 식별번호"
+    },
+    users_id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      primaryKey: true,
+      comment: "사용자 식별번호",
+      references: {
+        model: 'users',
+        key: 'users_id'
+      }
+    },
+    createDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "생성일"
     },
     custom1: {
       type: DataTypes.STRING(200),
@@ -21,18 +38,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true,
       comment: "예비3"
-    },
-    createDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "생성일"
-    },
-    users_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      comment: "사용자 식별번호"
     }
   }, {
     sequelize,
@@ -49,11 +54,9 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "Userlog_PK",
-        unique: true,
+        name: "Userlog_FK",
         using: "BTREE",
         fields: [
-          { name: "userlog_id" },
           { name: "users_id" },
         ]
       },

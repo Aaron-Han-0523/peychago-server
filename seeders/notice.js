@@ -15,6 +15,9 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
+        title:`noticetitle${i}`,
+        content:`noticecontent${i}`,
+        type:`${parseInt(i%2)}`,
         createUser:`notice${i}`
         ,createDate: new Date(),
       }

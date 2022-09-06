@@ -9,10 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       comment: "사용자 식별번호"
     },
     userid: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(15),
       allowNull: false,
       comment: "아이디",
-      unique: "Usersrid_UNIQUE"
+      unique: "Users_UK"
     },
     password: {
       type: DataTypes.STRING(200),
@@ -143,7 +143,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "Usersrid_UNIQUE",
+        name: "Users_UK",
         unique: true,
         using: "BTREE",
         fields: [
