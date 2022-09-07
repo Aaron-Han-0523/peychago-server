@@ -15,15 +15,16 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
-        clientName: `client${i}`,
-        phoneNum: `${i}${i}${i}-${i}${i}${i}${i}-${i}${i}${i}${i}`,
-        carNum: `서울${i}${i} 가${i}${i}${i}${i}`,
-        createDate: new Date(),
+        name: `parts${i}`
+        , unit: "EA"
+        , price: `${i}0000`
+        , createUser: `parts${i}${i}`
+        , createDate: new Date(),
       }
       datas.push(obj)
     }
 
-    await queryInterface.bulkInsert('clients', datas, {});
+    await queryInterface.bulkInsert('parts', datas, {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -33,6 +34,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('clients', null, {});
+    await queryInterface.bulkDelete('parts', null, {});
   }
 };
