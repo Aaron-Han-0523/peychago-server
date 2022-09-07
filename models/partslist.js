@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('subsidiarylist', {
+  return sequelize.define('partslist', {
     carInfo_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -11,17 +11,17 @@ module.exports = function(sequelize, DataTypes) {
         key: 'carInfo_id'
       }
     },
-    Subsidiary_id: {
+    parts_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
       comment: "부자재 식별번호",
       references: {
-        model: 'subsidiary',
-        key: 'Subsidiary_id'
+        model: 'parts',
+        key: 'parts_id'
       }
     },
-    subsidiaryId_cnt: {
+    parts_cnt: {
       type: DataTypes.TINYINT,
       allowNull: true,
       defaultValue: 1,
@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'subsidiarylist',
+    tableName: 'partslist',
     timestamps: false,
     indexes: [
       {
@@ -38,14 +38,14 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "carInfo_id" },
-          { name: "Subsidiary_id" },
+          { name: "parts_id" },
         ]
       },
       {
-        name: "SubsidiaryList_FK1",
+        name: "PartsList_FK1",
         using: "BTREE",
         fields: [
-          { name: "Subsidiary_id" },
+          { name: "parts_id" },
         ]
       },
     ]

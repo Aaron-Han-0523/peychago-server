@@ -1,9 +1,9 @@
-const subsidiary = require('../models').subsidiary;
+const parts = require('../models').parts;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    return await subsidiary
+    return await parts
         .create({
             createUser: obj.user,
             createDate: new Date(),
@@ -11,7 +11,7 @@ exports.create = async (obj) => {
             fields: ['createUser', 'createDate']
         })
         .then(result => {
-            console.log("subsidiary create success");
+            console.log("parts create success");
             return result;
         })
         .catch((err) => {
@@ -22,15 +22,15 @@ exports.create = async (obj) => {
 
 exports.update = async (obj) => {
     console.log("update obj :", obj)
-    return await subsidiary
+    return await parts
         .update({
             updateUser: obj.user,
             updateDate: new Date()
         }, {
-            where: { subsidiary_id: obj.id }
+            where: { parts_id: obj.id }
         })
         .then(result => {
-            console.log("subsidiary update success");
+            console.log("parts update success");
             return result.pop();
         })
         .catch(err => {
@@ -40,19 +40,19 @@ exports.update = async (obj) => {
 }
 
 exports.allRead = async () => {
-    // console.log('all subsidiary read');
+    // console.log('all parts read');
 
-    return await subsidiary
+    return await parts
         .findAndCountAll({
             where: {
                 deleteDate: null
             },
             order: [
-                ['subsidiary_id', 'DESC']
+                ['parts_id', 'DESC']
             ]
         })
         .then(result => {
-            console.log("subsidiary 'count' and 'rows' read success");
+            console.log("parts 'count' and 'rows' read success");
             console.log("data count :", result.count)
             return result;
         })
@@ -63,10 +63,10 @@ exports.allRead = async () => {
 }
 
 exports.readOne = async (id) => {
-    return await subsidiary
+    return await parts
         .findByPk(id)
         .then(result => {
-            console.log(`subsidiary_id-${id} find success`);
+            console.log(`parts_id-${id} find success`);
             return result
         })
         .catch(err => {
@@ -76,15 +76,15 @@ exports.readOne = async (id) => {
 }
 
 exports.delete = async (obj) => {
-    return await subsidiary
+    return await parts
         .update({
             deleteUser: obj.user,
             deleteDate: new Date()
         }, {
-            where: { subsidiary_id: obj.id }
+            where: { parts_id: obj.id }
         })
         .then(result => {
-            console.log("subsidiary delete success");
+            console.log("parts delete success");
             return result.pop();
         })
         .catch(err => {

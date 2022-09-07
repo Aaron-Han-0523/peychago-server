@@ -1,4 +1,4 @@
-const subsidiaryService = require('../Services/subsidiary');
+const partsService = require('../Services/parts');
 
 exports.add = async (req, res, next) => {
   const user = req.userInfo;
@@ -6,9 +6,9 @@ exports.add = async (req, res, next) => {
   body.user = user.userid;
   
   try {
-      let result = await subsidiaryService.create(body);
+      let result = await partsService.create(body);
       // console.log("result :",result);
-      return res.status(201).redirect('/subsidiary');
+      return res.status(201).redirect('/parts');
   }
   catch (e) {
       console.error(e);
@@ -17,32 +17,32 @@ exports.add = async (req, res, next) => {
 }
 
 exports.edit = async (req, res, next) => {
-  // console.log("put - subsidiary edit")
+  // console.log("put - parts edit")
   const user = req.userInfo;
   const id = req.params.id;
   let body = req.body;
   body.user = user.userid;
   body.id = id;
 
-  let result = await subsidiaryService
+  let result = await partsService
       .update(body)
       .catch(err => console.error(err));
 
   // console.log('result :', result)
 
-  if (result) res.redirect(`/subsidiary/${id}`);
+  if (result) res.redirect(`/parts/${id}`);
   else res.json(`fail id:${id}`)
 }
 
 exports.index = async (req, res, next) => {
-  let datas = await subsidiaryService
+  let datas = await partsService
       .allRead()
       .catch(err => console.error(err));
 
   // console.log("datas :", datas);
 
   return res.json({
-      render: '(subsidiary/index)',
+      render: '(parts/index)',
       count: datas.count,
       datas: datas.rows
   });
@@ -53,14 +53,14 @@ exports.detail = async (req, res, next) => {
   console.log(`open one data id-${id}`)
 
   const user = req.userInfo;
-  let data = await subsidiaryService
+  let data = await partsService
       .readOne(id)
       .catch(err => console.error(err));
 
   // console.log(data);
 
   if (data) return res.json({
-      render: `(subsidiary/${id})`,
+      render: `(parts/${id})`,
       data: data.dataValues
   });
   else res.json(`fail id:${id}`)
@@ -73,12 +73,12 @@ exports.delete = async (req, res, next) => {
   obj.id = id;
   obj.user = user.userid;
 
-  let result = await subsidiaryService
+  let result = await partsService
       .delete(obj)
       .catch(err => console.error(err));
 
   // console.log("delete result :", result)
 
-  if (result) return res.redirect('/subsidiary');
+  if (result) return res.redirect('/parts');
   else res.json(`fail id:${id}`)
 }
