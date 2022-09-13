@@ -5,10 +5,15 @@ const Op = Sequelize.Op;
 exports.create = async (obj) => {
     return await supplierUsers
         .create({
-            createUser: obj.user,
-            createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
+            companyName: obj.companyName
+            , mainPhoneNum: obj.mainPhoneNum
+            , password: "123456"
+            , address: obj.address
+            , companyNumber: obj.companyNumber
+            , ownerName: obj.ownerName
+            , phoneNum: obj.phoneNum
+            , email: obj.email
+            , createUser: obj.user
         })
         .then(result => {
             console.log("supplierUsers create success");
@@ -16,7 +21,7 @@ exports.create = async (obj) => {
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 }
 
@@ -24,8 +29,16 @@ exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await supplierUsers
         .update({
-            updateUser: obj.user,
-            updateDate: new Date()
+            companyName: obj.companyName
+            , mainPhoneNum: obj.mainPhoneNum
+            , password: obj.password
+            , address: obj.address
+            , companyNumber: obj.companyNumber
+            , ownerName: obj.ownerName
+            , phoneNum: obj.phoneNum
+            , email: obj.email
+            , updateUser: obj.user
+            , updateDate: new Date()
         }, {
             where: { supplierUsers_id: obj.id }
         })
@@ -35,7 +48,7 @@ exports.update = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -58,7 +71,7 @@ exports.allRead = async () => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -71,7 +84,7 @@ exports.readOne = async (id) => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -89,6 +102,6 @@ exports.delete = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }

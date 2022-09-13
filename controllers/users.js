@@ -15,7 +15,10 @@ exports.login = async function (req, res, next) {
         if (user.password == body.password) {
             delete user.password;
             console.log('secret_key :', secret)
-            const token = await jwt.createToken(user);
+            const token = await jwt.sign(user, secret, {
+                algorithm: 'HS512',
+                expiresIn: '4h',
+            })
 
             console.log(token)
             // res.header('Access-Control-Expose-Headers', 'jwt');
@@ -40,6 +43,7 @@ exports.login = async function (req, res, next) {
     }
 }
 
+<<<<<<< HEAD
 exports.logout = async (req, res, next) => {
     await res.cookie('jwt', '', {
         httpOnly: true,
@@ -47,6 +51,26 @@ exports.logout = async (req, res, next) => {
     });
     res.redirect('/');
     console.log("logout")
+=======
+exports.add = async (req, res, next) => {
+    res.render('users/add');
+}
+
+exports.edit = async (req, res, next) => {
+  
+}
+
+exports.index = async (req, res, next) => {
+  
+}
+
+exports.detail = async (req, res, next) => {
+  
+}
+
+exports.delete = async (req, res, next) => {
+  
+>>>>>>> parent of e1c7d96 (only API skeleton)
 }
 
 exports.changePassword = async (req, res, next) => {

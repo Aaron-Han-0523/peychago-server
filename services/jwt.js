@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const secret = process.env.SECRET_KEY
 
 exports.verifyToken = async (req, res, next) => {
     console.log('verify token')
@@ -53,12 +52,5 @@ exports.verifyToken = async (req, res, next) => {
         //     message: error.message
         // })
         return res.redirect('/users/login')
-    })
-}
-
-exports.createToken = async (payload) => {
-    return jwt.sign(payload, secret, {
-        algorithm: 'HS512',
-        expiresIn: '4h',
     })
 }

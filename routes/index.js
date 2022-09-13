@@ -14,7 +14,10 @@ router.get('/', jwt.verifyToken, async function(req, res, next) {
   delete user.password;
 
   console.log("메인 페이지 진입");
-  res.json('layout/index');
+  res.render('layout/index', {
+    title: 'Notice',
+    user: user,
+  });
 });
 
 module.exports = router;
