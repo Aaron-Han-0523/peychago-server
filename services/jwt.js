@@ -41,10 +41,7 @@ exports.verifyToken = async (req, res, next) => {
         const token = await this.createToken(decoded);
         // console.log(token);
 
-        res.cookie('jwt', token, {
-            httpOnly: true,
-            secure: req.app.get('cookie-secure'),
-        })
+        res.cookie('jwt', token, req.app.get('jwt-option'))
         console.log('verify complete')
         next()
     }).catch((error) => {

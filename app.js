@@ -54,7 +54,11 @@ app.use(bodyParser.json());
 app.set('secret_key', process.env.SECRET_KEY)
 
 // set the cookie option : secure
-app.set('cookie-secure', config.cookie_secure)
+app.set('jwt-option', {
+  httpOnly: true,
+  secure: config.cookie_secure,
+  maxAge: 4*60*60*1000  // 4시간
+})
 
 console.log(app)
 

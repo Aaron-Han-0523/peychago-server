@@ -7,9 +7,9 @@ const jwt = require('../services/jwt')
 /* GET carinfo listing. */
 router
   .get('/', jwt.verifyToken, carInfoController.index)
-  .get('/add', jwt.verifyToken, (req, res, next) => res.render('carInfo/add'))
+  .get('/add', jwt.verifyToken, (req, res, next) => res.render('carInfo/add', { user: req.userInfo }))
   .post('/add', jwt.verifyToken, carInfoController.add)
-  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('carInfo/edit'))
+  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('carInfo/edit', { user: req.userInfo }))
   .put('/edit/:id', jwt.verifyToken, carInfoController.edit)
   .delete('/:id', jwt.verifyToken, carInfoController.delete)
   .get('/:id', jwt.verifyToken, carInfoController.detail)

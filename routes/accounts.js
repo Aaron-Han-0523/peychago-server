@@ -8,6 +8,6 @@ const jwt = require('../services/jwt')
 router
   .get('/login', (req, res, next) => res.render('accounts/main'))
   .get('/logout', accountsController.logout)
-  .get('/changePassword', jwt.verifyToken, (req, res, next) => res.render('accounts/changePassword'))
+  .get('/changePassword', jwt.verifyToken, (req, res, next) => res.render('accounts/changePassword', { user: req.userInfo }))
 
 module.exports = router;

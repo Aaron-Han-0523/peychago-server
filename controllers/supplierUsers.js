@@ -19,10 +19,7 @@ exports.login = async function (req, res, next) {
             // res.header('Access-Control-Expose-Headers', 'jwt');
             // res.header('jwt', token);
 
-            res.cookie('jwt', token, {
-                httpOnly: true,
-                secure: req.app.get('cookie-secure'),
-            })
+            res.cookie('jwt', token, req.app.get('jwt-option'))
             // return res.status(201).json({
             //     result: 'ok',
             //     token
@@ -100,7 +97,8 @@ exports.index = async (req, res, next) => {
 
   return res.render('supplierUsers/index', {
         count: datas.count,
-        datas: datas.rows
+        datas: datas.rows,
+        user: req.userInfo
     });
 }
 

@@ -8,7 +8,8 @@ exports.getUser = async function (mainPhoneNum) {
         var result = await supplierUsers
             .findOne({
                 where: {
-                    mainPhoneNum: mainPhoneNum
+                    mainPhoneNum: mainPhoneNum,
+                    deleteDate: null
                 }
             })
             .then(result => result.dataValues)

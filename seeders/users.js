@@ -16,7 +16,7 @@ module.exports = {
     for (let i = 0; i < 10; i++) {
       let obj = {
         userid: `testid${i}`,
-        password: `testpassword${i}`,
+        password: `testpw${i}`,
         userName: `testname${i}`,
         phone: `${i}${i}${i}-${i}${i}${i}${i}-${i}${i}${i}${i}`,
         email: `test${i}@example.com`,

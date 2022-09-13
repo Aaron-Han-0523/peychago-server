@@ -23,6 +23,7 @@
         <div class="shadow-bottom"></div>
         <ul class="list-unstyled menu-categories" id="accordionExample">
             <li class="menu active"></li>
+            <% if(user.permission1&&(user.permission1.data[0]&0b0100)) { %>
             <li class="menu">
                 <a href="/notice" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -30,7 +31,9 @@
                     </div>
                 </a>
             </li>
+            <% } %>
 
+            <% if(user.permission2&&(user.permission2.data[0]&0b0100)) { %>
             <li class="menu">
                 <a href="/review" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -38,7 +41,9 @@
                     </div>
                 </a>
             </li>
+            <% } %>
 
+            <% if((user.permission3.data[0]&0b0100)||(user.permission5==='un')) { %>
             <li class="menu">
                 <a href="#reception-history" aria-expanded="false" class="dropdown-toggle" style="pointer-events:none;">
                     <div class="">
@@ -58,7 +63,9 @@
                     </li>
                 </ul>
             </li>
+            <% } %>
 
+            <% if(user.permission4&&(user.permission4.data[0]&0b0100)) { %>
             <li class="menu">
                 <a href="/imageSetting" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -66,7 +73,9 @@
                     </div>
                 </a>
             </li>
+            <% } %>
 
+            <% if(user.permission5&&(user.permission5.data[0]&0b0100)) { %>
             <li class="menu">
                 <a href="/carInfo" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -74,7 +83,9 @@
                     </div>
                 </a>
             </li>
+            <% } %>
 
+            <% if(user.permission6&&(user.permission6.data[0]&0b0100)) { %>
             <li class="menu">
                 <a href="/parts" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -82,7 +93,8 @@
                     </div>
                 </a>
             </li>
-
+            <% } %>
+            <% if (user.userid=='admin') { %>
             <li class="menu">
                 <a href="/users" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -90,7 +102,9 @@
                     </div>
                 </a>
             </li>
+            <% } %>
 
+            <% if(user.permission7&&(user.permission7.data[0]&0b0100)) { %>
             <li class="menu">
                 <a href="/supplierUsers" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -98,6 +112,7 @@
                     </div>
                 </a>
             </li>
+            <% } %>
 
             <li class="menu">
                 <a href="/accounts/changePassword" aria-expanded="false" class="dropdown-toggle">

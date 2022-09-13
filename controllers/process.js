@@ -43,7 +43,8 @@ exports.index = async (req, res, next) => {
 
   return res.render('process/index', {
       count: datas.count,
-      datas: datas.rows
+      datas: datas.rows,
+      user: req.userInfo
   });
 }
 

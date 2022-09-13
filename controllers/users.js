@@ -19,10 +19,7 @@ exports.login = async function (req, res, next) {
             // res.header('Access-Control-Expose-Headers', 'jwt');
             // res.header('jwt', token);
 
-            res.cookie('jwt', token, {
-                httpOnly: true,
-                secure: req.app.get('cookie-secure'),
-            })
+            res.cookie('jwt', token, req.app.get('jwt-option'))
             // return res.status(201).json({
             //     result: 'ok',
             //     token
@@ -60,8 +57,10 @@ exports.changePassword = async (req, res, next) => {
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
-    body.user = user.userid;
+    console.log(body);
 
+    body.user = user.userid;
+    console.log(body);
     try {
         let result = await usersService.create(body);
         // console.log("result :",result);
@@ -100,7 +99,8 @@ exports.index = async (req, res, next) => {
 
   return res.render('users/index', {
         count: datas.count,
-        datas: datas.rows
+        datas: datas.rows,
+        user: req.userInfo
     });
 }
 
@@ -125,6 +125,9 @@ exports.detail = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     const id = req.params.id;
     const user = req.userInfo;
+
+    console.log('delete',id);
+
     let obj = {};
     obj.id = id;
     obj.user = user.userid;

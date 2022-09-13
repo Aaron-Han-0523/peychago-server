@@ -8,7 +8,8 @@ exports.getUser = async function (userid) {
         var result = await users
             .findOne({
                 where: {
-                    userid: userid
+                    userid: userid,
+                    deleteDate: null
                 }
             })
             .then(result => result.dataValues)
@@ -42,13 +43,12 @@ exports.changePassword = async (obj) => {
 }
 
 exports.create = async (obj) => {
+    console.log(obj)
     return await users
-        .create({
+        .create(Object.assign(obj, {
             createUser: obj.user,
-            createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+            createDate: new Date()
+        }))
         .then(result => {
             console.log("users create success");
             return result;
