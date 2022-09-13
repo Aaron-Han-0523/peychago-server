@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     parts_cnt: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.TINYINT.UNSIGNED,
       allowNull: true,
       defaultValue: 1,
       comment: "부자재 별 갯수"

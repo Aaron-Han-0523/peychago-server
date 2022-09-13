@@ -2,6 +2,45 @@ const supplierUsers = require('../models').supplierusers;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+exports.getUser = async function (mainPhoneNum) {
+    try {
+        console.log('find', mainPhoneNum)
+        var result = await supplierUsers
+            .findOne({
+                where: {
+                    mainPhoneNum: mainPhoneNum
+                }
+            })
+            .then(result => result.dataValues)
+            .catch(err => { throw Error(err) })
+        return result;
+    } catch (e) {
+        console.log(e);
+        // throw Error('Error while getUser');
+    }
+}
+
+exports.changePassword = async (obj) => {
+    console.log("update obj :", obj)
+
+    return await supplierUsers
+        .update({
+            password: obj.newPassword,
+            updateUser: obj.user,
+            updateDate: new Date()
+        }, {
+            where: { users_id: obj.id }
+        })
+        .then(result => {
+            console.log("users update success");
+            return result.pop();
+        })
+        .catch(err => {
+            // console.log(err);
+            throw new Error(err);
+        })
+}
+
 exports.create = async (obj) => {
     return await supplierUsers
         .create({

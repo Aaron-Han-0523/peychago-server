@@ -1,4 +1,61 @@
 const supplierUsersService = require('../Services/supplierUsers');
+const jwt = require('../services/jwt')
+
+exports.login = async function (req, res, next) {
+    const body = req.body;
+
+    console.log(body)
+    console.log("try", body.user_id, "login");
+
+    const supplier = await supplierUsersService.getUser(body.user_id)
+    // console.log(user)
+
+    if (supplier) {
+        if (supplier.password == body.password) {
+            delete supplier.password;
+            const token = await jwt.createToken(supplier)
+
+            console.log(token)
+            // res.header('Access-Control-Expose-Headers', 'jwt');
+            // res.header('jwt', token);
+
+            res.cookie('jwt', token, {
+                httpOnly: true,
+                secure: req.app.get('cookie-secure'),
+            })
+            // return res.status(201).json({
+            //     result: 'ok',
+            //     token
+            // })
+            return res.redirect('/')
+        } else {
+            console.log('비밀번호 불일치')
+            return res.send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
+        }
+    } else {
+        console.log('아이디 없음')
+        return res.send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
+    }
+}
+
+exports.changePassword = async (req, res, next) => {
+    const userInfo = req.userInfo;
+    // console.log(userInfo);
+    let body = req.body;
+    body.id = userInfo.users_id;
+    body.user = userInfo.userName;
+    const user = await supplierUsersService.getUser(userInfo.userid);
+
+    if (body.currentPassword == user.password) {
+        let result = await supplierUsersService
+            .changePassword(body)
+            .catch(err => console.error(err));
+
+        if (result) res.redirect(`/`);
+        else res.json(`fail : changePassword`)
+    }
+    else res.json(`check Password`)
+}
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;

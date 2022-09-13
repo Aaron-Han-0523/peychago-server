@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken')
+const secret = process.env.SECRET_KEY
+const login_url = '/accounts/login'
 
 exports.verifyToken = async (req, res, next) => {
     console.log('verify token')
@@ -16,7 +18,7 @@ exports.verifyToken = async (req, res, next) => {
         //     success: false,
         //     message: 'not logged in'
         // })
-        return res.redirect('/users/login')
+        return res.redirect(login_url)
     }
 
     // create a promise that decodes the token
@@ -51,6 +53,13 @@ exports.verifyToken = async (req, res, next) => {
         //     success: false,
         //     message: error.message
         // })
-        return res.redirect('/users/login')
+        return res.redirect(login_url)
+    })
+}
+
+exports.createToken = (payload) => {
+    return jwt.sign(payload, secret, {
+        algorithm: 'HS512',
+        expiresIn: '4h',
     })
 }

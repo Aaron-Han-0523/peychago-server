@@ -7,9 +7,9 @@ const jwt = require('../services/jwt')
 /* GET clients listing. */
 router
   .get('/', jwt.verifyToken, clientsController.index)
-  .get('/add', jwt.verifyToken, (req, res, next) => res.json('clients/add'))
+  .get('/add', jwt.verifyToken, (req, res, next) => res.render('clients/add'))
   .post('/add', jwt.verifyToken, clientsController.add)
-  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.json('clients/edit'))
+  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('clients/edit'))
   .put('/edit/:id', jwt.verifyToken, clientsController.edit)
   .delete('/:id', jwt.verifyToken, clientsController.delete)
   .get('/:id', jwt.verifyToken, clientsController.detail)

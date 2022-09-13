@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "대표자명"
     },
-    phone: {
+    phoneNum: {
       type: DataTypes.STRING(15),
       allowNull: false,
       comment: "전화번호"

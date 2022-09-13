@@ -57,6 +57,21 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "status7 date"
+    },
+    disposalRequest_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "폐차 견적 식별번호"
+    },
+    supplierRequest_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "회수요청 식별번호"
+    },
+    exportRequest_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "수출 견적 식별번호"
     }
   }, {
     sequelize,

@@ -13,12 +13,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "고객명"
     },
-    phone: {
+    phoneNum: {
       type: DataTypes.STRING(15),
       allowNull: false,
       comment: "연락처"
     },
-    carNumber: {
+    carNum: {
       type: DataTypes.STRING(15),
       allowNull: false,
       comment: "차량번호"

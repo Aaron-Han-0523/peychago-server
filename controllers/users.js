@@ -3,7 +3,6 @@ const jwt = require('../services/jwt')
 
 exports.login = async function (req, res, next) {
     const body = req.body;
-    const secret = req.app.get('secret_key');
 
     console.log(body)
     console.log("try", body.user_id, "login");
@@ -14,11 +13,7 @@ exports.login = async function (req, res, next) {
     if (user) {
         if (user.password == body.password) {
             delete user.password;
-            console.log('secret_key :', secret)
-            const token = await jwt.sign(user, secret, {
-                algorithm: 'HS512',
-                expiresIn: '4h',
-            })
+            const token = await jwt.createToken(user)
 
             console.log(token)
             // res.header('Access-Control-Expose-Headers', 'jwt');
@@ -41,36 +36,6 @@ exports.login = async function (req, res, next) {
         console.log('아이디 없음')
         return res.send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
     }
-}
-
-<<<<<<< HEAD
-exports.logout = async (req, res, next) => {
-    await res.cookie('jwt', '', {
-        httpOnly: true,
-        secure: req.app.get('cookie-secure')
-    });
-    res.redirect('/');
-    console.log("logout")
-=======
-exports.add = async (req, res, next) => {
-    res.render('users/add');
-}
-
-exports.edit = async (req, res, next) => {
-  
-}
-
-exports.index = async (req, res, next) => {
-  
-}
-
-exports.detail = async (req, res, next) => {
-  
-}
-
-exports.delete = async (req, res, next) => {
-  
->>>>>>> parent of e1c7d96 (only API skeleton)
 }
 
 exports.changePassword = async (req, res, next) => {

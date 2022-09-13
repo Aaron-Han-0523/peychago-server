@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "전화번호"
     },
-    ownerName: {
+    clientName: {
       type: DataTypes.STRING(10),
       allowNull: false,
       comment: "소유자명"
