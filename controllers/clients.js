@@ -40,9 +40,8 @@ exports.index = async (req, res, next) => {
       .catch(err => console.error(err));
 
   // console.log("datas :", datas);
-
-  return res.json({
-      render: '(clients/index)',
+  
+  return res.render('clients/index', {
       count: datas.count,
       datas: datas.rows
   });

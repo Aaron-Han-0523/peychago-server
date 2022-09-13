@@ -4,7 +4,7 @@ exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
     body.user = user.userid;
-    
+
     try {
         let result = await carInfoService.create(body);
         // console.log("result :",result);
@@ -41,8 +41,7 @@ exports.index = async (req, res, next) => {
 
     // console.log("datas :", datas);
 
-    return res.json({
-        render: '(carInfo/index)',
+    return res.render('carInfo/index', {
         count: datas.count,
         datas: datas.rows
     });

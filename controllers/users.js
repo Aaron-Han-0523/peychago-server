@@ -98,8 +98,7 @@ exports.index = async (req, res, next) => {
 
     // console.log("datas :", datas);
 
-    return res.json({
-        render: '(users/index)',
+  return res.render('users/index', {
         count: datas.count,
         datas: datas.rows
     });
