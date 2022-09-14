@@ -62,11 +62,11 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     // console.log("update obj :", obj)
     return await users
-        .update({
+        .update(Object.assign(obj,{
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
-            where: { users_id: obj.id }
+        }), {
+            where: { userid: obj.userid }
         })
         .then(result => {
             console.log("users update success");
@@ -102,16 +102,22 @@ exports.allRead = async () => {
 }
 
 exports.readOne = async (id) => {
-    return await users
-        .findByPk(id)
-        .then(result => {
-            console.log(`users_id-${id} find success`);
-            return result
-        })
-        .catch(err => {
-            // console.error(err);
-            throw new Error(err);
-        })
+    try {
+        console.log('find', id)
+        var result = await users
+            .findOne({
+                where: {
+                    users_id: id,
+                    deleteDate: null
+                }
+            })
+            .then(result => result.dataValues)
+            .catch(err => { throw Error(err) })
+        return result;
+    } catch (e) {
+        console.log(e);
+        // throw Error('Error while getUser');
+    }
 }
 
 exports.delete = async (obj) => {
@@ -130,4 +136,22 @@ exports.delete = async (obj) => {
             // console.log(err);
             throw new Error(err);
         })
+}
+
+exports.checkID = async function (userid) {
+    try {
+        console.log('check', userid)
+        var result = await users
+            .findOne({
+                where: {
+                    userid: userid,
+                }
+            })
+            .then(result => result.dataValues)
+            .catch(err => { throw Error(err) })
+        return result;
+    } catch (e) {
+        console.log(e);
+        // throw Error('Error while getUser');
+    }
 }

@@ -10,7 +10,7 @@ router.get('/', jwt.verifyToken, async function(req, res, next) {
 
   const user = req.userInfo;
   console.log(user);
-
+  console.log(user.permission5===undefined);
   delete user.password;
 
   console.log("메인 페이지 진입");

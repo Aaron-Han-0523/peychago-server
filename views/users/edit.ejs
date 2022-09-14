@@ -2,401 +2,720 @@
 <html lang="en">
 
 <head>
-  <%- include ("../partials/header.ejs") %>
+    <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed alt-menu">
+    <%- include ("../partials/loader.ejs") %>
 
-  <%- include ("../partials/loader.ejs") %>
+        <%- include ("../partials/nav.ejs") %>
 
-    <%- include ("../partials/nav.ejs") %>
+            <!--  BEGIN MAIN CONTAINER  -->
+            <div class="main-container sidebar-closed " id="container">
 
-      <!--  BEGIN MAIN CONTAINER  -->
-      <div class="main-container sidebar-closed " id="container">
+                <div class="overlay"></div>
+                <div class="search-overlay"></div>
 
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
+                <%- include ("../partials/sidebar.ejs") %>
 
-        <%- include ("../partials/sidebar.ejs") %>
+                    <!--  BEGIN CONTENT AREA  -->
+                    <div id="content" class="main-content">
+                        <div class="layout-px-spacing">
 
-          <!--  BEGIN CONTENT AREA  -->
-          <div id="content" class="main-content">
-            <div class="layout-px-spacing">
+                            <div class="middle-content container-xxl p-0">
+                                <!-- BREADCRUMB -->
+                                <div class="page-meta">
+                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a
+                                                    href="/vertical-light-menu/subsidiary-material.html">User
+                                                    Management</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Add</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                                <!-- /BREADCRUMB -->
 
-                <div class="middle-content container-xxl p-0">
-                    <!-- BREADCRUMB -->
-                    <div class="page-meta">
-                        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/vertical-light-menu/subsidiary-material.html">User Management</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Add</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <!-- /BREADCRUMB -->
-
-                    <div class="row layout-spacing">
-                        <div class="col-lg-12 layout-top-spacing">
-                            <div class="col-lg-12">
-                                <div class="statbox widget box box-shadow">
-                                    <div class="widget-content widget-content-area">
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>User ID</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12">
+                                <div class="row layout-spacing">
+                                    <div class="col-lg-12 layout-top-spacing">
+                                        <div class="col-lg-12">
+                                            <div class="statbox widget box box-shadow">
                                                 <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text1" class="visually-hidden">Text</label>
-                                                        <input id="t-text1" type="text" name="txt" placeholder="" class="form-control" required>
+                                                    <div class="widget-content widget-content-area">
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>User ID</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text1"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text1" type="text" name="userid"
+                                                                        placeholder="" class="form-control" disabled
+                                                                        value="<%= data.userid %>">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Password</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text2"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text2" type="password" name="password"
+                                                                        placeholder="" class="form-control" required>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Confirm Password</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text3"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text3" type="password"
+                                                                        name="confirm_password" placeholder=""
+                                                                        class="form-control" required>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Name</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text4"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text4" type="text" name="userName"
+                                                                        placeholder="" class="form-control" required
+                                                                        value="<%= data.userName %>">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Phone</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text4"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text4" type="text" name="phone"
+                                                                        placeholder="" class="form-control" required
+                                                                        value="<%= data.phone %>">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Email</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text5"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text5" type="text" name="email"
+                                                                        placeholder="" class="form-control" required
+                                                                        value="<%= data.email %>">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Permission</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <div class="col-12 ">
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table table-hover table-striped table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="text-center" scope="col">Menu
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">Add
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">Read
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Edit
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Delete
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">ALL
+                                                                                </th>
+                                                                            </tr>
+                                                                            <tr aria-hidden="true"
+                                                                                class="mt-3 d-block table-row-hidden">
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Notice
+                                                                                        Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission1"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission1_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission1"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission1_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission1"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission1_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission1"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission1_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission1"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Review
+                                                                                        Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission2"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission2_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission2"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission2_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission2"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission2_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission2"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission2_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission2"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Reception
+                                                                                        History Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission3"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission3_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission3"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission3_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission3"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission3_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission3"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission3_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission3"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Image
+                                                                                        Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission4"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission4_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission4"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission4_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission4"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission4_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission4"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission4_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission4"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Car
+                                                                                        Information Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission5"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission5_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission5"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission5_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission5"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission5_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission5"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission5_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission5"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Subsidiary
+                                                                                        Material Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission6"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission6_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission6"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission6_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission6"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission6_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission6"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission6_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission6"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="text-center">
+                                                                                    <span
+                                                                                        class="media-body align-self-center">Supplier
+                                                                                        USER Management</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-secondary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission7"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission7_add">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-primary form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission7"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission7_read">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-info form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission7"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission7_edit">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-success form-check-inline">
+                                                                                        <input
+                                                                                            class="form-check-input permission7"
+                                                                                            type="checkbox" value='1'
+                                                                                            name="permission"
+                                                                                            id="permission7_del">
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <div
+                                                                                        class="form-check form-check-danger form-check-inline">
+                                                                                        <input class="form-check-input"
+                                                                                            id="permission7"
+                                                                                            type="checkbox" value='1'>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <h6>Note</h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <label for="t-text6"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <input id="t-text6" type="text" name="note"
+                                                                        placeholder="" class="form-control"
+                                                                        value="<%= data.note %>">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-top-spacing">
+                                                            <div class="col-12">
+
+                                                                <div class="form-group">
+                                                                    <button class="btn btn-outline-success mb-2 me-4"
+                                                                        type="button"
+                                                                        onclick="edit_user();">Edit</button>
+                                                                    <button class="btn btn-outline-danger mb-2 me-4"
+                                                                        type="button"
+                                                                        onclick="cancel();">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Password</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text2" class="visually-hidden">Text</label>
-                                                        <input id="t-text2" type="password" name="txt" placeholder="" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Confirm Password</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text3" class="visually-hidden">Text</label>
-                                                        <input id="t-text3" type="password" name="txt" placeholder="" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Name</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text4" class="visually-hidden">Text</label>
-                                                        <input id="t-text4" type="text" name="txt" placeholder="" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Phone</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text4" class="visually-hidden">Text</label>
-                                                        <input id="t-text4" type="text" name="txt" placeholder="" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Email</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text5" class="visually-hidden">Text</label>
-                                                        <input id="t-text5" type="text" name="txt" placeholder="" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Permission</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-spacing">
-                                            <div class="col-12 ">
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover table-striped table-bordered">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">Menu</th>
-                                                            <th scope="col">Read</th>
-                                                            <th class="text-center" scope="col">Add/Edit</th>
-                                                            <th class="text-center" scope="col">Delete</th>
-                                                            <th class="text-center" scope="col">ALL</th>
-                                                        </tr>
-                                                        <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Notice Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Review Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Reception History Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Image Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Car Information Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Subsidiary Material Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">
-                                                                <span class="media-body align-self-center">Supplier USER Management</span>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-primary form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-info form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-success form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-check form-check-danger form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox" value="" checked="">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h6>Note</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <label for="t-text6" class="visually-hidden">Text</label>
-                                                        <input id="t-text6" type="text" name="txt" placeholder="" class="form-control" required>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="row layout-top-spacing">
-                                            <div class="col-12">
-                                                <form method="post">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-outline-success mb-2 me-4">Edit</button>
-                                                        <button class="btn btn-outline-danger mb-2 me-4" type="button" onclick="cancel()">Cancel</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
+                        <%- include ("../partials/footer.ejs") %>
 
                     </div>
-                </div>
-
+                    <!--  END CONTENT AREA  -->
             </div>
+            <!-- END MAIN CONTAINER -->
 
-            <%- include ("../partials/footer.ejs") %>
+            <%- include ("../partials/commonScrpits.ejs") %>
 
-          </div>
-          <!--  END CONTENT AREA  -->
-      </div>
-      <!-- END MAIN CONTAINER -->
+                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                <% let encoder=new TextEncoder() %>
+                    <script>
+                        let permissions = [];
+                        permissions.push(parseInt('<%= encoder.encode(data.permission1) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission2) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission3) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission4) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission5) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission6) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission7) %>'))
+                        console.log(permissions)
 
-      <%- include ("../partials/commonScrpits.ejs") %>
+                        for (let i = 0; i < 7; i++) {
+                            document.getElementById('permission' + (i + 1) + '_add').checked = permissions[i] & 1 << 3;
+                            document.getElementById('permission' + (i + 1) + '_read').checked = permissions[i] & 1 << 2;
+                            document.getElementById('permission' + (i + 1) + '_edit').checked = permissions[i] & 1 << 1;
+                            document.getElementById('permission' + (i + 1) + '_del').checked = permissions[i] & 1 << 0;
+                        }
 
-      <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                        for (let i = 1; i <= 7; i++) {
+                            checkall('permission' + i, 'permission' + i)
+                        }
 
-      <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                        async function edit_user() {
+                            let password = $('input[name="password"]').val();
+                            let confirm_password = $('input[name="confirm_password"]').val();
+                            if (!(password == confirm_password)) return alert("비밀번호가 일치하지 않습니다.");
+
+                            let data = {};
+                            data.userid = $('input[name="userid"]').val();
+                            data.password = password;
+                            data.userName = $('input[name="userName"]').val();
+                            data.phone = $('input[name="phone"]').val();
+                            data.email = $('input[name="email"]').val();
+                            data.note = $('input[name="note"]').val();
+                            data.permission1 = permission_calc("permission1");
+                            data.permission2 = permission_calc("permission2");
+                            data.permission3 = permission_calc("permission3");
+                            data.permission4 = permission_calc("permission4");
+                            data.permission5 = permission_calc("permission5");
+                            data.permission6 = permission_calc("permission6");
+                            data.permission7 = permission_calc("permission7");
+                            // console.log('url :',location.href);
+
+                            await fetch(location.href, {
+                                method: 'put',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data),
+                                redirect: "follow"
+                            })
+                                .then((response) => {
+                                    // console.log(response);
+                                    if (response.ok) return window.location.href = response.url;
+                                })
+                                .catch((err) => {
+                                    console.error(err)
+                                });
+                        }
+
+                        function permission_calc(permission) {
+                            let result = 0;
+                            let add_permission = document.getElementById(permission + '_add');
+                            let read_permission = document.getElementById(permission + '_read');
+                            let edit_permission = document.getElementById(permission + '_edit');
+                            let del_permission = document.getElementById(permission + '_del');
+                            console.log(permission);
+
+                            if (add_permission.checked) result |= 1 << 3;
+                            if (read_permission.checked) result |= 1 << 2;
+                            if (edit_permission.checked) result |= 1 << 1;
+                            if (del_permission.checked) result |= 1 << 0;
+
+                            return result;
+                        }
+                    </script>
+                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

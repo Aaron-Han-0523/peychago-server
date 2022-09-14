@@ -68,7 +68,7 @@ exports.add = async (req, res, next) => {
     }
     catch (e) {
         console.error(e);
-        return res.json(`add fail`)
+        return res.status(409).json(`add fail`)
     }
 }
 
@@ -97,7 +97,7 @@ exports.index = async (req, res, next) => {
 
     // console.log("datas :", datas);
 
-  return res.render('users/index', {
+    return res.render('users/index', {
         count: datas.count,
         datas: datas.rows,
         user: req.userInfo
@@ -113,11 +113,11 @@ exports.detail = async (req, res, next) => {
         .readOne(id)
         .catch(err => console.error(err));
 
-    // console.log(data);
+    console.log("data :", data);
 
-    if (data) return res.json({
-        render: `(users/${id})`,
-        data: data.dataValues
+    if (data) return res.render('users/detail', {
+        user: user,
+        data: data
     });
     else res.json(`fail id:${id}`)
 }
@@ -126,7 +126,7 @@ exports.delete = async (req, res, next) => {
     const id = req.params.id;
     const user = req.userInfo;
 
-    console.log('delete',id);
+    console.log('delete', id);
 
     let obj = {};
     obj.id = id;
@@ -140,4 +140,12 @@ exports.delete = async (req, res, next) => {
 
     if (result) return res.redirect('/users');
     else res.json(`fail id:${id}`)
+}
+
+exports.checkID = async (req, res, next) => {
+    let userid = req.body.userid;
+    // console.log(userid)
+    const user = await usersService.checkID(userid);
+    if (user) return res.status(409).json({ exist: true });
+    else return res.status(200).json({ exist: false });
 }

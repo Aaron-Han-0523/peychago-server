@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const usersController = require('../controllers/users');
-const jwt = require('../services/jwt')
+const usersService = require('../services/users');
+const jwt = require('../services/jwt');
 
 /* GET users listing. */
 router
@@ -10,7 +11,14 @@ router
   .post('/login', usersController.login)
   .get('/add', jwt.verifyToken, (req, res, next) => res.render('users/add', { user: req.userInfo }))
   .post('/add', jwt.verifyToken, usersController.add)
-  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('users/edit', { user: req.userInfo }))
+  .post('/checkID', jwt.verifyToken, usersController.checkID)
+  .get('/edit/:id', jwt.verifyToken, async (req, res, next) => {
+    // console.log("id :", req.params.id)
+    res.render('users/edit', {
+      user: req.userInfo,
+      data: await usersService.readOne(req.params.id)
+    })
+  })
   .put('/edit/:id', jwt.verifyToken, usersController.edit)
   .get('/delete/:id', jwt.verifyToken, usersController.delete)
   .put('/changePassword', jwt.verifyToken, usersController.changePassword)

@@ -6,7 +6,6 @@
 </head>
 
 <body class="layout-boxed alt-menu">
-
     <%- include ("../partials/loader.ejs") %>
 
         <%- include ("../partials/nav.ejs") %>
@@ -55,49 +54,9 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text1"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text1" type="text" name="userid"
-                                                                        placeholder="" class="form-control" required>
-                                                                    <button type="button"
-                                                                        onclick="checkID()">중복확인</button>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Password</h6>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row layout-spacing">
-                                                            <div class="col-12">
-
-                                                                <div class="form-group">
-                                                                    <label for="t-text2"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="t-text2" type="password" name="password"
-                                                                        placeholder="" class="form-control" required>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Confirm Password</h6>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row layout-spacing">
-                                                            <div class="col-12">
-
-                                                                <div class="form-group">
-                                                                    <label for="t-text3"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="t-text3" type="password"
-                                                                        name="confirm_password" placeholder=""
-                                                                        class="form-control" required>
+                                                                    <input disabled id="t-text1" type="text"
+                                                                        name="userid" placeholder=""
+                                                                        class="form-control" value="<%= data.userid %>">
                                                                 </div>
 
                                                             </div>
@@ -115,8 +74,10 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text4"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text4" type="text" name="userName"
-                                                                        placeholder="" class="form-control" required>
+                                                                    <input disabled id="t-text4" type="text"
+                                                                        name="userName" placeholder=""
+                                                                        class="form-control"
+                                                                        value="<%= data.userName %>">
                                                                 </div>
 
                                                             </div>
@@ -134,8 +95,9 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text4"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text4" type="text" name="phone"
-                                                                        placeholder="" class="form-control" required>
+                                                                    <input disabled id="t-text4" type="text"
+                                                                        name="phone" placeholder="" class="form-control"
+                                                                        value="<%= data.phone %>">
                                                                 </div>
 
                                                             </div>
@@ -153,8 +115,9 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text5"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text5" type="text" name="email"
-                                                                        placeholder="" class="form-control" required>
+                                                                    <input disabled id="t-text5" type="text"
+                                                                        name="email" placeholder="" class="form-control"
+                                                                        value="<%= data.email %>">
                                                                 </div>
 
                                                             </div>
@@ -169,8 +132,8 @@
                                                         <div class="row layout-spacing">
                                                             <div class="col-12 ">
                                                                 <div class="table-responsive">
-                                                                    <table
-                                                                        class="table table-hover table-striped table-bordered">
+                                                                    <table disabled
+                                                                        class="table table-striped table-bordered">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th class="text-center" scope="col">Menu
@@ -202,7 +165,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission1"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -212,7 +175,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission1"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -222,7 +185,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission1"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -232,7 +195,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission1"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -242,7 +205,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission1"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -257,7 +221,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission2"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -267,7 +231,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission2"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -277,7 +241,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission2"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -287,7 +251,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission2"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -297,7 +261,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission2"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -312,7 +277,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission3"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -322,7 +287,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission3"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -332,7 +297,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission3"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -342,7 +307,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission3"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -352,7 +317,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission3"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -367,7 +333,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission4"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -377,7 +343,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission4"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -387,7 +353,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission4"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -397,7 +363,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission4"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -407,7 +373,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission4"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -422,7 +389,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission5"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -432,7 +399,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission5"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -442,7 +409,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission5"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -452,7 +419,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission5"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -462,7 +429,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission5"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -477,7 +445,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission6"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -487,7 +455,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission6"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -497,7 +465,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission6"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -507,7 +475,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission6"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -517,7 +485,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission6"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -532,7 +501,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-secondary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission7"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -542,7 +511,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-primary form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission7"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -552,7 +521,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-info form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission7"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -562,7 +531,7 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-success form-check-inline">
-                                                                                        <input
+                                                                                        <input disabled
                                                                                             class="form-check-input permission7"
                                                                                             type="checkbox" value='1'
                                                                                             name="permission"
@@ -572,7 +541,8 @@
                                                                                 <td>
                                                                                     <div
                                                                                         class="form-check form-check-danger form-check-inline">
-                                                                                        <input class="form-check-input"
+                                                                                        <input disabled
+                                                                                            class="form-check-input"
                                                                                             id="permission7"
                                                                                             type="checkbox" value='1'>
                                                                                     </div>
@@ -596,10 +566,10 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text6"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text6" type="text" name="note"
-                                                                        placeholder="" class="form-control">
+                                                                    <input disabled id="t-text6" type="text" name="note"
+                                                                        placeholder="" class="form-control"
+                                                                        value="<%= data.note %>">
                                                                 </div>
-
                                                             </div>
                                                         </div>
 
@@ -608,9 +578,11 @@
 
                                                                 <div class="form-group">
                                                                     <button class="btn btn-outline-success mb-2 me-4"
-                                                                        type="button" onclick="add_user()">Add</button>
+                                                                        type="button"
+                                                                        onclick="location.href='/users/edit/<%= data.users_id %>';">Edit</button>
                                                                     <button class="btn btn-outline-danger mb-2 me-4"
-                                                                        type="button" onclick="cancel()">Cancel</button>
+                                                                        type="button"
+                                                                        onclick="history.back()">Back</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -634,88 +606,26 @@
             <%- include ("../partials/commonScrpits.ejs") %>
 
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                <script>
-                    for (let i = 1; i <= 7; i++) {
-                        checkall('permission' + i, 'permission' + i)
-                    }
+                <% let encoder=new TextEncoder() %>
+                    <script>
+                        let permissions = [];
+                        permissions.push(parseInt('<%= encoder.encode(data.permission1) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission2) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission3) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission4) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission5) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission6) %>'))
+                        permissions.push(parseInt('<%= encoder.encode(data.permission7) %>'))
+                        console.log(permissions)
 
-                    async function add_user() {
-                        let password = $('input[name="password"]').val();
-                        let confirm_password = $('input[name="confirm_password"]').val();
-                        if (!(password == confirm_password)) return alert("비밀번호가 일치하지 않습니다.");
-
-                        let data = {};
-                        data.userid = $('input[name="userid"]').val();
-                        data.password = password;
-                        data.userName = $('input[name="userName"]').val();
-                        data.phone = $('input[name="phone"]').val();
-                        data.email = $('input[name="email"]').val();
-                        data.note = $('input[name="note"]').val();
-                        data.permission1 = permission_calc("permission1");
-                        data.permission2 = permission_calc("permission2");
-                        data.permission3 = permission_calc("permission3");
-                        data.permission4 = permission_calc("permission4");
-                        data.permission5 = permission_calc("permission5");
-                        data.permission6 = permission_calc("permission6");
-                        data.permission7 = permission_calc("permission7");
-
-                        await fetch(location.href, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(data),
-                            redirect: "follow"
-                        })
-                            .then((response) => {
-                                // console.log(response);
-                                if (response.ok) return window.location.href = response.url;
-                            })
-                            .catch((err) => {
-                                console.error(err)
-                            });
-                    }
-
-                    function permission_calc(permission) {
-                        let result = 0;
-                        let add_permission = document.getElementById(permission + '_add');
-                        let read_permission = document.getElementById(permission + '_read');
-                        let edit_permission = document.getElementById(permission + '_edit');
-                        let del_permission = document.getElementById(permission + '_del');
-                        console.log(permission);
-
-                        if (add_permission.checked) result |= 1 << 3;
-                        if (read_permission.checked) result |= 1 << 2;
-                        if (edit_permission.checked) result |= 1 << 1;
-                        if (del_permission.checked) result |= 1 << 0;
-
-                        return result;
-                    }
-
-                    async function checkID() {
-                        let userid = $('input[name="userid"]').val();
-                        console.log(userid);
-
-                        let url = '/users/checkID';
-                        await fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({userid}),
-                            redirect: "follow"
-                        })
-                            .then((response) => {
-                                // console.log(response);
-                                if (response.ok) return alert("사용가능한 ID입니다.");
-                                else return alert("사용할 수 없는 ID입니다.")
-                            })
-                            .catch((err) => {
-                                console.log(err)
-                            });
-                    }
-                </script>
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                        for (let i = 0; i < 7; i++) {
+                            document.getElementById('permission' + (i + 1) + '_add').checked = permissions[i] & 1 << 3;
+                            document.getElementById('permission' + (i + 1) + '_read').checked = permissions[i] & 1 << 2;
+                            document.getElementById('permission' + (i + 1) + '_edit').checked = permissions[i] & 1 << 1;
+                            document.getElementById('permission' + (i + 1) + '_del').checked = permissions[i] & 1 << 0;
+                        }
+                    </script>
+                    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>
