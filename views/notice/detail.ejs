@@ -31,7 +31,7 @@
                                             <li class="breadcrumb-item"><a
                                                     href="/notice">Notice
                                                     Management</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Add</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -48,53 +48,45 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <form method="post">
-                                                    <div class="widget-content widget-content-area">
-                                                        <div class="row">
-                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Title</h6>
+                                                <div class="widget-content widget-content-area">
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <h6>Title</h6>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12 ">
+                                                            <div class="form-group">
+                                                                <h2><%= data.title %></h2>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-12 ">
-                                                                <div class="form-group">
-                                                                    <label for="title"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="title" type="text" name="title"
-                                                                        placeholder="" class="form-control" required>
-                                                                </div>
+                                                    <div class="row layout-top-spacing">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <h6> Content </h6>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="editor-container">
+                                                        <p><%= data.content %></p>
+                                                    </div>
+
+                                                    <div class="row layout-top-spacing">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <h6> Link </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12 ">
+                                                            <div class="form-group">
+                                                                <a href='<%= data.link %>'><%= data.link %></a>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6> Content </h6>
-                                                            </div>
-                                                        </div>
-
-                                                        <div id="editor-container">
-                                                            <textarea class="form-control w-100" name="content"
-                                                                rows="15"></textarea>
-                                                        </div>
-
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6> Link </h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-12 ">
-                                                                <div class="form-group">
-                                                                    <label for="link"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="link" type="text" name="link"
-                                                                        placeholder="" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row layout-top-spacing">
+                                                    <!-- <div class="row layout-top-spacing">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                                                 <h6>Type</h6>
                                                             </div>
@@ -104,9 +96,9 @@
                                                             <option value="2">Top</option>
                                                             <option value="1">Nomal</option>
                                                             <option value="0">Bottom</option>
-                                                        </select>
+                                                        </select> -->
 
-                                                        <!--<div class="row layout-top-spacing">
+                                                    <!--<div class="row layout-top-spacing">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                             <h6>Link</h6>
                                         </div>
@@ -115,23 +107,25 @@
                                         <div class="col-lg-6 col-12 ">
                                                 <div class="form-group">
                                                     <label for="t-text" class="visually-hidden">Text</label>
-                                                    <input id="t-text2" type="text" name="txt" placeholder="" class="form-control" required>
+                                                    <input disabled id="t-text2" type="text" name="txt" placeholder="" class="form-control" >
                                                 </div>
                                         </div>
                                     </div>
 -->
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col-lg-6 col-12 ">
-                                                                <div class="form-group">
-                                                                    <button
-                                                                        class="btn btn-outline-success mb-2 me-4">Save</button>
-                                                                    <button class="btn btn-outline-danger mb-2 me-4"
-                                                                        type="button" onclick="cancel()">Cancel</button>
-                                                                </div>
+                                                    <div class="row layout-top-spacing">
+                                                        <div class="col-lg-6 col-12 ">
+                                                            <div class="form-group">
+                                                                <% if(user.permission1.data[0]&0b0010) { %>
+                                                                    <button type="button" onclick="location.href='/notice/edit/<%= data.notice_id %>';"
+                                                                        class="btn btn-outline-success mb-2 me-4">Edit</button>
+                                                                    <% } %>
+                                                                        <button class="btn btn-outline-danger mb-2 me-4"
+                                                                            type="button"
+                                                                            onclick="location.href='/notice';">back</button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                </div>
 
                                             </div>
                                         </div>
@@ -154,7 +148,7 @@
             <%- include ("../partials/commonScrpits.ejs") %>
 
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                
+
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 

@@ -4,7 +4,8 @@ exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
     body.user = user.userid;
-    
+    console.log("notice body :", body);
+
     try {
         let result = await noticeService.create(body);
         // console.log("result :",result);
@@ -12,17 +13,18 @@ exports.add = async (req, res, next) => {
     }
     catch (e) {
         console.error(e);
-        return res.json(`add fail`)
+        return res.status(409).json(`add fail`)
     }
 }
 
 exports.edit = async (req, res, next) => {
-    // console.log("put - notice edit")
+    console.log("put - notice edit")
     const user = req.userInfo;
     const id = req.params.id;
     let body = req.body;
     body.user = user.userid;
     body.id = id;
+    console.log("notice body :", body);
 
     let result = await noticeService
         .update(body)
@@ -41,7 +43,7 @@ exports.index = async (req, res, next) => {
 
     // console.log("datas :", datas);
 
-  return res.render('notice/index', {
+    return res.render('notice/index', {
         count: datas.count,
         datas: datas.rows,
         user: req.userInfo
@@ -57,13 +59,13 @@ exports.detail = async (req, res, next) => {
         .readOne(id)
         .catch(err => console.error(err));
 
-    // console.log(data);
+    console.log("data :", data);
 
-    if (data) return res.json({
-        render: `(notice/${id})`,
-        data: data.dataValues
+    if (data) return res.render(`notice/detail`, {
+        user: user,
+        data: data
     });
-    else res.json(`fail id:${id}`)
+    else res.status(404).json(`fail id:${id}`)
 }
 
 exports.delete = async (req, res, next) => {

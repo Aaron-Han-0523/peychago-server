@@ -4,12 +4,10 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await notice
-        .create({
+        .create(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+        }))
         .then(result => {
             console.log("notice create success");
             return result;
@@ -23,10 +21,10 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await notice
-        .update({
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
+        }), {
             where: { notice_id: obj.id }
         })
         .then(result => {
@@ -48,7 +46,8 @@ exports.allRead = async () => {
                 deleteDate: null
             },
             order: [
-                ['notice_id', 'DESC']
+                ['type', 'DESC'],
+                ['notice_id', 'DESC'],
             ]
         })
         .then(result => {
@@ -67,7 +66,7 @@ exports.readOne = async (id) => {
         .findByPk(id)
         .then(result => {
             console.log(`notice_id-${id} find success`);
-            return result
+            return result.dataValues;
         })
         .catch(err => {
             // console.error(err);
