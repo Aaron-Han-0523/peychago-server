@@ -31,8 +31,8 @@ let upload = multer({
 
 /* GET imageSetting listing. */
 router
-  .get('/', jwt.verifyToken, (req, res, next) => res.render('imageSetting/index', { user: req.userInfo }))
-  // .post('/add', jwt.verifyToken, imageSettingController.add)
-  .post('/noticeImage', upload.single('exampleFormControlFile1'),(req,res,next)=>{console.log(req.file); next();} ,imageSettingController.edit);
+    .get('/', jwt.verifyToken, (req, res, next) => res.render('imageSetting/index', { user: req.userInfo }))
+    // .post('/add', jwt.verifyToken, imageSettingController.add)
+    .post('/noticeImage', upload.single('exampleFormControlFile1'), imageSettingController.edit);
 
 module.exports = router;

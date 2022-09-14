@@ -9,7 +9,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var cors = require('cors')
+var cors = require('cors');
+const fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var carInfoRouter = require('./routes/carInfo');
@@ -57,7 +58,7 @@ app.set('secret_key', process.env.SECRET_KEY)
 app.set('jwt-option', {
   httpOnly: true,
   secure: config.cookie_secure,
-  maxAge: 4*60*60*1000  // 4시간
+  maxAge: 4 * 60 * 60 * 1000  // 4시간
 })
 
 console.log(app)
@@ -79,6 +80,7 @@ app.use('/supplierUsers', supplierUsersRouter);
 app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
+app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -93,7 +95,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  if (err.status==404) res.render('error/404page');
+  if (err.status == 404) res.render('error/404page');
   else res.render('error/error');
 });
 

@@ -4,12 +4,10 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await review
-        .create({
+        .create(Object.assign(obj, {
             createUser: obj.user,
-            createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+            createDate: new Date()
+        }))
         .then(result => {
             console.log("review create success");
             return result;
@@ -23,10 +21,10 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await review
-        .update({
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
+        }), {
             where: { review_id: obj.id }
         })
         .then(result => {
