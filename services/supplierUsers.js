@@ -44,17 +44,10 @@ exports.changePassword = async (obj) => {
 
 exports.create = async (obj) => {
     return await supplierUsers
-        .create({
-            companyName: obj.companyName
-            , mainPhoneNum: obj.mainPhoneNum
-            , password: "123456"
-            , address: obj.address
-            , companyNumber: obj.companyNumber
-            , ownerName: obj.ownerName
-            , phoneNum: obj.phoneNum
-            , email: obj.email
-            , createUser: obj.user
-        })
+        .create(Object.assign(obj, {
+            createUser: obj.user,
+            createDate: new Date()
+        }))
         .then(result => {
             console.log("supplierUsers create success");
             return result;
@@ -68,18 +61,10 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await supplierUsers
-        .update({
-            companyName: obj.companyName
-            , mainPhoneNum: obj.mainPhoneNum
-            , password: obj.password
-            , address: obj.address
-            , companyNumber: obj.companyNumber
-            , ownerName: obj.ownerName
-            , phoneNum: obj.phoneNum
-            , email: obj.email
-            , updateUser: obj.user
-            , updateDate: new Date()
-        }, {
+        .update(Object.assign(obj, {
+            updateUser: obj.user,
+            updateDate: new Date()
+        }), {
             where: { supplierUsers_id: obj.id }
         })
         .then(result => {
@@ -116,16 +101,22 @@ exports.allRead = async () => {
 }
 
 exports.readOne = async (id) => {
-    return await supplierUsers
-        .findByPk(id)
-        .then(result => {
-            console.log(`supplierUsers_id-${id} find success`);
-            return result
-        })
-        .catch(err => {
-            // console.error(err);
-            throw (err);
-        })
+    try {
+        console.log('find', id)
+        var result = await supplierUsers
+            .findOne({
+                where: {
+                    supplierUsers_id: id,
+                    deleteDate: null
+                }
+            })
+            .then(result => result.dataValues)
+            .catch(err => { throw Error(err) })
+        return result;
+    } catch (e) {
+        console.log(e);
+        // throw Error('Error while getUser');
+    }
 }
 
 exports.delete = async (obj) => {
@@ -144,4 +135,22 @@ exports.delete = async (obj) => {
             // console.log(err);
             throw (err);
         })
+}
+
+exports.checkID = async function (mainPhoneNum) {
+    try {
+        console.log('check', mainPhoneNum)
+        var result = await supplierUsers
+            .findOne({
+                where: {
+                    mainPhoneNum: mainPhoneNum,
+                }
+            })
+            .then(result => result.dataValues)
+            .catch(err => { throw Error(err) })
+        return result;
+    } catch (e) {
+        console.log(e);
+        // throw Error('Error while getUser');
+    }
 }

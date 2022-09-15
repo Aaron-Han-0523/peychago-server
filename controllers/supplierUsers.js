@@ -58,7 +58,9 @@ exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
     body.user = user.userid;
-    
+    body.password = '123456'
+    console.log("supplierUsers body :", body);
+
     try {
         let result = await supplierUsersService.create(body);
         // console.log("result :",result);
@@ -95,7 +97,7 @@ exports.index = async (req, res, next) => {
 
     // console.log("data :", data);
 
-  return res.render('supplierUsers/index', {
+    return res.render('supplierUsers/index', {
         count: data.count,
         data: data.rows,
         user: req.userInfo
@@ -113,9 +115,9 @@ exports.detail = async (req, res, next) => {
 
     // console.log(data);
 
-    if (data) return res.json({
-        render: `(supplierUsers/${id})`,
-        data: data.dataValues
+    if (data) return res.render('supplierUsers/detail', {
+        user: user,
+        data: data
     });
     else res.json(`fail id:${id}`)
 }
@@ -135,4 +137,12 @@ exports.delete = async (req, res, next) => {
 
     if (result) return res.redirect('/supplierUsers');
     else res.json(`fail id:${id}`)
+}
+
+exports.checkID = async (req, res, next) => {
+    let mainPhoneNum = req.body.mainPhoneNum;
+    // console.log(mainPhoneNum)
+    const user = await supplierUsersService.checkID(mainPhoneNum);
+    if (user) return res.status(409).json({ exist: true });
+    else return res.status(200).json({ exist: false });
 }
