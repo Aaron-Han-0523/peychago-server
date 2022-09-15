@@ -1,15 +1,14 @@
 const carInfo = require('../models').carinfo;
+const partslist = require('../models').partslist;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    return await carInfo
-        .create({
+    const car = await carInfo
+        .create(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+        }))
         .then(result => {
             console.log("carInfo create success");
             return result;
@@ -18,25 +17,68 @@ exports.create = async (obj) => {
             // console.error(err);
             throw new Error(err);
         });
+
+    // console.log(car.carInfo_id);
+    let partslist_obj = [];
+    for (let i = 0; i < obj.cnt.length; i++) {
+        partslist_obj.push({
+            carInfo_id: car.carInfo_id,
+            parts_id: obj.parts_id[i],
+            part_cnt: obj.cnt[i],
+        });
+    }
+
+    await partslist
+        .bulkCreate(partslist_obj)
+        .then(result => {
+            // console.log(result);
+        })
+        .catch(err => {
+            throw new Error(err)
+        });
+
+    return true
 }
 
 exports.update = async (obj) => {
-    console.log("update obj :", obj)
-    return await carInfo
-        .update({
+    console.log("update obj :", obj);
+    await carInfo
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
+        }), {
             where: { carInfo_id: obj.id }
         })
         .then(result => {
             console.log("carInfo update success");
             return result.pop();
         })
-        .catch(err => {
-            // console.log(err);
+        .catch((err) => {
+            // console.error(err);
             throw new Error(err);
+        });
+
+    await partslist.destroy({ where: { carInfo_id: obj.id } });
+
+    let partslist_obj = [];
+    for (let i = 0; i < obj.cnt.length; i++) {
+        partslist_obj.push({
+            carInfo_id: obj.id,
+            parts_id: obj.parts_id[i],
+            part_cnt: obj.cnt[i],
+        });
+    }
+
+    await partslist
+        .bulkCreate(partslist_obj)
+        .then(result => {
+            // console.log(result);
         })
+        .catch(err => {
+            throw new Error(err)
+        });
+
+    return true
 }
 
 exports.allRead = async () => {

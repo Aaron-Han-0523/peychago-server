@@ -10,7 +10,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-const fs = require('fs');
 
 var indexRouter = require('./routes/index');
 var carInfoRouter = require('./routes/carInfo');

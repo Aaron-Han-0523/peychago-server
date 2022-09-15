@@ -4,22 +4,23 @@
     "password": "root",
     "database": "admin_page",
     "host": "127.0.0.1",
-    "dialect": "mysql"
-    ,"cookie_secure": false
+    "dialect": "mysql",
+    "cookie_secure": false
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "cookie_secure": false
   },
   "production": {
     "username": "root",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
-    "dialect": "mysql"
-    ,"cookie_secure": false
+    "dialect": "mysql",
+    "cookie_secure": true
   }
 }

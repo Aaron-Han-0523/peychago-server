@@ -28,14 +28,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "연식모델"
     },
-    autoTotalPrice: {
-      type: DataTypes.STRING(200),
+    price: {
+      type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "자동 계산 가격"
-    },
-    manualTotalPrice: {
-      type: DataTypes.STRING(200),
-      allowNull: true,
+      defaultValue: 0,
       comment: "수동 계산 가격"
     },
     note: {

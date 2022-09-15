@@ -11,7 +11,7 @@
                 <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </a>
-        
+
         <ul class="navbar-item flex-row ms-lg-auto ms-0">
 
             <li class="nav-item theme-toggle-item">
@@ -223,16 +223,9 @@
                 </a>
 
                 <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
-                    <div class="user-profile-section">
-                        <div class="media mx-auto">
-                            <div class="emoji me-2">
-                                &#x1F44B;
-                            </div>
-                            <div class="media-body">
-                                <h5><%= user.userName||user.companyName %></h5>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- <div class="user-profile-section">
+                        
+                    </div> -->
                     <!-- <div class="dropdown-item">
                         <a href="user-profile.html">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -279,7 +272,20 @@
                 </div>
 
             </li>
+            <li class="nav-item order-lg-0 order-1">
+                <!-- <div class="media mx-auto">
+                    <div class="emoji me-2">
+                        &#x1F44B;
+                    </div>
+                    <div class="media-body"> -->
+                <h5>
+                    안녕하세요, <%= user.userName||user.companyName %>님
+                </h5>
+                <!-- </div>
+                </div> -->
+            </li>
         </ul>
+
     </header>
 </div>
 <!--  END NAVBAR  -->

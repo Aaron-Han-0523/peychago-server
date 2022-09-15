@@ -5,6 +5,8 @@ exports.add = async (req, res, next) => {
     let body = req.body;
     body.user = user.userid;
 
+    console.log("body ", body)
+
     try {
         let result = await carInfoService.create(body);
         // console.log("result :",result);
@@ -48,23 +50,23 @@ exports.index = async (req, res, next) => {
     });
 }
 
-exports.detail = async (req, res, next) => {
-    const id = req.params.id;
-    console.log(`open one data id-${id}`)
+// exports.detail = async (req, res, next) => {
+//     const id = req.params.id;
+//     console.log(`open one data id-${id}`)
 
-    const user = req.userInfo;
-    let data = await carInfoService
-        .readOne(id)
-        .catch(err => console.error(err));
+//     const user = req.userInfo;
+//     let data = await carInfoService
+//         .readOne(id)
+//         .catch(err => console.error(err));
 
-    // console.log(data);
+//     // console.log(data);
 
-    if (data) return res.json({
-        render: `(carInfo/${id})`,
-        data: data.dataValues
-    });
-    else res.json(`fail id:${id}`)
-}
+//     if (data) return res.render('carInfo/detail', {
+//         data: data.dataValues,
+
+//     });
+//     else res.json(`fail id:${id}`)
+// }
 
 exports.delete = async (req, res, next) => {
     const id = req.params.id;

@@ -2,16 +2,36 @@ const express = require('express');
 const router = express.Router();
 
 const carInfoController = require('../controllers/carInfo');
+const carInfoService = require('../Services/carInfo');
+const partsService = require('../Services/parts');
+const partsListService = require('../services/partsList');
 const jwt = require('../services/jwt')
 
 /* GET carinfo listing. */
 router
-  .get('/', jwt.verifyToken, carInfoController.index)
-  .get('/add', jwt.verifyToken, (req, res, next) => res.render('carInfo/add', { user: req.userInfo }))
+  .get('/add', jwt.verifyToken, async (req, res, next) => res.render('carInfo/add', {
+    user: req.userInfo,
+    parts: await partsService.allRead(),
+  }))
   .post('/add', jwt.verifyToken, carInfoController.add)
-  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('carInfo/edit', { user: req.userInfo }))
-  .put('/edit/:id', jwt.verifyToken, carInfoController.edit)
-  .delete('/:id', jwt.verifyToken, carInfoController.delete)
-  .get('/:id', jwt.verifyToken, carInfoController.detail)
+  .get('/edit/:id', jwt.verifyToken, async (req, res, next) => res.render('carInfo/edit', {
+    user: req.userInfo,
+    parts: await partsService.allRead(),
+    partsList: await partsListService.allRead({
+      carInfo_id:req.params.id
+    }),
+    data: await carInfoService.readOne(req.params.id),
+  }))
+  .post('/edit/:id', jwt.verifyToken, carInfoController.edit)
+  .get('/delete/:id', jwt.verifyToken, carInfoController.delete)
+  .get('/:id', jwt.verifyToken, async (req, res, next) => res.render('carInfo/detail', {
+    user: req.userInfo,
+    parts: await partsService.allRead(),
+    partsList: await partsListService.allRead({
+      carInfo_id:req.params.id
+    }),
+    data: await carInfoService.readOne(req.params.id),
+  }))
+  .get('/', jwt.verifyToken, carInfoController.index)
 
 module.exports = router;

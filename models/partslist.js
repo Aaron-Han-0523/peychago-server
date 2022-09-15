@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'parts_id'
       }
     },
-    parts_cnt: {
+    part_cnt: {
       type: DataTypes.TINYINT.UNSIGNED,
       allowNull: true,
       defaultValue: 1,
