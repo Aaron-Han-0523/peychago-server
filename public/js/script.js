@@ -46,7 +46,7 @@ function exportExcel(table_id, fileName, sheetName) {
     var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
 
     // step 5. 엑셀 파일 내보내기 
-    saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), fileName);
+    saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), fileName+'.xlsx');
 }
 
 var excelHandler = {
