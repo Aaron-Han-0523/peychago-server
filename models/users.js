@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "이름"
     },
-    phone: {
+    phoneNum: {
       type: DataTypes.CHAR(25),
       allowNull: false,
       comment: "연락처"
