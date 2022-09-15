@@ -30,7 +30,7 @@
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="/parts">Subsidiary Material
                           Management</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Add</li>
+                      <!-- <li class="breadcrumb-item active" aria-current="page">Edit</li> -->
                     </ol>
                   </nav>
                 </div>
@@ -60,7 +60,7 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text1" class="visually-hidden">Text</label>
-                                  <input id="name" type="text" name="name" placeholder="" class="form-control" required>
+                                  <label id="name" name="name" class="form-control"><%= data.name %></label>
                                 </div>
                               </div>
                             </div>
@@ -75,7 +75,7 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text2" class="visually-hidden">Text</label>
-                                  <input id="unit" type="text" name="unit" placeholder="" class="form-control" required>
+                                  <label id="unit" name="unit" class="form-control"><%= data.unit %></label>
                                 </div>
                               </div>
                             </div>
@@ -90,8 +90,8 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text3" class="visually-hidden">Text</label>
-                                  <input id="price" type="text" name="price" placeholder="" class="form-control"
-                                    required>
+                                  <label id="price" class="form-control"
+                                ><%= data.price %></label>
                                 </div>
                               </div>
                             </div>
@@ -106,16 +106,20 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text4" class="visually-hidden">Text</label>
-                                  <input id="note" type="text" name="note" placeholder="" class="form-control" required>
+                                  <label id="note" class="form-control"><%= data.note %></label>
                                 </div>
                               </div>
                             </div>
 
                             <div class="row layout-top-spacing">
                               <div class="col-lg-6 col-12 ">
-                                <button class="btn btn-outline-success mb-2 me-4">Save</button>
-                                <button class="btn btn-outline-danger mb-2 me-4" type="button"
-                                  onclick="cancel()">Cancel</button>
+                                <% if(user.permission6.data[0]&0b0010) { %>
+                                    <button type="button" onclick="location.href='/parts/edit/<%= data.parts_id %>';"
+                                        class="btn btn-outline-success mb-2 me-4">Edit</button>
+                                    <% } %>
+                                        <button class="btn btn-outline-danger mb-2 me-4"
+                                            type="button"
+                                            onclick="location.href='/parts';">back</button>
                               </div>
                             </div>
                           </div>

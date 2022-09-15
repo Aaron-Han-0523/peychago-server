@@ -1,3 +1,4 @@
+const { use } = require('../routes/parts');
 const partsService = require('../Services/parts');
 
 exports.add = async (req, res, next) => {
@@ -61,9 +62,9 @@ exports.detail = async (req, res, next) => {
 
   // console.log(data);
 
-  if (data) return res.json({
-    render: `(parts/detail)`,
-    data: data.dataValues
+  if (data) return res.render('parts/detail', {
+    user: user,
+    data: data
   });
   else res.json(`fail id:${id}`)
 }

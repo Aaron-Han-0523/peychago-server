@@ -4,12 +4,10 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await parts
-        .create({
+        .create(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+        }))
         .then(result => {
             console.log("parts create success");
             return result;
@@ -23,10 +21,10 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await parts
-        .update({
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
+        }), {
             where: { parts_id: obj.id }
         })
         .then(result => {
@@ -67,7 +65,7 @@ exports.readOne = async (id) => {
         .findByPk(id)
         .then(result => {
             console.log(`parts_id-${id} find success`);
-            return result
+            return result.dataValues
         })
         .catch(err => {
             // console.error(err);
