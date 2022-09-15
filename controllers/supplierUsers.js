@@ -89,15 +89,15 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    let datas = await supplierUsersService
+    let data = await supplierUsersService
         .allRead()
         .catch(err => console.error(err));
 
-    // console.log("datas :", datas);
+    // console.log("data :", data);
 
   return res.render('supplierUsers/index', {
-        count: datas.count,
-        datas: datas.rows,
+        count: data.count,
+        data: data.rows,
         user: req.userInfo
     });
 }

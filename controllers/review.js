@@ -57,15 +57,15 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    let datas = await reviewService
+    let data = await reviewService
         .allRead()
         .catch(err => console.error(err));
 
-    console.log("datas :", datas.rows[0]);
+    console.log("data :", data.rows[0]);
 
     return res.render('review/index', {
-        count: datas.count,
-        datas: datas.rows,
+        count: data.count,
+        data: data.rows,
         user: req.userInfo
     });
 }

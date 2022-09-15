@@ -35,15 +35,15 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-  let datas = await exportRequestService
+  let data = await exportRequestService
       .allRead()
       .catch(err => console.error(err));
 
-  // console.log("datas :", datas);
+  // console.log("data :", data);
 
   return res.render('exportRequest/index', {
-      count: datas.count,
-      datas: datas.rows,
+      count: data.count,
+      data: data.rows,
       user: req.userInfo
   });
 }
