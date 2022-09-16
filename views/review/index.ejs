@@ -53,7 +53,8 @@
 
 
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-striped table-bordered" id="review_list_table">
+                                        <table class="table table-hover table-striped table-bordered"
+                                            id="review_list_table">
                                             <thead>
                                                 <tr>
                                                     <!-- <th scope="col" width="5%">
@@ -127,6 +128,7 @@
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
+                                                                <label hidden><%= item.grade %></label>
                                                                 <% for(let i=0; i < item.grade; i++){ %><span
                                                                         class="media-body align-self-center"><svg
                                                                             xmlns="http://www.w3.org/2000/svg"
