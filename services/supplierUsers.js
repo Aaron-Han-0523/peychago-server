@@ -30,10 +30,10 @@ exports.changePassword = async (obj) => {
             updateUser: obj.user,
             updateDate: new Date()
         }, {
-            where: { users_id: obj.id }
+            where: { supplierUsers_id: obj.id }
         })
         .then(result => {
-            console.log("users update success");
+            console.log("supplierUsers update success");
             return result.pop();
         })
         .catch(err => {

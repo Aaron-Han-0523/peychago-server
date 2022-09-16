@@ -60,7 +60,7 @@ exports.create = async (obj) => {
 }
 
 exports.update = async (obj) => {
-    // console.log("update obj :", obj)
+    console.log("update obj :", obj)
     return await users
         .update(Object.assign(obj,{
             updateUser: obj.user,

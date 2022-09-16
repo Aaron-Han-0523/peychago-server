@@ -650,6 +650,7 @@
                         data.userName = $('#userName').val();
                         data.phoneNum = $('#phoneNum').val();
                         data.email = $('#email').val();
+                        if (data.email.length > 25) return alert("email은 25자를 넘길 수 없습니다.");
                         data.note = $('#note').val();
                         data.permission1 = permission_calc("permission1");
                         data.permission2 = permission_calc("permission2");
@@ -670,6 +671,7 @@
                             .then((response) => {
                                 // console.log(response);
                                 if (response.ok) return window.location.href = response.url;
+                                else alert("추가 실패!!");
                             })
                             .catch((err) => {
                                 console.error(err)
@@ -682,7 +684,7 @@
                         let read_permission = document.getElementById(permission + '_read');
                         let edit_permission = document.getElementById(permission + '_edit');
                         let del_permission = document.getElementById(permission + '_del');
-                        console.log(permission);
+                        // console.log(permission);
 
                         if (add_permission.checked) result |= 1 << 3;
                         if (read_permission.checked) result |= 1 << 2;

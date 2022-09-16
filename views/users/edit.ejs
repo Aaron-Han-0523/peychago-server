@@ -27,8 +27,7 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a
-                                                    href="/users">User
+                                            <li class="breadcrumb-item"><a href="/users">User
                                                     Management</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Edit</li>
                                         </ol>
@@ -52,9 +51,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text1"
+                                                                    <label for="ttext1"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text1" type="text" name="userid"
+                                                                    <input id="ttext1" type="text" name="userid"
                                                                         placeholder="" class="form-control" disabled
                                                                         value="<%= data.userid %>">
                                                                 </div>
@@ -72,9 +71,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text2"
+                                                                    <label for="ttext2"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text2" type="password" name="password"
+                                                                    <input id="ttext2" type="password" name="password"
                                                                         placeholder="" class="form-control" required>
                                                                 </div>
 
@@ -91,9 +90,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text3"
+                                                                    <label for="ttext3"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text3" type="password"
+                                                                    <input id="ttext3" type="password"
                                                                         name="confirm_password" placeholder=""
                                                                         class="form-control" required>
                                                                 </div>
@@ -111,9 +110,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text4"
+                                                                    <label for="ttext4"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text4" type="text" name="userName"
+                                                                    <input id="ttext4" type="text" name="userName"
                                                                         placeholder="" class="form-control" required
                                                                         value="<%= data.userName %>">
                                                                 </div>
@@ -131,11 +130,11 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text4"
+                                                                    <label for="phoneNum"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text4" type="text" name="phone"
+                                                                    <input id="phoneNum" type="text" name="phoneNum"
                                                                         placeholder="" class="form-control" required
-                                                                        value="<%= data.phone %>">
+                                                                        value="<%= data.phoneNum %>">
                                                                 </div>
 
                                                             </div>
@@ -151,9 +150,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text5"
+                                                                    <label for="email"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text5" type="text" name="email"
+                                                                    <input id="email" type="text" name="email"
                                                                         placeholder="" class="form-control" required
                                                                         value="<%= data.email %>">
                                                                 </div>
@@ -595,9 +594,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text6"
+                                                                    <label for="ttext6"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input id="t-text6" type="text" name="note"
+                                                                    <input id="ttext6" type="text" name="note"
                                                                         placeholder="" class="form-control"
                                                                         value="<%= data.note %>">
                                                                 </div>
@@ -670,8 +669,9 @@
                             data.userid = $('input[name="userid"]').val();
                             data.password = password;
                             data.userName = $('input[name="userName"]').val();
-                            data.phone = $('input[name="phone"]').val();
+                            data.phoneNum = $('input[name="phoneNum"]').val();
                             data.email = $('input[name="email"]').val();
+                            if (data.email.length > 25) return alert("email은 25자를 넘길 수 없습니다.");
                             data.note = $('input[name="note"]').val();
                             data.permission1 = permission_calc("permission1");
                             data.permission2 = permission_calc("permission2");
@@ -682,8 +682,8 @@
                             data.permission7 = permission_calc("permission7");
                             // console.log('url :',location.href);
 
-                            await fetch(location.href, {
-                                method: 'put',
+                            let reuslt = await fetch(location.href, {
+                                method: 'post',
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
@@ -691,8 +691,9 @@
                                 redirect: "follow"
                             })
                                 .then((response) => {
-                                    // console.log(response);
+                                    console.log(response);
                                     if (response.ok) return window.location.href = response.url;
+                                    else alert('수정 실패!!');
                                 })
                                 .catch((err) => {
                                     console.error(err)
@@ -705,7 +706,7 @@
                             let read_permission = document.getElementById(permission + '_read');
                             let edit_permission = document.getElementById(permission + '_edit');
                             let del_permission = document.getElementById(permission + '_del');
-                            console.log(permission);
+                            // console.log(permission);
 
                             if (add_permission.checked) result |= 1 << 3;
                             if (read_permission.checked) result |= 1 << 2;

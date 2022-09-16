@@ -79,7 +79,7 @@ app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));
-app.get('/', (req, res, next) => res.redirect('/notice'));
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

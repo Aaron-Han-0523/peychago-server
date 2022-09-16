@@ -27,8 +27,7 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a
-                                                    href="/users">User
+                                            <li class="breadcrumb-item"><a href="/users">User
                                                     Management</a></li>
                                             <!-- <li class="breadcrumb-item active" aria-current="page">Add</li> -->
                                         </ol>
@@ -52,11 +51,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text1"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input disabled id="t-text1" type="text"
-                                                                        name="userid" placeholder=""
-                                                                        class="form-control" value="<%= data.userid %>">
+                                                                    <label class="form-control">
+                                                                        <%= data.userid %>
+                                                                    </label>
                                                                 </div>
 
                                                             </div>
@@ -72,12 +69,9 @@
                                                             <div class="col-12">
 
                                                                 <div class="form-group">
-                                                                    <label for="t-text4"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input disabled id="t-text4" type="text"
-                                                                        name="userName" placeholder=""
-                                                                        class="form-control"
-                                                                        value="<%= data.userName %>">
+                                                                    <label class="form-control">
+                                                                        <%= data.userName %>
+                                                                    </label>
                                                                 </div>
 
                                                             </div>
@@ -95,9 +89,9 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text4"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input disabled id="t-text4" type="text"
-                                                                        name="phone" placeholder="" class="form-control"
-                                                                        value="<%= data.phone %>">
+                                                                    <label class="form-control">
+                                                                        <%= data.phoneNum %>
+                                                                    </label>
                                                                 </div>
 
                                                             </div>
@@ -115,9 +109,9 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text5"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input disabled id="t-text5" type="text"
-                                                                        name="email" placeholder="" class="form-control"
-                                                                        value="<%= data.email %>">
+                                                                    <label class="form-control">
+                                                                        <%= data.email %>
+                                                                    </label>
                                                                 </div>
 
                                                             </div>
@@ -566,9 +560,10 @@
                                                                 <div class="form-group">
                                                                     <label for="t-text6"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input disabled id="t-text6" type="text" name="note"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.note %>">
+                                                                    <label disabled id="t-text6" type="text" name="note"
+                                                                        class="form-control">
+                                                                        <%= data.note %>
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                         </div>

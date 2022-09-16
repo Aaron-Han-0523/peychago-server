@@ -12,6 +12,8 @@ exports.login = async function (req, res, next) {
 
     if (user) {
         if (user.password == body.password) {
+            let password = user.password;
+
             delete user.password;
             const token = await jwt.createToken(user)
 
@@ -24,7 +26,8 @@ exports.login = async function (req, res, next) {
             //     result: 'ok',
             //     token
             // })
-            return res.redirect('/')
+            if (password=='123456') return res.redirect('/accounts/changePassword');
+            return res.redirect('/');
         } else {
             console.log('비밀번호 불일치')
             return res.send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
@@ -37,11 +40,15 @@ exports.login = async function (req, res, next) {
 
 exports.changePassword = async (req, res, next) => {
     const userInfo = req.userInfo;
-    // console.log(userInfo);
+    console.log("user information :", userInfo);
+
     let body = req.body;
     body.id = userInfo.users_id;
     body.user = userInfo.userName;
+    console.log("body :", body);
+
     const user = await usersService.getUser(userInfo.userid);
+    console.log("user :", user);
 
     if (body.currentPassword == user.password) {
         let result = await usersService

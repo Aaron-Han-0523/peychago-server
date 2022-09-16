@@ -59,8 +59,8 @@
                                         <input class="form-check-input" id="custom_mixed_parent_all" type="checkbox">
                                     </div>
                                 </th> -->
-                                                    <th scope="col">User ID</th>
-                                                    <th scope="col">P</th>
+                                                    <th class="text-center" scope="col">User ID</th>
+                                                    <th class="text-center" scope="col">Phone</th>
                                                     <th class="text-center" scope="col">E-mail</th>
                                                     <th class="text-center" scope="col">User</th>
                                                     <th class="text-center" scope="col">Created date</th>
@@ -90,7 +90,9 @@
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.phoneNum %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">

@@ -19,9 +19,8 @@ router
       data: await usersService.readOne(req.params.id)
     })
   })
-  .put('/edit/:id', jwt.verifyToken, usersController.edit)
+  .post('/edit/:id', jwt.verifyToken, usersController.edit)
   .get('/delete/:id', jwt.verifyToken, usersController.delete)
-  .put('/changePassword', jwt.verifyToken, usersController.changePassword)
   .get('/:id', jwt.verifyToken, usersController.detail)
   .get('/', jwt.verifyToken, usersController.index)
 
