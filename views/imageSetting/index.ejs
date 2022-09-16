@@ -2,159 +2,215 @@
 <html lang="en">
 
 <head>
-  <%- include ("../partials/header.ejs") %>
+    <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed alt-menu">
 
-  <%- include ("../partials/loader.ejs") %>
+    <%- include ("../partials/loader.ejs") %>
 
-    <%- include ("../partials/nav.ejs") %>
+        <%- include ("../partials/nav.ejs") %>
 
-      <!--  BEGIN MAIN CONTAINER  -->
-      <div class="main-container sidebar-closed " id="container">
+            <!--  BEGIN MAIN CONTAINER  -->
+            <div class="main-container sidebar-closed " id="container">
 
-        <div class="overlay"></div>
-        <div class="search-overlay"></div>
+                <div class="overlay"></div>
+                <div class="search-overlay"></div>
 
-        <%- include ("../partials/sidebar.ejs") %>
+                <%- include ("../partials/sidebar.ejs") %>
 
-          <!--  BEGIN CONTENT AREA  -->
-          <div id="content" class="main-content">
-            <div class="layout-px-spacing">
+                    <!--  BEGIN CONTENT AREA  -->
+                    <div id="content" class="main-content">
+                        <div class="layout-px-spacing">
 
-              <div class="middle-content container-xxl p-0">
-                <!-- BREADCRUMB -->
-                <div class="page-meta">
-                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active" aria-current="page">Image Setting</li>
-                        </ol>
-                    </nav>
-                </div>
-                <!-- /BREADCRUMB -->
+                            <div class="middle-content container-xxl p-0">
 
-                <div class="row layout-spacing">
-                    <div class="col-lg-12 layout-top-spacing">
-                        <div class="col-lg-12">
-                            <div class="statbox widget box box-shadow">
-                                <div class="widget-header">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h4></h4>
-                                        </div>
-                                    </div>
+                                <!-- BREADCRUMB -->
+                                <div class="page-meta">
+                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item active" aria-current="page">Image Setting</li>
+                                        </ol>
+                                    </nav>
                                 </div>
+                                <!-- /BREADCRUMB -->
 
-                                <div class="widget-content widget-content-area">
-                                    <div class="form-group mb-4 mt-3">
-                                        <label for="exampleFormControlFile1">Notice Image</label>
-                                        <form method="POST" action="/imageSetting/noticeImage" enctype="multipart/form-data">
-                                            <input type="file" class="form-control-file" name="exampleFormControlFile1">
-                                            <button type="submit">Upload</button>
-                                        </form>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h6>About Us Tab 1 Title</h6>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12 ">
-                                            <form method="post">
-                                                <div class="form-group">
-                                                    <label for="t-text1" class="visually-hidden">About Us Tab 1 Title</label>
-                                                    <input id="t-text1" type="text" name="txt" placeholder="TEXT" class="form-control" required>
+                                <div class="row layout-spacing">
+                                    <div class="col-lg-12 layout-top-spacing">
+                                        <div class="col-lg-12">
+                                            <div class="statbox widget box box-shadow">
+                                                <div class="widget-header">
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <h4></h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </form>
-                                        </div>
-                                    </div>
 
-                                    <div class="row layout-top-spacing">
-                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h6>About Us Tab 1 URL</h6>
-                                        </div>
-                                    </div>
+                                                <div id="about1Title" class="widget-content widget-content-area">
+                                                    <form method="POST" action="/imageSetting/noticeImagePath"
+                                                        enctype="multipart/form-data">
+                                                        <h6>Notice Image</h6>
+                                                        <div class="d-flex">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <input type="file" class="form-control-file"
+                                                                    name="noticeImagePath">
+                                                            </div>
+                                                            <div class="p-2">
+                                                                <button class="btn btn-primary">Upload</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
 
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12 ">
-                                            <form method="post">
-                                                <div class="form-group">
-                                                    <label for="t-text2" class="visually-hidden">About Us Tab 1 URL</label>
-                                                    <input id="t-text2" type="text" name="txt" placeholder="URL" class="form-control" required>
+                                                    <form method="POST" action="/imageSetting/about1Title">
+                                                        <div id="about1URL" class="layout-top-spacing">
+                                                            <h6> About Us Tab 1 Title
+                                                            </h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="text" name="about1Title"
+                                                                        placeholder="TEXT" class="form-control"
+                                                                        value="<%= data.about1Title %>">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <form method="POST" action="/imageSetting/about1URL">
+                                                        <div id="about2ImagePath" class="layout-top-spacing">
+                                                            <h6> About Us Tab 1 URL
+                                                            </h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="text" name="about1URL"
+                                                                        placeholder="URL" class="form-control"
+                                                                        value="<%= data.about1URL %>">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <form method="POST" action="/imageSetting/about2Title">
+                                                        <div id="about2ImagePath" class="layout-top-spacing">
+                                                            <h6> About Us Tab 2 Title
+                                                            </h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="text" name="about2Title"
+                                                                        placeholder="TEXT" class="form-control"
+                                                                        value="<%= data.about2Title %>">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <form method="POST" action="/imageSetting/about2ImagePath"
+                                                        enctype="multipart/form-data">
+                                                        <div id="privacyImagePath" class="layout-top-spacing">
+                                                            <h6>About Us Tab 2
+                                                                Image</h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="file" class="form-control-file"
+                                                                        name="about2ImagePath">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <form method="POST" action="/imageSetting/privacyImagePath"
+                                                        enctype="multipart/form-data">
+                                                        <div id="termOfServicePath" class="layout-top-spacing">
+                                                            <h6>개인 정보 보호법</h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="file" class="form-control-file"
+                                                                        name="privacyImagePath">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                    <div id="exportNoticePath" class="layout-top-spacing">
+                                                        <form method="POST" action="/imageSetting/termOfServicePath">
+                                                            <h6>이용약관</h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="file" class="form-control-file"
+                                                                        name="termOfServicePath">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                    <div id="exportPicturePath" class="layout-top-spacing">
+                                                        <form method="POST" action="/imageSetting/exportNoticePath">
+                                                            <h6>수출관리 공지</h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="file" class="form-control-file"
+                                                                        name="exportNoticePath">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                    <div class="layout-top-spacing">
+                                                        <form method="POST" action="/imageSetting/exportPicturePath">
+                                                            <h6>수출관리 사진 샘플</h6>
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <input type="file" class="form-control-file"
+                                                                        name="exportPicturePath">
+                                                                </div>
+                                                                <div class="p-2">
+                                                                    <button class="btn btn-primary">Upload</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="row layout-top-spacing">
-                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h6>About Us Tab 2 Title</h6>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12 ">
-                                            <form method="post">
-                                                <div class="form-group">
-                                                    <label for="t-text3" class="visually-hidden">About Us Tab 2 Title</label>
-                                                    <input id="t-text3" type="text" name="txt" placeholder="TEXT" class="form-control" required>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-4 mt-3">
-                                        <label for="exampleFormControlFile2">About Us Tab 2 Image</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile2">
-                                    </div>
-
-                                    <div class="form-group mb-4 mt-3">
-                                        <label for="exampleFormControlFile3">개인 정보 보호법</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile3">
-                                    </div>
-
-                                    <div class="form-group mb-4 mt-3">
-                                        <label for="exampleFormControlFile4">이용약관</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile4">
-                                    </div>
-
-                                    <div class="form-group mb-4 mt-3">
-                                        <label for="exampleFormControlFile5">수출관리 공지</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile5">
-                                    </div>
-
-                                    <div class="form-group mb-4 mt-3">
-                                        <label for="exampleFormControlFile6">수출관리 사진 샘플</label>
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile6">
-                                    </div>
-
                                 </div>
                             </div>
+
                         </div>
+
+                        <%- include ("../partials/footer.ejs") %>
+
                     </div>
-
-
-
-                </div>
+                    <!--  END CONTENT AREA  -->
             </div>
+            <!-- END MAIN CONTAINER -->
 
-            </div>
+            <%- include ("../partials/commonScrpits.ejs") %>
 
-            <%- include ("../partials/footer.ejs") %>
+                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
-          </div>
-          <!--  END CONTENT AREA  -->
-      </div>
-      <!-- END MAIN CONTAINER -->
-
-      <%- include ("../partials/commonScrpits.ejs") %>
-
-      <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-
-      <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

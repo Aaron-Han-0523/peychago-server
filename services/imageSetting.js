@@ -7,7 +7,16 @@ exports.allRead = async () => {
 }
 
 exports.readOne = async () => {
-    return await null;
+    return await imageSetting
+        .findByPk(1)
+        .then(result => {
+            console.log(JSON.stringify(result));
+            return result;
+        })
+        .catch(err => {
+            console.error(err);
+            throw err;
+        });
 }
 
 exports.update = async (valus) => {
@@ -19,11 +28,11 @@ exports.update = async (valus) => {
             }
         })
         .then(result => {
-            console.log("carInfo update success");
+            console.log("imageSetting update success");
             return result.pop();
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw err;
         })
 }

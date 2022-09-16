@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       comment: "이미지세팅 식별번호"
     },
-    noticeImage: {
+    noticeImagePath: {
       type: DataTypes.STRING(500),
       allowNull: true,
       comment: "공지사항 이미지 경로"
