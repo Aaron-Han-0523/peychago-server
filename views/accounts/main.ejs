@@ -3,7 +3,6 @@
 
 <head>
     <%- include ("../partials/header.ejs") %>
-        <%- include ("../partials/commonScrpits.ejs") %>
 </head>
 
 <body class="layout-boxed alt-menu">
@@ -19,13 +18,13 @@
                         style="justify-content: space-between;">
                         <div class="card mt-3 mb-3">
                             <button type="button" onclick="location.href = '/users/login';"
-                                style="width:200px; height: 200px;">
+                                style="width:200px; height: 200px; font-size: 20px;" class="btn btn-primary">
                                 직원 로그인
                             </button>
                         </div>
                         <div class="card mt-3 mb-3">
                             <button type="button" onclick="location.href = '/supplierusers/login';"
-                                style="width:200px; height: 200px;">
+                                style="width:200px; height: 200px; font-size: 20px;" class="btn btn-primary">
                                 협력업체 로그인
                             </button>
                         </div>
@@ -36,9 +35,11 @@
 
             </div>
             
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+            <%- include ("../partials/commonScrpits.ejs") %>
 
-            <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>
