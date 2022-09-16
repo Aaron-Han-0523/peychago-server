@@ -85,8 +85,8 @@ exports.detail = async (req, res, next) => {
     if (data) return res.render('review/detail', {
         user: user,
         data: data,
-        car: await carInfoService.readOne(data.carInfo_id).then(result => result.dataValues),
-        supplier: await supplierUsersService.readOne(data.supplierUsers_id).then(result => result.dataValues)
+        car: await carInfoService.readOne(data.carInfo_id).then(result => result),
+        supplier: await supplierUsersService.readOne(data.supplierUsers_id).then(result => result)
     });
     else res.status(404).json(`fail id:${id}`)
 }
