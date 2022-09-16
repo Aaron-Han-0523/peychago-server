@@ -60,12 +60,11 @@ app.set('jwt-option', {
   maxAge: 4 * 60 * 60 * 1000  // 4시간
 })
 
-console.log(app)
+// console.log(app)
 
 // 추가사항
 // clientsRouter
 // processRouter
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/notice', noticeRouter);
 app.use('/review', reviewRouter);
@@ -80,6 +79,7 @@ app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
 app.use('/uploads', express.static(path.join(__dirname, './uploads')));
+app.get('/', (req, res, next) => res.redirect('/notice'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
