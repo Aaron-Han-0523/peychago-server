@@ -15,6 +15,7 @@ router
   }))
   .post('/edit/:id', jwt.verifyToken, partsController.edit)
   .get('/delete/:id', jwt.verifyToken, partsController.delete)
+  .get('/search', jwt.verifyToken, partsController.search)
   .get('/:id', jwt.verifyToken, partsController.detail)
   .get('/', jwt.verifyToken, partsController.index)
 

@@ -1,5 +1,6 @@
-const { use } = require('../routes/parts');
 const partsService = require('../Services/parts');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
   const user = req.userInfo;
@@ -84,4 +85,26 @@ exports.delete = async (req, res, next) => {
 
   if (result) return res.redirect('/parts');
   else res.json(`fail id:${id}`)
+}
+
+
+exports.search = async (req, res, next) => {
+  let word = req.query.q;
+  console.log("search", word, "start")
+
+  let result = null;
+  try {
+    if (word) {
+      result = await partsService.allRead({ name: { [Op.like]: `%${word}%` } })
+    } else {
+      result = await partsService.allRead()
+    }
+  } catch (err) {
+    console.error(err)
+  }
+
+  console.log("search result :", result)
+
+  if (result) return res.status(200).json(result);
+  else res.status(400).json(`don't find ${word}`)
 }
