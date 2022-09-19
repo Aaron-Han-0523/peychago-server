@@ -2,30 +2,45 @@ const clients = require('../models').clients;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+exports.getUser = async function (phoneNum) {
+    try {
+        console.log('find', phoneNum)
+        var result = await clients
+            .findOne({
+                where: {
+                    phoneNum: phoneNum,
+                }
+            })
+            .then(result => result.dataValues)
+            .catch(err => { throw Error(err) })
+        return result;
+    } catch (e) {
+        console.log(e);
+        // throw Error('Error while getUser');
+    }
+}
+
 exports.create = async (obj) => {
     return await clients
-        .create({
-            createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+        .create(Object.assign(obj, {
+            createDate: new Date()
+        }))
         .then(result => {
             console.log("clients create success");
             return result;
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 }
 
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await clients
-        .update({
-            updateUser: obj.user,
+        .update(Object.assign(obj, {
             updateDate: new Date()
-        }, {
+        }), {
             where: { clients_id: obj.id }
         })
         .then(result => {
@@ -34,15 +49,17 @@ exports.update = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all clients read');
 
     return await clients
-        .findAndCountAll({            
+        .findAndCountAll({
+            where: condition
+        }, {
             order: [
                 ['clients_id', 'DESC']
             ]
@@ -54,7 +71,7 @@ exports.allRead = async () => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -67,7 +84,7 @@ exports.readOne = async (id) => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -85,6 +102,6 @@ exports.delete = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
