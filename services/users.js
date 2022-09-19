@@ -38,7 +38,7 @@ exports.changePassword = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -55,7 +55,7 @@ exports.create = async (obj) => {
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 }
 
@@ -74,7 +74,7 @@ exports.update = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -97,7 +97,7 @@ exports.allRead = async () => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -134,7 +134,7 @@ exports.delete = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
