@@ -26,6 +26,7 @@ var supplierUsersRouter = require('./routes/supplierUsers');
 var usersRouter = require('./routes/users');
 var accountsRouter = require('./routes/accounts');
 var uploadsRouter = require('./routes/uploads');
+var apiRouter = require('./routes/api');
 
 let sequelize = require('./models/index').sequelize;
 sequelize.sync();
@@ -80,6 +81,7 @@ app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
 app.use('/uploads', uploadsRouter);
+app.use('/api', apiRouter);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler

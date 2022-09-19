@@ -6,12 +6,9 @@ const jwt = require('../services/jwt')
 
 /* GET clients listing. */
 router
-  .get('/', jwt.verifyToken, clientsController.index)
-  .get('/add', jwt.verifyToken, (req, res, next) => res.render('clients/add', { user: req.userInfo }))
-  .post('/add', jwt.verifyToken, clientsController.add)
-  .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('clients/edit', { user: req.userInfo }))
-  .put('/edit/:id', jwt.verifyToken, clientsController.edit)
-  .delete('/:id', jwt.verifyToken, clientsController.delete)
-  .get('/:id', jwt.verifyToken, clientsController.detail)
+  .post('/add', clientsController.add)
+  .post('/login', clientsController.login)
+  .put('/selectCompany', jwt.verifyToken, clientsController.selectCompany)
+  .get('/Info', jwt.verifyToken, clientsController.info)
 
 module.exports = router;
