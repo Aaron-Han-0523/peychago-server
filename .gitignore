@@ -1,4 +1,7 @@
 uploads/
+search.ejs
+test.js
+Service.js
 
 # Logs
 logs
