@@ -14,7 +14,7 @@ exports.create = async (obj) => {
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 }
 
@@ -33,18 +33,19 @@ exports.update = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all review read');
 
     return await review
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
                 ['review_id', 'DESC']
             ]
@@ -56,20 +57,26 @@ exports.allRead = async () => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
 exports.readOne = async (id) => {
     return await review
-        .findByPk(id)
+        .findOne({
+            raw: true,
+            where: {
+                deleteDate: null,
+                review_id: id
+            }
+        })
         .then(result => {
             console.log(`review_id-${id} find success`);
             return result
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -87,6 +94,6 @@ exports.delete = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }

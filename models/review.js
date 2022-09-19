@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "후기 식별번호"
     },
     carNum: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.STRING(15),
       allowNull: false,
       comment: "차량번호"
     },

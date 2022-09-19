@@ -12,15 +12,15 @@ const path = require("path");
 
 let storage = multer.diskStorage({
   destination: function (req, file, callback) {
-      callback(null, "uploads/review/")
+    callback(null, "uploads/review/")
   }, filename: function (req, file, callback) {
-      let extension = path.extname(file.originalname);
-      let basename = path.basename(file.originalname, extension);
-      let encoding = ""
-      for(let i=0; i<basename.length; i++){
-        encoding += basename.codePointAt(i);
-      }
-      callback(null, encoding + "-" + Date.now() + extension);
+    let extension = path.extname(file.originalname);
+    let basename = path.basename(file.originalname, extension);
+    let encoding = ""
+    for (let i = 0; i < basename.length; i++) {
+      encoding += basename.codePointAt(i);
+    }
+    callback(null, encoding + "-" + Date.now() + extension);
   },
 });
 
@@ -28,7 +28,7 @@ let storage = multer.diskStorage({
 let upload = multer({
   storage: storage, // file size 5MB로 제한
   limits: {
-      fileSize: 5 * 1024 * 1024,
+    fileSize: 5 * 1024 * 1024,
   },
 });
 
@@ -47,7 +47,9 @@ router
     supplier: await supplierUsersService.allRead(),
   }))
   .post('/edit/:id', jwt.verifyToken, upload.array('files'), reviewController.edit)
+  .put('/edit/:id', jwt.verifyToken, upload.array('files'), reviewController.edit)
   .get('/delete/:id', jwt.verifyToken, reviewController.delete)
+  .delete('/:id', jwt.verifyToken, reviewController.delete)
   .get('/:id', jwt.verifyToken, reviewController.detail)
   .get('/', jwt.verifyToken, reviewController.index)
 
