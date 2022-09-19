@@ -37,17 +37,22 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
+    const condition = req.query ? req.query : {};
+    console.log("carInfo condition :", condition);
+
     let data = await carInfoService
-        .allRead()
+        .allRead(condition)
         .catch(err => console.error(err));
 
     // console.log("data :", data);
 
-    return res.render('carInfo/index', {
-        count: data.count,
-        data: data.rows,
-        user: req.userInfo
-    });
+    return req.api ?
+        res.status(200).json(data)
+        : res.render('carInfo/index', {
+            count: data.count,
+            data: data.rows,
+            user: req.userInfo
+        });
 }
 
 // exports.detail = async (req, res, next) => {

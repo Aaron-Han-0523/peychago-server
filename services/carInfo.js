@@ -15,7 +15,7 @@ exports.create = async (obj) => {
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 
     // console.log(car.carInfo_id);
@@ -34,7 +34,7 @@ exports.create = async (obj) => {
             // console.log(result);
         })
         .catch(err => {
-            throw new Error(err)
+            throw (err)
         });
 
     return true
@@ -55,7 +55,7 @@ exports.update = async (obj) => {
         })
         .catch((err) => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         });
 
     await partslist.destroy({ where: { carInfo_id: obj.id } });
@@ -75,20 +75,21 @@ exports.update = async (obj) => {
             // console.log(result);
         })
         .catch(err => {
-            throw new Error(err)
+            throw (err)
         });
 
     return true
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all carinfo read');
 
     return await carInfo
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
                 ['carInfo_id', 'DESC']
             ]
@@ -100,8 +101,8 @@ exports.allRead = async () => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
-        })
+            throw (err);
+        });
 }
 
 exports.readOne = async (id) => {
@@ -113,7 +114,7 @@ exports.readOne = async (id) => {
         })
         .catch(err => {
             // console.error(err);
-            throw new Error(err);
+            throw (err);
         })
 }
 
@@ -131,6 +132,6 @@ exports.delete = async (obj) => {
         })
         .catch(err => {
             // console.log(err);
-            throw new Error(err);
+            throw (err);
         })
 }
