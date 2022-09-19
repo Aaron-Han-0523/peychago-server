@@ -7,6 +7,7 @@ const jwt = require('../services/jwt')
 const multer = require("multer");
 const path = require("path");
 
+// 날짜 형식 포맷터 YYYY-MM-DD_시간h분m초s
 function formatDate(d_t) {
     let year = d_t.getFullYear(); let month = ("0"
         + (d_t.getMonth() + 1)).slice(-2); let day = ("0" +
@@ -16,6 +17,7 @@ function formatDate(d_t) {
             + "_" + hour + "h" + minute + "m" + seconds + "s"
 }
 
+// 업로드 파일 저장 설정
 const storage = (fileName) => multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, "uploads/imageSetting/")
@@ -25,7 +27,7 @@ const storage = (fileName) => multer.diskStorage({
     },
 });
 
-// 1. 미들웨어 등록
+// 미들웨어 등록
 const upload = (fileName) => multer({
     storage: storage(fileName), // file size 5MB로 제한
     limits: {
@@ -33,21 +35,16 @@ const upload = (fileName) => multer({
     },
 });
 
-function formatDate(d_t) {
-    let year = d_t.getFullYear(); let month = ("0"
-        + (d_t.getMonth() + 1)).slice(-2); let day = ("0" +
-            d_t.getDate()).slice(-2); let hour = ("0" + d_t.getHours()).slice(-2);
-    let minute = ("0" + d_t.getMinutes()).slice(-2); let seconds = ("0" +
-        d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day
-            + "_" + hour + "h" + minute + "m" + seconds + "s"
-}
 
 /* GET imageSetting listing. */
 router
-    .get('/', jwt.verifyToken, async (req, res, next) => res.render('imageSetting/index', {
-        user: req.userInfo,
-        data: await imageSettingService.readOne()
-    }))
+    .get('/', jwt.verifyToken, async (req, res, next) =>
+        req.api ?
+            res.status(200).json(await imageSettingService.readOne())
+            : res.render('imageSetting/index', {
+                user: req.userInfo,
+                data: await imageSettingService.readOne()
+            }))
     .post('/noticeImagePath', jwt.verifyToken, upload('noticeImage').single('noticeImagePath'), imageSettingController.edit)
     .post('/about1Title', jwt.verifyToken, imageSettingController.edit)
     .post('/about1URL', jwt.verifyToken, imageSettingController.edit)
