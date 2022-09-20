@@ -10,6 +10,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var fs = require('fs');
+
 
 var indexRouter = require('./routes/index');
 var carInfoRouter = require('./routes/carInfo');
@@ -27,6 +29,7 @@ var usersRouter = require('./routes/users');
 var accountsRouter = require('./routes/accounts');
 var uploadsRouter = require('./routes/uploads');
 var apiRouter = require('./routes/api');
+const { fstat } = require('fs');
 
 let sequelize = require('./models/index').sequelize;
 sequelize.sync();
@@ -80,9 +83,21 @@ app.use('/supplierUsers', supplierUsersRouter);
 app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
-app.use('/uploads', uploadsRouter);
+// app.use('/uploads', uploadsRouter);
 app.use('/api', apiRouter);
 app.use('/', indexRouter);
+
+app.get('/uploads/review/:path', function (req, res) {
+  console.log("url :", req.url);
+  let extension = path.extname(req.params.path);
+
+  console.log("\t", '.' + req.url)
+  fs.readFile('.' + req.url, function (err, data) {
+    res.writeHead(200, { 'Content-Type': extension.slice(1) });
+    res.end(data);
+  })
+})
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
