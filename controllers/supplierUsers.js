@@ -69,7 +69,7 @@ exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
     body.user = user.userid;
-    body.password = '123456'
+    body.password = await encryption.hashing('123456');
     console.log("supplierUsers body :", body);
 
     try {
