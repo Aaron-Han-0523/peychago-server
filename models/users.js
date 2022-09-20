@@ -37,43 +37,43 @@ module.exports = function(sequelize, DataTypes) {
     permission1: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "공지사항 권한"
     },
     permission2: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "후기 권한"
     },
     permission3: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "입금 내역 권한"
     },
     permission4: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "이미지 세팅 권한"
     },
     permission5: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "차량 정보 권한"
     },
     permission6: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "부자재 권한"
     },
     permission7: {
       type: "BIT(4)",
       allowNull: false,
-      defaultValue: "b'0'",
+      defaultValue: 0,
       comment: "폐차 파트너 권한"
     },
     note: {
