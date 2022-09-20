@@ -27,7 +27,7 @@ module.exports = {
       , custom3: ''
     }
 
-    await queryInterface.bulkInsert('imageSetting', [imageSetting], {});
+    await queryInterface.bulkInsert('imagesetting', [imageSetting], {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -37,7 +37,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('imageSetting', null, {});
+    await queryInterface.bulkDelete('imagesetting', null, {});
 
   }
 };

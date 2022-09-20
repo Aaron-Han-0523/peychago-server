@@ -25,7 +25,7 @@ module.exports = {
         , createUser: `review${i}${i}${i}`
         , createDate: new Date()
         , supplierusers_id: `${i + 1}`
-        , clients_id: null
+        , clients_id: 1
         , carinfo_id: `${i + 1}`
       }
       datas.push(obj)
