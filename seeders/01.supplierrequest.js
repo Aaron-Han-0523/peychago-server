@@ -15,8 +15,16 @@ module.exports = {
     let datas = [];
     for (let i = 0; i < 10; i++) {
       let obj = {
-        createUser:`supplierReq${i}`
-        ,createDate: new Date(),
+        state: 0
+        , enrollDate: new Date()
+        , carNum: `서울 ${i}${i} 가 ${i}${i}${i}${i}`
+        , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
+        , carName: `${i}car${i}`
+        , yearModel: `${i}${i}${i}${i}`
+        , ownerName: `testclient${i}`
+        , supplierUsers_id: i
+        , createUser: `supplierReq${i}`
+        , createDate: new Date()
       }
       datas.push(obj)
     }
