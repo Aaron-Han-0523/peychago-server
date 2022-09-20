@@ -2,6 +2,8 @@ uploads/
 search.ejs
 test.js
 Service.js
+.sequelizerc
+config.json
 
 # Logs
 logs
