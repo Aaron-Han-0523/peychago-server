@@ -1,5 +1,6 @@
 const supplierUsersService = require('../Services/supplierUsers');
 const jwt = require('../services/jwt')
+const encryption = require('../utils/encryption');
 
 exports.login = async function (req, res, next) {
     const body = req.body;
@@ -10,8 +11,10 @@ exports.login = async function (req, res, next) {
     const supplier = await supplierUsersService.getUser(body.user_id)
     // console.log(user)
 
+    const hashedPassword = await encryption.hashing(body.password);
+
     if (supplier) {
-        if (supplier.password == body.password) {
+        if (supplier.password == hashedPassword) {
             let password = supplier.password;
             delete supplier.password;
             const token = await jwt.createToken(supplier)
@@ -25,7 +28,9 @@ exports.login = async function (req, res, next) {
             //     result: 'ok',
             //     token
             // })
-            if (password=='123456') return res.redirect('/accounts/changePassword');
+            const initPassword = await encryption.hashing('123456');
+
+            if (password == initPassword) return res.redirect('/accounts/changePassword');
             return res.redirect('/');
         } else {
             console.log('비밀번호 불일치')
@@ -45,7 +50,11 @@ exports.changePassword = async (req, res, next) => {
     body.user = userInfo.companyName;
     const user = await supplierUsersService.getUser(userInfo.mainPhoneNum);
 
-    if (body.currentPassword == user.password) {
+    const hashedPassword = await encryption.hashing(body.currentPassword);
+
+    if (hashedPassword == user.password) {
+        body.newPassword = await encryption.hashing(body.newPassword);
+
         let result = await supplierUsersService
             .changePassword(body)
             .catch(err => console.error(err));

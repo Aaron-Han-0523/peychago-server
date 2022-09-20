@@ -1,5 +1,6 @@
 const clientsService = require('../Services/clients');
 const jwt = require('../services/jwt');
+const encryption = require('../utils/encryption');
 
 exports.login = async function (req, res, next) {
   const body = req.body;
@@ -10,8 +11,10 @@ exports.login = async function (req, res, next) {
   const user = await clientsService.getUser(body.phoneNum)
   console.log(user)
 
+  hashedPassword = await encryption.hashing(body.password);
+
   if (user) {
-    if (user.password == body.password) {
+    if (user.password == hashedPassword) {
       let password = user.password;
 
       delete user.password;

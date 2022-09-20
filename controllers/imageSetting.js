@@ -7,11 +7,11 @@ exports.edit = async function (req, res) {
     // console.log('edit', body);
 
     const fieldName = req.url.slice(1);
-    // console.log('fieldName :',fieldName);
+    console.log('fieldName :',fieldName);
     if (!body[fieldName]) body[fieldName] = '';
 
     const file = req.file;
-    // console.log(file);
+    console.log(file);
 
     if (file) {
         body[file.fieldname] = file.path;

@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       unique: "SupplierUsers_UK"
     },
     password: {
-      type: DataTypes.STRING(25),
+      type: DataTypes.STRING(200),
       allowNull: false,
       comment: "비밀번호"
     },

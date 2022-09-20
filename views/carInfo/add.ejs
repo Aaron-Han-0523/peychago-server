@@ -358,7 +358,7 @@
             let cntArr = document.getElementsByName('cnt');
 
             cntArr.forEach(function (item, index) {
-              let partPrice = +trArr[index].split('\t')[2];
+              let partPrice = +trArr[index].split('\t')[2].replace(',','');
               totalPrice += +item.value * partPrice;
             })
 

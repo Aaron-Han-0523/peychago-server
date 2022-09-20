@@ -1,5 +1,8 @@
 'use strict';
 
+require('dotenv').config();
+const encryption = require('../utils/encryption');
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -11,11 +14,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    let password = await encryption
+      .hashing('admin')
+      .then(result => {
+        // console.log(result);
+        return result;
+      })
+      .catch(err => console.error(err));
+
+    // console.log(password.length)
+
     let admin = {
       userid: "admin",
-      password: "admin",
+      password: password,
       userName: "관리자",
-      phone: "000-0000-0000",
+      phoneNum: "000-0000-0000",
       email: "admin@page.com",
       permission1: 0b1111,
       permission2: 0b1111,

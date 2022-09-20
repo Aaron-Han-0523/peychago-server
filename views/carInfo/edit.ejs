@@ -162,7 +162,7 @@
                                               </td>
                                               <td class="text-center">
                                                 <button class="btn btn-outline-danger mb-2 me-4" type="button"
-                                                  onclick="del_part('part-${+parts_id}')">-</button>
+                                                  onclick="del_part('part-<%= item.parts_id %>')">-</button>
                                               </td>
                                             </tr>
                                             <% }) %>
@@ -371,7 +371,7 @@
             let cntArr = document.getElementsByName('cnt');
 
             cntArr.forEach(function (item, index) {
-              let partPrice = +trArr[index].split('\t')[2];
+              let partPrice = +trArr[index].split('\t')[2].replace(',','');
               totalPrice += +item.value * partPrice;
             })
 
@@ -398,7 +398,7 @@
 
             // console.log(result);
             document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
-            searchWord_element.value='';
+            searchWord_element.value = '';
 
             let tempHTML = ''
             for (let i = 0; i < result.count; i++) {
@@ -426,7 +426,7 @@
 
           document.getElementById('searchWord').addEventListener("keyup", (event) => {
             const key = event.key;
-            if(key=='Enter') return searchParts();
+            if (key == 'Enter') return searchParts();
           })
 
         </script>

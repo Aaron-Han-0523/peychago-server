@@ -2,9 +2,9 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('imagesetting', {
     imagesetting_id: {
-      autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
+      defaultValue: 1,
       primaryKey: true,
       comment: "이미지세팅 식별번호"
     },

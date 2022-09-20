@@ -21,11 +21,12 @@ module.exports = {
         , title: `review${i}`
         , content: `review${i}${i}`
         , grade: `${(i % 5) + 1}`
-        , clients_id: `${i+1}`
+        , clients_id: `${i + 1}`
         , createUser: `review${i}${i}${i}`
         , createDate: new Date()
-        , supplierusers_id: `${i+1}`
-        , carinfo_id: `${i+1}`
+        , supplierusers_id: `${i + 1}`
+        , clients_id: null
+        , carinfo_id: `${i + 1}`
       }
       datas.push(obj)
     }

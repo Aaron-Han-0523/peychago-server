@@ -23,7 +23,9 @@ const storage = (fileName) => multer.diskStorage({
         callback(null, "uploads/imageSetting/")
     }, filename: function (req, file, callback) {
         let extension = path.extname(file.originalname);
-        callback(null, fileName + '-' + req.userInfo.userName + '_' + formatDate(new Date) + extension);
+        const newFilename = fileName + '-' + req.userInfo.userName + '_' + formatDate(new Date) + extension
+        console.log("save filename :", newFilename)
+        callback(null, newFilename);
     },
 });
 

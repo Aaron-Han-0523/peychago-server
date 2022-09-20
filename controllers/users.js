@@ -1,5 +1,6 @@
 const usersService = require('../services/users')
 const jwt = require('../services/jwt')
+const encryption = require('../utils/encryption');
 
 exports.login = async function (req, res, next) {
     const body = req.body;
@@ -10,8 +11,12 @@ exports.login = async function (req, res, next) {
     const user = await usersService.getUser(body.user_id)
     // console.log(user)
 
+    const hashedPassword = await encryption.hashing(body.password);
+    // console.log("해싱된 패스워드", hashedPassword);
+    // console.log("저장된 패스워드", user.password);
+
     if (user) {
-        if (user.password == body.password) {
+        if (user.password == hashedPassword) {
             let password = user.password;
 
             delete user.password;
@@ -26,7 +31,9 @@ exports.login = async function (req, res, next) {
             //     result: 'ok',
             //     token
             // })
-            if (password=='123456') return res.redirect('/accounts/changePassword');
+            const initPassword = await encryption.hashing('123456');
+
+            if (password == initPassword) return res.redirect('/accounts/changePassword');
             return res.redirect('/');
         } else {
             console.log('비밀번호 불일치')
@@ -50,7 +57,11 @@ exports.changePassword = async (req, res, next) => {
     const user = await usersService.getUser(userInfo.userid);
     console.log("user :", user);
 
-    if (body.currentPassword == user.password) {
+    const hashedPassword = await encryption.hashing(body.currentPassword);
+
+    if (hashedPassword == user.password) {
+        body.newPassword = await encryption.hashing(body.newPassword);
+
         let result = await usersService
             .changePassword(body)
             .catch(err => console.error(err));

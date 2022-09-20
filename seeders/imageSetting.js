@@ -12,7 +12,8 @@ module.exports = {
      * }], {});
     */
     let imageSetting = {
-      noticeImagePath: ''
+      imagesetting_id: 1
+      , noticeImagePath: ''
       , about1Title: ''
       , about1URL: ''
       , about2Title: ''
@@ -21,9 +22,12 @@ module.exports = {
       , termOfServicePath: ''
       , exportNoticePath: ''
       , exportPicturePath: ''
+      , custom1: ''
+      , custom2: ''
+      , custom3: ''
     }
 
-    await queryInterface.bulkInsert('users', [imageSetting], {});
+    await queryInterface.bulkInsert('imageSetting', [imageSetting], {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -33,7 +37,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('users', null, {});
+    await queryInterface.bulkDelete('imageSetting', null, {});
 
   }
 };

@@ -63,8 +63,8 @@ exports.edit = async (req, res, next) => {
     let result = await reviewService
         .update(body)
         .catch(err => {
-            console.error(e);
-            return res.status(400).json(`edit fail : ${e.message}`)
+            console.error(err);
+            return res.status(400).json(`edit fail : ${err.message}`)
         })
     // console.log('result :', result)
 
