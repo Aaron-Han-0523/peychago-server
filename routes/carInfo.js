@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const carInfoController = require('../controllers/carInfo');
-const carInfoService = require('../Services/carInfo');
-const partsService = require('../Services/parts');
+const carInfoService = require('../services/carInfo');
+const partsService = require('../services/parts');
 const partsListService = require('../services/partsList');
 const jwt = require('../services/jwt')
 

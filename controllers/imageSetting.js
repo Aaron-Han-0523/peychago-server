@@ -1,4 +1,4 @@
-const imageSettingService = require('../Services/imageSetting');
+const imageSettingService = require('../services/imageSetting');
 const path = require("path");
 
 exports.edit = async function (req, res) {

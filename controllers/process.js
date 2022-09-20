@@ -1,4 +1,4 @@
-const processService = require('../Services/process');
+const processService = require('../services/process');
 
 exports.add = async (req, res, next) => {
   const user = req.userInfo;

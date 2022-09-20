@@ -1,4 +1,4 @@
-const disposalRequestService = require('../Services/disposalRequest');
+const disposalRequestService = require('../services/disposalRequest');
 
 exports.add = async (req, res, next) => {
   const user = req.userInfo;

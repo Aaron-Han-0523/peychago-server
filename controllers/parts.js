@@ -1,4 +1,4 @@
-const partsService = require('../Services/parts');
+const partsService = require('../services/parts');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

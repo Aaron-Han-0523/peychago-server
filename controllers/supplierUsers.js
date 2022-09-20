@@ -1,4 +1,4 @@
-const supplierUsersService = require('../Services/supplierUsers');
+const supplierUsersService = require('../services/supplierUsers');
 const jwt = require('../services/jwt')
 const encryption = require('../utils/encryption');
 

@@ -1,4 +1,4 @@
-const supplierRequestService = require('../Services/supplierRequest');
+const supplierRequestService = require('../services/supplierRequest');
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;

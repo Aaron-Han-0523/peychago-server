@@ -1,4 +1,4 @@
-const carInfoService = require('../Services/carInfo');
+const carInfoService = require('../services/carInfo');
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;

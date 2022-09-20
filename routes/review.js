@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const reviewController = require('../controllers/review');
-const reviewService = require('../Services/review');
-const carInfoService = require('../Services/carInfo');
-const supplierUsersService = require('../Services/supplierUsers');
+const reviewService = require('../services/review');
+const carInfoService = require('../services/carInfo');
+const supplierUsersService = require('../services/supplierUsers');
 
 const jwt = require('../services/jwt')
 const multer = require("multer");

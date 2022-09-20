@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const imageSettingController = require('../controllers/imageSetting');
-const imageSettingService = require('../Services/imageSetting');
+const imageSettingService = require('../services/imageSetting');
 const jwt = require('../services/jwt')
 const multer = require("multer");
 const path = require("path");

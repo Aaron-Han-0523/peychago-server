@@ -1,4 +1,4 @@
-const exportRequestService = require('../Services/exportRequest');
+const exportRequestService = require('../services/exportRequest');
 
 exports.add = async (req, res, next) => {
   const user = req.userInfo;

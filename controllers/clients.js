@@ -1,4 +1,4 @@
-const clientsService = require('../Services/clients');
+const clientsService = require('../services/clients');
 const jwt = require('../services/jwt');
 const encryption = require('../utils/encryption');
 

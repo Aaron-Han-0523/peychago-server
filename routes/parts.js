@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const partsController = require('../controllers/parts');
-const partsService = require('../Services/parts');
+const partsService = require('../services/parts');
 const jwt = require('../services/jwt')
 
 /* GET parts listing. */

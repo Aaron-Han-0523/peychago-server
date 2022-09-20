@@ -1,6 +1,6 @@
-const reviewService = require('../Services/review');
-const carInfoService = require('../Services/carInfo');
-const supplierUsersService = require('../Services/supplierUsers');
+const reviewService = require('../services/review');
+const carInfoService = require('../services/carInfo');
+const supplierUsersService = require('../services/supplierUsers');
 var createError = require('http-errors');
 
 exports.add = async (req, res, next) => {

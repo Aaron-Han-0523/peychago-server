@@ -1,4 +1,4 @@
-const noticeService = require('../Services/notice');
+const noticeService = require('../services/notice');
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
