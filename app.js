@@ -83,20 +83,20 @@ app.use('/supplierUsers', supplierUsersRouter);
 app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
-// app.use('/uploads', uploadsRouter);
+app.use('/uploads', uploadsRouter);
 app.use('/api', apiRouter);
 app.use('/', indexRouter);
 
-app.get('/uploads/review/:path', function (req, res) {
-  console.log("url :", req.url);
-  let extension = path.extname(req.params.path);
+// app.get('/uploads/review/:path', function (req, res) {
+//   console.log("url :", req.url);
+//   let extension = path.extname(req.params.path);
 
-  console.log("\t", '.' + req.url)
-  fs.readFile('.' + req.url, function (err, data) {
-    res.writeHead(200, { 'Content-Type': extension.slice(1) });
-    res.end(data);
-  })
-})
+//   console.log("\t", '.' + req.url)
+//   fs.readFile('.' + req.url, function (err, data) {
+//     res.writeHead(200, { 'Content-Type': extension.slice(1) });
+//     res.end(data);
+//   })
+// })
 
 
 // catch 404 and forward to error handler
