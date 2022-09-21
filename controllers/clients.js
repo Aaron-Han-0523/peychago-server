@@ -155,5 +155,7 @@ exports.info = async (req, res, next) => {
   const user = req.userInfo;
   console.log("client :", user);
 
-  return res.status(200).json(user);
+  return user ?
+    res.status(200).json(user)
+    : res.status(400).json("접속한 고객이 없습니다.");
 }
