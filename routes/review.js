@@ -58,8 +58,8 @@ router
   .get('/delete/:id', jwt.verifyToken, reviewController.delete)
   .delete('/:id', jwt.verifyToken, reviewController.delete)
 
-  .get('/:id', /* jwt.verifyToken, */ reviewController.detail)
+  .get('/:id', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), reviewController.detail)
 
-  .get('/', /* jwt.verifyToken, */ reviewController.index)
+  .get('/', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), reviewController.index)
 
 module.exports = router;
