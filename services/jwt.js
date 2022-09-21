@@ -18,7 +18,9 @@ exports.verifyToken = async (req, res, next) => {
         //     success: false,
         //     message: 'not logged in'
         // })
-        return res.redirect(login_url)
+        return req.api ?
+            res.status(403).json("접근할 수 없습니다.")
+            : res.redirect(login_url)
     }
 
     // create a promise that decodes the token
@@ -50,7 +52,9 @@ exports.verifyToken = async (req, res, next) => {
         //     success: false,
         //     message: error.message
         // })
-        return res.redirect(login_url)
+        return req.api ?
+            res.status(403).json("접근할 수 없습니다.")
+            : res.redirect(login_url)
     })
 }
 
