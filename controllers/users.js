@@ -75,7 +75,9 @@ exports.changePassword = async (req, res, next) => {
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
-    console.log(body);
+    body.user = user.userid;
+    body.password = await encryption.hashing(body.password);
+    console.log("Users body :", body);
 
     body.user = user.userid;
     console.log(body);
