@@ -1,8 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-const encryption = require('../utils/encryption');
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -14,19 +11,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let hashedPassword = await encryption.hashing("123456");
 
     let obj = {
       clients_id: 1
-      , clientName: '홍길동'
-      , phoneNum: '010-0000-0000'
-      , password: hashedPassword
-      , carNum: '율도국0000'
-      , carInfo_id: 1
-      , createDate: new Date(),
+      , status: 0
+      , date0: new Date()
+      , supplierRequest_id: 1
     }
 
-    await queryInterface.bulkInsert('clients', [obj], {});
+    await queryInterface.bulkInsert('process', [obj], {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -36,6 +29,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('clients', null, {});
+    await queryInterface.bulkDelete('process', null, {});
   }
 };

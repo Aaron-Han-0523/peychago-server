@@ -23,10 +23,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "진행단계"
     },
+    date0: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      comment: "신청일"
+    },
     date1: {
       type: DataTypes.DATE,
       allowNull: true,
-      comment: "status1 date"
+      comment: "접수일"
     },
     date2: {
       type: DataTypes.DATE,
@@ -58,20 +63,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "status7 date"
     },
-    disposalRequest_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      comment: "폐차 견적 식별번호"
-    },
     supplierRequest_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       comment: "회수요청 식별번호"
-    },
-    exportRequest_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      comment: "수출 견적 식별번호"
     }
   }, {
     sequelize,
