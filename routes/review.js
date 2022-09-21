@@ -40,17 +40,26 @@ router
     supplier: await supplierUsersService.allRead(),
   }))
   .post('/add', jwt.verifyToken, upload.array('files'), reviewController.add)
-  .get('/edit/:id', jwt.verifyToken, async (req, res, next) => res.render('review/edit', {
-    user: req.userInfo,
-    data: await reviewService.readOne(req.params.id),
-    car: await carInfoService.allRead(),
-    supplier: await supplierUsersService.allRead(),
-  }))
+
+  .get('/edit/:id', jwt.verifyToken, async (req, res, next) => req.api ?
+    res.json({
+      user: req.userInfo,
+      data: await reviewService.readOne(req.params.id),
+    })
+    : res.render('review/edit', {
+      user: req.userInfo,
+      data: await reviewService.readOne(req.params.id),
+      car: await carInfoService.allRead(),
+      supplier: await supplierUsersService.allRead(),
+    }))
   .post('/edit/:id', jwt.verifyToken, upload.array('files'), reviewController.edit)
   .put('/edit/:id', jwt.verifyToken, upload.array('files'), reviewController.edit)
+
   .get('/delete/:id', jwt.verifyToken, reviewController.delete)
   .delete('/:id', jwt.verifyToken, reviewController.delete)
-  .get('/:id', jwt.verifyToken, reviewController.detail)
-  .get('/', jwt.verifyToken, reviewController.index)
+
+  .get('/:id', /* jwt.verifyToken, */ reviewController.detail)
+
+  .get('/', /* jwt.verifyToken, */ reviewController.index)
 
 module.exports = router;
