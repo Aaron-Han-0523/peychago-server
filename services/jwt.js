@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET_KEY
-const login_url = '/accounts/login'
+const login_url = '/users/login'    // 로그인 분리 시 url : '/accounts/login'
 
 exports.verifyToken = async (req, res, next) => {
     console.log('verify token')
