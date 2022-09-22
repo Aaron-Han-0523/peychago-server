@@ -28,8 +28,7 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item active" aria-current="page">Subsidiary Material
-                                                Management</li>
+                                            <li class="breadcrumb-item active" aria-current="page">부속품 정보 관리</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -39,12 +38,11 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Title and content"
                                             aria-label="Recipient's username with two button addons">
-                                        <button class="btn btn-outline-primary" type="button">Search</button>
+                                        <button class="btn btn-outline-primary" type="button">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('subsidiary_material_list_table','subsidiary_material_file','subsidiary_material_sheet');">Excel
-                                            Download</button>
+                                            onclick="exportExcel('subsidiary_material_list_table','subsidiary_material_file','subsidiary_material_sheet');">엑셀 다운로드</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href='/parts/add';">+ Add New</button>
+                                            onclick="location.href='/parts/add';">새 정보 추가</button>
                                     </div>
                                 </div>
 
@@ -60,15 +58,15 @@
                                         <input class="form-check-input" id="custom_mixed_parent_all" type="checkbox">
                                     </div>
                                 </th> -->
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Unit</th>
-                                                    <th class="text-center" scope="col">Price</th>
-                                                    <th class="text-center" scope="col">User</th>
-                                                    <th class="text-center" scope="col">Created date</th>
-                                                    <th class="text-center" scope="col">Updated User</th>
-                                                    <th class="text-center" scope="col">Updated Date</th>
-                                                    <th class="text-center" scope="col">Note</th>
-                                                    <th class="text-center" scope="col">Function</th>
+                                                    <th scope="col">품명</th>
+                                                    <th scope="col">단위</th>
+                                                    <th class="text-center" scope="col">단위당 가격</th>
+                                                    <th class="text-center" scope="col">작성자</th>
+                                                    <th class="text-center" scope="col">작성일</th>
+                                                    <th class="text-center" scope="col">수정자</th>
+                                                    <th class="text-center" scope="col">수정일</th>
+                                                    <th class="text-center" scope="col">메모</th>
+                                                    <th class="text-center" scope="col">수정/삭제</th>
                                                 </tr>
                                                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                                             </thead>
@@ -123,7 +121,7 @@
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"></span>
+                                                                <span class="media-body align-self-center"><%= item.note %></span>
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="action-btns">

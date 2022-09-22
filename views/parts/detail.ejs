@@ -28,9 +28,10 @@
                 <div class="page-meta">
                   <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="/parts">Subsidiary Material
-                          Management</a></li>
-                      <!-- <li class="breadcrumb-item active" aria-current="page">Edit</li> -->
+                      <li class="breadcrumb-item"><a href="/parts">부속품 정보 관리</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        <%= data.name %>
+                      </li>
                     </ol>
                   </nav>
                 </div>
@@ -52,7 +53,7 @@
                           <div class="widget-content widget-content-area">
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Name</h6>
+                                <h6>품명</h6>
                               </div>
                             </div>
 
@@ -60,14 +61,16 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text1" class="visually-hidden">Text</label>
-                                  <label id="name" name="name" class="form-control"><%= data.name %></label>
+                                  <label id="name" name="name" class="form-control">
+                                    <%= data.name %>
+                                  </label>
                                 </div>
                               </div>
                             </div>
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Unit</h6>
+                                <h6>단위</h6>
                               </div>
                             </div>
 
@@ -75,14 +78,16 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text2" class="visually-hidden">Text</label>
-                                  <label id="unit" name="unit" class="form-control"><%= data.unit %></label>
+                                  <label id="unit" name="unit" class="form-control">
+                                    <%= data.unit %>
+                                  </label>
                                 </div>
                               </div>
                             </div>
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Price</h6>
+                                <h6>단위당 가격</h6>
                               </div>
                             </div>
 
@@ -90,15 +95,16 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text3" class="visually-hidden">Text</label>
-                                  <label id="price" class="form-control"
-                                ><%= data.price %></label>
+                                  <label id="price" class="form-control">
+                                    <%= data.price %>
+                                  </label>
                                 </div>
                               </div>
                             </div>
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Note</h6>
+                                <h6>메모</h6>
                               </div>
                             </div>
 
@@ -106,7 +112,9 @@
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="text4" class="visually-hidden">Text</label>
-                                  <label id="note" class="form-control"><%= data.note %></label>
+                                  <label id="note" class="form-control">
+                                    <%= data.note %>
+                                  </label>
                                 </div>
                               </div>
                             </div>
@@ -114,12 +122,11 @@
                             <div class="row layout-top-spacing">
                               <div class="col-lg-6 col-12 ">
                                 <% if(user.permission6.data[0]&0b0010) { %>
-                                    <button type="button" onclick="location.href='/parts/edit/<%= data.parts_id %>';"
-                                        class="btn btn-outline-success mb-2 me-4">Edit</button>
-                                    <% } %>
-                                        <button class="btn btn-outline-danger mb-2 me-4"
-                                            type="button"
-                                            onclick="location.href='/parts';">back</button>
+                                  <button type="button" onclick="location.href='/parts/edit/<%= data.parts_id %>';"
+                                    class="btn btn-outline-success mb-2 me-4">수정하기</button>
+                                  <% } %>
+                                    <button class="btn btn-outline-danger mb-2 me-4" type="button"
+                                      onclick="location.href='/parts';">뒤로가기</button>
                               </div>
                             </div>
                           </div>

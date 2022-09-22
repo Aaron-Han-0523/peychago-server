@@ -29,8 +29,7 @@
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <!--                                <li class="breadcrumb-item"><a href="#">Table</a></li>-->
-                                            <li class="breadcrumb-item active" aria-current="page">Supplier USER
-                                                Management</li>
+                                            <li class="breadcrumb-item active" aria-current="page">협력사 관리</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -38,14 +37,13 @@
 
                                 <div class="col-lg-12 layout-top-spacing">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Title and content"
+                                        <input type="text" class="form-control" placeholder="검색할 협력사명을 입력해주세요."
                                             aria-label="Recipient's username with two button addons">
-                                        <button class="btn btn-outline-primary" type="button">Search</button>
+                                        <button class="btn btn-outline-primary" type="button">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('supplier_user_list_table','supplier_user_list_file','supplier_user_list_sheet');">Excel
-                                            Download</button>
+                                            onclick="exportExcel('supplier_user_list_table','supplier_user_list_file','supplier_user_list_sheet');">엑셀 다운로드</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href='/supplierUsers/add';">+ Add New</button>
+                                            onclick="location.href='/supplierUsers/add';">협력사 등록</button>
                                     </div>
                                 </div>
 
@@ -62,15 +60,15 @@
                                                                 type="checkbox">
                                                         </div>
                                                     </th> -->
-                                                    <th scope="col">Company Name</th>
-                                                    <th scope="col">P - ID</th>
-                                                    <th class="text-center" scope="col">Owner Name</th>
-                                                    <th class="text-center" scope="col">Address</th>
-                                                    <th class="text-center" scope="col">Created User</th>
-                                                    <th class="text-center" scope="col">Created date</th>
-                                                    <th class="text-center" scope="col">Updated User</th>
-                                                    <th class="text-center" scope="col">Updated Date</th>
-                                                    <th class="text-center" scope="col">Function</th>
+                                                    <th scope="col">협력사 회사명</th>
+                                                    <th scope="col">사업자등록번호</th>
+                                                    <th class="text-center" scope="col">대표자 성함</th>
+                                                    <th class="text-center" scope="col">소재지</th>
+                                                    <th class="text-center" scope="col">등록자</th>
+                                                    <th class="text-center" scope="col">등록일</th>
+                                                    <th class="text-center" scope="col">수정자</th>
+                                                    <th class="text-center" scope="col">수정일</th>
+                                                    <th class="text-center" scope="col">수정/삭제</th>
                                                 </tr>
                                                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                                             </thead>

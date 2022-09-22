@@ -28,10 +28,10 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a
-                                                    href="/notice">Notice
-                                                    Management</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                                            <li class="breadcrumb-item"><a href="/notice">공지사항</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                <%= data.notice_id %>
+                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -51,37 +51,64 @@
                                                 <div class="widget-content widget-content-area">
                                                     <div class="row">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6>Title</h6>
+                                                            <!-- <h6>제목</h6> -->
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-lg-6 col-12 ">
                                                             <div class="form-group">
-                                                                <h2><%= data.title %></h2>
+                                                                <h2>
+                                                                    <%= data.title %>
+                                                                </h2>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6> Content </h6>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="editor-container">
-                                                        <p><%= data.content %></p>
-                                                    </div>
+                                                    <!-- <hr size="1px">
 
                                                     <div class="row layout-top-spacing">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6> Link </h6>
+                                                            <h6>링크Link</h6>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-6 col-12 ">
                                                             <div class="form-group">
-                                                                <a href='<%= data.link %>'><%= data.link %></a>
+                                                                <a href='<%= data.link %>'>
+                                                                    <%= data.link %>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <hr size="1px">
+
+                                                    <div class="row layout-top-spacing">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <!-- <h6>내용</h6> -->
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="editor-container">
+                                                        <p style="font-size: 20px;">
+                                                            <%= data.content %>
+                                                        </p>
+                                                    </div>
+
+                                                    <hr size="1px">
+
+                                                    <div class="row layout-top-spacing">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <h6>링크Link</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-12 ">
+                                                            <div class="form-group">
+                                                                <a href='<%= data.link %>'>
+                                                                    <%= data.link %>
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -116,12 +143,13 @@
                                                         <div class="col-lg-6 col-12 ">
                                                             <div class="form-group">
                                                                 <% if(user.permission1.data[0]&0b0010) { %>
-                                                                    <button type="button" onclick="location.href='/notice/edit/<%= data.notice_id %>';"
-                                                                        class="btn btn-outline-success mb-2 me-4">Edit</button>
+                                                                    <button type="button"
+                                                                        onclick="location.href='/notice/edit/<%= data.notice_id %>';"
+                                                                        class="btn btn-outline-success mb-2 me-4">수정하기</button>
                                                                     <% } %>
                                                                         <button class="btn btn-outline-danger mb-2 me-4"
                                                                             type="button"
-                                                                            onclick="location.href='/notice';">back</button>
+                                                                            onclick="location.href='/notice';">뒤로가기</button>
                                                             </div>
                                                         </div>
                                                     </div>

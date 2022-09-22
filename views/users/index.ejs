@@ -29,7 +29,7 @@
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <!--                                <li class="breadcrumb-item"><a href="#">Table</a></li>-->
-                                            <li class="breadcrumb-item active" aria-current="page">User Management</li>
+                                            <li class="breadcrumb-item active" aria-current="page">매니저 관리</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -37,14 +37,13 @@
 
                                 <div class="col-lg-12 layout-top-spacing">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Title and content"
+                                        <input type="text" class="form-control" placeholder="검색할 매니저 이름을 입력해주세요."
                                             aria-label="Recipient's username with two button addons">
-                                        <button class="btn btn-outline-primary" type="button">Search</button>
+                                        <button class="btn btn-outline-primary" type="button">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('user_list_table','user_list_file','user_list_sheet');">Excel
-                                            Download</button>
+                                            onclick="exportExcel('user_list_table','user_list_file','user_list_sheet');">엑셀 다운로드</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href='/users/add';">+ Add New</button>
+                                            onclick="location.href='/users/add';">매니저 등록</button>
                                     </div>
                                 </div>
 
@@ -59,14 +58,15 @@
                                         <input class="form-check-input" id="custom_mixed_parent_all" type="checkbox">
                                     </div>
                                 </th> -->
-                                                    <th class="text-center" scope="col">User ID</th>
-                                                    <th class="text-center" scope="col">Phone</th>
+                                                    <th class="text-center" scope="col">ID</th>
+                                                    <th class="text-center" scope="col">매니저 이름</th>
+                                                    <th class="text-center" scope="col">연락처</th>
                                                     <th class="text-center" scope="col">E-mail</th>
-                                                    <th class="text-center" scope="col">User</th>
-                                                    <th class="text-center" scope="col">Created date</th>
-                                                    <th class="text-center" scope="col">Updated User</th>
-                                                    <th class="text-center" scope="col">Updated Date</th>
-                                                    <th class="text-center" scope="col">Function</th>
+                                                    <th class="text-center" scope="col">등록자</th>
+                                                    <th class="text-center" scope="col">등록일</th>
+                                                    <th class="text-center" scope="col">수정자</th>
+                                                    <th class="text-center" scope="col">수정일</th>
+                                                    <th class="text-center" scope="col">수정/삭제</th>
                                                 </tr>
                                                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                                             </thead>
@@ -87,6 +87,11 @@
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">
                                                                     <%= item.userid %>
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.userName %>
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">

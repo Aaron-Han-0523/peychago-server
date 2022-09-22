@@ -29,8 +29,7 @@
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <!-- <li class="breadcrumb-item"><a href="#">Table</a></li> -->
-                                            <li class="breadcrumb-item active" aria-current="page">Car Information
-                                                Management</li>
+                                            <li class="breadcrumb-item active" aria-current="page">차량 정보 관리</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -38,14 +37,13 @@
 
                                 <div class="col-lg-12 layout-top-spacing">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Title and content"
+                                        <input type="text" class="form-control" placeholder="검색할 제조사 또는 모델명을 입력해주세요."
                                             aria-label="Recipient's username with two button addons">
-                                        <button class="btn btn-outline-primary" type="button">Search</button>
+                                        <button class="btn btn-outline-primary" type="button">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('car_information_list_table','car_information_list_file','car_information_list_sheet');">Excel
-                                            Download</button>
+                                            onclick="exportExcel('car_information_list_table','car_information_list_file','car_information_list_sheet');">엑셀 다운로드</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href = '/carinfo/add';">+ Add New</button>
+                                            onclick="location.href = '/carinfo/add';">새 정보 추가</button>
                                     </div>
                                 </div>
 
@@ -62,17 +60,17 @@
                                         <input class="form-check-input" id="custom_mixed_parent_all" type="checkbox">
                                     </div>
                                 </th> -->
-                                                    <th scope="col">Company</th>
-                                                    <th scope="col">Model</th>
-                                                    <th class="text-center" scope="col">Detail Model</th>
-                                                    <th class="text-center" scope="col">Year Model</th>
-                                                    <th class="text-center" scope="col">Price</th>
-                                                    <th class="text-center" scope="col">Create User</th>
-                                                    <th class="text-center" scope="col">Create Date</th>
-                                                    <th class="text-center" scope="col">Update User</th>
-                                                    <th class="text-center" scope="col">Update Date</th>
+                                                    <th scope="col">제조사</th>
+                                                    <th scope="col">모델명</th>
+                                                    <th class="text-center" scope="col">세부모델</th>
+                                                    <th class="text-center" scope="col">연식</th>
+                                                    <th class="text-center" scope="col">예상 견적</th>
+                                                    <th class="text-center" scope="col">작성자</th>
+                                                    <th class="text-center" scope="col">작성일</th>
+                                                    <th class="text-center" scope="col">수정자</th>
+                                                    <th class="text-center" scope="col">수정일</th>
                                                     <!-- <th class="text-center" scope="col">Type</th> -->
-                                                    <th class="text-center" scope="col">Function</th>
+                                                    <th class="text-center" scope="col">수정/삭제</th>
                                                 </tr>
                                                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                                             </thead>
@@ -91,34 +89,50 @@
                                         </div>
                                     </td> -->
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.maker %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.maker %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.model %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.model %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.detailModel %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.detailModel %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.yearModel %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.yearModel %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span
-                                                                    class="media-body align-self-center"><%= item.price? item.price:'' %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.price? item.price:'0' %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.createUser %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.createUser %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span
-                                                                    class="media-body align-self-center"><%= formatDate(item.createDate) %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= formatDate(item.createDate) %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.updateUser %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.updateUser %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span
-                                                                    class="media-body align-self-center"><%= item.updateDate? formatDate(item.updateDate):'' %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.updateDate? formatDate(item.updateDate):''
+                                                                        %>
+                                                                </span>
                                                             </td>
                                                             <!-- <td class="text-center">
                                                                 <span class="media-body align-self-center">자동 계산</span>

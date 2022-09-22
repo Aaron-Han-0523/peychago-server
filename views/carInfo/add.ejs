@@ -30,8 +30,8 @@
                 <div class="page-meta">
                   <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="/carinfo">Car Information Management</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Add</li>
+                      <li class="breadcrumb-item"><a href="/carinfo">차량 정보 관리</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">추가</li>
                     </ol>
                   </nav>
                 </div>
@@ -53,7 +53,7 @@
                           <div class="widget-content widget-content-area">
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Company</h6>
+                                <h6>제조사</h6>
                               </div>
                             </div>
 
@@ -69,7 +69,7 @@
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Model</h6>
+                                <h6>모델명</h6>
                               </div>
                             </div>
 
@@ -85,7 +85,7 @@
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Detail Model</h6>
+                                <h6>세부모델</h6>
                               </div>
                             </div>
 
@@ -101,12 +101,12 @@
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Year Model</h6>
+                                <h6>연식</h6>
                               </div>
                             </div>
 
                             <div class="row layout-spacing">
-                              <div class="col-lg-6 col-12 ">
+                              <div class="col-lg-6 col-12">
                                 <div class="form-group">
                                   <label for="yearModel" class="visually-hidden">Text</label>
                                   <input id="yearModel" type="text" name="yearModel" placeholder="" class="form-control"
@@ -117,21 +117,21 @@
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Subsidiary Model</h6>
+                                <h6>부속품</h6>
                               </div>
                             </div>
 
-                            <div class="row">
-                              <div class="col-xl-6 mb-xl-0 mb-2">
-                                <div class="table-responsive layout-spacing">
+                            <div class="row layout-spacing">
+                              <div class="col-lg-6 col-12">
+                                <div class="table-responsive form-group">
                                   <table class="table table-striped table-bordered">
                                     <thead>
                                       <tr>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Unit</th>
-                                        <th class="text-center" scope="col">Price</th>
-                                        <th class="text-center" scope="col">Count</th>
-                                        <th class="text-center" scope="col">Function</th>
+                                        <th scope="col">품명</th>
+                                        <th scope="col">단위</th>
+                                        <th class="text-center" scope="col">단위당 가격</th>
+                                        <th class="text-center" scope="col">개수</th>
+                                        <th class="text-center" scope="col">삭제</th>
                                       </tr>
                                       <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                                     </thead>
@@ -157,26 +157,31 @@
                                   </table>
                                 </div>
                               </div>
-                              <div class="col-xl-1 mb-xl-0 mb-2">
-                                <div class="form-group">
-                                  <div><button class="btn btn-outline-success mb-2 me-4" data-bs-toggle="modal"
-                                      data-bs-target="#partsModal" type="button">+</button></div>
+                              <div class="row layout-spacing">
+                                <div class="col-lg-6 col-12">
+                                  <div class="form-group">
+                                    <div><button class="btn btn-outline-success mb-2 me-4" data-bs-toggle="modal"
+                                        data-bs-target="#partsModal" type="button">부속품 추가</button></div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
 
 
-
-                            <div>
-                              <input type="radio" name="calc" id="auto"><span class="">Auto Total Price</span>
-                              <input type="radio" name="calc" id="manual"><span>Manual Total Price</span>
+                            <div class="row">
+                              <div class="col">
+                                <input type="radio" name="calc" id="auto" checked><span> 예상 견적 자동계산</span>
+                              </div>
+                              <div class="col">
+                                <input type="radio" name="calc" id="manual"><span> 예상 견적 수기입력</span>
+                              </div>
                             </div>
 
                             <div class="row layout-spacing">
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
                                   <label for="price" class="visually-hidden">Text</label>
-                                  <input id="price" type="text" name="price" placeholder="" class="form-control"
+                                  <input id="price" type="text" name="price" placeholder="" class="form-control" value="0"
                                     required>
                                 </div>
                               </div>
@@ -184,7 +189,7 @@
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h6>Note</h6>
+                                <h6>메모</h6>
                               </div>
                             </div>
 
@@ -200,9 +205,9 @@
                             <div class="row layout-top-spacing">
                               <div class="col-lg-6 col-12 ">
                                 <div class="form-group">
-                                  <button class="btn btn-outline-success mb-2 me-4">Save</button>
+                                  <button class="btn btn-outline-success mb-2 me-4">저장</button>
                                   <button class="btn btn-outline-danger mb-2 me-4" type="button"
-                                    onclick="cancel()">Cancel</button>
+                                    onclick="cancel()">취소</button>
                                 </div>
                               </div>
                             </div>
@@ -224,12 +229,12 @@
       <!-- END MAIN CONTAINER -->
 
       <!-- Begin Modal -->
-      <div class="modal fade" id="partsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <div class="modal fade" id="partsModal" tabindex="-1" role="dialog" aria-labelledby="partsModal"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Subsidiary material Search</h5>
+              <h5 class="modal-title" id="partsModal">부속품 검색</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 <svg> ... </svg>
               </button>
@@ -238,9 +243,9 @@
               <div class="row">
                 <div class="col-lg-12 layout-top-spacing">
                   <div class="input-group">
-                    <input id="searchWord" type="text" class="form-control" placeholder="input 'Name' for search"
+                    <input id="searchWord" type="text" class="form-control" placeholder="검색할 부속품명을 입력해주세요."
                       aria-label="Recipient's username with two button addons">
-                    <button class="btn btn-outline-primary" type="button" onclick="searchParts();">Search</button>
+                    <button class="btn btn-outline-primary" type="button" onclick="searchParts();">검색</button>
                   </div>
                 </div>
               </div>
@@ -250,9 +255,9 @@
                 <table class="table table-hover table-striped table-bordered">
                   <thead>
                     <tr>
-                      <th class="text-center" scope="col">Name</th>
-                      <th class="text-center" scope="col">Unit</th>
-                      <th class="text-center" scope="col">Price</th>
+                      <th class="text-center" scope="col">품명</th>
+                      <th class="text-center" scope="col">단위</th>
+                      <th class="text-center" scope="col">단위당 가격</th>
                     </tr>
                     <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                   </thead>
@@ -291,7 +296,7 @@
         <script>
           $("#yearModel").inputmask("9999");
 
-          let autoFlag = false;
+          let autoFlag = true;
 
           const manual = document.getElementById('manual')
           manual.addEventListener("change", function (event) {
@@ -314,7 +319,7 @@
 
           function add_part(parts_id) {
             // console.log(parts_id);
-            if (document.getElementById('part-' + parts_id)) return alert('이미 추가된 부자재입니다.')
+            if (document.getElementById('part-' + parts_id)) return alert('이미 추가된 부속품입니다.')
 
             let part = document.getElementById('part' + parts_id).innerText.split('\t');
             // console.log(part);
@@ -358,7 +363,7 @@
             let cntArr = document.getElementsByName('cnt');
 
             cntArr.forEach(function (item, index) {
-              let partPrice = +trArr[index].split('\t')[2].replace(',','');
+              let partPrice = +trArr[index].split('\t')[2].replace(',', '');
               totalPrice += +item.value * partPrice;
             })
 
@@ -385,7 +390,7 @@
 
             // console.log(result);
             document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
-            searchWord_element.value='';
+            searchWord_element.value = '';
 
             let tempHTML = ''
             for (let i = 0; i < result.count; i++) {
@@ -413,7 +418,7 @@
 
           document.getElementById('searchWord').addEventListener("keyup", (event) => {
             const key = event.key;
-            if(key=='Enter') return searchParts();
+            if (key == 'Enter') return searchParts();
           })
 
         </script>

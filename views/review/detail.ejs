@@ -28,9 +28,10 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/review">Review
-                                                    Management</a></li>
-                                            <!-- <li class="breadcrumb-item active" aria-current="page">Edit</li> -->
+                                            <li class="breadcrumb-item"><a href="/review">고객 후기 관리</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                <%= data.review_id %>
+                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -50,16 +51,14 @@
 
                                                 <div class="widget-content widget-content-area">
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-form-label-sm">Car
-                                                            Information</label>
+                                                        <label class="col-form-label col-form-label-sm">차량 정보</label>
                                                         <label class="col-form-label">
                                                             <%= car.maker +'-'+ car.model +'-'+ car.detailModel +'-'+
                                                                 car.yearModel %>
                                                         </label>
                                                     </div>
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-form-label col-form-label-sm">Supplier
-                                                            User
+                                                        <label class="col-form-label col-form-label-sm">처리한 협력사
                                                         </label>
                                                         <label class="col-form-label col-form-label-sm">
                                                             <%= supplier.companyName +'-'+ supplier.mainPhoneNum %>
@@ -67,8 +66,7 @@
                                                     </div>
 
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-sm-2 col-form-label col-form-label-sm">Car
-                                                            Number</label>
+                                                        <label class="col-sm-2 col-form-label col-form-label-sm">차량 번호</label>
                                                         <label class="col-form-label col-form-label-sm">
                                                             <%= data.carNum %>
                                                         </label>
@@ -76,8 +74,7 @@
                                                     </div>
 
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-sm-2 col-form-label col-form-label-sm">Phone
-                                                            Number</label>
+                                                        <label class="col-sm-2 col-form-label col-form-label-sm">연락처</label>
                                                         <label class="col-form-label col-form-label-sm">
                                                             <%= data.phoneNum %>
                                                         </label>
@@ -85,8 +82,7 @@
                                                     </div>
 
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-sm-2 col-form-label col-form-label-sm">Owner
-                                                            Number</label>
+                                                        <label class="col-sm-2 col-form-label col-form-label-sm">소유자명</label>
                                                         <label class="col-form-label col-form-label-sm">
                                                             <%= data.clientName %>
                                                         </label>
@@ -95,7 +91,7 @@
 
                                                     <div class="row">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6>Title</h6>
+                                                            <h6>제목</h6>
                                                         </div>
                                                     </div>
                                                     <div id="editor-container">
@@ -106,7 +102,7 @@
 
                                                     <div class="row layout-top-spacing">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6> Content </h6>
+                                                            <h6>내용</h6>
                                                         </div>
                                                     </div>
                                                     <div id="editor-container">
@@ -133,7 +129,7 @@
                                         </div>
                                     </div> -->
                                                     <div class="form-group mb-4 layout-top-spacing">
-                                                        <label for="exampleFormControlSelect1">Grade</label>
+                                                        <label for="exampleFormControlSelect1">평점</label>
                                                         <p class="form-control">
                                                             <%= '★' .repeat(data.grade) %>
                                                         </p>
@@ -160,11 +156,11 @@
                                                                 <% if(user.permission2.data[0]&0b0010) { %>
                                                                     <button type="button"
                                                                         onclick="location.href='/review/edit/<%= data.review_id %>';"
-                                                                        class="btn btn-outline-success mb-2 me-4">Edit</button>
+                                                                        class="btn btn-outline-success mb-2 me-4">수정하기</button>
                                                                     <% } %>
                                                                         <button class="btn btn-outline-danger mb-2 me-4"
                                                                             type="button"
-                                                                            onclick="location.href='/review';">back</button>
+                                                                            onclick="location.href='/review';">뒤로가기</button>
                                                             </div>
                                                         </div>
                                                     </div>

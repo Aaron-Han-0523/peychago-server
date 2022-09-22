@@ -28,9 +28,11 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/notice">Notice
-                                                    Management</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                                            <li class="breadcrumb-item"><a href="/notice">공지사항</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                <%= data.notice_id %>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">수정</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -51,7 +53,7 @@
                                                     <div class="widget-content widget-content-area">
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Title</h6>
+                                                                <h6>제목</h6>
                                                             </div>
                                                         </div>
 
@@ -69,7 +71,7 @@
 
                                                         <div class="row layout-top-spacing">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6> Content </h6>
+                                                                <h6>내용</h6>
                                                             </div>
                                                         </div>
 
@@ -80,7 +82,7 @@
 
                                                         <div class="row layout-top-spacing">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6> Link </h6>
+                                                                <h6>링크Link</h6>
                                                             </div>
                                                         </div>
                                                         <div class="row">
@@ -97,26 +99,26 @@
 
                                                         <div class="row layout-top-spacing">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Type</h6>
+                                                                <h6>위치설정</h6>
                                                             </div>
                                                         </div>
 
                                                         <select name="type">
                                                             <% if(data.type==2) { %>
-                                                                <option value="2" selected>Top</option>
+                                                                <option value="2" selected>상단</option>
                                                                 <% } else { %>
-                                                                    <option value="2">Top</option>
+                                                                    <option value="2">상단</option>
                                                                     <% } %>
                                                                         <% if(data.type==1) { %>
-                                                                            <option value="1" selected>Nomal</option>
+                                                                            <option value="1" selected>고정안함</option>
                                                                             <% } else { %>
-                                                                                <option value="1">Nomal</option>
+                                                                                <option value="1">고정안함</option>
                                                                                 <% } %>
                                                                                     <% if(data.type==0) { %>
                                                                                         <option value="0" selected>
-                                                                                            Bottom</option>
+                                                                                            하단</option>
                                                                                         <% } else { %>
-                                                                                            <option value="0">Bottom
+                                                                                            <option value="0">하단
                                                                                             </option>
                                                                                             <% } %>
                                                         </select>
@@ -139,9 +141,9 @@
                                                             <div class="col-lg-6 col-12 ">
                                                                 <div class="form-group">
                                                                     <button
-                                                                        class="btn btn-outline-success mb-2 me-4">Save</button>
+                                                                        class="btn btn-outline-success mb-2 me-4">저장</button>
                                                                     <button class="btn btn-outline-danger mb-2 me-4"
-                                                                        type="button" onclick="cancel()">Cancel</button>
+                                                                        type="button" onclick="cancel()">취소</button>
                                                                 </div>
                                                             </div>
                                                         </div>

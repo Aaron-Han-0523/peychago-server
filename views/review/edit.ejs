@@ -28,9 +28,12 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/review">Review
-                                                    Management</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                                            <li class="breadcrumb-item"><a href="/review">고객 후기 관리</a></li>
+                                            <li class="breadcrumb-item"><a href="/review/<%= data.review_id %>">
+                                                    <%= data.review_id %>
+                                                </a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">수정</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -52,8 +55,8 @@
 
                                                     <div class="widget-content widget-content-area">
                                                         <div class="form-group row mb-4">
-                                                            <label class="col-sm-2 col-form-label col-form-label-sm">Car
-                                                                Information</label>
+                                                            <label class="col-form-label">차량
+                                                                정보 선택</label>
                                                             <select class="form-select" id="carInfo" name="carInfo_id">
                                                                 <% car.rows.forEach(function(item, index) { %>
                                                                     <% if(data.carInfo_id==item.carInfo_id) { %>
@@ -72,9 +75,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group row mb-4">
-                                                            <label
-                                                                class="col-sm-2 col-form-label col-form-label-sm">Supplier
-                                                                User
+                                                            <label class="col-form-label">처리한 협력사 선택
                                                             </label>
                                                             <select class="form-select" id="suppliereUsers"
                                                                 name="supplierUsers_id">
@@ -98,8 +99,8 @@
                                                         </div>
 
                                                         <div class="form-group row mb-4">
-                                                            <label class="col-sm-2 col-form-label col-form-label-sm">Car
-                                                                Number</label>
+                                                            <label class="col-sm-2 col-form-label col-form-label-sm">차량
+                                                                번호</label>
                                                             <input id="carNum" type="text" name="carNum" placeholder=""
                                                                 class="form-control" required
                                                                 value="<%= data.carNum %>">
@@ -108,8 +109,7 @@
 
                                                         <div class="form-group row mb-4">
                                                             <label
-                                                                class="col-sm-2 col-form-label col-form-label-sm">Phone
-                                                                Number</label>
+                                                                class="col-sm-2 col-form-label col-form-label-sm">연락처</label>
                                                             <input id="phoneNum" type="text" name="phoneNum"
                                                                 placeholder="" class="form-control" required
                                                                 value="<%= data.phoneNum %>">
@@ -118,8 +118,7 @@
 
                                                         <div class="form-group row mb-4">
                                                             <label
-                                                                class="col-sm-2 col-form-label col-form-label-sm">Owner
-                                                                Number</label>
+                                                                class="col-sm-2 col-form-label col-form-label-sm">소유자명</label>
                                                             <input id="clientName" type="text" name="clientName"
                                                                 placeholder="" class="form-control" required
                                                                 value="<%= data.clientName %>">
@@ -128,7 +127,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Title</h6>
+                                                                <h6>제목</h6>
                                                             </div>
                                                         </div>
 
@@ -148,7 +147,7 @@
 
                                                         <div class="row layout-top-spacing">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6> Content </h6>
+                                                                <h6>내용</h6>
                                                             </div>
                                                         </div>
                                                         <div id="editor-container">
@@ -174,7 +173,7 @@
                                         </div>
                                     </div> -->
                                                         <div class="form-group mb-4 layout-top-spacing">
-                                                            <label for="exampleFormControlSelect1">Grade</label>
+                                                            <label for="exampleFormControlSelect1">평점</label>
                                                             <select class="form-select" id="grade" name="grade">
                                                                 <% if(data.grade==1) { %>
                                                                     <option value="1" selected>★</option>
@@ -244,9 +243,9 @@
                                                             <div class="col-lg-6 col-12 ">
                                                                 <div class="form-group">
                                                                     <button
-                                                                        class="btn btn-outline-success mb-2 me-4">Save</button>
+                                                                        class="btn btn-outline-success mb-2 me-4">저장</button>
                                                                     <button class="btn btn-outline-danger mb-2 me-4"
-                                                                        type="button" onclick="cancel()">Cancel</button>
+                                                                        type="button" onclick="cancel()">취소</button>
                                                                 </div>
                                                             </div>
                                                         </div>

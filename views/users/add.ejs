@@ -28,10 +28,8 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a
-                                                    href="/users">User
-                                                    Management</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Add</li>
+                                            <li class="breadcrumb-item"><a href="/users">매니저 관리</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">매니저 등록</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -45,7 +43,7 @@
                                                     <div class="widget-content widget-content-area">
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>User ID</h6>
+                                                                <h6>ID</h6>
                                                             </div>
                                                         </div>
 
@@ -57,7 +55,8 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <input id="userid" type="text" name="userid"
                                                                         placeholder="" class="form-control" required>
-                                                                    <button type="button" class="btn btn-outline-info mb-2 me-4"
+                                                                    <button type="button"
+                                                                        class="btn btn-outline-info mb-2 me-4"
                                                                         onclick="checkID()">중복확인</button>
                                                                 </div>
 
@@ -66,7 +65,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Password</h6>
+                                                                <h6>비밀번호</h6>
                                                             </div>
                                                         </div>
 
@@ -85,7 +84,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Confirm Password</h6>
+                                                                <h6>비밀번호 확인</h6>
                                                             </div>
                                                         </div>
 
@@ -105,7 +104,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Name</h6>
+                                                                <h6>이름</h6>
                                                             </div>
                                                         </div>
 
@@ -124,7 +123,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Phone</h6>
+                                                                <h6>연락처</h6>
                                                             </div>
                                                         </div>
 
@@ -162,7 +161,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Permission</h6>
+                                                                <h6>권한</h6>
                                                             </div>
                                                         </div>
 
@@ -173,17 +172,15 @@
                                                                         class="table table-hover table-striped table-bordered">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th class="text-center" scope="col">Menu
+                                                                                <th class="text-center" scope="col">권한명
                                                                                 </th>
-                                                                                <th class="text-center" scope="col">Add
+                                                                                <th class="text-center" scope="col">등록
                                                                                 </th>
-                                                                                <th class="text-center" scope="col">Read
+                                                                                <th class="text-center" scope="col">조회
                                                                                 </th>
-                                                                                <th class="text-center" scope="col">
-                                                                                    Edit
+                                                                                <th class="text-center" scope="col">수정
                                                                                 </th>
-                                                                                <th class="text-center" scope="col">
-                                                                                    Delete
+                                                                                <th class="text-center" scope="col">삭제
                                                                                 </th>
                                                                                 <th class="text-center" scope="col">ALL
                                                                                 </th>
@@ -196,8 +193,8 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Notice
-                                                                                        Management</span>
+                                                                                        class="media-body align-self-center">공지사항
+                                                                                        관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -251,8 +248,7 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Review
-                                                                                        Management</span>
+                                                                                        class="media-body align-self-center">후기 관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -306,8 +302,7 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Reception
-                                                                                        History Management</span>
+                                                                                        class="media-body align-self-center">폐차/수출 관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -361,8 +356,7 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Image
-                                                                                        Management</span>
+                                                                                        class="media-body align-self-center">앱 이미지 관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -416,8 +410,7 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Car
-                                                                                        Information Management</span>
+                                                                                        class="media-body align-self-center">차량 정보 관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -471,8 +464,7 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Subsidiary
-                                                                                        Material Management</span>
+                                                                                        class="media-body align-self-center">부속품 관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -526,8 +518,7 @@
                                                                             <tr>
                                                                                 <td class="text-center">
                                                                                     <span
-                                                                                        class="media-body align-self-center">Supplier
-                                                                                        USER Management</span>
+                                                                                        class="media-body align-self-center">협력사 관리</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div
@@ -586,7 +577,7 @@
 
                                                         <div class="row">
                                                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Note</h6>
+                                                                <h6>메모</h6>
                                                             </div>
                                                         </div>
 
@@ -608,9 +599,9 @@
 
                                                                 <div class="form-group">
                                                                     <button class="btn btn-outline-success mb-2 me-4"
-                                                                        type="button" onclick="add_user()">Save</button>
+                                                                        type="button" onclick="add_user()">저장</button>
                                                                     <button class="btn btn-outline-danger mb-2 me-4"
-                                                                        type="button" onclick="cancel()">Cancel</button>
+                                                                        type="button" onclick="cancel()">취소</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -704,7 +695,7 @@
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({userid}),
+                            body: JSON.stringify({ userid }),
                             redirect: "follow"
                         })
                             .then((response) => {
