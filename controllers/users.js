@@ -12,8 +12,8 @@ exports.login = async function (req, res, next) {
     // console.log(user)
 
     const hashedPassword = await encryption.hashing(body.password);
-    // console.log("해싱된 패스워드", hashedPassword);
-    // console.log("저장된 패스워드", user.password);
+    console.log("해싱된 패스워드", hashedPassword);
+    console.log("저장된 패스워드", user.password);
 
     if (user) {
         if (user.password == hashedPassword) {
@@ -98,6 +98,7 @@ exports.edit = async (req, res, next) => {
     const id = req.params.id;
     let body = req.body;
     body.user = user.userid;
+    if (!body.password) body.password = await encryption.hashing(body.password);
     body.id = id;
 
     let result = await usersService
