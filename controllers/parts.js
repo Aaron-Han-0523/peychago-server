@@ -87,9 +87,9 @@ exports.delete = async (req, res, next) => {
   else res.json(`fail id:${id}`)
 }
 
-
 exports.search = async (req, res, next) => {
-  let word = req.query.q;
+    const user = req.userInfo;
+    let word = req.query.q;
   console.log("search", word, "start")
 
   let result = null;
@@ -105,6 +105,6 @@ exports.search = async (req, res, next) => {
 
   console.log("search result :", result)
 
-  if (result) return res.status(200).json(result);
+  if (result) return res.status(200).json({ user: user, data: result });
   else res.status(400).json(`don't find ${word}`)
 }

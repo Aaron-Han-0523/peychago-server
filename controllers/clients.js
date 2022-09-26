@@ -1,6 +1,8 @@
 const clientsService = require('../services/clients');
 const jwt = require('../services/jwt');
 const encryption = require('../utils/encryption');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.login = async function (req, res, next) {
   const body = req.body;
@@ -158,4 +160,33 @@ exports.info = async (req, res, next) => {
   return user ?
     res.status(200).json(user)
     : res.status(400).json("접속한 고객이 없습니다.");
+}
+
+
+exports.search = async (req, res, next) => {
+    const user = req.userInfo;
+    let word = req.query.q;
+  console.log("search", word, "start")
+
+  let result = null;
+  let condition = {};
+  try {
+    if (word) {
+      condition = {
+        [Op.or]: [
+          { clientName: { [Op.like]: `%${word}%` } },
+          { carNum: { [Op.like]: `%${word}%` } },
+          { phoneNum: { [Op.like]: `%${word}%` } }
+        ]
+      }
+    }
+    result = await clientsService.allRead(condition);
+  } catch (err) {
+    console.error(err)
+  }
+
+  console.log("search result :", result)
+
+  if (result) return res.status(200).json({ user: user, data: result });
+  else res.status(400).json(`don't find ${word}`)
 }

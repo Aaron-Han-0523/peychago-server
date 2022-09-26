@@ -37,14 +37,15 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all notice read');
 
     return await notice
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
                 ['type', 'DESC'],
                 ['notice_id', 'DESC'],

@@ -9,9 +9,12 @@ const jwt = require('../services/jwt');
 router
   .get('/login', (req, res, next) => res.render('users/login'))
   .post('/login', usersController.login)
+
   .get('/add', jwt.verifyToken, (req, res, next) => res.render('users/add', { user: req.userInfo }))
   .post('/add', jwt.verifyToken, usersController.add)
+
   .post('/checkID', jwt.verifyToken, usersController.checkID)
+
   .get('/edit/:id', jwt.verifyToken, async (req, res, next) => {
     // console.log("id :", req.params.id)
     res.render('users/edit', {
@@ -20,7 +23,11 @@ router
     })
   })
   .post('/edit/:id', jwt.verifyToken, usersController.edit)
+
   .get('/delete/:id', jwt.verifyToken, usersController.delete)
+
+  .get('/search', jwt.verifyToken, usersController.search)
+
   .get('/:id', jwt.verifyToken, usersController.detail)
   .get('/', jwt.verifyToken, usersController.index)
 

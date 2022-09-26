@@ -1,6 +1,8 @@
 const usersService = require('../services/users')
 const jwt = require('../services/jwt')
 const encryption = require('../utils/encryption');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.login = async function (req, res, next) {
     const body = req.body;
@@ -169,4 +171,30 @@ exports.checkID = async (req, res, next) => {
     const user = await usersService.checkID(userid);
     if (user) return res.status(409).json({ exist: true });
     else return res.status(200).json({ exist: false });
+}
+
+exports.search = async (req, res, next) => {
+    const user = req.userInfo;
+    let word = req.query.q;
+    console.log("search", word, "start")
+
+    let result = null;
+    let condition = {};
+    try {
+        if (word) {
+            condition = {
+                [Op.or]: [
+                    { userName: { [Op.like]: `%${word}%` } }
+                ]
+            }
+        }
+        result = await usersService.allRead(condition);
+    } catch (err) {
+        console.error(err)
+    }
+
+    console.log("search result :", result)
+
+    if (result) return res.status(200).json({ user: user, data: result });
+    else res.status(400).json(`don't find ${word}`)
 }

@@ -77,14 +77,15 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all supplierUsers read');
 
     return await supplierUsers
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
                 ['supplierUsers_id', 'DESC']
             ]

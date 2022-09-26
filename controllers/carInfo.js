@@ -1,4 +1,6 @@
 const carInfoService = require('../services/carInfo');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
@@ -88,4 +90,31 @@ exports.delete = async (req, res, next) => {
 
     if (result) return res.redirect('/carInfo');
     else res.json(`fail id:${id}`)
+}
+
+exports.search = async (req, res, next) => {
+    const user = req.userInfo;
+    let word = req.query.q;
+    console.log("search", word, "start")
+
+    let result = null;
+    let condition = {};
+    try {
+        if (word) {
+            condition = {
+                [Op.or]: [
+                    { maker: { [Op.like]: `%${word}%` } },
+                    { model: { [Op.like]: `%${word}%` } }
+                ]
+            }
+        }
+        result = await carInfoService.allRead(condition);
+    } catch (err) {
+        console.error(err)
+    }
+
+    console.log("search result :", result)
+
+    if (result) return res.status(200).json({ user: user, data: result });
+    else res.status(400).json(`don't find ${word}`)
 }

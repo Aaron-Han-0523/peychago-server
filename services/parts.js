@@ -37,11 +37,12 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition={}) => {
+exports.allRead = async (condition = {}) => {
     // console.log('all parts read');
 
     return await parts
         .findAndCountAll({
+            raw: true,
             where: Object.assign(condition, {
                 deleteDate: null
             }),

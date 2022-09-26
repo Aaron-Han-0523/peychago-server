@@ -226,7 +226,8 @@
                 <script>
                     function formatDate(d_t) {
                         d_t = new Date(d_t);
-                        console.log(typeof d_t);
+                        //console.log(typeof d_t);
+
                         let year = d_t.getFullYear();
                         let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
                         let day = ("0" + d_t.getDate()).slice(-2);
@@ -241,14 +242,17 @@
                         const searchWord_element = document.getElementById('searchWord');
                         const searchWord = searchWord_element.value;
 
-                        const result = await fetch(`/notice/search?q=${searchWord}`)
+                        const res = await fetch(`/notice/search?q=${searchWord}`)
                             .then((response) => {
                                 // console.log(response.json());
                                 return response.json();
                             })
                         // .catch((err) => { console.error(err) });
 
-                        console.log(typeof result.rows[0].createDate);
+                        const user = res.user;
+                        const result = res.data;
+
+                        // console.log(typeof result.rows[0].createDate);
                         document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
                         searchWord_element.value = '';
 
@@ -256,12 +260,6 @@
                         for (let i = 0; i < result.count; i++) {
                             tempHTML += `
                                 <tr onclick="location.href='/notice/${result.rows[i].notice_id}';">
-                                    <!-- <td>
-                        <div class="form-check form-check-primary">
-                            <input class="form-check-input custom_mixed_child"
-                                type="checkbox">
-                        </div>
-                    </td> -->
                                     <td class="text-center">
                                         <div class="media">
                                             <!-- <div class="avatar me-2">
@@ -305,10 +303,55 @@
                                             ${result.rows[i].type == 2 ? "상단" : result.rows[i].type == 1 ? "" : "하단"}
                                         </span>
                                     </td>
-                                    <td class="text-center">
-                                        
-                                    </td>
-                                </tr>                                `
+                                    <td class="text-center">`
+                            if (user.permission1.data[0] & 0b0010) {
+                                tempHTML += `<a href="/notice/edit/${result.rows[i].notice_id}"
+                                    class="action-btn btn-edit bs-tooltip me-2"
+                                    data-toggle="tooltip" data-placement="top"
+                                    title="Edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-edit-2">
+                                        <path
+                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                        </path>
+                                    </svg>
+                                </a>`
+                            }
+
+                            if (user.permission1.data[0] & 0b0001) {
+                                tempHTML += `<a href="/notice/delete/${result.rows[i].notice_id}"
+                                    class="action-btn btn-delete bs-tooltip"
+                                    data-toggle="tooltip"
+                                    data-placement="top" title="Delete">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-trash-2">
+                                        <polyline points="3 6 5 6 21 6">
+                                        </polyline>
+                                        <path
+                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                        </path>
+                                        <line x1="10" y1="11" x2="10"
+                                            y2="17">
+                                        </line>
+                                        <line x1="14" y1="11" x2="14"
+                                            y2="17">
+                                        </line>
+                                    </svg>
+                                </a>`
+                            }
+                            tempHTML += `</td >
+                                </tr >`
                         }
 
                         document.getElementById(target_id).innerHTML = tempHTML;

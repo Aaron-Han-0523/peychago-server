@@ -58,6 +58,8 @@ router
   .get('/delete/:id', jwt.verifyToken, reviewController.delete)
   .delete('/:id', jwt.verifyToken, reviewController.delete)
 
+  .get('/search', jwt.verifyToken, reviewController.search)
+
   .get('/:id', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), reviewController.detail)
 
   .get('/', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), reviewController.index)

@@ -17,7 +17,7 @@ module.exports = {
       let obj = {
         title:`noticetitle${i}`,
         content:`noticecontent${i}`,
-        type:`${parseInt(i%2)}`,
+        type:`${parseInt(i%3)}`,
         createUser:`notice${i}`
         ,createDate: new Date(),
       }

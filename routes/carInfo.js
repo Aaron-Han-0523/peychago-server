@@ -14,6 +14,7 @@ router
     parts: await partsService.allRead(),
   }))
   .post('/add', jwt.verifyToken, carInfoController.add)
+
   .get('/edit/:id', jwt.verifyToken, async (req, res, next) => res.render('carInfo/edit', {
     user: req.userInfo,
     parts: await partsService.allRead(),
@@ -23,7 +24,11 @@ router
     data: await carInfoService.readOne(req.params.id),
   }))
   .post('/edit/:id', jwt.verifyToken, carInfoController.edit)
+
   .get('/delete/:id', jwt.verifyToken, carInfoController.delete)
+
+  .get('/search', jwt.verifyToken, carInfoController.search)
+
   .get('/:id', jwt.verifyToken, async (req, res, next) => res.render('carInfo/detail', {
     user: req.userInfo,
     parts: await partsService.allRead(),

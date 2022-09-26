@@ -1,4 +1,6 @@
 const noticeService = require('../services/notice');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
@@ -83,4 +85,31 @@ exports.delete = async (req, res, next) => {
 
     if (result) return res.redirect('/notice');
     else res.json(`fail id:${id}`)
+}
+
+exports.search = async (req, res, next) => {
+    const user = req.userInfo;
+    let word = req.query.q;
+    console.log("search", word, "start")
+
+    let result = null;
+    try {
+        if (word) {
+            result = await noticeService.allRead({
+                [Op.or]: [
+                    { title: { [Op.like]: `%${word}%` } },
+                    { content: { [Op.like]: `%${word}%` } }
+                ]
+            })
+        } else {
+            result = await noticeService.allRead()
+        }
+    } catch (err) {
+        console.error(err)
+    }
+
+    console.log("search result :", result)
+
+    if (result) return res.status(200).json({ user: user, data: result });
+    else res.status(400).json(`don't find ${word}`)
 }

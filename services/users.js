@@ -62,7 +62,7 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await users
-        .update(Object.assign(obj,{
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
         }), {
@@ -78,14 +78,15 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all users read');
 
     return await users
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
                 ['users_id', 'DESC']
             ]

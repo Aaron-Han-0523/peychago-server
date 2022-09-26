@@ -15,6 +15,7 @@ router
   }))
   .post('/edit/:id', jwt.verifyToken, noticeController.edit)
   .get('/delete/:id', jwt.verifyToken, noticeController.delete)
+  .get('/search', jwt.verifyToken, noticeController.search)
   .get('/:id', jwt.verifyToken, noticeController.detail)
   .get('/', jwt.verifyToken, noticeController.index)
 

@@ -33,7 +33,7 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition) => {
+exports.allRead = async (condition = {}) => {
     // console.log('all partslist read');
 
     return await partslist
@@ -48,6 +48,7 @@ exports.allRead = async (condition) => {
             //         where: { deleteDate: null }
             //     }
             // ],
+            raw: true,
             where: condition,
             order: [
                 ['parts_id', 'DESC'],

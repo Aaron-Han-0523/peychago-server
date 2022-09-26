@@ -39,14 +39,15 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all process read');
 
     return await process
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
                 ['process_id', 'DESC']
             ]

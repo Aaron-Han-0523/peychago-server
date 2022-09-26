@@ -2,6 +2,8 @@ const reviewService = require('../services/review');
 const carInfoService = require('../services/carInfo');
 const supplierUsersService = require('../services/supplierUsers');
 var createError = require('http-errors');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
@@ -139,3 +141,30 @@ exports.delete = async (req, res, next) => {
     if (result) return res.status(200).redirect('/review');
     else res.status(400).json(`delete fail id:${id}`)
 }
+
+exports.search = async (req, res, next) => {
+    const user = req.userInfo;
+    let word = req.query.q;
+    console.log("search", word, "start")
+  
+    let result = null;
+    let condition = {};
+    try {
+      if (word) {
+        condition = {
+          [Op.or]: [
+            { title: { [Op.like]: `%${word}%` } },
+            { content: { [Op.like]: `%${word}%` } }
+          ]
+        }
+      }
+      result = await reviewService.allRead(condition);
+    } catch (err) {
+      console.error(err)
+    }
+  
+    console.log("search result :", result)
+  
+    if (result) return res.status(200).json({ user: user, data: result });
+    else res.status(400).json(`don't find ${word}`)
+  }

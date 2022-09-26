@@ -392,13 +392,14 @@
             const searchWord_element = document.getElementById('searchWord');
             const searchWord = searchWord_element.value;
 
-            const result = await fetch(`/parts/search?q=${searchWord}`)
+            const res = await fetch(`/parts/search?q=${searchWord}`)
               .then((response) => {
                 // console.log(response.json());
                 return response.json();
               })
             // .catch((err) => { console.error(err) });
-
+            
+            const result = res.data;
             // console.log(result);
             document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
             searchWord_element.value = '';
