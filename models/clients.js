@@ -20,7 +20,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     password: {
       type: DataTypes.STRING(200),
-      allowNull: false
+      allowNull: false,
+      comment: "비밀번호"
     },
     carNum: {
       type: DataTypes.STRING(15),
@@ -29,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     carInfo_id: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true,
+      allowNull: false,
       comment: "차량 정보 식별번호",
       references: {
         model: 'carinfo',

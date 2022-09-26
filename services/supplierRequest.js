@@ -44,6 +44,7 @@ exports.allRead = async () => {
 
     return await supplierRequest
         .findAndCountAll({
+            raw: true,
             where: {
                 deleteDate: null
             },

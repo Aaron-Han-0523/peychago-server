@@ -19,8 +19,9 @@ module.exports = function(sequelize, DataTypes) {
       comment: "단위"
     },
     price: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.INTEGER,
       allowNull: true,
+      defaultValue: 0,
       comment: "가격"
     },
     note: {

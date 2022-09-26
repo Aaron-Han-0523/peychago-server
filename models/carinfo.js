@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: 0,
-      comment: "수동 계산 가격"
+      comment: "가격"
     },
     note: {
       type: DataTypes.STRING(200),

@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "연식"
     },
     ownerName: {
-      type: DataTypes.STRING(15),
+      type: DataTypes.STRING(25),
       allowNull: false,
       comment: "차주명"
     },

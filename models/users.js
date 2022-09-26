@@ -46,7 +46,13 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0,
       comment: "후기 권한"
     },
-    permission3: {
+    permission3_1: {
+      type: "BIT(4)",
+      allowNull: false,
+      defaultValue: 0,
+      comment: "입금 내역 권한"
+    },
+    permission3_2: {
       type: "BIT(4)",
       allowNull: false,
       defaultValue: 0,

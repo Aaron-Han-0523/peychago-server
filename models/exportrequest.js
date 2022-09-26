@@ -53,6 +53,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true,
       comment: "예비3"
+    },
+    supplierRequest_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: "회수요청 식별번호"
     }
   }, {
     sequelize,
