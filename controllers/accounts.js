@@ -1,5 +1,6 @@
 exports.logout = async (req, res, next) => {
-    await res.cookie('jwt', '', {
+    console.log(req.userInfo)
+    await res.clearCookie('jwt', {
         httpOnly: true,
         secure: req.app.get('cookie-secure')
     });
