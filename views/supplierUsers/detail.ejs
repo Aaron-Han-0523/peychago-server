@@ -29,7 +29,9 @@
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="/suppliersupplierUsers">협력사 관리</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page"><%= data.companyName></li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                <%= data.companyName %>
+                                            </li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -241,6 +243,10 @@
                                                                 <div class="form-group">
                                                                     <button class="btn btn-outline-success mb-2 me-4"
                                                                         type="button"
+                                                                        onclick="resetPassword('<%= data.supplierUsers_id %>');">비밀번호
+                                                                        초기화</button>
+                                                                    <button class="btn btn-outline-success mb-2 me-4"
+                                                                        type="button"
                                                                         onclick="location.href='/supplierUsers/edit/<%= data.supplierUsers_id %>';">수정하기</button>
                                                                     <button class="btn btn-outline-danger mb-2 me-4"
                                                                         type="button"
@@ -266,7 +272,15 @@
 
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
                 <script>
-
+                    function resetPassword(id) {
+                        const url = `/supplierUsers/resetPassword/${id}`;
+                        fetch(url)
+                            .then(res => {
+                                // console.log(res);
+                                if (res.ok) return alert("비밀번호 초기화 성공");
+                                else return alert("비밀번호 초기화 실패");
+                            })
+                    }
                 </script>
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>

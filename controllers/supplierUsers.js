@@ -65,6 +65,20 @@ exports.changePassword = async (req, res, next) => {
     else res.json(`check Password`)
 }
 
+exports.resetPassword = async (req, res, next) => {
+    let body = {};
+    body.id = req.params.id;
+    body.user = req.userInfo.userid;
+    body.newPassword = await encryption.hashing('123456');
+
+    let result = await supplierUsersService
+        .changePassword(body)
+        .catch(err => console.error(err));
+
+    if (result) res.status(200).json("Reset Password Complete");
+    else res.status(400).json(`fail : Reset Password`)
+}
+
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;

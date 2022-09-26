@@ -9,6 +9,8 @@ const jwt = require('../services/jwt')
 router
   .get('/login', (req, res, next) => res.render('supplierUsers/login'))
   .post('/login', supplierUsersController.login)
+  .get('/resetPassword/:id', jwt.verifyToken, supplierUsersController.resetPassword)
+
   .get('/add', jwt.verifyToken, (req, res, next) => res.render('supplierUsers/add', { user: req.userInfo }))
   .post('/add', jwt.verifyToken, supplierUsersController.add)
   .post('/checkID', jwt.verifyToken, supplierUsersController.checkID)
