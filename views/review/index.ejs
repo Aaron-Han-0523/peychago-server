@@ -44,8 +44,10 @@
                                         <button class="btn btn-outline-primary" type="button"
                                             onclick="exportExcel('review_list_table','review_list_file','review_list_sheet');">엑셀
                                             다운로드</button>
-                                        <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href='/review/add';">글쓰기</button>
+                                        <% if(user.permission2.data[0]&0b1000) { %>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                onclick="location.href='/review/add';">글쓰기</button>
+                                            <% } %>
                                     </div>
                                 </div>
 

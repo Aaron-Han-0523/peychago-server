@@ -41,9 +41,12 @@
                                             aria-label="Recipient's username with two button addons">
                                         <button class="btn btn-outline-primary" type="button">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('car_information_list_table','car_information_list_file','car_information_list_sheet');">엑셀 다운로드</button>
-                                        <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href = '/carinfo/add';">새 정보 추가</button>
+                                            onclick="exportExcel('car_information_list_table','car_information_list_file','car_information_list_sheet');">엑셀
+                                            다운로드</button>
+                                        <% if(user.permission5.data[0]&0b1000) { %>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                onclick="location.href = '/carinfo/add';">새 정보 추가</button>
+                                            <% } %>
                                     </div>
                                 </div>
 
@@ -171,7 +174,6 @@
                                                                             </svg>
                                                                         </a>
                                                                         <% } %>
-
                                                                             <% if(user.permission5.data[0]&0b0001) { %>
                                                                                 <a href="/carInfo/delete/<%= item.carInfo_id %>"
                                                                                     class="action-btn btn-delete bs-tooltip"

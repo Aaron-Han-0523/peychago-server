@@ -241,17 +241,26 @@
                                                         <div class="row layout-top-spacing">
                                                             <div class="col-lg-6 col-12 ">
                                                                 <div class="form-group">
-                                                                    <button class="btn btn-outline-success mb-2 me-4"
-                                                                        type="button"
-                                                                        onclick="resetPassword('<%= data.supplierUsers_id %>');">비밀번호
-                                                                        초기화</button>
-                                                                    <button class="btn btn-outline-success mb-2 me-4"
-                                                                        type="button"
-                                                                        onclick="location.href='/supplierUsers/edit/<%= data.supplierUsers_id %>';">수정하기</button>
-                                                                    <button class="btn btn-outline-danger mb-2 me-4"
-                                                                        type="button"
-                                                                        onclick="location.href='/supplierUsers';">뒤로가기</button>
-                                                                </div>
+                                                                    <% if(user.permission7.data[0]&0b0010) { %>
+                                                                        <button
+                                                                            class="btn btn-outline-success mb-2 me-4"
+                                                                            type="button"
+                                                                            onclick="resetPassword('<%= data.supplierUsers_id %>');">비밀번호
+                                                                            초기화</button>
+                                                                        <button
+                                                                            class="btn btn-outline-success mb-2 me-4"
+                                                                            type="button"
+                                                                            onclick="location.href='/supplierUsers/edit/<%= data.supplierUsers_id %>';">수정하기</button>
+                                                                        <% } %>
+                                                                            <% if(user.permission7.data[0]&0b0001) { %>
+                                                                                <button
+                                                                                    class="btn btn-outline-danger mb-2 me-4"
+                                                                                    type="button"
+                                                                                    onclick="location.href='/supplierUsers/delete/<%= data.supplierUsers_id %>';">삭제하기</button>
+                                                                                <% } %>
+                                                                </div><button class="btn btn-outline-danger mb-2 me-4"
+                                                                    type="button"
+                                                                    onclick="location.href='/supplierUsers';">뒤로가기</button>
                                                             </div>
                                                         </div>
                                                     </div>

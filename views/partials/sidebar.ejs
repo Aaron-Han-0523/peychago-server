@@ -56,8 +56,7 @@
                                             <span>폐차 고객 관리</span>
                                         </div>
                                     </a>
-                                    <ul class="submenu list-unstyled" id="disposal"
-                                        data-bs-parent="#accordionExample">
+                                    <ul class="submenu list-unstyled" id="disposal" data-bs-parent="#accordionExample">
                                         <li>
                                             <a href="/exportRequest" aria-expanded="false" class="dropdown-toggle">
                                                 <div class="">
@@ -106,7 +105,7 @@
                                         </li>
                                         <% } %>
 
-                                            <% if(user.permission4&&(user.permission4.data[0]&0b0100)) { %>
+                                            <% if(user.permission4&&(user.permission4.data[0]&0b0010)) { %>
                                                 <li class="menu">
                                                     <a href="/imageSetting" aria-expanded="false"
                                                         class="dropdown-toggle">

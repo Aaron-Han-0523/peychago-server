@@ -125,8 +125,12 @@
                                   <button type="button" onclick="location.href='/parts/edit/<%= data.parts_id %>';"
                                     class="btn btn-outline-success mb-2 me-4">수정하기</button>
                                   <% } %>
-                                    <button class="btn btn-outline-danger mb-2 me-4" type="button"
-                                      onclick="location.href='/parts';">뒤로가기</button>
+                                    <% if(user.permission6.data[0]&0b0001) { %>
+                                      <button class="btn btn-outline-danger mb-2 me-4" type="button"
+                                        onclick="location.href='/parts/delete/<%= data.parts_id %>';">삭제하기</button>
+                                      <% } %>
+                                        <button class="btn btn-outline-danger mb-2 me-4" type="button"
+                                          onclick="location.href='/parts';">뒤로가기</button>
                               </div>
                             </div>
                           </div>

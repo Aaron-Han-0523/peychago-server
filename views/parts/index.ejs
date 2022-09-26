@@ -40,9 +40,12 @@
                                             aria-label="Recipient's username with two button addons">
                                         <button class="btn btn-outline-primary" type="button">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('subsidiary_material_list_table','subsidiary_material_file','subsidiary_material_sheet');">엑셀 다운로드</button>
-                                        <button class="btn btn-outline-primary" type="button"
-                                            onclick="location.href='/parts/add';">새 정보 추가</button>
+                                            onclick="exportExcel('subsidiary_material_list_table','subsidiary_material_file','subsidiary_material_sheet');">엑셀
+                                            다운로드</button>
+                                        <% if(user.permission6.data[0]&0b1000) { %>
+                                            <button class="btn btn-outline-primary" type="button"
+                                                onclick="location.href='/parts/add';">새 정보 추가</button>
+                                            <% } %>
                                     </div>
                                 </div>
 
@@ -50,7 +53,8 @@
 
 
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-striped table-bordered" id="subsidiary_material_list_table">
+                                        <table class="table table-hover table-striped table-bordered"
+                                            id="subsidiary_material_list_table">
                                             <thead>
                                                 <tr>
                                                     <!-- <th scope="col" width="5%">
@@ -121,7 +125,9 @@
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <span class="media-body align-self-center"><%= item.note %></span>
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.note %>
+                                                                </span>
                                                             </td>
                                                             <td class="text-center">
                                                                 <div class="action-btns">

@@ -147,9 +147,16 @@
                                                                         onclick="location.href='/notice/edit/<%= data.notice_id %>';"
                                                                         class="btn btn-outline-success mb-2 me-4">수정하기</button>
                                                                     <% } %>
-                                                                        <button class="btn btn-outline-danger mb-2 me-4"
-                                                                            type="button"
-                                                                            onclick="location.href='/notice';">뒤로가기</button>
+                                                                        <% if(user.permission1.data[0]&0b0001) { %>
+                                                                            <button
+                                                                                class="btn btn-outline-danger mb-2 me-4"
+                                                                                type="button"
+                                                                                onclick="location.href='/notice/delete/<%= data.notice_id %>';">삭제하기</button>
+                                                                            <% } %>
+                                                                                <button
+                                                                                    class="btn btn-outline-danger mb-2 me-4"
+                                                                                    type="button"
+                                                                                    onclick="location.href='/notice';">뒤로가기</button>
                                                             </div>
                                                         </div>
                                                     </div>
