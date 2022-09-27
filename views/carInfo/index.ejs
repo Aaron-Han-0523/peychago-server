@@ -37,7 +37,8 @@
 
                                 <div class="col-lg-12 layout-top-spacing">
                                     <div class="input-group">
-                                        <input id="searchWord" type="text" class="form-control" placeholder="검색할 제조사 또는 모델명을 입력해주세요."
+                                        <input id="searchWord" type="text" class="form-control"
+                                            placeholder="검색할 제조사 또는 모델명을 입력해주세요."
                                             aria-label="Recipient's username with two button addons">
                                         <button class="btn btn-outline-primary" type="button"
                                             onclick="searchCarInfo();">검색</button>
@@ -177,7 +178,7 @@
                                                                         </a>
                                                                         <% } %>
                                                                             <% if(user.permission5.data[0]&0b0001) { %>
-                                                                                <a href="/carInfo/delete/<%= item.carInfo_id %>"
+                                                                                <a onclick="delete_(event, '/carInfo/delete/<%= item.carInfo_id %>');"
                                                                                     class="action-btn btn-delete bs-tooltip"
                                                                                     data-toggle="tooltip"
                                                                                     data-placement="top" title="Delete">
@@ -228,18 +229,6 @@
 
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
                 <script>
-                    function formatDate(d_t) {
-                        d_t = new Date(d_t);
-                        // console.log(typeof d_t);
-                        let year = d_t.getFullYear();
-                        let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
-                        let day = ("0" + d_t.getDate()).slice(-2);
-                        let hour = ("0" + d_t.getHours()).slice(-2);
-                        let minute = ("0" + d_t.getMinutes()).slice(-2);
-                        let seconds = ("0" + d_t.getSeconds()).slice(-2);
-                        return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + seconds;
-                    }
-
                     async function searchCarInfo() {
                         const target_id = "searchResults";
                         const searchWord_element = document.getElementById('searchWord');
@@ -338,7 +327,7 @@
                             }
 
                             if (user.permission5.data[0] & 0b0001) {
-                                tempHTML += `<a href="/carInfo/delete/${result.rows[i].carInfo_id}"
+                                tempHTML += `<a onclick="delete_(event, '/carInfo/delete/${result.rows[i].carInfo_id}');"
                                     class="action-btn btn-delete bs-tooltip"
                                     data-toggle="tooltip"
                                     data-placement="top" title="Delete">

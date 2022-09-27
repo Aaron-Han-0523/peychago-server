@@ -29,7 +29,6 @@
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item active" aria-current="page">폐차 고객 관리</li>
-                                            <li class="breadcrumb-item active" aria-current="page">폐차 회수 요청 고객</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -37,17 +36,15 @@
 
                                 <div class="col-lg-12 layout-top-spacing">
                                     <div class="input-group">
-                                        <input id="searchWord" type="text" class="form-control"
-                                            placeholder="검색할 차량번호 또는 차주성함 또는 차명을 입력해주세요."
+                                        <input type="text" class="form-control" placeholder="Title and content"
                                             aria-label="Recipient's username with two button addons">
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="searchDisposalRequest();">검색</button>
+                                            onclick="searchDisposalClients();">검색</button>
                                         <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('disposalRequest_list_table','disposalRequest_list_file','disposalRequest_list_sheet');">엑셀
+                                            onclick="exportExcel('disposalClients_list_table','disposalClients_list_file','disposalClients_list_sheet');">엑셀
                                             다운로드</button>
-                                        <!-- <button class="btn btn-outline-primary" type="button" onclick="location.href='/disposalRequest/add';">+ Add New</button> -->
+                                        <!-- <button class="btn btn-outline-primary" type="button" onclick="location.href='/disposalClients/add';">+ Add New</button> -->
                                     </div>
-                                    <p id="searchCount"></p>
                                 </div>
 
                                 <div class="row layout-top-spacing">
@@ -55,7 +52,7 @@
 
                                     <div class="table-responsive">
                                         <table class="table table-hover table-striped table-bordered"
-                                            id="disposalRequest_list_table">
+                                            id="disposalClients_list_table">
                                             <thead>
                                                 <tr>
                                                     <!-- <th scope="col" width="5%">
@@ -76,7 +73,7 @@
                                                 </tr>
                                                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
                                             </thead>
-                                            <tbody id="searchResults">
+                                            <tbody>
                                                 <% function formatDate(d_t) { let year=d_t.getFullYear(); let month=("0"
                                                     + (d_t.getMonth() + 1)).slice(-2); let day=("0" +
                                                     d_t.getDate()).slice(-2); let hour=("0" + d_t.getHours()).slice(-2);
@@ -84,8 +81,7 @@
                                                     d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day
                                                     + " " + hour + ":" + minute + ":" + seconds } %>
                                                     <% data.forEach( function(item, index) { %>
-                                                        <tr
-                                                            onclick="location.href='/disposalRequest/<%= item.disposalRequest_id %>';">
+                                                        <tr>
                                                             <!-- <td>
                                         <div class="form-check form-check-primary">
                                             <input class="form-check-input custom_mixed_child" type="checkbox">
@@ -118,12 +114,12 @@
                                                             </td>
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">
-                                                                    <%= formatDate(item.deliveryDate) %>
+                                                                    <%=  %>
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">
-                                                                    <%= item.collectPlace %>
+                                                                    <%=  %>
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
@@ -153,7 +149,7 @@
                                                                     <circle cx="12" cy="12" r="3"></circle>
                                                                 </svg>
                                                             </a> -->
-                                                                    <a href="/disposalRequest/edit/<%= item.disposalRequest_id %>"
+                                                                    <a href="/disposalClients/edit/<%= item.disposalClients_id %>"
                                                                         class="action-btn btn-edit bs-tooltip me-2"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Edit">
@@ -168,7 +164,7 @@
                                                                             </path>
                                                                         </svg>
                                                                     </a>
-                                                                    <a onclick="delete_(event, '/disposalRequest/delete/<%= item.disposalRequest_id %>');"
+                                                                    <a onclick="delete_(event, '/disposalClients/delete/<%= item.disposalClients_id %>');"
                                                                         class="action-btn btn-delete bs-tooltip"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Delete">
@@ -213,12 +209,12 @@
 
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
                 <script>
-                    async function searchDisposalRequest() {
+                    async function searchDisposalClients() {
                         const target_id = "searchResults";
                         const searchWord_element = document.getElementById('searchWord');
                         const searchWord = searchWord_element.value;
 
-                        const res = await fetch(`/disposalRequest/search?q=${searchWord}`)
+                        const res = await fetch(`/disposalClients/search?q=${searchWord}`)
                             .then((response) => {
                                 // console.log(response.json());
                                 return response.json();
@@ -238,7 +234,7 @@
                             const data = result.rows[i];
 
                             tempHTML += `
-                                <tr onclick="location.href='/disposalRequest/${data.disposalRequest_id}';">
+                                <tr onclick="location.href='/disposalClients/${data.disposalClients_id}';">
                                     <td class="text-center">
                                         <div class="media">
                                             <!-- <div class="avatar me-2">
@@ -247,7 +243,7 @@
                             </div> -->
                                             <div class="media-body align-self-center">
                                                 <span class="media-body align-self-center">
-                                                    ${data.companyName ? data.companyName : ''}
+                                                    ${data.companyName}
                                                 </span>
                                             </div>
                                         </div>
@@ -279,7 +275,7 @@
                                     </td>
                                     <td class="text-center">
                                         <span class="media-body align-self-center">
-                                            ${data.collectPlace}
+                                            ${data.place}
                                         </span>
                                     </td>
                                     <td class="text-center">
@@ -294,7 +290,7 @@
                                     </td>
                                     <td class="text-center">`
                             if (user.permission1.data[0] & 0b0010) {
-                                tempHTML += `<a href="/disposalRequest/edit/${data.disposalRequest_id}"
+                                tempHTML += `<a href="/disposalClients/edit/${data.disposalClients_id}"
                                                 class="action-btn btn-edit bs-tooltip me-2"
                                                 data-toggle="tooltip" data-placement="top"
                                                 title="Edit">
@@ -313,7 +309,7 @@
                             }
 
                             if (user.permission1.data[0] & 0b0001) {
-                                tempHTML += `<a onclick="delete_(event, '/disposalRequest/delete/${data.disposalRequest_id}');"
+                                tempHTML += `<a onclick="delete_(event, '/disposalClients/delete/${data.disposalClients_id}');"
                                                 class="action-btn btn-delete bs-tooltip"
                                                 data-toggle="tooltip"
                                                 data-placement="top" title="Delete">

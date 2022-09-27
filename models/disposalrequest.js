@@ -8,27 +8,42 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       comment: "폐차 견적 식별번호"
     },
-    state: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      comment: "신청\/진행\/종료\/보류"
+    supplierUsers_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "협력사 식별번호"
     },
-    enrollDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      comment: "접수일"
+    commission: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "수수료"
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "차대비"
+    },
+    loss: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "손실금"
+    },
+    deliveryFee: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "탁송료"
     },
     carNum: {
       type: DataTypes.STRING(15),
       allowNull: false,
       comment: "차량번호"
     },
-    phoneNum: {
+    ownerName: {
       type: DataTypes.STRING(25),
       allowNull: false,
-      comment: "전화번호"
+      comment: "차주 성함"
     },
-    carName: {
+    model: {
       type: DataTypes.STRING(200),
       allowNull: false,
       comment: "차량명, 차종"
@@ -40,46 +55,97 @@ module.exports = function(sequelize, DataTypes) {
     },
     engineCode: {
       type: DataTypes.STRING(20),
-      allowNull: true,
+      allowNull: false,
       comment: "원동기 형식"
     },
     displacement: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       comment: "배기량"
+    },
+    mortgage: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "압류\/저당"
+    },
+    carCondition: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "차량상태"
+    },
+    aluminumWheel: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      comment: "알루미늄 휠"
+    },
+    collectMethod: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "견인\/조기\/인탁"
     },
     deliveryDate: {
       type: DataTypes.DATE,
-      allowNull: true,
-      comment: "인수일"
+      allowNull: false,
+      comment: "회수일시"
     },
-    disposalDate: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment: "폐차일"
+    collectPlace: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "회수장소"
     },
-    payDate: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      comment: "입금일"
-    },
-    payPrice: {
-      type: DataTypes.TINYINT,
-      allowNull: true,
-      comment: "폐차금액"
-    },
-    manager: {
+    phoneNum: {
       type: DataTypes.STRING(25),
-      allowNull: true,
-      comment: "담당자"
+      allowNull: false,
+      comment: "회수연락처"
     },
-    supplierRequest_id: {
+    bankName1: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "차주-은행명"
+    },
+    accountNum1: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "차주-계좌번호"
+    },
+    accountHolder1: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "차주-예금주"
+    },
+    amount1: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: "차주-금액"
+    },
+    bankName2: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "입금-은행명"
+    },
+    accountNum2: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "입금-계좌번호"
+    },
+    accountHolder2: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "입금-예금주"
+    },
+    amount2: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "회수요청 식별번호"
+      comment: "입금-금액"
+    },
+    note: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      defaultValue: "",
+      comment: "비고"
     },
     createUser: {
-      type: DataTypes.CHAR(15),
+      type: DataTypes.STRING(15),
       allowNull: false,
       comment: "생성자"
     },
@@ -90,7 +156,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "생성일"
     },
     updateUser: {
-      type: DataTypes.CHAR(15),
+      type: DataTypes.STRING(15),
       allowNull: true,
       comment: "수정자"
     },
@@ -100,7 +166,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "수정일"
     },
     deleteUser: {
-      type: DataTypes.CHAR(15),
+      type: DataTypes.STRING(15),
       allowNull: true,
       comment: "삭제자"
     },

@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "계약번호"
     },
-    carName: {
+    model: {
       type: DataTypes.STRING(200),
       allowNull: false,
       comment: "차량명, 차종"

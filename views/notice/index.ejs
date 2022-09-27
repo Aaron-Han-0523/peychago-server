@@ -173,7 +173,7 @@
                                                                         <% } %>
 
                                                                             <% if(user.permission1.data[0]&0b0001) { %>
-                                                                                <a href="/notice/delete/<%= item.notice_id %>"
+                                                                                <a onclick="delete_(event, '/notice/delete/<%= item.notice_id %>');"
                                                                                     class="action-btn btn-delete bs-tooltip"
                                                                                     data-toggle="tooltip"
                                                                                     data-placement="top" title="Delete">
@@ -324,7 +324,7 @@
                             }
 
                             if (user.permission1.data[0] & 0b0001) {
-                                tempHTML += `<a href="/notice/delete/${result.rows[i].notice_id}"
+                                tempHTML += `<a onclick="delete_(event, '/notice/delete/${result.rows[i].notice_id}');"
                                     class="action-btn btn-delete bs-tooltip"
                                     data-toggle="tooltip"
                                     data-placement="top" title="Delete">

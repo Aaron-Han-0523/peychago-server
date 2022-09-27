@@ -1,10 +1,13 @@
 const supplierRequestService = require('../services/supplierRequest');
+const models = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
     body.user = user.userid;
-    
+
     try {
         let result = await supplierRequestService.create(body);
         // console.log("result :",result);
@@ -12,7 +15,7 @@ exports.add = async (req, res, next) => {
     }
     catch (e) {
         console.error(e);
-        return res.json(`add fail`)
+        return res.status(400).json(`add fail`)
     }
 }
 
@@ -31,19 +34,32 @@ exports.edit = async (req, res, next) => {
     // console.log('result :', result)
 
     if (result) res.redirect(`/supplierRequest/${id}`);
-    else res.json(`fail id:${id}`)
+    else res.status(400).json(`fail id:${id}`)
 }
 
 exports.index = async (req, res, next) => {
-    let data = await supplierRequestService
-        .allRead()
-        .catch(err => console.error(err));
 
-    // console.log("data :", data);
+    let query = `
+    select supplier.companyName, req.* from supplierrequest req
+    left join supplierusers supplier
+    on req.supplierUsers_id=supplier.supplierUsers_id
+    order by supplierUsers_id desc;
+    `
+    const data = await models.sequelize.query(query)
+        .then(function (results, metadata) {
+            // 쿼리 실행 성공
+            return results[0];
+        })
+        .catch(function (err) {
+            // 쿼리 실행 에러 
+            console.error(err);
+        });
 
-  return res.render('supplierRequest/index', {
-        count: data.count,
-        data: data.rows,
+    console.log("data :", data);
+
+    return res.render('supplierRequest/index', {
+        count: data.length,
+        data: data,
         user: req.userInfo
     });
 }
@@ -63,7 +79,7 @@ exports.detail = async (req, res, next) => {
         render: `(supplierRequest/${id})`,
         data: data.dataValues
     });
-    else res.json(`fail id:${id}`)
+    else res.status(400).json(`fail id:${id}`)
 }
 
 exports.delete = async (req, res, next) => {
@@ -80,5 +96,5 @@ exports.delete = async (req, res, next) => {
     // console.log("delete result :", result)
 
     if (result) return res.redirect('/supplierRequest');
-    else res.json(`fail id:${id}`)
+    else res.status(400).json(`fail id:${id}`)
 }

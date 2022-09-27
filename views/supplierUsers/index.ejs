@@ -172,7 +172,7 @@
                                                                         <% } %>
 
                                                                             <% if(user.permission7.data[0]&0b0001) { %>
-                                                                                <a href="/supplierUsers/delete/<%= item.supplierUsers_id %>"
+                                                                                <a onclick="delete_(event, '/supplierUsers/delete/<%= item.supplierUsers_id %>');"
                                                                                     class="action-btn btn-delete bs-tooltip"
                                                                                     data-toggle="tooltip"
                                                                                     data-placement="top" title="Delete">
@@ -222,19 +222,6 @@
 
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
                 <script>
-                    function formatDate(d_t) {
-                        d_t = new Date(d_t);
-                        //console.log(typeof d_t);
-
-                        let year = d_t.getFullYear();
-                        let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
-                        let day = ("0" + d_t.getDate()).slice(-2);
-                        let hour = ("0" + d_t.getHours()).slice(-2);
-                        let minute = ("0" + d_t.getMinutes()).slice(-2);
-                        let seconds = ("0" + d_t.getSeconds()).slice(-2);
-                        return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + seconds;
-                    }
-
                     async function searchSupplierUsers() {
                         const target_id = "searchResults";
                         const searchWord_element = document.getElementById('searchWord');
@@ -327,7 +314,7 @@
                             }
 
                             if (user.permission7.data[0] & 0b0001) {
-                                tempHTML += `<a href="/supplierUsers/delete/${result.rows[i].supplierUsers_id}"
+                                tempHTML += `<a onclick="delete_(event, '/supplierUsers/delete/${result.rows[i].supplierUsers_id}');"
                                     class="action-btn btn-delete bs-tooltip"
                                     data-toggle="tooltip"
                                     data-placement="top" title="Delete">

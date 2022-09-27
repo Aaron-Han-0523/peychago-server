@@ -50,8 +50,6 @@ function initModels(sequelize) {
   clients.hasMany(review, { as: "reviews", foreignKey: "clients_id"});
   partslist.belongsTo(parts, { as: "part", foreignKey: "parts_id"});
   parts.hasMany(partslist, { as: "partslists", foreignKey: "parts_id"});
-  clients.belongsTo(supplierusers, { as: "supplierUser", foreignKey: "supplierUsers_id"});
-  supplierusers.hasMany(clients, { as: "clients", foreignKey: "supplierUsers_id"});
   review.belongsTo(supplierusers, { as: "supplierUser", foreignKey: "supplierUsers_id"});
   supplierusers.hasMany(review, { as: "reviews", foreignKey: "supplierUsers_id"});
   supplieruserlog.belongsTo(supplierusers, { as: "supplierUser", foreignKey: "supplierUsers_id"});

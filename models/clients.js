@@ -28,9 +28,35 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "차량번호"
     },
+    model: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "차종"
+    },
+    detailModel: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "세부모델"
+    },
+    displacement: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "배기량"
+    },
+    yearModel: {
+      type: DataTypes.STRING(4),
+      allowNull: false,
+      comment: "연식"
+    },
+    processType: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0,
+      comment: "폐차(1)\/수출(2)"
+    },
     carInfo_id: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
       comment: "차량 정보 식별번호",
       references: {
         model: 'carinfo',
@@ -38,13 +64,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     supplierUsers_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "협력사 식별번호",
-      references: {
-        model: 'supplierusers',
-        key: 'supplierUsers_id'
-      }
+      comment: "협력사 식별번호"
     },
     createDate: {
       type: DataTypes.DATE,
@@ -90,13 +112,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "carInfo_id" },
-        ]
-      },
-      {
-        name: "Clients_FK",
-        using: "BTREE",
-        fields: [
-          { name: "supplierUsers_id" },
         ]
       },
     ]

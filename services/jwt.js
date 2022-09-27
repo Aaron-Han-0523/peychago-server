@@ -4,7 +4,7 @@ const login_url = '/users/login'    // 로그인 분리 시 url : '/accounts/log
 
 exports.verifyToken = async (req, res, next) => {
     console.log('verify token')
-    console.log('Request url :', req.url)
+    console.log('Request url :', req.originalUrl)
 
     // read the token from header or url 
     const token = req.cookies.jwt

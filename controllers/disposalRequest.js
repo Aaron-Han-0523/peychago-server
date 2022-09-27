@@ -1,18 +1,21 @@
 const disposalRequestService = require('../services/disposalRequest');
+const models = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 exports.add = async (req, res, next) => {
   const user = req.userInfo;
   let body = req.body;
   body.user = user.userid;
-  
+
   try {
-      let result = await disposalRequestService.create(body);
-      // console.log("result :",result);
-      return res.status(201).redirect('/disposalRequest');
+    let result = await disposalRequestService.create(body);
+    // console.log("result :",result);
+    return res.status(201).redirect('/disposalRequest');
   }
   catch (e) {
-      console.error(e);
-      return res.json(`add fail`)
+    console.error(e);
+    return res.status(400).json(`add fail`)
   }
 }
 
@@ -25,26 +28,40 @@ exports.edit = async (req, res, next) => {
   body.id = id;
 
   let result = await disposalRequestService
-      .update(body)
-      .catch(err => console.error(err));
+    .update(body)
+    .catch(err => console.error(err));
 
   // console.log('result :', result)
 
   if (result) res.redirect(`/disposalRequest/${id}`);
-  else res.json(`fail id:${id}`)
+  else res.status(400).json(`fail id:${id}`)
 }
 
 exports.index = async (req, res, next) => {
-  let data = await disposalRequestService
-      .allRead()
-      .catch(err => console.error(err));
+
+  let query = `
+    select supplier.companyName, req.* from disposalRequest req
+    left join supplierusers supplier
+    on req.supplierUsers_id=supplier.supplierUsers_id
+    where (req.deleteDate is null)
+    order by req.createDate;
+    `
+  const data = await models.sequelize.query(query)
+    .then(function (results, metadata) {
+      // 쿼리 실행 성공
+      return results[0];
+    })
+    .catch(function (err) {
+      // 쿼리 실행 에러 
+      console.error(err);
+    });
 
   // console.log("data :", data);
 
   return res.render('disposalRequest/index', {
-      count: data.count,
-      data: data.rows,
-      user: req.userInfo
+    count: data.length,
+    data: data,
+    user: req.userInfo
   });
 }
 
@@ -54,16 +71,16 @@ exports.detail = async (req, res, next) => {
 
   const user = req.userInfo;
   let data = await disposalRequestService
-      .readOne(id)
-      .catch(err => console.error(err));
+    .readOne(id)
+    .catch(err => console.error(err));
 
-  // console.log(data);
+  console.log("data :", data);
 
-  if (data) return res.json({
-      render: `(disposalRequest/${id})`,
-      data: data.dataValues
+  if (data) return res.render(`disposalRequest/detail`, {
+    user: user,
+    data: data
   });
-  else res.json(`fail id:${id}`)
+  else res.status(404).json(`fail id:${id}`)
 }
 
 exports.delete = async (req, res, next) => {
@@ -74,11 +91,41 @@ exports.delete = async (req, res, next) => {
   obj.user = user.userid;
 
   let result = await disposalRequestService
-      .delete(obj)
-      .catch(err => console.error(err));
+    .delete(obj)
+    .catch(err => console.error(err));
 
   // console.log("delete result :", result)
 
   if (result) return res.redirect('/disposalRequest');
-  else res.json(`fail id:${id}`)
+  else res.status(400).json(`fail id:${id}`)
+}
+
+exports.search = async (req, res, next) => {
+  const user = req.userInfo;
+  let word = req.query.q.replace(';', '').trim();
+  console.log("search", word, "start")
+
+  // let condition = {};
+
+  let query = `
+    select supplier.companyName, req.* from disposalRequest req
+    left join supplierusers supplier
+    on req.supplierUsers_id=supplier.supplierUsers_id
+    where (req.deleteDate is null) and (req.carNum like('%${word}%') or req.ownerName like('%${word}%') or req.model like('%${word}%'))
+    order by req.createDate;
+    `
+  const result = await models.sequelize.query(query)
+    .then(function (results, metadata) {
+      // 쿼리 실행 성공
+      return results[0];
+    })
+    .catch(function (err) {
+      // 쿼리 실행 에러 
+      console.error(err);
+    });
+
+  console.log("search result :", result)
+
+  if (result) return res.status(200).json({ user: user, data: { rows: result, count: result.length } });
+  else res.status(400).json(`don't find ${word}`)
 }

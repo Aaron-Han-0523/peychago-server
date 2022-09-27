@@ -50,24 +50,23 @@
 
                             <% if((user.permission3_1===undefined) || (user.permission3_1.data[0]&0b0100)) { %>
                                 <li class="menu">
-                                    <a href="#disposal" aria-expanded="false" class="dropdown-toggle"
-                                        style="pointer-events:none;">
+                                    <a href="/disposalClients" aria-expanded="false" class="dropdown-toggle">
                                         <div class="">
                                             <span>폐차 고객 관리</span>
                                         </div>
                                     </a>
-                                    <ul class="submenu list-unstyled" id="disposal" data-bs-parent="#accordionExample">
+                                    <ul class="submenu list-unstyled" data-bs-parent="#accordionExample">
                                         <li>
-                                            <a href="/exportRequest" aria-expanded="false" class="dropdown-toggle">
+                                            <a href="/disposalEstimate" aria-expanded="false" class="dropdown-toggle">
                                                 <div class="">
-                                                    <span>폐차 견적 신청 고객</span>
+                                                    <span>견적 신청 고객</span>
                                                 </div>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/disposalRequest" aria-expanded="false" class="dropdown-toggle">
                                                 <div class="">
-                                                    <span>폐차 회수 요청 고객</span>
+                                                    <span>회수 요청 고객</span>
                                                 </div>
                                             </a>
                                         </li>
@@ -77,27 +76,25 @@
 
                                     <% if((user.permission3_2===undefined) || (user.permission3_2.data[0]&0b0100)) { %>
                                         <li class="menu">
-                                            <a href="#export" aria-expanded="false" class="dropdown-toggle"
-                                                style="pointer-events:none;">
+                                            <a href="/exportClients" aria-expanded="false" class="dropdown-toggle">
                                                 <div class="">
                                                     <span>수출 고객 관리</span>
                                                 </div>
                                             </a>
-                                            <ul class="submenu list-unstyled" id="export"
-                                                data-bs-parent="#accordionExample">
+                                            <ul class="submenu list-unstyled" data-bs-parent="#accordionExample">
                                                 <li>
-                                                    <a href="/exportRequest" aria-expanded="false"
+                                                    <a href="/exportEstimate" aria-expanded="false"
                                                         class="dropdown-toggle">
                                                         <div class="">
-                                                            <span>수출 견적 신청 고객</span>
+                                                            <span>견적 신청 고객</span>
                                                         </div>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="/disposalRequest" aria-expanded="false"
+                                                    <a href="/exportRequest" aria-expanded="false"
                                                         class="dropdown-toggle">
                                                         <div class="">
-                                                            <span>수출 회수 요청 고객</span>
+                                                            <span>회수 요청 고객</span>
                                                         </div>
                                                     </a>
                                                 </li>

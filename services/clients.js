@@ -59,15 +59,12 @@ exports.allRead = async (condition = {}) => {
     return await clients
         .findAndCountAll({
             raw: true,
-            where: Object.assign(condition, {
-                deleteDate: null
-            }),
-        },
-            {
-                order: [
-                    ['clients_id', 'DESC']
-                ]
-            })
+            where: condition,
+        }, {
+            order: [
+                ['clients_id', 'DESC']
+            ]
+        })
         .then(result => {
             console.log("clients 'count' and 'rows' read success");
             console.log("data count :", result.count)

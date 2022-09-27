@@ -14,19 +14,24 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    let hashedPassword = await encryption.hashing("123456");
+    let hashedPassword = await encryption.hashing("1234");
 
-    let obj = {
-      clients_id: 1
-      , clientName: '홍길동'
-      , phoneNum: '010-0000-0000'
-      , password: hashedPassword
-      , carNum: '율도국0000'
-      , carInfo_id: 1
-      , createDate: new Date(),
+    let data = []
+    for (let i = 0; i < 10; i++) {
+      let obj = {
+        clientName: 'cli' + i
+        , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
+        , password: hashedPassword
+        , carNum: `${i}${i}가${i}${i}${i}${i}`
+        , model: `${i}모델${i}`
+        , yearModel: `200` + i
+        , processType: i % 3
+        , createDate: new Date(),
+      }
+      data.push(obj)
     }
-
-    await queryInterface.bulkInsert('clients', [obj], {});
+    console.log(data)
+    await queryInterface.bulkInsert('clients', data, {});
   },
 
   async down(queryInterface, Sequelize) {

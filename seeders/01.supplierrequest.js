@@ -19,7 +19,7 @@ module.exports = {
         , enrollDate: new Date()
         , carNum: `서울 ${i}${i} 가 ${i}${i}${i}${i}`
         , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
-        , carName: `${i}car${i}`
+        , model: `${i}car${i}`
         , yearModel: `${i}${i}${i}${i}`
         , ownerName: `testclient${i}`
         , supplierUsers_id: i
