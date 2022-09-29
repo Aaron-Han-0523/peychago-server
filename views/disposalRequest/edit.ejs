@@ -135,8 +135,10 @@
                                                                         <label id="supplierUsers" name="companyName"
                                                                             class="col-form-label form-control"
                                                                             value="<%= supplier.companyName %>">
-                                                                            <%= supplier.companyName %> -
-                                                                                <%= supplier.mainPhoneNum %>
+                                                                            <% if (supplier) { %>
+                                                                                <%= supplier.companyName %> - <%=
+                                                                                        supplier.mainPhoneNum %>
+                                                                                        <% } %>
                                                                         </label>
                                                                         <input id="supplierUsers_id" hidden
                                                                             name="supplierUsers_id"

@@ -64,8 +64,10 @@
                                                                     <div class="p-2 flex-grow-1">
                                                                         <label id="supplierUsers" name="companyName"
                                                                             class="col-form-label form-control">
-                                                                            <%= supplier.companyName %> - <%=
-                                                                                    supplier.mainPhoneNum %>
+                                                                            <% if (supplier) { %>
+                                                                                <%= supplier.companyName %> - <%=
+                                                                                        supplier.mainPhoneNum %>
+                                                                                        <% } %>
                                                                         </label>
                                                                     </div>
                                                                 </div>
