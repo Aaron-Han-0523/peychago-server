@@ -4,12 +4,10 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await process
-        .create({
+        .create(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+        }))
         .then(result => {
             console.log("process create success");
             return result;
@@ -23,11 +21,11 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await process
-        .update({
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
-            where: { process_id: obj.id }
+        }), {
+            where: { carNum: obj.id }
         })
         .then(result => {
             console.log("process update success");
@@ -49,7 +47,8 @@ exports.allRead = async (condition = {}) => {
                 deleteDate: null
             }),
             order: [
-                ['process_id', 'DESC']
+                ['type', 'DESC'],
+                ['carNum', 'DESC'],
             ]
         })
         .then(result => {
@@ -67,8 +66,8 @@ exports.readOne = async (id) => {
     return await process
         .findByPk(id)
         .then(result => {
-            console.log(`process_id-${id} find success`);
-            return result
+            console.log(`carNum-${id} find success`);
+            return result.dataValues;
         })
         .catch(err => {
             // console.error(err);
@@ -82,7 +81,7 @@ exports.delete = async (obj) => {
             deleteUser: obj.user,
             deleteDate: new Date()
         }, {
-            where: { process_id: obj.id }
+            where: { carNum: obj.id }
         })
         .then(result => {
             console.log("process delete success");

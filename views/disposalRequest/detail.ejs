@@ -3,6 +3,8 @@
 
 <head>
     <%- include ("../partials/header.ejs") %>
+
+
 </head>
 
 <body class="layout-boxed alt-menu">
@@ -28,9 +30,12 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/notice">공지사항</a></li>
+                                            <li class="breadcrumb-item"><a href="/disposalClients">폐차 고객 관리</a>
+                                            </li>
+                                            <li class="breadcrumb-item"><a href="/disposalRequest">회수 요청 고객</a>
+                                            </li>
                                             <li class="breadcrumb-item active" aria-current="page">
-                                                <%= data.notice_id %>
+                                                <%= data.carNum %>
                                             </li>
                                         </ol>
                                     </nav>
@@ -48,143 +53,1214 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="widget-content widget-content-area">
-                                                    <div class="row">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <!-- <h6>제목</h6> -->
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-12 ">
-                                                            <div class="form-group">
-                                                                <h2>
-                                                                    <%= data.title %>
-                                                                </h2>
+                                                    <form method="post">
+                                                        <div class="row form-group">
+                                                            <div class="col col-xl-8 mb-xl-1 mb-4">
+                                                                <label class="col-form-label">인수업체
+                                                                </label>
+                                                                <div class="d-flex">
+                                                                    <div class="p-2 flex-grow-1">
+                                                                        <label id="supplierUsers" name="companyName"
+                                                                            class="col-form-label form-control">
+                                                                            <%= supplier.companyName %> - <%=
+                                                                                    supplier.mainPhoneNum %>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <!-- <hr size="1px">
-
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6>링크Link</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-12 ">
-                                                            <div class="form-group">
-                                                                <a href='<%= data.link %>'>
-                                                                    <%= data.link %>
-                                                                </a>
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>수수료</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>차대비</h6>
                                                             </div>
                                                         </div>
-                                                    </div> -->
-
-                                                    <hr size="1px">
-
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <!-- <h6>내용</h6> -->
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="editor-container">
-                                                        <p style="font-size: 20px;">
-                                                            <%= data.content %>
-                                                        </p>
-                                                    </div>
-
-                                                    <hr size="1px">
-
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h6>링크Link</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-12 ">
-                                                            <div class="form-group">
-                                                                <a href='<%= data.link %>'>
-                                                                    <%= data.link %>
-                                                                </a>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="commission"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="commission" type="text" name="commission"
+                                                                        placeholder="" class="form-control" required>
+                                                                        <%= data.commission %>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- <div class="row layout-top-spacing">
-                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                                <h6>Type</h6>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="price"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="price" type="text" name="price"
+                                                                        placeholder="" class="form-control" required>
+                                                                        <%= data.price %>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
 
-                                                        <select name="type">
-                                                            <option value="2">Top</option>
-                                                            <option value="1">Nomal</option>
-                                                            <option value="0">Bottom</option>
-                                                        </select> -->
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>손실금</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>탁송료</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="loss"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="loss" type="text" name="loss"
+                                                                        placeholder="" class="form-control">
+                                                                        <%= data.loss %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="deliveryFee"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="deliveryFee" type="text"
+                                                                        name="deliveryFee" placeholder=""
+                                                                        class="form-control">
+                                                                        <%= data.deliveryFee %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                                    <!--<div class="row layout-top-spacing">
-                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h6>Link</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12 ">
-                                                <div class="form-group">
-                                                    <label for="t-text" class="visually-hidden">Text</label>
-                                                    <input disabled id="t-text2" type="text" name="txt" placeholder="" class="form-control" >
-                                                </div>
-                                        </div>
-                                    </div>
--->
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col-lg-6 col-12 ">
-                                                            <div class="form-group">
-                                                                <% if(user.permission1.data[0]&0b0010) { %>
+                                                        <div class="row layout-spacing">
+                                                            <h5 class="text-center">차량정보
+                                                            </h5>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>차량번호</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>차주 성함</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="carNum"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="carNum" type="text" name="carNum"
+                                                                        placeholder="" class="form-control" required
+                                                                        disabled>
+                                                                        <%= process.carNum %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="ownerName"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="ownerName" type="text" name="ownerName"
+                                                                        placeholder="" class="form-control" required
+                                                                        disabled>
+                                                                        <%= process.ownerName %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>차종</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>연식</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="model"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="model" type="text" name="model"
+                                                                        placeholder="" class="form-control" required
+                                                                        disabled>
+                                                                        <%= process.model %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="yearModel"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="yearModel" type="text" name="yearModel"
+                                                                        placeholder="" class="form-control" required
+                                                                        disabled>
+                                                                        <%= process.yearModel %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>원동기형식</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>배기량</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="detailModel"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="detailModel" type="text"
+                                                                        name="detailModel" placeholder=""
+                                                                        class="form-control" required disabled>
+                                                                        <%= process.detailModel %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="displacement"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="displacement" type="text"
+                                                                        name="displacement" placeholder=""
+                                                                        class="form-control" required disabled>
+                                                                        <%= process.displacement %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>압류/저당</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>사고유무</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="mortgage"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label class="form-control" id="mortgage"
+                                                                        name="mortgage">
+                                                                        <%= data.mortgage==0? "없음" :"있음" %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="carCondition"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label class="form-control" id="carCondition"
+                                                                        name="carCondition">
+                                                                        <%= data.carCondition==0? "없음" :"있음" %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>알루미늄 휠</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>견인/조기/인탁</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="aluminumWheel"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label class="form-control" id="aluminumWheel"
+                                                                        name="aluminumWheel">
+                                                                        <%= data.aluminumWheel==0? "X" :"O" %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="collectMethod"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label class="form-control" id="collectMethod"
+                                                                        name="collectMethod">
+                                                                        <%= data.collectMethod==0? "견인"
+                                                                            :data.collectMethod==1? "조기" :"인탁" %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-spacing">
+                                                            <h5 class="text-center">회수정보
+                                                            </h5>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>회수일시</h6>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>회수연락처</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <% function formatDate(d_t) { let
+                                                                        year=d_t.getFullYear(); let month=("0" +
+                                                                        (d_t.getMonth() + 1)).slice(-2); let day=("0" +
+                                                                        d_t.getDate()).slice(-2); let hour=("0" +
+                                                                        d_t.getHours()).slice(-2); let minute=("0" +
+                                                                        d_t.getMinutes()).slice(-2); let seconds=("0" +
+                                                                        d_t.getSeconds()).slice(-2); return year + "-" +
+                                                                        month + "-" + day + " " + hour + ":" + minute
+                                                                        + ":" + seconds } %>
+                                                                        <label for="deliveryDate"
+                                                                            class="visually-hidden">Text</label>
+                                                                        <label id="deliveryDate" type="text"
+                                                                            name="deliveryDate" placeholder=""
+                                                                            class="form-control" required>
+                                                                            <%= formatDate(data.deliveryDate) %>
+                                                                        </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="phoneNum"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="phoneNum" type="text" name="phoneNum"
+                                                                        placeholder="" class="form-control" required>
+                                                                        <%= data.phoneNum %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>회수장소</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="collectPlace"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="collectPlace" type="text"
+                                                                        name="collectPlace" placeholder=""
+                                                                        class="form-control" required>
+                                                                        <%= data.collectPlace %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                                                                <h5>[차주계좌정보]</h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="bankName1">은행명</label>
+                                                                    <label id="bankName1" type="text" name="bankName1"
+                                                                        placeholder="" class="form-control" required>
+                                                                        <%= data.bankName1 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="accountNum1">계좌번호</label>
+                                                                    <label id="accountNum1" type="text"
+                                                                        name="accountNum1" placeholder=""
+                                                                        class="form-control" required>
+                                                                        <%= data.accountNum1 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="accountHolder1">예금주</label>
+                                                                    <label id="accountHolder1" type="text"
+                                                                        name="accountHolder1" placeholder=""
+                                                                        class="form-control" required>
+                                                                        <%= data.accountHolder1 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="amount1">금액</label>
+                                                                    <label id="amount1" type="text" name="amount1"
+                                                                        placeholder="" class="form-control" required>
+                                                                        <%= data.amount1 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                                                                <h5>[입금계좌정보]</h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="bankName2">은행명</label>
+                                                                    <label id="bankName2" type="text" name="bankName2"
+                                                                        placeholder="" class="form-control">
+                                                                        <%= data.bankName2 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="accountNum2">계좌번호</label>
+                                                                    <label id="accountNum2" type="text"
+                                                                        name="accountNum2" placeholder=""
+                                                                        class="form-control">
+                                                                        <%= data.accountNum2 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="accountHolder2">예금주</label>
+                                                                    <label id="accountHolder2" type="text"
+                                                                        name="accountHolder2" placeholder=""
+                                                                        class="form-control">
+                                                                        <%= data.accountHolder2 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="amount2">금액</label>
+                                                                    <label id="amount2" type="text" name="amount2"
+                                                                        placeholder="" class="form-control">
+                                                                        <%= data.amount2 %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <h6>비고</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row layout-spacing">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="note"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label id="note" type="text" name="note"
+                                                                        placeholder="" class="form-control">
+                                                                        <%= data.note %>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row layout-top-spacing">
+                                                            <div class="col">
+                                                                <div class="form-group ">
                                                                     <button type="button"
-                                                                        onclick="location.href='/notice/edit/<%= data.notice_id %>';"
-                                                                        class="btn btn-outline-success mb-2 me-4">수정하기</button>
-                                                                    <% } %>
-                                                                        <% if(user.permission1.data[0]&0b0001) { %>
-                                                                            <button
-                                                                                class="btn btn-outline-danger mb-2 me-4"
-                                                                                type="button"
-                                                                                onclick="location.href='/notice/delete/<%= data.notice_id %>';">삭제하기</button>
-                                                                            <% } %>
-                                                                                <button
-                                                                                    class="btn btn-outline-danger mb-2 me-4"
-                                                                                    type="button"
-                                                                                    onclick="location.href='/notice';">뒤로가기</button>
+                                                                        onclick="location.href='/disposalRequest/edit/<%= data.carNum %>';"
+                                                                        class="btn btn-outline-success me-3">수정하기</button>
+                                                                    <button type="button"
+                                                                        onclick="location.href='/disposalRequest';"
+                                                                        class="btn btn-outline-danger me-3">목록으로</button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
 
+                            <%- include ("../partials/footer.ejs") %>
+
                         </div>
-
-                        <%- include ("../partials/footer.ejs") %>
-
+                        <!--  END CONTENT AREA  -->
                     </div>
-                    <!--  END CONTENT AREA  -->
-            </div>
-            <!-- END MAIN CONTAINER -->
+                    <!-- END MAIN CONTAINER -->
 
-            <%- include ("../partials/commonScrpits.ejs") %>
+                    <!-- REQUEST PREVIEW AREA-->
+                    <!-- <div class="row">
+                        <div class="col"></div>
+                        <div class="col form-control" id="req_table" style="width: 21cm;"></div>
+                    </div> -->
 
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                    <%- include ("../partials/commonScrpits.ejs") %>
 
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+                        <script>
+                            async function searchSupplier() {
+                                const target_id = "searchResults";
+                                const searchWord_element = document.getElementById('searchWord');
+                                const searchWord = searchWord_element.value;
+
+                                const res = await fetch(`/supplierUsers/search?q=${searchWord}`)
+                                    .then((response) => {
+                                        // console.log(response.json());
+                                        return response.json();
+                                    })
+                                // .catch((err) => { console.error(err) });
+
+                                const result = res.data;
+                                // console.log(result);
+                                document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
+                                searchWord_element.value = '';
+
+                                let tempHTML = ''
+                                result.rows.forEach(function (item, index) {
+                                    tempHTML += `
+                                    <tr onclick="labelSupplier(${item.supplierUsers_id});" id="supplier${item.supplierUsers_id}">
+                                        <td class="text-center">
+                                        <span class="media-body align-self-center">
+                                            ${item.companyName}
+                                        </span>
+                                        </td>
+                                        <td class="text-center">
+                                        <span class="media-body align-self-center">
+                                            ${item.mainPhoneNum}
+                                        </span>
+                                        </td>
+                                        <td class="text-center">
+                                        <span class="media-body align-self-center">
+                                            ${item.address}
+                                        </span>
+                                        </td>
+                                    </tr>
+                                    `
+                                });
+
+                                document.getElementById(target_id).innerHTML = tempHTML;
+                            }
+                            function labelSupplier(id) {
+                                const supplier = document.getElementById('supplier' + id).innerText.split('\t');
+                                document.getElementById('supplierUsers_id').value = id;
+                                document.getElementById('supplierUsers').innerText = supplier[0] + '-' + supplier[1];
+                                document.getElementById('supplierUsers').value = supplier[0];
+                            }
+
+                            function sendClient(id) {
+                                const form_elements = document.forms[0].elements;
+                                for (let i = 0; i < form_elements.length; i++) {
+                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
+                                }
+
+                                document.getElementById('req_table').innerHTML = `
+                                    <table class="table table-bordered ">
+                                        <tr>
+                                            <td class="text-center" colspan="4">(주)월드리싸이클링</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h1>폐 차 회 수 신 청 서</h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">대표전화</td>
+                                            <td class="text-center">1544-8732</td>
+                                            <td class="text-center">팩스</td>
+                                            <td class="text-center">031-997-9447</td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center">수수료</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.commission}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">인수업체명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.companyName}
+                                            </td>
+                                            <td class="text-center">차대비</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.price}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">손실금</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.loss}
+                                            </td>
+                                            <td class="text-center">탁송료</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryFee}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="2">폐차연수증 발송 FAX</td>
+                                            <td class="text-center" colspan="2">031-997-9447</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차량정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차량번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carNum}
+                                            </td>
+                        
+                                            <td class="text-center">차주 성함</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.ownerName}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차종</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.model}
+                                            </td>
+                                            <td class="text-center">연식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.yearModel}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">원동기형식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.engineCode}
+                                            </td>
+                                            <td class="text-center">배기량</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.displacement}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">압류/저당</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">차량상태</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">알루미늄 휠</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">견인/조기/인탁</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.collectMethod == 0 ? "견인"
+                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                            </td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>회수정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수일시</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryDate}
+                                            </td>
+                                            <td class="text-center">회수 연락처</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.phoneNum}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수장소</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.collectPlace}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차주계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName1}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder1}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>입금계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName2}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder2}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">비고</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.note}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"><br>출발하시기전 회수 연락처로 꼭 통화 부탁드립니다.<br>
+                                                <br>차량인수 후 폐차대금은 입금요청계좌로 당일 입금하셔야 합니다.
+                                                <br>입금시 업체명과 차량번호 기재하시면 됩니다.(예 : 월드00두0000)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                `
+
+                                const target = document.getElementById('req_table')
+
+                                domtoimage.toBlob(target)
+                                    .then(function (blob) {
+                                        // console.log(blob);
+                                        const formData = new FormData();
+                                        formData.append('diposalRequest', blob);
+
+                                        const url = `/disposalRequest/upload/${id}`;
+                                        fetch(url, {
+                                            method: 'POST',
+                                            // headers: { 'Content-Type': 'multipart/form-data' },
+                                            body: formData
+                                        })
+                                            .then(res => {
+                                                // console.log(res)
+                                                if (res.ok) alert("전송 성공");
+                                                else throw new Error(res.statusText)
+                                            })
+                                            .catch(err => {
+                                                console.error(err)
+                                                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
+                                            });
+                                    });
+                            }
+
+                            let disposalRequest = {
+                                companyName: ""
+                                , commission: ""
+                                , price: ""
+                                , loss: ""
+                                , deliveryFee: ""
+                                , carNum: ""
+                                , ownerName: ""
+                                , model: ""
+                                , yearModel: ""
+                                , engineCode: ""
+                                , displacement: ""
+                                , mortgage: ""
+                                , carCondition: ""
+                                , aluminumWheel: ""
+                                , collectMethod: ""
+                                , deliveryDate: ""
+                                , collectPlace: ""
+                                , phoneNum: ""
+                                , bankName1: ""
+                                , accountNum1: ""
+                                , accountHolder1: ""
+                                , amount1: ""
+                                , bankName2: ""
+                                , accountNum2: ""
+                                , accountHolder2: ""
+                                , amount2: ""
+                                , note: ""
+                            }
+
+                            function downloadImage() {
+                                const form_elements = document.forms[0].elements;
+                                for (let i = 0; i < form_elements.length; i++) {
+                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
+                                }
+
+                                document.getElementById('req_table').innerHTML = `
+                                    <table class="table table-bordered ">
+                                        <tr>
+                                            <td class="text-center" colspan="4">(주)월드리싸이클링</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h1>폐 차 회 수 신 청 서</h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">대표전화</td>
+                                            <td class="text-center">1544-8732</td>
+                                            <td class="text-center">팩스</td>
+                                            <td class="text-center">031-997-9447</td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center">수수료</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.commission}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">인수업체명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.companyName}
+                                            </td>
+                                            <td class="text-center">차대비</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.price}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">손실금</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.loss}
+                                            </td>
+                                            <td class="text-center">탁송료</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryFee}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="2">폐차연수증 발송 FAX</td>
+                                            <td class="text-center" colspan="2">031-997-9447</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차량정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차량번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carNum}
+                                            </td>
+                        
+                                            <td class="text-center">차주 성함</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.ownerName}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차종</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.model}
+                                            </td>
+                                            <td class="text-center">연식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.yearModel}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">원동기형식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.engineCode}
+                                            </td>
+                                            <td class="text-center">배기량</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.displacement}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">압류/저당</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">차량상태</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">알루미늄 휠</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">견인/조기/인탁</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.collectMethod == 0 ? "견인"
+                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                            </td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>회수정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수일시</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryDate}
+                                            </td>
+                                            <td class="text-center">회수 연락처</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.phoneNum}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수장소</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.collectPlace}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차주계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName1}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder1}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>입금계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName2}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder2}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">비고</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.note}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"><br>출발하시기전 회수 연락처로 꼭 통화 부탁드립니다.<br>
+                                                <br>차량인수 후 폐차대금은 입금요청계좌로 당일 입금하셔야 합니다.
+                                                <br>입금시 업체명과 차량번호 기재하시면 됩니다.(예 : 월드00두0000)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                `
+
+                                const target = document.getElementById('req_table')
+
+                                domtoimage.toBlob(target)
+                                    .then(function (blob) {
+                                        // console.log(blob)
+                                        window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
+                                    });
+                            }
+
+                            function showImage() {
+                                const form_elements = document.forms[0].elements;
+                                for (let i = 0; i < form_elements.length; i++) {
+                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
+                                }
+
+                                document.getElementById('req_table').innerHTML = `
+                                    <table class="table table-bordered ">
+                                        <tr>
+                                            <td class="text-center" colspan="4">(주)월드리싸이클링</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h1>폐 차 회 수 신 청 서</h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">대표전화</td>
+                                            <td class="text-center">1544-8732</td>
+                                            <td class="text-center">팩스</td>
+                                            <td class="text-center">031-997-9447</td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center">수수료</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.commission}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">인수업체명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.companyName}
+                                            </td>
+                                            <td class="text-center">차대비</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.price}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">손실금</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.loss}
+                                            </td>
+                                            <td class="text-center">탁송료</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryFee}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="2">폐차연수증 발송 FAX</td>
+                                            <td class="text-center" colspan="2">031-997-9447</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차량정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차량번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carNum}
+                                            </td>
+                        
+                                            <td class="text-center">차주 성함</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.ownerName}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차종</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.model}
+                                            </td>
+                                            <td class="text-center">연식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.yearModel}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">원동기형식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.engineCode}
+                                            </td>
+                                            <td class="text-center">배기량</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.displacement}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">압류/저당</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">차량상태</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">알루미늄 휠</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">견인/조기/인탁</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.collectMethod == 0 ? "견인"
+                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                            </td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>회수정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수일시</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryDate}
+                                            </td>
+                                            <td class="text-center">회수 연락처</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.phoneNum}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수장소</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.collectPlace}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차주계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName1}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder1}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>입금계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName2}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder2}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">비고</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.note}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"><br>출발하시기전 회수 연락처로 꼭 통화 부탁드립니다.<br>
+                                                <br>차량인수 후 폐차대금은 입금요청계좌로 당일 입금하셔야 합니다.
+                                                <br>입금시 업체명과 차량번호 기재하시면 됩니다.(예 : 월드00두0000)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                `
+                                const target = document.getElementById('req_table')
+                            }
+                        </script>
+                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

@@ -4,12 +4,10 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await disposalRequest
-        .create({
+        .create(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
-        }, {
-            fields: ['createUser', 'createDate']
-        })
+        }))
         .then(result => {
             console.log("disposalRequest create success");
             return result;
@@ -23,11 +21,11 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await disposalRequest
-        .update({
+        .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
-        }, {
-            where: { disposalRequest_id: obj.id }
+        }), {
+            where: { carNum: obj.id }
         })
         .then(result => {
             console.log("disposalRequest update success");
@@ -39,16 +37,18 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async () => {
+exports.allRead = async (condition = {}) => {
     // console.log('all disposalRequest read');
 
     return await disposalRequest
         .findAndCountAll({
-            where: {
+            raw: true,
+            where: Object.assign(condition, {
                 deleteDate: null
-            },
+            }),
             order: [
-                ['disposalRequest_id', 'DESC']
+                ['type', 'DESC'],
+                ['carNum', 'DESC'],
             ]
         })
         .then(result => {
@@ -66,8 +66,8 @@ exports.readOne = async (id) => {
     return await disposalRequest
         .findByPk(id)
         .then(result => {
-            console.log(`disposalRequest_id-${id} find success`);
-            return result
+            console.log(`carNum-${id} find success`);
+            return result.dataValues;
         })
         .catch(err => {
             // console.error(err);
@@ -81,7 +81,7 @@ exports.delete = async (obj) => {
             deleteUser: obj.user,
             deleteDate: new Date()
         }, {
-            where: { disposalRequest_id: obj.id }
+            where: { carNum: obj.id }
         })
         .then(result => {
             console.log("disposalRequest delete success");

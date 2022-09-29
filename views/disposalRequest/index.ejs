@@ -28,7 +28,8 @@
                                 <div class="page-meta">
                                     <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item active" aria-current="page">폐차 고객 관리</li>
+                                            <li class="breadcrumb-item active" aria-current="page"><a
+                                                    href="/disposalClients">폐차 고객 관리</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">폐차 회수 요청 고객</li>
                                         </ol>
                                     </nav>
@@ -72,6 +73,8 @@
                                                     <th class="text-center" scope="col">회수장소</th>
                                                     <th class="text-center" scope="col">회수연락처</th>
                                                     <th class="text-center" scope="col">접수일</th>
+                                                    <th class="text-center" scope="col">수정자</th>
+                                                    <th class="text-center" scope="col">수정일</th>
                                                     <th class="text-center" scope="col">수정/삭제</th>
                                                 </tr>
                                                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
@@ -85,7 +88,7 @@
                                                     + " " + hour + ":" + minute + ":" + seconds } %>
                                                     <% data.forEach( function(item, index) { %>
                                                         <tr
-                                                            onclick="location.href='/disposalRequest/<%= item.disposalRequest_id %>';">
+                                                            onclick="location.href='/disposalRequest/<%= item.carNum %>';">
                                                             <!-- <td>
                                         <div class="form-check form-check-primary">
                                             <input class="form-check-input custom_mixed_child" type="checkbox">
@@ -133,8 +136,18 @@
                                                             </td>
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">
-                                                                    <%= item.updateDate ? formatDate(item.updateDate) :
-                                                                        formatDate(item.createDate) %>
+                                                                    <%= formatDate(item.createDate) %>
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.updateUser %>
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="media-body align-self-center">
+                                                                    <%= item.updateDate ? formatDate(item.updateDate)
+                                                                        : '' %>
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">
@@ -153,7 +166,7 @@
                                                                     <circle cx="12" cy="12" r="3"></circle>
                                                                 </svg>
                                                             </a> -->
-                                                                    <a href="/disposalRequest/edit/<%= item.disposalRequest_id %>"
+                                                                    <a href="/disposalRequest/edit/<%= item.carNum %>"
                                                                         class="action-btn btn-edit bs-tooltip me-2"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Edit">
@@ -168,7 +181,7 @@
                                                                             </path>
                                                                         </svg>
                                                                     </a>
-                                                                    <a onclick="delete_(event, '/disposalRequest/delete/<%= item.disposalRequest_id %>');"
+                                                                    <a onclick="delete_(event, '/disposalRequest/delete/<%= item.carNum %>');"
                                                                         class="action-btn btn-delete bs-tooltip"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Delete">
@@ -238,7 +251,7 @@
                             const data = result.rows[i];
 
                             tempHTML += `
-                                <tr onclick="location.href='/disposalRequest/${data.disposalRequest_id}';">
+                                <tr onclick="location.href='/disposalRequest/${data.carNum}';">
                                     <td class="text-center">
                                         <div class="media">
                                             <!-- <div class="avatar me-2">
@@ -289,12 +302,22 @@
                                     </td>
                                     <td class="text-center">
                                         <span class="media-body align-self-center">
-                                            ${data.updateDate ? formatDate(data.updateDate) : formatDate(data.createDate)}
+                                            ${formatDate(data.createDate)}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="media-body align-self-center">
+                                            ${data.updateUser ? data.updateUser : ''}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="media-body align-self-center">
+                                            ${data.updateDate ? formatDate(data.updateDate) : ''}
                                         </span>
                                     </td>
                                     <td class="text-center">`
                             if (user.permission1.data[0] & 0b0010) {
-                                tempHTML += `<a href="/disposalRequest/edit/${data.disposalRequest_id}"
+                                tempHTML += `<a href="/disposalRequest/edit/${data.carNum}"
                                                 class="action-btn btn-edit bs-tooltip me-2"
                                                 data-toggle="tooltip" data-placement="top"
                                                 title="Edit">
@@ -313,7 +336,7 @@
                             }
 
                             if (user.permission1.data[0] & 0b0001) {
-                                tempHTML += `<a onclick="delete_(event, '/disposalRequest/delete/${data.disposalRequest_id}');"
+                                tempHTML += `<a onclick="delete_(event, '/disposalRequest/delete/${data.carNum}');"
                                                 class="action-btn btn-delete bs-tooltip"
                                                 data-toggle="tooltip"
                                                 data-placement="top" title="Delete">

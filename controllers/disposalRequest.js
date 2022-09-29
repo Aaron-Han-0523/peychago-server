@@ -1,4 +1,5 @@
 const disposalRequestService = require('../services/disposalRequest');
+const processService = require('../services/process');
 const models = require('../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -26,6 +27,11 @@ exports.edit = async (req, res, next) => {
   let body = req.body;
   body.user = user.userid;
   body.id = id;
+  console.log(body)
+
+  for ([key, value] of Object.entries(body)) {
+    if (value == '') delete body[key];
+  }
 
   let result = await disposalRequestService
     .update(body)
@@ -40,9 +46,11 @@ exports.edit = async (req, res, next) => {
 exports.index = async (req, res, next) => {
 
   let query = `
-    select supplier.companyName, req.* from disposalRequest req
+    select supplier.companyName, req.*, process.* from disposalrequest req
     left join supplierusers supplier
     on req.supplierUsers_id=supplier.supplierUsers_id
+    left join process
+    on req.carNum=process.carNum
     where (req.deleteDate is null)
     order by req.createDate;
     `
@@ -108,10 +116,12 @@ exports.search = async (req, res, next) => {
   // let condition = {};
 
   let query = `
-    select supplier.companyName, req.* from disposalRequest req
+    select supplier.companyName, req.*, process.* from disposalrequest req
     left join supplierusers supplier
     on req.supplierUsers_id=supplier.supplierUsers_id
-    where (req.deleteDate is null) and (req.carNum like('%${word}%') or req.ownerName like('%${word}%') or req.model like('%${word}%'))
+    left join process
+    on req.carNum=process.carNum
+    where (req.deleteDate is null) and (process.carNum like('%${word}%') or process.ownerName like('%${word}%') or process.model like('%${word}%'))
     order by req.createDate;
     `
   const result = await models.sequelize.query(query)
@@ -128,4 +138,30 @@ exports.search = async (req, res, next) => {
 
   if (result) return res.status(200).json({ user: user, data: { rows: result, count: result.length } });
   else res.status(400).json(`don't find ${word}`)
+}
+
+exports.upload = async (req, res, next) => {
+  const file = req.file;
+  // console.log('request file :', file);
+  if (!file) return res.status(400).json("Not found file");
+
+  let body = {};
+  body.id = req.params.id;
+
+  const fieldName = 'requestPath';
+
+  body[fieldName] = file.path;
+
+  await processService
+    .update(body)
+    .then(result => {
+      // console.log(result)
+      console.log(fieldName + ' upload complete');
+    })
+    .catch(err => {
+      console.error(err);
+      console.log(fieldName + " upload fail");
+      return res.status(400).json(err);
+    })
+  return res.json(fieldName + ' upload success')
 }
