@@ -18,6 +18,7 @@ module.exports = {
         maker: `carinfo${i}`
         , model: `carinfo${i}${i}`
         , detailModel: `carinfo${i}${i}${i}`
+        , displacement: `${i + 1}${i}${i}`
         , yearModel: `${i}${i}${i}${i}`
         , createUser: `carinfo${i}${i}${i}${i}${i}`
         , createDate: new Date()

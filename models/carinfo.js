@@ -21,7 +21,12 @@ module.exports = function(sequelize, DataTypes) {
     detailModel: {
       type: DataTypes.STRING(200),
       allowNull: false,
-      comment: "상세모델"
+      comment: "세부모델"
+    },
+    displacement: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: "배기량"
     },
     yearModel: {
       type: DataTypes.STRING(4),
@@ -53,6 +58,7 @@ module.exports = function(sequelize, DataTypes) {
     updateUser: {
       type: DataTypes.CHAR(15),
       allowNull: true,
+      defaultValue: "",
       comment: "수정자"
     },
     updateDate: {

@@ -14,15 +14,11 @@ module.exports = {
         let now = new Date();
 
         let datas = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 3; i++) {
             let obj = {
-                carNum: `서울 ${i}${i} 가 ${i}${i}${i}${i}`
-                , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
-                , model: `${i}car${i}`
-                , yearModel: `200${i}`
-                , ownerName: `testclient${i}`
-                , engineCode: `engin${i}`
-                , displacement: `${i + 1}${i}${i}`
+                carNum: `${i}${i} 가 ${i}${i}${i}${i}`
+                , canDrive: i % 2 == 0 ? false : true
+                , aluminumWheel: i % 3 == 0 ? true : false
                 , deliveryDate: new Date(2022, 10, i)
                 , collectPlace: '논현' + i
                 , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
@@ -36,7 +32,7 @@ module.exports = {
             datas.push(obj)
         }
 
-        await queryInterface.bulkInsert('disposalRequest', datas, {});
+        await queryInterface.bulkInsert('disposalrequest', datas, {});
     },
 
     async down(queryInterface, Sequelize) {
@@ -46,6 +42,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('disposalRequest', null, {});
+        await queryInterface.bulkDelete('disposalrequest', null, {});
     }
 };

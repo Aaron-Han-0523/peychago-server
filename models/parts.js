@@ -43,6 +43,7 @@ module.exports = function(sequelize, DataTypes) {
     updateUser: {
       type: DataTypes.CHAR(15),
       allowNull: true,
+      defaultValue: "",
       comment: "수정자"
     },
     updateDate: {

@@ -1,22 +1,10 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('clientlog', {
-    clientlog_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-      primaryKey: true,
-      comment: "고객로그 식별번호"
-    },
     clients_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      comment: "고객 식별번호",
-      references: {
-        model: 'clients',
-        key: 'clients_id'
-      }
+      comment: "고객 식별번호"
     },
     createDate: {
       type: DataTypes.DATE,
@@ -42,24 +30,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'clientlog',
-    timestamps: false,
-    indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "clientlog_id" },
-          { name: "clients_id" },
-        ]
-      },
-      {
-        name: "Clientlog_FK",
-        using: "BTREE",
-        fields: [
-          { name: "clients_id" },
-        ]
-      },
-    ]
+    timestamps: false
   });
 };

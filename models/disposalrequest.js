@@ -1,12 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('disposalrequest', {
-    disposalRequest_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
+    carNum: {
+      type: DataTypes.STRING(15),
       allowNull: false,
       primaryKey: true,
-      comment: "폐차 견적 식별번호"
+      comment: "차량번호"
     },
     supplierUsers_id: {
       type: DataTypes.INTEGER,
@@ -33,35 +32,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "탁송료"
     },
-    carNum: {
-      type: DataTypes.STRING(15),
+    canDrive: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      comment: "차량번호"
+      comment: "차량운행가능여부"
     },
-    ownerName: {
-      type: DataTypes.STRING(25),
+    aluminumWheel: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      comment: "차주 성함"
-    },
-    model: {
-      type: DataTypes.STRING(200),
-      allowNull: false,
-      comment: "차량명, 차종"
-    },
-    yearModel: {
-      type: DataTypes.STRING(5),
-      allowNull: false,
-      comment: "연식"
-    },
-    engineCode: {
-      type: DataTypes.STRING(20),
-      allowNull: false,
-      comment: "원동기 형식"
-    },
-    displacement: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      comment: "배기량"
+      comment: "알루미늄 휠"
     },
     mortgage: {
       type: DataTypes.TINYINT,
@@ -71,12 +50,7 @@ module.exports = function(sequelize, DataTypes) {
     carCondition: {
       type: DataTypes.TINYINT,
       allowNull: true,
-      comment: "차량상태"
-    },
-    aluminumWheel: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      comment: "알루미늄 휠"
+      comment: "차량상태(사고유무)"
     },
     collectMethod: {
       type: DataTypes.TINYINT,
@@ -200,7 +174,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "disposalRequest_id" },
+          { name: "carNum" },
         ]
       },
     ]

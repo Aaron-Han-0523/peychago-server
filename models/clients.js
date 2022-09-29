@@ -23,50 +23,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "비밀번호"
     },
-    carNum: {
-      type: DataTypes.STRING(15),
-      allowNull: false,
-      comment: "차량번호"
-    },
-    model: {
+    address: {
       type: DataTypes.STRING(200),
       allowNull: false,
-      comment: "차종"
-    },
-    detailModel: {
-      type: DataTypes.STRING(200),
-      allowNull: true,
-      comment: "세부모델"
-    },
-    displacement: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      comment: "배기량"
-    },
-    yearModel: {
-      type: DataTypes.STRING(4),
-      allowNull: false,
-      comment: "연식"
-    },
-    processType: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 0,
-      comment: "폐차(1)\/수출(2)"
-    },
-    carInfo_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: true,
-      comment: "차량 정보 식별번호",
-      references: {
-        model: 'carinfo',
-        key: 'carInfo_id'
-      }
-    },
-    supplierUsers_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      comment: "협력사 식별번호"
+      comment: "실거주지"
     },
     createDate: {
       type: DataTypes.DATE,
@@ -105,13 +65,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "clients_id" },
-        ]
-      },
-      {
-        name: "Clients_FK1",
-        using: "BTREE",
-        fields: [
-          { name: "carInfo_id" },
         ]
       },
     ]

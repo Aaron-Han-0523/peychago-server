@@ -12,14 +12,23 @@ module.exports = {
      * }], {});
     */
 
-    let obj = {
-      clients_id: 1
-      , status: 0
-      , date0: new Date()
-      , supplierRequest_id: 1
+    let data = []
+    for (let i = 0; i < 10; i++) {
+      let obj = {
+        carNum: `${i}${i} 가 ${i}${i}${i}${i}`
+        , state: i
+        , clients_id: i + 1
+        , ownerName: 'cli' + i
+        , model: `${i}모델${i}`
+        , detailModel: `engin${i}`
+        , displacement: `${i + 1}${i}${i}`
+        , yearModel: `200` + i
+        , processType: i % 3
+        , date0: new Date()
+      }
+      data.push(obj);
     }
-
-    await queryInterface.bulkInsert('process', [obj], {});
+    await queryInterface.bulkInsert('process', data, {});
   },
 
   async down(queryInterface, Sequelize) {

@@ -3,7 +3,42 @@ const router = express.Router();
 
 const disposalRequestController = require('../controllers/disposalRequest');
 const disposalRequestService = require('../services/disposalRequest');
+const supplierUsersService = require('../services/supplierUsers');
+const processService = require('../services/process');
 const jwt = require('../services/jwt')
+const multer = require("multer");
+const path = require("path");
+
+// 날짜 형식 포맷터 YYYY-MM-DD_시간h분m초s
+function formatDate(d_t) {
+  let year = d_t.getFullYear();
+  let month = ("0" + (d_t.getMonth() + 1)).slice(-2);
+  let day = ("0" + d_t.getDate()).slice(-2);
+  let hour = ("0" + d_t.getHours()).slice(-2);
+  let minute = ("0" + d_t.getMinutes()).slice(-2);
+  let seconds = ("0" + d_t.getSeconds()).slice(-2);
+  return year + "-" + month + "-" + day + "_" + hour + "h" + minute + "m" + seconds + "s";
+}
+
+// 업로드 파일 저장 설정
+const storage = (fileName) => multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "uploads/clients/")
+  }, filename: function (req, file, callback) {
+    let extension = file.mimetype.split('/')[1];
+    const newFilename = fileName + '-' + req.userInfo.userName + '_' + formatDate(new Date) + '.' + extension;
+    console.log("save filename :", newFilename)
+    callback(null, newFilename);
+  },
+});
+
+// 미들웨어 등록
+const upload = (fileName) => multer({
+  storage: storage(fileName), // file size 5MB로 제한
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+});
 
 /* GET disposalRequest listing. */
 router
@@ -12,20 +47,54 @@ router
   }))
   .post('/add', jwt.verifyToken, disposalRequestController.add)
 
-  .get('/edit/:id', jwt.verifyToken, async (req, res, next) => res.render('disposalRequest/edit', {
-    user: req.userInfo,
-    data: await disposalRequestService.readOne(req.params.id),
-  }))
+  .get('/edit/:id', jwt.verifyToken, async (req, res, next) => {
+    const data = await disposalRequestService.readOne(req.params.id);
+    const process = await processService.readOne(req.params.id);
+    const supplier = await supplierUsersService.readOne(data.supplierUsers_id);
+    const supplierUsers = await supplierUsersService.allRead();
+    return req.api ?
+      res.json({
+        user: req.userInfo,
+        data: data,
+        process: process,
+        supplier: supplier,
+        supplierUsers: supplierUsers
+      })
+      : res.render('disposalRequest/edit', {
+        user: req.userInfo,
+        data: data,
+        process: process,
+        supplier: supplier,
+        supplierUsers: supplierUsers
+      })
+  })
   .post('/edit/:id', jwt.verifyToken, disposalRequestController.edit)
 
   .get('/delete/:id', jwt.verifyToken, disposalRequestController.delete)
 
   .get('/search', jwt.verifyToken, disposalRequestController.search)
 
-  .get('/:id', jwt.verifyToken, async (req, res, next) => res.render('disposalRequest/detail', {
-    user: req.userInfo,
-    data: await disposalRequestService.readOne(req.params.id),
-  }))
+  .post('/upload/:id', jwt.verifyToken,
+    // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
+    (req, res, next) => upload('폐차회수요청서').single('diposalRequest')(req, res, function (err) {
+      if (err) {
+        console.error(err);
+        return
+      }
+      next();
+    }),
+    // (req, res, next) => { console.log('disposalRequest upload file\n', req.file); next(); },
+    disposalRequestController.upload)
+
+  .get('/:id', jwt.verifyToken, async (req, res, next) => {
+    const data = await disposalRequestService.readOne(req.params.id)
+    res.render('disposalRequest/detail', {
+      user: req.userInfo,
+      data: data,
+      process: await processService.readOne(req.params.id),
+      supplier: await supplierUsersService.readOne(data.supplierUsers_id),
+    })
+  })
   .get('/', jwt.verifyToken, disposalRequestController.index)
 
 module.exports = router;

@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "계약번호"
     },
-    model: {
+    carName: {
       type: DataTypes.STRING(200),
       allowNull: false,
       comment: "차량명, 차종"
@@ -102,11 +102,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true,
       comment: "기타사항"
-    },
-    supplierUsers_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      comment: "협력사 식별번호"
     },
     bankName1: {
       type: DataTypes.STRING(200),
@@ -247,6 +242,7 @@ module.exports = function(sequelize, DataTypes) {
     updateUser: {
       type: DataTypes.STRING(15),
       allowNull: true,
+      defaultValue: "",
       comment: "수정자"
     },
     updateDate: {

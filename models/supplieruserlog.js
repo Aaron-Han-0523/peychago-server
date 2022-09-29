@@ -1,17 +1,9 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('supplieruserlog', {
-    SupplierUserLog_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-      primaryKey: true,
-      comment: "협력사로그 식별번호"
-    },
     supplierUsers_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      primaryKey: true,
       comment: "협력사 식별번호",
       references: {
         model: 'supplierusers',
@@ -44,15 +36,6 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'supplieruserlog',
     timestamps: false,
     indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "SupplierUserLog_id" },
-          { name: "supplierUsers_id" },
-        ]
-      },
       {
         name: "SupplierUserLog_FK",
         using: "BTREE",

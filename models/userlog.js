@@ -1,17 +1,9 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('userlog', {
-    userlog_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-      primaryKey: true,
-      comment: "사용자로그 식별번호"
-    },
     users_id: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
-      primaryKey: true,
       comment: "사용자 식별번호",
       references: {
         model: 'users',
@@ -44,15 +36,6 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'userlog',
     timestamps: false,
     indexes: [
-      {
-        name: "PRIMARY",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "userlog_id" },
-          { name: "users_id" },
-        ]
-      },
       {
         name: "Userlog_FK",
         using: "BTREE",

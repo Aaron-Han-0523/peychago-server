@@ -1,5 +1,8 @@
 'use strict';
 
+require('dotenv').config();
+const encryption = require('../utils/encryption');
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -11,25 +14,21 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    let hashedPassword = await encryption.hashing("1234");
 
-    let datas = [];
+    let data = []
     for (let i = 0; i < 10; i++) {
       let obj = {
-        state: 0
-        , enrollDate: new Date()
-        , carNum: `서울 ${i}${i} 가 ${i}${i}${i}${i}`
+        clientName: 'cli' + i
         , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
-        , model: `${i}car${i}`
-        , yearModel: `${i}${i}${i}${i}`
-        , ownerName: `testclient${i}`
-        , supplierUsers_id: i
-        , createUser: `supplierReq${i}`
-        , createDate: new Date()
+        , password: hashedPassword
+        , address: '학동' + i
+        , createDate: new Date(),
       }
-      datas.push(obj)
+      data.push(obj)
     }
-
-    await queryInterface.bulkInsert('supplierrequest', datas, {});
+    // console.log(data)
+    await queryInterface.bulkInsert('clients', data, {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -39,6 +38,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('supplierrequest', null, {});
+    await queryInterface.bulkDelete('clients', null, {});
   }
 };
