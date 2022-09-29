@@ -132,9 +132,10 @@
                                                                 </label>
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
-                                                                        <label id="supplierUsers" name="companyName"
-                                                                            class="col-form-label form-control"
-                                                                            value="<%= supplier.companyName %>">
+                                                                        <input id="companyName" name="companyName"
+                                                                            value="<%= supplier ? supplier.companyName : null %>"
+                                                                            hidden>
+                                                                        <label id="supplierUser" class="form-control">
                                                                             <% if (supplier) { %>
                                                                                 <%= supplier.companyName %> - <%=
                                                                                         supplier.mainPhoneNum %>
@@ -142,7 +143,7 @@
                                                                         </label>
                                                                         <input id="supplierUsers_id" hidden
                                                                             name="supplierUsers_id"
-                                                                            value="<%= supplier.supplierUsers_id %>">
+                                                                            value="<%= supplier ? supplier.supplierUsers_id : null %>">
                                                                     </div>
                                                                     <div class="p-2">
                                                                         <button class="btn btn-primary"
@@ -669,11 +670,12 @@
 
                                 document.getElementById(target_id).innerHTML = tempHTML;
                             }
+
                             function selectSupplier(id) {
                                 const supplier = document.getElementById('supplier' + id).innerText.split('\t');
                                 document.getElementById('supplierUsers_id').value = id;
-                                document.getElementById('supplierUsers').innerText = supplier[0] + '-' + supplier[1];
-                                document.getElementById('supplierUsers').value = supplier[0];
+                                document.getElementById('supplierUser').innerText = supplier[0] + '-' + supplier[1];
+                                document.getElementById('companyName').value = supplier[0];
                             }
 
                             function sendClient(id) {
@@ -761,7 +763,7 @@
                                         <tr>
                                             <td class="text-center">원동기형식</td>
                                             <td class="text-center">
-                                                ${disposalRequest.engineCode}
+                                                ${disposalRequest.detailModel}
                                             </td>
                                             <td class="text-center">배기량</td>
                                             <td class="text-center">
@@ -771,11 +773,11 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
                                             </td>
                                         </tr>
                                         <tr>
@@ -921,7 +923,7 @@
                                 , ownerName: ""
                                 , model: ""
                                 , yearModel: ""
-                                , engineCode: ""
+                                , detailModel: ""
                                 , displacement: ""
                                 , mortgage: ""
                                 , carCondition: ""
@@ -1026,7 +1028,7 @@
                                         <tr>
                                             <td class="text-center">원동기형식</td>
                                             <td class="text-center">
-                                                ${disposalRequest.engineCode}
+                                                ${disposalRequest.detailModel}
                                             </td>
                                             <td class="text-center">배기량</td>
                                             <td class="text-center">
@@ -1036,11 +1038,11 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1244,7 +1246,7 @@
                                         <tr>
                                             <td class="text-center">원동기형식</td>
                                             <td class="text-center">
-                                                ${disposalRequest.engineCode}
+                                                ${disposalRequest.detailModel}
                                             </td>
                                             <td class="text-center">배기량</td>
                                             <td class="text-center">
@@ -1254,11 +1256,11 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
                                             </td>
                                         </tr>
                                         <tr>
