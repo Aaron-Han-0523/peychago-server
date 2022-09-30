@@ -30,7 +30,7 @@ var usersRouter = require('./routes/users');
 var accountsRouter = require('./routes/accounts');
 var uploadsRouter = require('./routes/uploads');
 var apiRouter = require('./routes/api');
-const { fstat } = require('fs');
+const myUtils = require('./utils/myUtils');
 
 let sequelize = require('./models/index').sequelize;
 sequelize.sync();
@@ -40,9 +40,18 @@ var app = express();
 // 헤더 정보 숨기기
 app.disable('x-powered-by');
 
+// -----------app settings-------------
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// set the cookie option : secure
+app.set('jwt-option', {
+  httpOnly: true,
+  secure: process.env.cookie_secure,
+  maxAge: process.env.JWT_MAXAGE * 1000 // ms단위
+})
+const UPLOADFILES_PATH = process.env.UPLOADFILES_ROOT
+myUtils.mkdir(UPLOADFILES_PATH);
 
 // print the request log on console
 app.use(logger('dev'));
@@ -56,24 +65,13 @@ app.use(bodyParser.json());
 // app.use(cors());
 // app.use(cors({ exposedHeaders: 'jwt' }));
 
-// set the secret key variable for jwt
-app.set('secret_key', process.env.SECRET_KEY)
 
-// set the cookie option : secure
-app.set('jwt-option', {
-  httpOnly: true,
-  secure: config.cookie_secure,
-  maxAge: 4 * 60 * 60 * 1000  // 4시간
-})
 
 // console.log(app)
 
-// 추가사항
-// clientsRouter
-// processRouter
 app.use('/users', usersRouter);
 app.use('/notice', noticeRouter);
-app.use('/review', reviewRouter);
+app.use((path.join('/', 'review').replace('\\', '/')), reviewRouter);
 app.use('/exportRequest', exportRequestRouter);
 app.use('/disposalRequest', disposalRequestRouter);
 app.use('/disposalClients', disposalClientsRouter);
@@ -85,7 +83,10 @@ app.use('/supplierUsers', supplierUsersRouter);
 app.use('/clients', clientsRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
-app.use('/uploads', uploadsRouter);
+app.use(path.join('/', process.env.UPLOADFILES_ROOT).replace('\\', '/'),
+  //  (req, res, next) => { console.log('이미지 불러간다'); next(); },
+  uploadsRouter
+);
 app.use('/api', apiRouter);
 app.use('/', indexRouter);
 

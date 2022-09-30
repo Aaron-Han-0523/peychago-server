@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const secret = process.env.SECRET_KEY
+const secret = process.env.JWT_SECRET_KEY
 const login_url = '/users/login'    // 로그인 분리 시 url : '/accounts/login'
 
 exports.verifyToken = async (req, res, next) => {
@@ -8,7 +8,6 @@ exports.verifyToken = async (req, res, next) => {
 
     // read the token from header or url 
     const token = req.cookies.jwt
-    const secret = req.app.get('secret_key')
     // console.log(token)
 
     // token does not exist

@@ -5,6 +5,6 @@ const path = require('path');
 const fs = require('fs');
 /* GET accounts listing. */
 router
-  .use('/', express.static(path.join(__dirname, '../uploads')))
+  .use('/', express.static(path.join(process.cwd(), process.env.UPLOADFILES_ROOT)))
 
 module.exports = router;

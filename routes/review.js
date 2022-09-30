@@ -9,10 +9,15 @@ const supplierUsersService = require('../services/supplierUsers');
 const jwt = require('../services/jwt')
 const multer = require("multer");
 const path = require("path");
+const myUtils = require('../utils/myUtils');
 
 let storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, "uploads/review/")
+    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, "review");
+    const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
+    myUtils.mkdir(FOLDER_PATH);
+
+    callback(null, FILES_PATH)
   }, filename: function (req, file, callback) {
     let extension = path.extname(file.originalname);
     let basename = path.basename(file.originalname, extension);

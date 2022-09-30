@@ -8,6 +8,7 @@ const processService = require('../services/process');
 const jwt = require('../services/jwt')
 const multer = require("multer");
 const path = require("path");
+const myUtils = require('../utils/myUtils');
 
 // 날짜 형식 포맷터 YYYY-MM-DD_시간h분m초s
 function formatDate(d_t) {
@@ -23,7 +24,11 @@ function formatDate(d_t) {
 // 업로드 파일 저장 설정
 const storage = (fileName) => multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, "uploads/clients/")
+    const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, "clients");
+    const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
+    myUtils.mkdir(FOLDER_PATH);
+
+    callback(null, FILES_PATH)
   }, filename: function (req, file, callback) {
     let extension = file.mimetype.split('/')[1];
     const newFilename = fileName + '-' + req.userInfo.userName + '_' + formatDate(new Date) + '.' + extension;
@@ -78,7 +83,7 @@ router
     // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
     (req, res, next) => upload('폐차회수요청서').single('diposalRequest')(req, res, function (err) {
       if (err) {
-        console.error(err);
+        console.error(err); // multer 에러 확인
         return
       }
       next();
