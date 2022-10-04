@@ -97,7 +97,7 @@ router
       user: req.userInfo,
       data: data,
       process: await processService.readOne(req.params.id),
-      supplier: await supplierUsersService.readOne(data.supplierUsers_id),
+      supplier: data.supplierUsers_id ? await supplierUsersService.readOne(data.supplierUsers_id) : null,
     })
   })
   .get('/', jwt.verifyToken, disposalRequestController.index)
