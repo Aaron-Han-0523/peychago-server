@@ -54,7 +54,9 @@ const UPLOADFILES_PATH = process.env.UPLOADFILES_ROOT
 myUtils.mkdir(UPLOADFILES_PATH);
 
 // print the request log on console
-app.use(logger('dev'));
+// logger 인수 dev, comvined, common, short, tiny
+if (env == 'development') app.use(logger('dev'));
+else app.use(logger('comvined'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
