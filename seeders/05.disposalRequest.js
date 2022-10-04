@@ -14,7 +14,8 @@ module.exports = {
         let now = new Date();
 
         let datas = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 10; i++) {
+            if (i % 3 != 1) continue;
             let obj = {
                 carNum: `${i}${i} 가 ${i}${i}${i}${i}`
                 , canDrive: i % 2 == 0 ? false : true
