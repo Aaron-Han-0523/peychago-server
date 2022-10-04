@@ -619,11 +619,9 @@
                     <!-- END MAIN CONTAINER -->
 
                     <!-- REQUEST PREVIEW -->
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col form-control" id="req_table" style="width: 21cm;"></div>
-                    </div>
+                    <div id="req_table">
 
+                    </div>
                     <%- include ("../partials/commonScrpits.ejs") %>
 
                         <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
@@ -684,7 +682,8 @@
                                     if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
                                 }
 
-                                document.getElementById('req_table').innerHTML = `
+                                const target = document.getElementById('req_table')
+                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -885,9 +884,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                `
-
-                                const target = document.getElementById('req_table')
+                                </div>`
 
                                 domtoimage.toBlob(target)
                                     .then(function (blob) {
@@ -910,6 +907,8 @@
                                                 console.error(err)
                                                 alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
                                             });
+                                        
+                                        target.innerHTML = '';
                                     });
                             }
 
@@ -949,7 +948,8 @@
                                     if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
                                 }
 
-                                document.getElementById('req_table').innerHTML = `
+                                const target = document.getElementById('req_table');
+                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1150,14 +1150,13 @@
                                             </td>
                                         </tr>
                                     </table>
-                                `
-
-                                const target = document.getElementById('req_table')
+                                </div>`
 
                                 domtoimage.toBlob(target)
                                     .then(function (blob) {
                                         // console.log(blob)
                                         window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
+                                        target.innerHTML = '';
                                     });
                             }
 
@@ -1167,7 +1166,8 @@
                                     if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
                                 }
 
-                                document.getElementById('req_table').innerHTML = `
+                                const target = document.getElementById('req_table');
+                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1368,8 +1368,14 @@
                                             </td>
                                         </tr>
                                     </table>
-                                `
-                                const target = document.getElementById('req_table')
+                                </div>`
+
+                                domtoimage.toBlob(target)
+                                    .then((blob) => {
+                                        let url = URL.createObjectURL(blob);
+                                        window.open(url);
+                                        target.innerHTML = '';
+                                    })
                             }
                         </script>
                         <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
