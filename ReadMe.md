@@ -8,7 +8,10 @@
 - stretching_num
     - 비밀번호 해싱 stretching값(임의의 수)  
 - cookie_secure
-    - https여부(0 또는 1)  
+    - 생략가능
+    - https여부
+    - https를 안 쓸 경우 이 항목을 아예 생략하는 것이 좋다.
+    - 우분투의 경우 숫자로 문자열로 읽어드림....
 - UPLOADFILES_ROOT
     - 업로드 경로(앱경로 기준)
 - FILE_MAX_SIZE
@@ -19,7 +22,6 @@
 JWT_MAXAGE=240  
 salt=kkkwwwzz  
 stretching_num=4848  
-cookie_secure=0  
 UPLOADFILES_ROOT=uploads  
 FILE_MAX_SIZE=5  
 <hr/>  
