@@ -31,9 +31,10 @@ let storage = multer.diskStorage({
 
 // 1. 미들웨어 등록
 let upload = multer({
-  storage: storage, // file size 5MB로 제한
+  storage: storage,
+  // file size 제한(MB)
   limits: {
-    fileSize: 5 * 1024 * 1024,
+    fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
   },
 });
 
