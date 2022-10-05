@@ -63,7 +63,7 @@
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <label id="companyName" hidden>
-                                                                            <%= supplier.companyName %>
+                                                                            <%= supplier ? supplier.companyName : '' %>
                                                                         </label>
                                                                         <label name="companyName"
                                                                             class="col-form-label form-control">
