@@ -48,15 +48,15 @@ app.set('view engine', 'ejs');
 app.set('jwt-option', {
   httpOnly: true,
   secure: process.env.cookie_secure,
-  maxAge: process.env.JWT_MAXAGE * 1000 // ms단위
+  maxAge: process.env.JWT_MAXAGE * 60 * 1000 // ms단위
 })
 const UPLOADFILES_PATH = process.env.UPLOADFILES_ROOT
 myUtils.mkdir(UPLOADFILES_PATH);
 
 // print the request log on console
-// logger 인수 dev, comvined, common, short, tiny
+// logger 인수 dev, combined, common, short, tiny
 if (env == 'development') app.use(logger('dev'));
-else app.use(logger('comvined'));
+else app.use(logger('combined'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,24 +1,27 @@
 # .env 파일 설정
 - JWT_SECRET_KEY
-    - JWT 비밀키 값  
+    - JWT 비밀키 값(임의의 문자열)  
 - JWT_MAXAGE
-    - JWT 인증 지속시간(초)  
+    - JWT 인증 지속시간(분)  
 - salt
-    - 비밀번호 salt값  
+    - 비밀번호 해싱 salt값(임의의 문자열)  
 - stretching_num
-    - 비밀번호 stretching값  
+    - 비밀번호 해싱 stretching값(임의의 수)  
 - cookie_secure
-    - https여부  
+    - https여부(0 또는 1)  
 - UPLOADFILES_ROOT
     - 업로드 경로(앱경로 기준)
+- FILE_MAX_SIZE
+    - 업로드 파일 크기 제한(MB)
 
 ## 예시
 > JWT_SECRET_KEY=wewunvb34097bh%(%)9dm348n  
-JWT_MAXAGE=14400  
+JWT_MAXAGE=240  
 salt=kkkwwwzz  
 stretching_num=4848  
 cookie_secure=0  
 UPLOADFILES_ROOT=uploads  
+FILE_MAX_SIZE=5  
 <hr/>  
 
 # 테스트 서버 운용
