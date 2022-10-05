@@ -591,7 +591,7 @@
                                                                         class="btn btn-outline-success me-3">저장</button>
                                                                     <button type="button"
                                                                         onclick="sendClient('<%= data.carNum %>')"
-                                                                        class="btn btn-outline-success me-3">전송</button>
+                                                                        class="btn btn-outline-info me-3">전송</button>
                                                                     <button type="button" onclick="showImage()"
                                                                         class="btn btn-outline-info me-3">요청서
                                                                         미리보기</button>
@@ -674,6 +674,37 @@
                                 document.getElementById('supplierUsers_id').value = id;
                                 document.getElementById('supplierUser').innerText = supplier[0] + '-' + supplier[1];
                                 document.getElementById('companyName').value = supplier[0];
+                            }
+
+
+                            let disposalRequest = {
+                                companyName: ""
+                                , commission: ""
+                                , price: ""
+                                , loss: ""
+                                , deliveryFee: ""
+                                , carNum: ""
+                                , ownerName: ""
+                                , model: ""
+                                , yearModel: ""
+                                , detailModel: ""
+                                , displacement: ""
+                                , mortgage: ""
+                                , carCondition: ""
+                                , aluminumWheel: ""
+                                , collectMethod: ""
+                                , deliveryDate: ""
+                                , collectPlace: ""
+                                , phoneNum: ""
+                                , bankName1: ""
+                                , accountNum1: ""
+                                , accountHolder1: ""
+                                , amount1: ""
+                                , bankName2: ""
+                                , accountNum2: ""
+                                , accountHolder2: ""
+                                , amount2: ""
+                                , note: ""
                             }
 
                             function sendClient(id) {
@@ -911,37 +942,7 @@
                                         target.innerHTML = '';
                                     });
                             }
-
-                            let disposalRequest = {
-                                companyName: ""
-                                , commission: ""
-                                , price: ""
-                                , loss: ""
-                                , deliveryFee: ""
-                                , carNum: ""
-                                , ownerName: ""
-                                , model: ""
-                                , yearModel: ""
-                                , detailModel: ""
-                                , displacement: ""
-                                , mortgage: ""
-                                , carCondition: ""
-                                , aluminumWheel: ""
-                                , collectMethod: ""
-                                , deliveryDate: ""
-                                , collectPlace: ""
-                                , phoneNum: ""
-                                , bankName1: ""
-                                , accountNum1: ""
-                                , accountHolder1: ""
-                                , amount1: ""
-                                , bankName2: ""
-                                , accountNum2: ""
-                                , accountHolder2: ""
-                                , amount2: ""
-                                , note: ""
-                            }
-
+                            
                             function downloadImage() {
                                 const form_elements = document.forms[0].elements;
                                 for (let i = 0; i < form_elements.length; i++) {

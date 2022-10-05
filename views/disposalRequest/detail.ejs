@@ -62,7 +62,10 @@
                                                                 </label>
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
-                                                                        <label id="supplierUsers" name="companyName"
+                                                                        <label id="companyName" hidden>
+                                                                            <%= supplier.companyName %>
+                                                                        </label>
+                                                                        <label name="companyName"
                                                                             class="col-form-label form-control">
                                                                             <% if (supplier) { %>
                                                                                 <%= supplier.companyName %> - <%=
@@ -489,6 +492,15 @@
                                                                         onclick="location.href='/disposalRequest/edit/<%= data.carNum %>';"
                                                                         class="btn btn-outline-success me-3">수정하기</button>
                                                                     <button type="button"
+                                                                        onclick="sendClient('<%= data.carNum %>')"
+                                                                        class="btn btn-outline-info me-3">전송</button>
+                                                                    <button type="button" onclick="showImage()"
+                                                                        class="btn btn-outline-info me-3">요청서
+                                                                        미리보기</button>
+                                                                    <button type="button" onclick="downloadImage()"
+                                                                        class="btn btn-outline-info me-3">요청서
+                                                                        다운로드</button>
+                                                                    <button type="button"
                                                                         onclick="location.href='/disposalRequest';"
                                                                         class="btn btn-outline-danger me-3">목록으로</button>
                                                                 </div>
@@ -516,294 +528,13 @@
                     </div> -->
 
                     <%- include ("../partials/commonScrpits.ejs") %>
+                        <!-- REQUEST PREVIEW -->
+                        <div id="req_table">
 
+                        </div>
                         <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
                         <script>
-                            async function searchSupplier() {
-                                const target_id = "searchResults";
-                                const searchWord_element = document.getElementById('searchWord');
-                                const searchWord = searchWord_element.value;
-
-                                const res = await fetch(`/supplierUsers/search?q=${searchWord}`)
-                                    .then((response) => {
-                                        // console.log(response.json());
-                                        return response.json();
-                                    })
-                                // .catch((err) => { console.error(err) });
-
-                                const result = res.data;
-                                // console.log(result);
-                                document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
-                                searchWord_element.value = '';
-
-                                let tempHTML = ''
-                                result.rows.forEach(function (item, index) {
-                                    tempHTML += `
-                                    <tr onclick="labelSupplier(${item.supplierUsers_id});" id="supplier${item.supplierUsers_id}">
-                                        <td class="text-center">
-                                        <span class="media-body align-self-center">
-                                            ${item.companyName}
-                                        </span>
-                                        </td>
-                                        <td class="text-center">
-                                        <span class="media-body align-self-center">
-                                            ${item.mainPhoneNum}
-                                        </span>
-                                        </td>
-                                        <td class="text-center">
-                                        <span class="media-body align-self-center">
-                                            ${item.address}
-                                        </span>
-                                        </td>
-                                    </tr>
-                                    `
-                                });
-
-                                document.getElementById(target_id).innerHTML = tempHTML;
-                            }
-                            function labelSupplier(id) {
-                                const supplier = document.getElementById('supplier' + id).innerText.split('\t');
-                                document.getElementById('supplierUsers_id').value = id;
-                                document.getElementById('supplierUsers').innerText = supplier[0] + '-' + supplier[1];
-                                document.getElementById('supplierUsers').value = supplier[0];
-                            }
-
-                            function sendClient(id) {
-                                const form_elements = document.forms[0].elements;
-                                for (let i = 0; i < form_elements.length; i++) {
-                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
-                                }
-
-                                document.getElementById('req_table').innerHTML = `
-                                    <table class="table table-bordered ">
-                                        <tr>
-                                            <td class="text-center" colspan="4">(주)월드리싸이클링</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4">
-                                                <h1>폐 차 회 수 신 청 서</h1>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">대표전화</td>
-                                            <td class="text-center">1544-8732</td>
-                                            <td class="text-center">팩스</td>
-                                            <td class="text-center">031-997-9447</td>
-                                        </tr>
-                                        <td class="text-center" colspan="4"> </td>
-                                        <tr>
-                                            <td class="text-center">수수료</td>
-                                            <td class="text-center" colspan="3">
-                                                ${disposalRequest.commission}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">인수업체명</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.companyName}
-                                            </td>
-                                            <td class="text-center">차대비</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.price}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">손실금</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.loss}
-                                            </td>
-                                            <td class="text-center">탁송료</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.deliveryFee}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="2">폐차연수증 발송 FAX</td>
-                                            <td class="text-center" colspan="2">031-997-9447</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4"> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4">
-                                                <h5>차량정보</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">차량번호</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.carNum}
-                                            </td>
-                        
-                                            <td class="text-center">차주 성함</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.ownerName}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">차종</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.model}
-                                            </td>
-                                            <td class="text-center">연식</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.yearModel}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">원동기형식</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.engineCode}
-                                            </td>
-                                            <td class="text-center">배기량</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.displacement}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">압류/저당</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
-                                            </td>
-                                            <td class="text-center">차량상태</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">알루미늄 휠</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
-                                            </td>
-                                            <td class="text-center">견인/조기/인탁</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.collectMethod == 0 ? "견인"
-                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
-                                            </td>
-                                        </tr>
-                                        <td class="text-center" colspan="4"> </td>
-                                        <tr>
-                                            <td class="text-center" colspan="4">
-                                                <h5>회수정보</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">회수일시</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.deliveryDate}
-                                            </td>
-                                            <td class="text-center">회수 연락처</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.phoneNum}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">회수장소</td>
-                                            <td class="text-center" colspan="3">
-                                                ${disposalRequest.collectPlace}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4"> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4">
-                                                <h5>차주계좌정보</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">은행명</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.bankName1}
-                                            </td>
-                                            <td class="text-center">계좌번호</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.accountNum1}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">예금주</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.accountHolder1}
-                                            </td>
-                                            <td class="text-center">금액</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.amount1}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4"> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4">
-                                                <h5>입금계좌정보</h5>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">은행명</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.bankName2}
-                                            </td>
-                                            <td class="text-center">계좌번호</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.accountNum2}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">예금주</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.accountHolder2}
-                                            </td>
-                                            <td class="text-center">금액</td>
-                                            <td class="text-center">
-                                                ${disposalRequest.amount2}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4"> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">비고</td>
-                                            <td class="text-center" colspan="3">
-                                                ${disposalRequest.note}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="4"><br>출발하시기전 회수 연락처로 꼭 통화 부탁드립니다.<br>
-                                                <br>차량인수 후 폐차대금은 입금요청계좌로 당일 입금하셔야 합니다.
-                                                <br>입금시 업체명과 차량번호 기재하시면 됩니다.(예 : 월드00두0000)
-                                            </td>
-                                        </tr>
-                                    </table>
-                                `
-
-                                const target = document.getElementById('req_table')
-
-                                domtoimage.toBlob(target)
-                                    .then(function (blob) {
-                                        // console.log(blob);
-                                        const formData = new FormData();
-                                        formData.append('diposalRequest', blob);
-
-                                        const url = `/disposalRequest/upload/${id}`;
-                                        fetch(url, {
-                                            method: 'POST',
-                                            // headers: { 'Content-Type': 'multipart/form-data' },
-                                            body: formData
-                                        })
-                                            .then(res => {
-                                                // console.log(res)
-                                                if (res.ok) alert("전송 성공");
-                                                else throw new Error(res.statusText)
-                                            })
-                                            .catch(err => {
-                                                console.error(err)
-                                                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
-                                            });
-                                    });
-                            }
-
-                            let disposalRequest = {
+                            const disposalRequest = {
                                 companyName: ""
                                 , commission: ""
                                 , price: ""
@@ -833,13 +564,15 @@
                                 , note: ""
                             }
 
-                            function downloadImage() {
-                                const form_elements = document.forms[0].elements;
-                                for (let i = 0; i < form_elements.length; i++) {
-                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
-                                }
+                            const labels = document.getElementsByTagName('label');
+                            for (let i = 0; i < labels.length; i++) {
+                                if (labels[i].id && labels[i].innerText) disposalRequest[labels[i].id] = labels[i].innerText;
+                            }
 
-                                document.getElementById('req_table').innerHTML = `
+                            function sendClient(id) {
+
+                                const target = document.getElementById('req_table')
+                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -918,7 +651,7 @@
                                         <tr>
                                             <td class="text-center">원동기형식</td>
                                             <td class="text-center">
-                                                ${disposalRequest.engineCode}
+                                                ${disposalRequest.detailModel}
                                             </td>
                                             <td class="text-center">배기량</td>
                                             <td class="text-center">
@@ -928,11 +661,11 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1040,24 +773,252 @@
                                             </td>
                                         </tr>
                                     </table>
-                                `
+                                </div>`
 
-                                const target = document.getElementById('req_table')
+                                domtoimage.toBlob(target)
+                                    .then(function (blob) {
+                                        // console.log(blob);
+                                        const formData = new FormData();
+                                        formData.append('diposalRequest', blob);
+
+                                        const url = `/disposalRequest/upload/${id}`;
+                                        fetch(url, {
+                                            method: 'POST',
+                                            // headers: { 'Content-Type': 'multipart/form-data' },
+                                            body: formData
+                                        })
+                                            .then(res => {
+                                                // console.log(res)
+                                                if (res.ok) alert("전송 성공");
+                                                else throw new Error(res.statusText)
+                                            })
+                                            .catch(err => {
+                                                console.error(err)
+                                                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
+                                            });
+
+                                        target.innerHTML = '';
+                                    });
+                            }
+
+                            function downloadImage() {
+
+                                const target = document.getElementById('req_table');
+                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+                                    <table class="table table-bordered ">
+                                        <tr>
+                                            <td class="text-center" colspan="4">(주)월드리싸이클링</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h1>폐 차 회 수 신 청 서</h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">대표전화</td>
+                                            <td class="text-center">1544-8732</td>
+                                            <td class="text-center">팩스</td>
+                                            <td class="text-center">031-997-9447</td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center">수수료</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.commission}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">인수업체명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.companyName}
+                                            </td>
+                                            <td class="text-center">차대비</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.price}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">손실금</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.loss}
+                                            </td>
+                                            <td class="text-center">탁송료</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryFee}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="2">폐차연수증 발송 FAX</td>
+                                            <td class="text-center" colspan="2">031-997-9447</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차량정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차량번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carNum}
+                                            </td>
+                        
+                                            <td class="text-center">차주 성함</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.ownerName}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">차종</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.model}
+                                            </td>
+                                            <td class="text-center">연식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.yearModel}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">원동기형식</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.detailModel}
+                                            </td>
+                                            <td class="text-center">배기량</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.displacement}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">압류/저당</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
+                                            </td>
+                                            <td class="text-center">차량상태</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">알루미늄 휠</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                            </td>
+                                            <td class="text-center">견인/조기/인탁</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.collectMethod == 0 ? "견인"
+                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                            </td>
+                                        </tr>
+                                        <td class="text-center" colspan="4"> </td>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>회수정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수일시</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.deliveryDate}
+                                            </td>
+                                            <td class="text-center">회수 연락처</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.phoneNum}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">회수장소</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.collectPlace}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>차주계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName1}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder1}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount1}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4">
+                                                <h5>입금계좌정보</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">은행명</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.bankName2}
+                                            </td>
+                                            <td class="text-center">계좌번호</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountNum2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">예금주</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.accountHolder2}
+                                            </td>
+                                            <td class="text-center">금액</td>
+                                            <td class="text-center">
+                                                ${disposalRequest.amount2}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center">비고</td>
+                                            <td class="text-center" colspan="3">
+                                                ${disposalRequest.note}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" colspan="4"><br>출발하시기전 회수 연락처로 꼭 통화 부탁드립니다.<br>
+                                                <br>차량인수 후 폐차대금은 입금요청계좌로 당일 입금하셔야 합니다.
+                                                <br>입금시 업체명과 차량번호 기재하시면 됩니다.(예 : 월드00두0000)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>`
 
                                 domtoimage.toBlob(target)
                                     .then(function (blob) {
                                         // console.log(blob)
                                         window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
+                                        target.innerHTML = '';
                                     });
                             }
 
                             function showImage() {
-                                const form_elements = document.forms[0].elements;
-                                for (let i = 0; i < form_elements.length; i++) {
-                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
-                                }
 
-                                document.getElementById('req_table').innerHTML = `
+                                const target = document.getElementById('req_table');
+                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1136,7 +1097,7 @@
                                         <tr>
                                             <td class="text-center">원동기형식</td>
                                             <td class="text-center">
-                                                ${disposalRequest.engineCode}
+                                                ${disposalRequest.detailModel}
                                             </td>
                                             <td class="text-center">배기량</td>
                                             <td class="text-center">
@@ -1146,11 +1107,11 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "X" : "O"}
+                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "X" : "O"}
+                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1258,8 +1219,14 @@
                                             </td>
                                         </tr>
                                     </table>
-                                `
-                                const target = document.getElementById('req_table')
+                                </div>`
+
+                                domtoimage.toBlob(target)
+                                    .then((blob) => {
+                                        let url = URL.createObjectURL(blob);
+                                        window.open(url);
+                                        target.innerHTML = '';
+                                    })
                             }
                         </script>
                         <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
