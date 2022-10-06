@@ -121,7 +121,7 @@ exports.search = async (req, res, next) => {
     on req.supplierUsers_id=supplier.supplierUsers_id
     left join process
     on req.carNum=process.carNum
-    where (req.deleteDate is null) and (process.carNum like('%${word}%') or process.ownerName like('%${word}%') or process.model like('%${word}%'))
+    where (req.deleteDate is null) and (process.carNum like('%${word}%') or process.ownerName like('%${word}%'))
     order by req.createDate;
     `
   const result = await models.sequelize.query(query)
