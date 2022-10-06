@@ -244,21 +244,34 @@
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>압류/저당</h6>
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2 row">
+                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                    <h6>압류</h6>
+                                                                </div>
+                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                    <h6>저당</h6>
+                                                                </div>
                                                             </div>
                                                             <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                 <h6>사고유무</h6>
                                                             </div>
                                                         </div>
                                                         <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
+                                                            <div class="col col-xl-4 mb-xl-0 mb-2 row">
+                                                                <div class="col form-group">
+                                                                    <label for="attachment"
+                                                                        class="visually-hidden">Text</label>
+                                                                    <label class="form-control" id="attachment"
+                                                                        name="attachment">
+                                                                        <%= data.attachment %>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="col form-group">
                                                                     <label for="mortgage"
                                                                         class="visually-hidden">Text</label>
                                                                     <label class="form-control" id="mortgage"
                                                                         name="mortgage">
-                                                                        <%= data.mortgage==0? "없음" :"있음" %>
+                                                                        <%= data.mortgage %>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -268,7 +281,9 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <label class="form-control" id="carCondition"
                                                                         name="carCondition">
-                                                                        <%= data.carCondition==0? "없음" :"있음" %>
+                                                                        <% let carCondition=['양호', '사고' ]; %>
+                                                                            <%= carCondition[data.carCondition]
+                                                                                %>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -493,7 +508,7 @@
                                                                         class="btn btn-outline-success me-3">수정하기</button>
                                                                     <button type="button"
                                                                         onclick="sendClient('<%= data.carNum %>')"
-                                                                        class="btn btn-outline-info me-3">전송</button>
+                                                                        class="btn btn-outline-info me-3">요청서 전송</button>
                                                                     <button type="button" onclick="showImage()"
                                                                         class="btn btn-outline-info me-3">요청서
                                                                         미리보기</button>
@@ -661,22 +676,21 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
+                                                ${disposalRequest.attachment ? disposalRequest.attachment : 0}건 / ${disposalRequest.mortgage ? disposalRequest.mortgage : 0}건
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
+                                                ${disposalRequest.carCondition}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-center">알루미늄 휠</td>
                                             <td class="text-center">
-                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                                ${disposalRequest.aluminumWheel}
                                             </td>
                                             <td class="text-center">견인/조기/인탁</td>
                                             <td class="text-center">
-                                                ${disposalRequest.collectMethod == 0 ? "견인"
-                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                                ${disposalRequest.collectMethod}
                                             </td>
                                         </tr>
                                         <td class="text-center" colspan="4"> </td>
@@ -893,22 +907,21 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
+                                                ${disposalRequest.attachment ? disposalRequest.attachment : 0}건 / ${disposalRequest.mortgage ? disposalRequest.mortgage : 0}건
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
+                                                ${disposalRequest.carCondition}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-center">알루미늄 휠</td>
                                             <td class="text-center">
-                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                                ${disposalRequest.aluminumWheel}
                                             </td>
                                             <td class="text-center">견인/조기/인탁</td>
                                             <td class="text-center">
-                                                ${disposalRequest.collectMethod == 0 ? "견인"
-                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                                ${disposalRequest.collectMethod}
                                             </td>
                                         </tr>
                                         <td class="text-center" colspan="4"> </td>
@@ -1107,22 +1120,21 @@
                                         <tr>
                                             <td class="text-center">압류/저당</td>
                                             <td class="text-center">
-                                                ${disposalRequest.mortgage == 0 ? "없음" : "있음"}
+                                                ${disposalRequest.attachment ? disposalRequest.attachment : 0}건 / ${disposalRequest.mortgage ? disposalRequest.mortgage : 0}건
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "없음" : "있음"}
+                                                ${disposalRequest.carCondition}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="text-center">알루미늄 휠</td>
                                             <td class="text-center">
-                                                ${disposalRequest.aluminumWheel == 0 ? "X" : "O"}
+                                                ${disposalRequest.aluminumWheel}
                                             </td>
                                             <td class="text-center">견인/조기/인탁</td>
                                             <td class="text-center">
-                                                ${disposalRequest.collectMethod == 0 ? "견인"
-                                        : disposalRequest.collectMethod == 1 ? "조기" : "인탁"}
+                                                ${disposalRequest.collectMethod}
                                             </td>
                                         </tr>
                                         <td class="text-center" colspan="4"> </td>
