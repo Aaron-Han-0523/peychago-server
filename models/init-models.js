@@ -2,6 +2,8 @@ var DataTypes = require("sequelize").DataTypes;
 var _carinfo = require("./carinfo");
 var _clientlog = require("./clientlog");
 var _clients = require("./clients");
+var _disposalestimation = require("./disposalestimation");
+var _disposalquotation = require("./disposalquotation");
 var _disposalrequest = require("./disposalrequest");
 var _estimationslist = require("./estimationslist");
 var _exportrequest = require("./exportrequest");
@@ -21,6 +23,8 @@ function initModels(sequelize) {
   var carinfo = _carinfo(sequelize, DataTypes);
   var clientlog = _clientlog(sequelize, DataTypes);
   var clients = _clients(sequelize, DataTypes);
+  var disposalestimation = _disposalestimation(sequelize, DataTypes);
+  var disposalquotation = _disposalquotation(sequelize, DataTypes);
   var disposalrequest = _disposalrequest(sequelize, DataTypes);
   var estimationslist = _estimationslist(sequelize, DataTypes);
   var exportrequest = _exportrequest(sequelize, DataTypes);
@@ -57,6 +61,8 @@ function initModels(sequelize) {
     carinfo,
     clientlog,
     clients,
+    disposalestimation,
+    disposalquotation,
     disposalrequest,
     estimationslist,
     exportrequest,

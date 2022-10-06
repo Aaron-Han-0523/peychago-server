@@ -45,7 +45,12 @@ module.exports = function(sequelize, DataTypes) {
     mortgage: {
       type: DataTypes.TINYINT,
       allowNull: true,
-      comment: "압류\/저당"
+      comment: "저당"
+    },
+    attachment: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "압류"
     },
     carCondition: {
       type: DataTypes.TINYINT,
