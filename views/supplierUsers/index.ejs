@@ -293,7 +293,9 @@
                                             ${result.rows[i].updateDate ? formatDate(result.rows[i].updateDate) : ''}
                                         </span>
                                     </td>
-                                    <td class="text-center">`
+                                    <td class="text-center">
+                                        <div class="action-btns">
+                                        `
                             if (user.permission7.data[0] & 0b0010) {
                                 tempHTML += `<a href="/supplierUsers/edit/${result.rows[i].supplierUsers_id}"
                                     class="action-btn btn-edit bs-tooltip me-2"
@@ -340,7 +342,8 @@
                                     </svg>
                                 </a>`
                             }
-                            tempHTML += `</td >
+                            tempHTML += `</div>
+                                    </td >
                                 </tr >`
                         }
 

@@ -306,7 +306,9 @@
                                         </span>
                                     </td>
                                     
-                                    <td class="text-center">`
+                                    <td class="text-center">
+                                        <div class="action-btns">
+                                            `
                             if (user.permission5.data[0] & 0b0010) {
                                 tempHTML += `<a href="/carInfo/edit/${result.rows[i].carInfo_id}"
                                     class="action-btn btn-edit bs-tooltip me-2"
@@ -353,7 +355,8 @@
                                     </svg>
                                 </a>`
                             }
-                            tempHTML += `</td >
+                            tempHTML += `</div>
+                                    </td >
                                 </tr >`
                         }
 

@@ -336,9 +336,12 @@
                                             </svg></span>`
                             }
 
+                            tempHTML += `</td>`
+
                             if (user.permission2.data[0] & 0b0010) {
-                                tempHTML += `</td>
+                                tempHTML += `
                                 <td class="text-center">
+                                    <div class="action-btns">
                                     <a href="/review/edit/${result.rows[i].review_id}"
                                     class="action-btn btn-edit bs-tooltip me-2"
                                     data-toggle="tooltip" data-placement="top"

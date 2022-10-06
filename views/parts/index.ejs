@@ -278,7 +278,9 @@
                                             ${result.rows[i].note ? result.rows[i].note : ''}
                                         </span>
                                     </td>
-                                    <td class="text-center">`
+                                    <td class="text-center">
+                                        <div class="action-btns">
+                                            `
                             if (user.permission6.data[0] & 0b0010) {
                                 tempHTML += `<a href="/parts/edit/${result.rows[i].parts_id}"
                                     class="action-btn btn-edit bs-tooltip me-2"
@@ -325,7 +327,8 @@
                                     </svg>
                                 </a>`
                             }
-                            tempHTML += `</td >
+                            tempHTML += `</div>
+                                    </td >
                                 </tr >`
                         }
 

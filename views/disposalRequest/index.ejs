@@ -166,7 +166,8 @@
                                                                     <circle cx="12" cy="12" r="3"></circle>
                                                                 </svg>
                                                             </a> -->
-                                                                    <a href="/disposalRequest/edit/<%= item.carNum %>"
+                                                                    <% if(user.permission3_1.data[0]&0b0010) { %>
+                                                                        <a href="/disposalRequest/edit/<%= item.carNum %>"
                                                                         class="action-btn btn-edit bs-tooltip me-2"
                                                                         data-toggle="tooltip" data-placement="top"
                                                                         title="Edit">
@@ -181,6 +182,8 @@
                                                                             </path>
                                                                         </svg>
                                                                     </a>
+                                                                    <% } %>
+                                                                            <% if(user.permission3_1.data[0]&0b0001) { %>
                                                                     <a onclick="delete_(event, '/disposalRequest/delete/<%= item.carNum %>');"
                                                                         class="action-btn btn-delete bs-tooltip"
                                                                         data-toggle="tooltip" data-placement="top"
@@ -201,6 +204,7 @@
                                                                             </line>
                                                                         </svg>
                                                                     </a>
+                                                                    <% } %>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -315,8 +319,10 @@
                                             ${data.updateDate ? formatDate(data.updateDate) : ''}
                                         </span>
                                     </td>
-                                    <td class="text-center">`
-                            if (user.permission1.data[0] & 0b0010) {
+                                    <td class="text-center">
+                                        <div class="action-btns">
+                                            `
+                            if (user.permission3_1.data[0] & 0b0010) {
                                 tempHTML += `<a href="/disposalRequest/edit/${data.carNum}"
                                                 class="action-btn btn-edit bs-tooltip me-2"
                                                 data-toggle="tooltip" data-placement="top"
@@ -335,7 +341,7 @@
                                             </a>`
                             }
 
-                            if (user.permission1.data[0] & 0b0001) {
+                            if (user.permission3_1.data[0] & 0b0001) {
                                 tempHTML += `<a onclick="delete_(event, '/disposalRequest/delete/${data.carNum}');"
                                                 class="action-btn btn-delete bs-tooltip"
                                                 data-toggle="tooltip"
@@ -362,7 +368,8 @@
                                                 </svg>
                                             </a>`
                             }
-                            tempHTML += `</td >
+                            tempHTML += `</div>
+                                    </td >
                                 </tr >`
                         }
 
