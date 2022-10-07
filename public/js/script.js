@@ -1,4 +1,6 @@
 function formatDate(d_t) {
+    if (!d_t) return '';
+
     d_t = new Date(d_t);
     //console.log(typeof d_t);
 
