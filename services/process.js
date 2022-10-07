@@ -21,10 +21,7 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await process
-        .update(Object.assign(obj, {
-            updateUser: obj.user,
-            updateDate: new Date()
-        }), {
+        .update(Object.assign(obj, {}), {
             where: { carNum: obj.id }
         })
         .then(result => {
@@ -43,12 +40,9 @@ exports.allRead = async (condition = {}) => {
     return await process
         .findAndCountAll({
             raw: true,
-            where: Object.assign(condition, {
-                deleteDate: null
-            }),
+            where: condition,
             order: [
-                ['type', 'DESC'],
-                ['carNum', 'DESC'],
+                ['date0', 'ASC'],
             ]
         })
         .then(result => {

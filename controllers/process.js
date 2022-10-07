@@ -4,47 +4,61 @@ exports.add = async (req, res, next) => {
   const user = req.userInfo;
   let body = req.body;
   body.user = user.userid;
-  
+
   try {
-      let result = await processService.create(body);
-      // console.log("result :",result);
-      return res.status(201).redirect('/process');
+    let result = await processService.create(body);
+    // console.log("result :",result);
+    return res.status(201).redirect('/process');
   }
   catch (e) {
-      console.error(e);
-      return res.json(`add fail`)
+    console.error(e);
+    return res.json(`add fail`)
   }
 }
 
 exports.edit = async (req, res, next) => {
-  // console.log("put - process edit")
+  console.log("post - process edit")
   const user = req.userInfo;
   const id = req.params.id;
   let body = req.body;
   body.user = user.userid;
   body.id = id;
 
-  let result = await processService
-      .update(body)
-      .catch(err => console.error(err));
+  // console.log(req.headers);
 
-  // console.log('result :', result)
+  for (key in body) {
+    if (body[key] == '') delete body[key];
+  }
 
-  if (result) res.redirect(`/process/${id}`);
-  else res.json(`fail id:${id}`)
+  const file = req.file;
+  console.log("file :", file);
+  if (file) {
+    body[file.fieldname] = file.path;
+  }
+
+  await processService
+    .update(body)
+    .then(() => {
+      res.send(`<script>history.go(-1);</script>`);
+      //redirect(`/process/${id}`);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400).json(`fail id:${id}`)
+    });
 }
 
 exports.index = async (req, res, next) => {
   let data = await processService
-      .allRead()
-      .catch(err => console.error(err));
+    .allRead()
+    .catch(err => console.error(err));
 
   // console.log("data :", data);
 
   return res.render('process/index', {
-      count: data.count,
-      data: data.rows,
-      user: req.userInfo
+    count: data.count,
+    data: data.rows,
+    user: req.userInfo
   });
 }
 
@@ -54,14 +68,14 @@ exports.detail = async (req, res, next) => {
 
   const user = req.userInfo;
   let data = await processService
-      .readOne(id)
-      .catch(err => console.error(err));
+    .readOne(id)
+    .catch(err => console.error(err));
 
   // console.log(data);
 
   if (data) return res.json({
-      render: `(process/${id})`,
-      data: data.dataValues
+    render: `(process/${id})`,
+    data: data.dataValues
   });
   else res.json(`fail id:${id}`)
 }
@@ -74,8 +88,8 @@ exports.delete = async (req, res, next) => {
   obj.user = user.userid;
 
   let result = await processService
-      .delete(obj)
-      .catch(err => console.error(err));
+    .delete(obj)
+    .catch(err => console.error(err));
 
   // console.log("delete result :", result)
 
