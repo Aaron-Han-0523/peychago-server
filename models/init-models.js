@@ -2,8 +2,6 @@ var DataTypes = require("sequelize").DataTypes;
 var _carinfo = require("./carinfo");
 var _clientlog = require("./clientlog");
 var _clients = require("./clients");
-var _disposalestimation = require("./disposalestimation");
-var _disposalquotation = require("./disposalquotation");
 var _disposalrequest = require("./disposalrequest");
 var _estimationslist = require("./estimationslist");
 var _exportrequest = require("./exportrequest");
@@ -13,7 +11,6 @@ var _parts = require("./parts");
 var _partslist = require("./partslist");
 var _process = require("./process");
 var _review = require("./review");
-var _supplierrequest = require("./supplierrequest");
 var _supplieruserlog = require("./supplieruserlog");
 var _supplierusers = require("./supplierusers");
 var _userlog = require("./userlog");
@@ -23,8 +20,6 @@ function initModels(sequelize) {
   var carinfo = _carinfo(sequelize, DataTypes);
   var clientlog = _clientlog(sequelize, DataTypes);
   var clients = _clients(sequelize, DataTypes);
-  var disposalestimation = _disposalestimation(sequelize, DataTypes);
-  var disposalquotation = _disposalquotation(sequelize, DataTypes);
   var disposalrequest = _disposalrequest(sequelize, DataTypes);
   var estimationslist = _estimationslist(sequelize, DataTypes);
   var exportrequest = _exportrequest(sequelize, DataTypes);
@@ -34,7 +29,6 @@ function initModels(sequelize) {
   var partslist = _partslist(sequelize, DataTypes);
   var process = _process(sequelize, DataTypes);
   var review = _review(sequelize, DataTypes);
-  var supplierrequest = _supplierrequest(sequelize, DataTypes);
   var supplieruserlog = _supplieruserlog(sequelize, DataTypes);
   var supplierusers = _supplierusers(sequelize, DataTypes);
   var userlog = _userlog(sequelize, DataTypes);
@@ -61,8 +55,6 @@ function initModels(sequelize) {
     carinfo,
     clientlog,
     clients,
-    disposalestimation,
-    disposalquotation,
     disposalrequest,
     estimationslist,
     exportrequest,
@@ -72,7 +64,6 @@ function initModels(sequelize) {
     partslist,
     process,
     review,
-    supplierrequest,
     supplieruserlog,
     supplierusers,
     userlog,

@@ -55,7 +55,7 @@ module.exports = function(sequelize, DataTypes) {
     carCondition: {
       type: DataTypes.TINYINT,
       allowNull: true,
-      comment: "차량상태(사고유무)"
+      comment: "차량상태"
     },
     collectMethod: {
       type: DataTypes.TINYINT,

@@ -53,15 +53,45 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "연식"
     },
+    registerDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      comment: "최초등록일"
+    },
+    carCondition: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "차량상태(양호\/사고\/운행불가)"
+    },
+    aluminumWheel: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "알루미늄 휠"
+    },
+    attachment: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "압류"
+    },
+    mortgage: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "저당"
+    },
+    estimation: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "가견적"
+    },
+    quotation: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "실견적"
+    },
     requestPath: {
       type: DataTypes.STRING(200),
       allowNull: true,
       comment: "회수요청서 경로"
-    },
-    estimationPath: {
-      type: DataTypes.STRING(200),
-      allowNull: true,
-      comment: "실견적 경로"
     },
     deregistrationPath: {
       type: DataTypes.STRING(200),
@@ -107,6 +137,57 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "status7 date"
+    },
+    note: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "비고"
+    },
+    createUser: {
+      type: DataTypes.STRING(15),
+      allowNull: false,
+      comment: "생성자"
+    },
+    createDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "생성일"
+    },
+    updateUser: {
+      type: DataTypes.STRING(15),
+      allowNull: true,
+      comment: "수정자"
+    },
+    updateDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "수정일"
+    },
+    deleteUser: {
+      type: DataTypes.STRING(15),
+      allowNull: true,
+      comment: "삭제자"
+    },
+    deleteDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "삭제일"
+    },
+    custom1: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "예비1"
+    },
+    custom2: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "예비2"
+    },
+    custom3: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "예비3"
     }
   }, {
     sequelize,
