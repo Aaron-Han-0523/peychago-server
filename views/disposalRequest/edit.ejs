@@ -342,7 +342,7 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <select class="form-select" id="carCondition"
                                                                         name="carCondition">
-                                                                        <% let carCondition=['양호', '사고' ]; %>
+                                                                        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
                                                                             <% for(let i=0; i< carCondition.length; i++)
                                                                                 { %>
                                                                                 <% if(data.carCondition==i) { %>
@@ -589,7 +589,8 @@
                                                                         class="btn btn-outline-success me-3">저장</button>
                                                                     <button type="button"
                                                                         onclick="sendClient('<%= data.carNum %>')"
-                                                                        class="btn btn-outline-success me-3">저장 및 요청서 전송</button>
+                                                                        class="btn btn-outline-success me-3">저장 및 요청서
+                                                                        전송</button>
                                                                     <button type="button" onclick="showImage()"
                                                                         class="btn btn-outline-info me-3">요청서
                                                                         미리보기</button>
@@ -805,7 +806,8 @@
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "양호" : "사고"}
+                                                ${disposalRequest.carCondition == 0 ? "양호"
+                                        : disposalRequest.carCondition == 1 ? "사고" : "운행불가"}
                                             </td>
                                         </tr>
                                         <tr>
@@ -930,7 +932,7 @@
                                             .then(res => {
                                                 // console.log(res)
                                                 // if (res.ok) alert("전송 성공");
-                                                if(!res.ok) throw new Error(res.statusText)
+                                                if (!res.ok) throw new Error(res.statusText)
                                                 document.forms[0].submit();
                                             })
                                             .catch(err => {
@@ -1042,7 +1044,8 @@
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "양호" : "사고"}
+                                                ${disposalRequest.carCondition == 0 ? "양호"
+                                        : disposalRequest.carCondition == 1 ? "사고" : "운행불가"}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1260,7 +1263,8 @@
                                             </td>
                                             <td class="text-center">차량상태</td>
                                             <td class="text-center">
-                                                ${disposalRequest.carCondition == 0 ? "양호" : "사고"}
+                                                ${disposalRequest.carCondition == 0 ? "양호"
+                                        : disposalRequest.carCondition == 1 ? "사고" : "운행불가"}
                                             </td>
                                         </tr>
                                         <tr>

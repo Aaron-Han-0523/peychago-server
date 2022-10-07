@@ -281,9 +281,8 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <label class="form-control" id="carCondition"
                                                                         name="carCondition">
-                                                                        <% let carCondition=['양호', '사고' ]; %>
-                                                                            <%= carCondition[data.carCondition]
-                                                                                %>
+                                                                        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
+                                                                            <%= carCondition[data.carCondition] %>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -508,7 +507,8 @@
                                                                         class="btn btn-outline-success me-3">수정하기</button>
                                                                     <button type="button"
                                                                         onclick="sendClient('<%= data.carNum %>')"
-                                                                        class="btn btn-outline-info me-3">요청서 전송</button>
+                                                                        class="btn btn-outline-info me-3">요청서
+                                                                        전송</button>
                                                                     <button type="button" onclick="showImage()"
                                                                         class="btn btn-outline-info me-3">요청서
                                                                         미리보기</button>
