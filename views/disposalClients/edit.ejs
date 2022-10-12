@@ -3,6 +3,18 @@
 
 <head>
     <%- include ("../partials/header.ejs") %>
+
+        <% formatDate=(d_t)=> { if (!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
+            (d_t.getMonth() + 1)).slice(-2); let day=("0" + d_t.getDate()).slice(-2); let hour=("0" +
+            d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
+            d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day; } %>
+
+            <% const disposalStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중' , '실견적 확인중'
+                , '폐차 진행 승인' , '폐차 진행중' , '폐차 완료' ]; %>
+
+                <% let carCondition=['양호', '사고' , '운행불가' ]; %>
+
+                    <% let aluminumWheel=['X', 'O' ]; %>
 </head>
 
 <body class="layout-boxed alt-menu">
@@ -11,17 +23,7 @@
 
         <%- include ("../partials/nav.ejs") %>
             <div>
-                <% formatDate=(d_t)=> { if (!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
-                    (d_t.getMonth() + 1)).slice(-2); let day=("0" + d_t.getDate()).slice(-2); let hour=("0" +
-                    d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
-                    d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day; } %>
 
-                    <% const stateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중' , '실견적 확인중'
-                        , '폐차 진행 승인' , '폐차 진행중' , '폐차 완료' ]; %>
-
-                        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-
-                            <% let aluminumWheel=['X', 'O' ]; %>
             </div>
             <!--  BEGIN MAIN CONTAINER  -->
             <div class="main-container sidebar-closed " id="container">
@@ -189,6 +191,25 @@
                                                         <div class="form-group row">
                                                             <div class="row">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                    <h6>실거주지</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row layout-spacing">
+                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                    <div class="form-group">
+                                                                        <label id="clientName" type="text"
+                                                                            name="clientName" placeholder=""
+                                                                            class="form-control">
+                                                                            <%= clients.address %>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <div class="row">
+                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <h6>차량상태</h6>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
@@ -257,7 +278,8 @@
                                                                         <input class="p-2 form-control"
                                                                             name="attachment"
                                                                             value="<%= process.attachment %>">
-                                                                        <h6 class="p-2 align-self-end">건</h6>
+                                                                        <h6 class="p-2 align-self-end">
+                                                                            건</h6>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2 row">
@@ -266,7 +288,8 @@
                                                                             class="visually-hidden">Text</label>
                                                                         <input class="p-2 form-control" name="mortgage"
                                                                             value="<%= process.mortgage %>">
-                                                                        <h6 class="p-2 align-self-end">건</h6>
+                                                                        <h6 class="p-2 align-self-end">
+                                                                            건</h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -311,14 +334,14 @@
                                                             <div class="p-2 mb-xl-1 mb-4">
                                                                 <select class="form-select" type="text" id="state"
                                                                     name="state">
-                                                                    <% for(code in stateCode2Text) { %>
+                                                                    <% for(code in disposalStateCode2Text) { %>
                                                                         <% if (process.state==code) { %>
                                                                             <option value="<%= code %>" selected>
-                                                                                <%= stateCode2Text[code] %>
+                                                                                <%= disposalStateCode2Text[code] %>
                                                                             </option>
                                                                             <% } else { %>
                                                                                 <option value="<%= code %>">
-                                                                                    <%= stateCode2Text[code] %>
+                                                                                    <%= disposalStateCode2Text[code] %>
                                                                                 </option>
                                                                                 <% } %>
                                                                                     <% } %>
@@ -441,6 +464,18 @@
                                                 <div class="widget-content widget-content-area">
                                                     <form id="estimation" method="post"
                                                         action="/process/edit/<%= process.carNum %>">
+                                                        <div class="row">
+                                                            <h6>수출 가능여부
+                                                                <span>
+                                                                    <% if (process.exportable) { %>
+                                                                        <input type="checkbox" name="exportable"
+                                                                            checked>
+                                                                        <% } else { %>
+                                                                            <input type="checkbox" name="exportable">
+                                                                            <% } %>
+                                                                </span>
+                                                            </h6>
+                                                        </div>
                                                         <div class="form-group d-flex col-xl-8">
                                                             <h6 class="p-2 align-self-end">견적가</h6>
                                                             <div class="p-2">
@@ -448,14 +483,15 @@
                                                                     value="<%= process.estimation %>">
                                                             </div>
                                                             <h6 class="p-2 align-self-end">원</h6>
-                                                            <div class="p-2 form-group align-self-center">
-                                                                <button class="btn btn-outline-success me-3">저장</button>
-                                                            </div>
+
                                                         </div>
 
                                                         <div class="row layout-top-spacing">
                                                             <div class="col">
-
+                                                                <div class="form-group align-self-center">
+                                                                    <button
+                                                                        class="btn btn-outline-success me-3">저장</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -526,9 +562,8 @@
                                                         </div>
                                                     </form>
                                                     <div id="deregistrationImg" class="col-xl-8">
-                                                        <% console.log(process.deregistrationPath);
-                                                            if(process.deregistrationPath) { %>
-                                                            <img class="form-control"
+                                                        <% if(process.deregistrationPath) { %>
+                                                            <img class="img-fluid"
                                                                 src="/<%= process.deregistrationPath %>" />
                                                             <% } %>
                                                     </div>
@@ -560,7 +595,7 @@
                         $(".input-date").datepicker({
                         });
                     });
-                    /*
+
                     const deregistrationInput = document.getElementById('deregistrationInput');
                     deregistrationInput.addEventListener('change', (event) => {
                         console.log(event.target)
@@ -570,7 +605,7 @@
                     function loadFile(input) {
                         var file = input.files[0];
                         $('#deregistrationImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
-                    }*/
+                    }
 
                     deregistration.onsubmit = async (e) => {
                         e.preventDefault();
@@ -587,10 +622,36 @@
                                 alert("전송 실패!!");
                             }
                             return res.json();
-                        }).then(result=>{
+                        }).then(result => {
                             console.log(result);
                         });
+                    }
 
+                    estimation.onsubmit = async (e) => {
+                        e.preventDefault();
+
+                        let body = {};
+                        body.exportable = estimation[0].checked;
+                        body.estimation = estimation[1].value;
+
+                        let response = await fetch(estimation.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(body)
+                        }).then(res => {
+                            if (res.ok) {
+                                //alert("저장되었습니다.");
+                                window.location.reload();
+                            }
+                            else {
+                                alert("전송 실패!!");
+                            }
+                            return res.json();
+                        }).then(result => {
+                            console.log(result);
+                        });
                     }
 
                     // 알럿 처리

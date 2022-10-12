@@ -326,26 +326,26 @@
                                                                     <label for="attachment"
                                                                         class="visually-hidden">Text</label>
                                                                     <input class="form-control" id="attachment"
-                                                                        name="attachment"
-                                                                        value="<%= data.attachment %>">
+                                                                        name="attachment" disabled
+                                                                        value="<%= process.attachment %>">
                                                                 </div>
                                                                 <div class="col form-group">
                                                                     <label for="mortgage"
                                                                         class="visually-hidden">Text</label>
-                                                                    <input class="form-control" id="mortgage"
-                                                                        name="mortgage" value="<%= data.mortgage %>">
+                                                                    <input class="form-control" id="mortgage" disabled
+                                                                        name="mortgage" value="<%= process.mortgage %>">
                                                                 </div>
                                                             </div>
                                                             <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                 <div class="form-group">
                                                                     <label for="carCondition"
                                                                         class="visually-hidden">Text</label>
-                                                                    <select class="form-select" id="carCondition"
-                                                                        name="carCondition">
+                                                                    <select class="form-control" id="carCondition"
+                                                                        name="carCondition" disabled>
                                                                         <% let carCondition=['양호', '사고' , '운행불가' ]; %>
                                                                             <% for(let i=0; i< carCondition.length; i++)
                                                                                 { %>
-                                                                                <% if(data.carCondition==i) { %>
+                                                                                <% if(process.carCondition==i) { %>
                                                                                     <option value="<%= i %>" selected>
                                                                                         <%= carCondition[i] %>
                                                                                     </option>
@@ -373,12 +373,12 @@
                                                                 <div class="form-group">
                                                                     <label for="aluminumWheel"
                                                                         class="visually-hidden">Text</label>
-                                                                    <select class="form-select" id="aluminumWheel"
-                                                                        name="aluminumWheel">
+                                                                    <select class="form-control" id="aluminumWheel"
+                                                                        name="aluminumWheel" disabled>
                                                                         <% let aluminumWheel=['X', 'O' ]; %>
                                                                             <% for(let i=0; i< aluminumWheel.length;
                                                                                 i++) { %>
-                                                                                <% if(data.aluminumWheel==i) { %>
+                                                                                <% if(process.aluminumWheel==i) { %>
                                                                                     <option value="<%= i %>" selected>
                                                                                         <%= aluminumWheel[i] %>
                                                                                     </option>
