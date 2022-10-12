@@ -39,11 +39,11 @@
 
                                 <div class="row layout-spacing">
                                     <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
+                                        <div class="col-xl-10">
                                             <div class="statbox widget box box-shadow">
                                                 <div class="widget-header">
                                                     <div class="row">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                        <div class="col-xl-6 col-md-12 col-sm-12 col-12">
                                                             <h4></h4>
                                                         </div>
                                                     </div>
@@ -52,64 +52,75 @@
                                                 <div class="widget-content widget-content-area">
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-form-label-sm">차량 정보</label>
-                                                        <label class="col-form-label">
-                                                            <%= car.maker +'-'+ car.model +'-'+ car.detailModel +'-'+
-                                                                car.yearModel %>
-                                                        </label>
+                                                        <div>
+                                                            <label
+                                                                class="col-form-label form-control col-xl-4 mb-xl-0 mb-2">
+                                                                <%= car.maker +'-'+ car.model +'-'+ car.detailModel
+                                                                    +'-'+ car.yearModel %>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group row mb-4">
                                                         <label class="col-form-label col-form-label-sm">처리한 협력사
                                                         </label>
-                                                        <label class="col-form-label col-form-label-sm">
-                                                            <%= supplier.companyName +'-'+ supplier.mainPhoneNum %>
-                                                        </label>
+                                                        <div>
+                                                            <label class="form-control col-xl-4 mb-xl-0 mb-2">
+                                                                <%= supplier.companyName +'-'+ supplier.mainPhoneNum %>
+                                                            </label>
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group row mb-4">
                                                         <label class="col-sm-2 col-form-label col-form-label-sm">차량
                                                             번호</label>
-                                                        <label class="col-form-label col-form-label-sm">
-                                                            <%= data.carNum %>
-                                                        </label>
-
+                                                        <div>
+                                                            <label
+                                                                class="col-form-label col-form-label-sm form-control col-xl-4 mb-xl-0 mb-2">
+                                                                <%= data.carNum %>
+                                                            </label>
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group row mb-4">
                                                         <label
                                                             class="col-sm-2 col-form-label col-form-label-sm">연락처</label>
-                                                        <label class="col-form-label col-form-label-sm">
-                                                            <%= data.phoneNum %>
-                                                        </label>
-
+                                                        <div>
+                                                            <label
+                                                                class="col-form-label col-form-label-sm form-control col-xl-4 mb-xl-0 mb-2">
+                                                                <%= data.phoneNum %>
+                                                            </label>
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group row mb-4">
                                                         <label
                                                             class="col-sm-2 col-form-label col-form-label-sm">소유자명</label>
-                                                        <label class="col-form-label col-form-label-sm">
-                                                            <%= data.clientName %>
-                                                        </label>
-
+                                                        <div>
+                                                            <label
+                                                                class="col-form-label col-form-label-sm form-control col-xl-4 mb-xl-0 mb-2">
+                                                                <%= data.clientName %>
+                                                            </label>
+                                                        </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                        <div class="col-xl-4 mb-xl-0 mb-2">
                                                             <h6>제목</h6>
                                                         </div>
                                                     </div>
-                                                    <div id="editor-container">
-                                                        <h3 class="form-control">
+                                                    <div>
+                                                        <h3 class="col-form-label col-form-label-sm form-control col-xl-4 mb-xl-0 mb-2">
                                                             <%= data.title %>
                                                         </h3>
                                                     </div>
 
                                                     <div class="row layout-top-spacing">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                        <div class="col-xl-4 mb-xl-0 mb-2">
                                                             <h6>내용</h6>
                                                         </div>
                                                     </div>
-                                                    <div id="editor-container">
-                                                        <p class="form-control">
+                                                    <div>
+                                                        <p class="form-control col-xl-4 mb-xl-0 mb-2">
                                                             <%= data.content %>
                                                         </p>
                                                     </div>
@@ -137,19 +148,35 @@
                                                             <%= '★' .repeat(data.grade) %>
                                                         </p>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <% if(data.attachedFilepath1) { %>
-                                                            <img class="form-control"
-                                                                src="/<%= data.attachedFilepath1 %>" />
-                                                            <% } %>
+
+                                                    <div class="row layout-spacing">
+                                                        <div class="col col-xl-5 mb-xl-0 mb-2">
+                                                            <div class="form-group">
+                                                                <% if(data.attachedFilepath1) { %>
+                                                                    <img class="img-fluid"
+                                                                        src="/<%= data.attachedFilepath1 %>" />
+                                                                    <% } %>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-xl-5 mb-xl-0 mb-2">
+                                                            <div class="form-group">
                                                                 <% if(data.attachedFilepath2) { %>
-                                                                    <img class="form-control"
+                                                                    <img class="img-fluid"
                                                                         src="/<%= data.attachedFilepath2 %>" />
                                                                     <% } %>
-                                                                        <% if(data.attachedFilepath3) { %>
-                                                                            <img class="form-control"
-                                                                                src="/<%= data.attachedFilepath3 %>" />
-                                                                            <% } %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col col-6 col-xl-5 mb-xl-0 mb-2">
+                                                            <div class="form-group">
+                                                                <% if(data.attachedFilepath3) { %>
+                                                                    <img class="img-fluid"
+                                                                        src="/<%= data.attachedFilepath3 %>" />
+                                                                    <% } %>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
 

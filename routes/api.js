@@ -3,7 +3,7 @@ const router = express.Router();
 
 var carInfoRouter = require('../routes/carInfo');
 var clientsRouter = require('../routes/clients');
-var disposalRequestRouter = require('../routes/disposalRequest');
+var requestRouter = require('../routes/request');
 var imageSettingRouter = require('../routes/imageSetting');
 // var partsRouter = require('../routes/parts');
 // var noticeRouter = require('../routes/notice');
@@ -23,6 +23,6 @@ router
     .use('/review', (req, res, next) => { req.api = true; next(); }, reviewRouter)
     .use('/imageSetting', (req, res, next) => { req.api = true; next(); }, imageSettingRouter)
     .use('/supplierUsers', (req, res, next) => { req.api = true; next(); }, supplierUsersRouter)
-    .use('/disposalRequest', (req, res, next) => { req.api = true; next(); }, disposalRequestRouter)
+    .use('/request', (req, res, next) => { req.api = true; next(); }, requestRouter)
 
 module.exports = router;

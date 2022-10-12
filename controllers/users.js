@@ -100,7 +100,7 @@ exports.edit = async (req, res, next) => {
     const id = req.params.id;
     let body = req.body;
     body.user = user.userid;
-    if (!body.password) body.password = await encryption.hashing(body.password);
+    if (body.password) body.password = await encryption.hashing(body.password);
     body.id = id;
 
     let result = await usersService

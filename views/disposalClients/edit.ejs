@@ -80,19 +80,18 @@
                                                             <div class="row layout-spacing">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="clientName" type="text"
+                                                                        <input disabled id="clientName" type="text"
                                                                             name="clientName" placeholder=""
-                                                                            class="form-control">
-                                                                            <%= clients.clientName %>
-                                                                        </label>
+                                                                            class="form-control"
+                                                                            value="<%= clients.clientName %>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="phoneNum" type="text" name="phoneNum"
-                                                                            placeholder="" class="form-control">
-                                                                            <%= clients.phoneNum %>
-                                                                        </label>
+                                                                        <input disabled id="phoneNum" type="text"
+                                                                            name="phoneNum" placeholder=""
+                                                                            class="form-control"
+                                                                            value="<%= clients.phoneNum %>">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -110,19 +109,18 @@
                                                             <div class="row layout-spacing">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="clientName" type="text"
+                                                                        <input disabled id="clientName" type="text"
                                                                             name="clientName" placeholder=""
-                                                                            class="form-control">
-                                                                            <%= process.carNum %>
-                                                                        </label>
+                                                                            class="form-control"
+                                                                            value="<%= process.carNum %>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="phoneNum" type="text" name="phoneNum"
-                                                                            placeholder="" class="form-control">
-                                                                            <%= process.model %>
-                                                                        </label>
+                                                                        <input disabled id="phoneNum" type="text"
+                                                                            name="phoneNum" placeholder=""
+                                                                            class="form-control"
+                                                                            value="<%= process.model %>">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -140,19 +138,18 @@
                                                             <div class="row layout-spacing">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="clientName" type="text"
+                                                                        <input disabled id="clientName" type="text"
                                                                             name="clientName" placeholder=""
-                                                                            class="form-control">
-                                                                            <%= process.detailModel %>
-                                                                        </label>
+                                                                            class="form-control"
+                                                                            value="<%= process.detailModel %>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="phoneNum" type="text" name="phoneNum"
-                                                                            placeholder="" class="form-control">
-                                                                            <%= process.displacement %>
-                                                                        </label>
+                                                                        <input disabled id="phoneNum" type="text"
+                                                                            name="phoneNum" placeholder=""
+                                                                            class="form-control"
+                                                                            value="<%= process.displacement %>">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -170,19 +167,18 @@
                                                             <div class="row layout-spacing">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="clientName" type="text"
+                                                                        <input disabled id="clientName" type="text"
                                                                             name="clientName" placeholder=""
-                                                                            class="form-control">
-                                                                            <%= process.yearModel %>
-                                                                        </label>
+                                                                            class="form-control"
+                                                                            value="<%= process.yearModel %>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="phoneNum" type="text" name="phoneNum"
-                                                                            placeholder="" class="form-control">
-                                                                            <%= formatDate(process.registerDate) %>
-                                                                        </label>
+                                                                        <input disabled id="phoneNum" type="text"
+                                                                            name="phoneNum" placeholder=""
+                                                                            class="form-control"
+                                                                            value="<%= formatDate(process.registerDate) %>">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -197,16 +193,15 @@
                                                             <div class="row layout-spacing">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <div class="form-group">
-                                                                        <label id="clientName" type="text"
+                                                                        <input disabled id="clientName" type="text"
                                                                             name="clientName" placeholder=""
-                                                                            class="form-control">
-                                                                            <%= clients.address %>
-                                                                        </label>
+                                                                            class="form-control"
+                                                                            value="<%= clients.address %>">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="form-group row">
                                                             <div class="row">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
@@ -610,12 +605,14 @@
                     deregistration.onsubmit = async (e) => {
                         e.preventDefault();
 
+                        if (!deregistration[0].value) return alert("파일을 선택해주세요.");
+
                         let response = await fetch(deregistration.action, {
                             method: 'POST',
                             body: new FormData(deregistration)
                         }).then(res => {
                             if (res.ok) {
-                                //alert("저장되었습니다.");
+                                alert("저장되었습니다.");
                                 window.location.reload();
                             }
                             else {
@@ -633,6 +630,7 @@
                         let body = {};
                         body.exportable = estimation[0].checked;
                         body.estimation = estimation[1].value;
+                        console.log(body);
 
                         let response = await fetch(estimation.action, {
                             method: 'POST',
@@ -642,7 +640,7 @@
                             body: JSON.stringify(body)
                         }).then(res => {
                             if (res.ok) {
-                                //alert("저장되었습니다.");
+                                alert("저장되었습니다.");
                                 window.location.reload();
                             }
                             else {
@@ -654,11 +652,9 @@
                         });
                     }
 
-                    // 알럿 처리
-                    /*
                     process.onsubmit = async (e) => {
                         e.preventDefault();
-                        
+
                         let body = {};
                         for (let [name, value] of new FormData(process)) body[name] = value;
 
@@ -674,7 +670,52 @@
                         });
 
                     }
-                    */
+
+                    clientInfo.onsubmit = async (e) => {
+                        e.preventDefault();
+
+                        let body = {};
+                        for (let [name, value] of new FormData(clientInfo)) body[name] = value;
+
+                        let response = await fetch(clientInfo.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(body)
+                        }).then(res => {
+                            if (res.ok) alert("저장되었습니다.");
+                            else {
+                                alert("전송 실패!!");
+                            }
+                            return res.json();
+                        }).then(result => {
+                            console.log(result);
+                        });
+                    }
+
+                    quotation.onsubmit = async (e) => {
+                        e.preventDefault();
+
+                        let body = {};
+                        for (let [name, value] of new FormData(quotation)) body[name] = value;
+
+                        let response = await fetch(quotation.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(body)
+                        }).then(res => {
+                            if (res.ok) alert("저장되었습니다.");
+                            else {
+                                alert("전송 실패!!");
+                            }
+                            return res.json();
+                        }).then(result => {
+                            console.log(result);
+                        });
+                    }
                 </script>
                 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>

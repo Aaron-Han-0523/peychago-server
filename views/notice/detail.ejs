@@ -51,16 +51,16 @@
                                                 <div class="widget-content widget-content-area">
                                                     <div class="row">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <!-- <h6>제목</h6> -->
+                                                            <h6>제목</h6>
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-12 ">
+                                                        <div class="col-lg-10 col-12 ">
                                                             <div class="form-group">
-                                                                <h2>
+                                                                <label class="form-control">
                                                                     <%= data.title %>
-                                                                </h2>
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -73,7 +73,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-12 ">
+                                                        <div class="col-lg-10 col-12 ">
                                                             <div class="form-group">
                                                                 <a href='<%= data.link %>'>
                                                                     <%= data.link %>
@@ -82,21 +82,25 @@
                                                         </div>
                                                     </div> -->
 
-                                                    <hr size="1px">
+                                                    <!-- <hr size="1px"> -->
 
                                                     <div class="row layout-top-spacing">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <!-- <h6>내용</h6> -->
+                                                            <h6>내용</h6>
                                                         </div>
                                                     </div>
 
                                                     <div id="editor-container">
-                                                        <p style="font-size: 20px;">
-                                                            <%= data.content %>
-                                                        </p>
+                                                        <div class="col-lg-10 col-12 ">
+                                                            <div class="form-group">
+                                                                <label class="form-control">
+                                                                    <%= data.content %>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
-                                                    <hr size="1px">
+                                                    <!-- <hr size="1px"> -->
 
                                                     <div class="row layout-top-spacing">
                                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
@@ -104,11 +108,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-12 ">
+                                                        <div class="col-lg-10 col-12 ">
                                                             <div class="form-group">
-                                                                <a href='<%= data.link %>'>
-                                                                    <%= data.link %>
-                                                                </a>
+                                                                <label class="form-control">
+                                                                    <a href='<%= data.link %>'>
+                                                                        <%= data.link %>
+                                                                    </a>
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -131,7 +137,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-6 col-12 ">
+                                        <div class="col-lg-10 col-12 ">
                                                 <div class="form-group">
                                                     <label for="t-text" class="visually-hidden">Text</label>
                                                     <input disabled id="t-text2" type="text" name="txt" placeholder="" class="form-control" >
@@ -140,7 +146,7 @@
                                     </div>
 -->
                                                     <div class="row layout-top-spacing">
-                                                        <div class="col-lg-6 col-12 ">
+                                                        <div class="col-lg-10 col-12 ">
                                                             <div class="form-group">
                                                                 <% if(user.permission1.data[0]&0b0010) { %>
                                                                     <button type="button"

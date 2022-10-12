@@ -16,6 +16,7 @@ var fs = require('fs');
 var indexRouter = require('./routes/index');
 var carInfoRouter = require('./routes/carInfo');
 var clientsRouter = require('./routes/clients');
+var requestRouter = require('./routes/request');
 var disposalRequestRouter = require('./routes/disposalRequest');
 var disposalClientsRouter = require('./routes/disposalClients');
 var exportClientsRouter = require('./routes/exportClients');
@@ -83,6 +84,7 @@ app.use('/carInfo', carInfoRouter);
 app.use('/parts', partsRouter);
 app.use('/supplierUsers', supplierUsersRouter);
 app.use('/clients', clientsRouter);
+app.use('/request', requestRouter);
 app.use('/process', processRouter);
 app.use('/accounts', accountsRouter);
 app.use(path.join('/', process.env.UPLOADFILES_ROOT).replace('\\', '/'),

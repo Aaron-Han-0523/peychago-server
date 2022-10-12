@@ -27,7 +27,7 @@ exports.edit = async (req, res, next) => {
   // console.log(req.headers);
 
   for (key in body) {
-    if (body[key] == '') delete body[key];
+    if (body[key] === '') delete body[key];
   }
 
   const file = req.file;

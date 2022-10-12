@@ -239,7 +239,7 @@
                                                         </div>
 
                                                         <div class="row layout-top-spacing">
-                                                            <div class="col-lg-6 col-12 ">
+                                                            <div class="col-12">
                                                                 <div class="form-group">
                                                                     <% if(user.permission7.data[0]&0b0010) { %>
                                                                         <button
@@ -258,9 +258,11 @@
                                                                                     type="button"
                                                                                     onclick="location.href='/supplierUsers/delete/<%= data.supplierUsers_id %>';">삭제하기</button>
                                                                                 <% } %>
-                                                                </div><button class="btn btn-outline-danger mb-2 me-4"
-                                                                    type="button"
-                                                                    onclick="location.href='/supplierUsers';">뒤로가기</button>
+                                                                                    <button
+                                                                                        class="btn btn-outline-danger mb-2 me-4"
+                                                                                        type="button"
+                                                                                        onclick="location.href='/supplierUsers';">뒤로가기</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

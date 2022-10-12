@@ -57,72 +57,83 @@
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label">차량
                                                                 정보 선택</label>
-                                                            <select class="form-select" id="carInfo" name="carInfo_id">
-                                                                <% car.rows.forEach(function(item, index) { %>
-                                                                    <% if(data.carInfo_id==item.carInfo_id) { %>
-                                                                        <option value="<%= item.carInfo_id %>" selected>
-                                                                            <%= item.maker +'-'+ item.model +'-'+
-                                                                                item.detailModel +'-'+ item.yearModel %>
-                                                                        </option>
-                                                                        <% } else { %>
-                                                                            <option value="<%= item.carInfo_id %>">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <select class="form-select" id="carInfo"
+                                                                    name="carInfo_id">
+                                                                    <% car.rows.forEach(function(item, index) { %>
+                                                                        <% if(data.carInfo_id==item.carInfo_id) { %>
+                                                                            <option value="<%= item.carInfo_id %>"
+                                                                                selected>
                                                                                 <%= item.maker +'-'+ item.model +'-'+
                                                                                     item.detailModel +'-'+
                                                                                     item.yearModel %>
                                                                             </option>
-                                                                            <% } %>
-                                                                                <% }); %>
-                                                            </select>
+                                                                            <% } else { %>
+                                                                                <option value="<%= item.carInfo_id %>">
+                                                                                    <%= item.maker +'-'+ item.model
+                                                                                        +'-'+ item.detailModel +'-'+
+                                                                                        item.yearModel %>
+                                                                                </option>
+                                                                                <% } %>
+                                                                                    <% }); %>
+                                                                </select>
+                                                            </div>
                                                         </div>
+                                                        
                                                         <div class="form-group row mb-4">
                                                             <label class="col-form-label">처리한 협력사 선택
                                                             </label>
-                                                            <select class="form-select" id="suppliereUsers"
-                                                                name="supplierUsers_id">
-                                                                <% supplier.rows.forEach(function(item, index) { %>
-                                                                    <% if(data.supplierUsers_id==item.supplierUsers_id)
-                                                                        { %>
-                                                                        <option value="<%= item.supplierUsers_id %>"
-                                                                            selected>
-                                                                            <%= item.companyName +'-'+ item.mainPhoneNum
-                                                                                %>
-                                                                        </option>
-                                                                        <% } else { %>
-                                                                            <option
-                                                                                value="<%= item.supplierUsers_id %>">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <select class="form-select" id="suppliereUsers"
+                                                                    name="supplierUsers_id">
+                                                                    <% supplier.rows.forEach(function(item, index) { %>
+                                                                        <% if(data.supplierUsers_id==item.supplierUsers_id)
+                                                                            { %>
+                                                                            <option value="<%= item.supplierUsers_id %>"
+                                                                                selected>
                                                                                 <%= item.companyName +'-'+
                                                                                     item.mainPhoneNum %>
                                                                             </option>
-                                                                            <% } %>
-                                                                                <% }); %>
-                                                            </select>
+                                                                            <% } else { %>
+                                                                                <option
+                                                                                    value="<%= item.supplierUsers_id %>">
+                                                                                    <%= item.companyName +'-'+
+                                                                                        item.mainPhoneNum %>
+                                                                                </option>
+                                                                                <% } %>
+                                                                                    <% }); %>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
                                                         <div class="form-group row mb-4">
                                                             <label class="col-sm-2 col-form-label col-form-label-sm">차량
                                                                 번호</label>
-                                                            <input id="carNum" type="text" name="carNum" placeholder=""
-                                                                class="form-control" required
-                                                                value="<%= data.carNum %>">
-
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <input id="carNum" type="text" name="carNum"
+                                                                    placeholder="" class="form-control" required
+                                                                    value="<%= data.carNum %>">
+                                                            </div>
                                                         </div>
 
                                                         <div class="form-group row mb-4">
                                                             <label
                                                                 class="col-sm-2 col-form-label col-form-label-sm">연락처</label>
-                                                            <input id="phoneNum" type="text" name="phoneNum"
-                                                                placeholder="" class="form-control" required
-                                                                value="<%= data.phoneNum %>">
-
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <input id="phoneNum" type="text" name="phoneNum"
+                                                                    placeholder="" class="form-control" required
+                                                                    value="<%= data.phoneNum %>">
+                                                            </div>
                                                         </div>
 
                                                         <div class="form-group row mb-4">
                                                             <label
                                                                 class="col-sm-2 col-form-label col-form-label-sm">소유자명</label>
-                                                            <input id="clientName" type="text" name="clientName"
-                                                                placeholder="" class="form-control" required
-                                                                value="<%= data.clientName %>">
-
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                                <input id="clientName" type="text" name="clientName"
+                                                                    placeholder="" class="form-control" required
+                                                                    value="<%= data.clientName %>">
+                                                            </div>
                                                         </div>
 
                                                         <div class="row">
@@ -132,7 +143,7 @@
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class="col-lg-6 col-12 ">
+                                                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                                                 <form method="post">
                                                                     <div class="form-group">
                                                                         <label for="t-text"
