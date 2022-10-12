@@ -2,7 +2,6 @@ var DataTypes = require("sequelize").DataTypes;
 var _carinfo = require("./carinfo");
 var _clientlog = require("./clientlog");
 var _clients = require("./clients");
-var _disposalrequest = require("./disposalrequest");
 var _estimationslist = require("./estimationslist");
 var _exportrequest = require("./exportrequest");
 var _imagesetting = require("./imagesetting");
@@ -10,6 +9,7 @@ var _notice = require("./notice");
 var _parts = require("./parts");
 var _partslist = require("./partslist");
 var _process = require("./process");
+var _request = require("./request");
 var _review = require("./review");
 var _supplieruserlog = require("./supplieruserlog");
 var _supplierusers = require("./supplierusers");
@@ -20,7 +20,6 @@ function initModels(sequelize) {
   var carinfo = _carinfo(sequelize, DataTypes);
   var clientlog = _clientlog(sequelize, DataTypes);
   var clients = _clients(sequelize, DataTypes);
-  var disposalrequest = _disposalrequest(sequelize, DataTypes);
   var estimationslist = _estimationslist(sequelize, DataTypes);
   var exportrequest = _exportrequest(sequelize, DataTypes);
   var imagesetting = _imagesetting(sequelize, DataTypes);
@@ -28,6 +27,7 @@ function initModels(sequelize) {
   var parts = _parts(sequelize, DataTypes);
   var partslist = _partslist(sequelize, DataTypes);
   var process = _process(sequelize, DataTypes);
+  var request = _request(sequelize, DataTypes);
   var review = _review(sequelize, DataTypes);
   var supplieruserlog = _supplieruserlog(sequelize, DataTypes);
   var supplierusers = _supplierusers(sequelize, DataTypes);
@@ -55,7 +55,6 @@ function initModels(sequelize) {
     carinfo,
     clientlog,
     clients,
-    disposalrequest,
     estimationslist,
     exportrequest,
     imagesetting,
@@ -63,6 +62,7 @@ function initModels(sequelize) {
     parts,
     partslist,
     process,
+    request,
     review,
     supplieruserlog,
     supplierusers,

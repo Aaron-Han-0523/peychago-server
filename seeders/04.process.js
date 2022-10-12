@@ -24,7 +24,7 @@ module.exports = {
         , displacement: `${i + 1}${i}${i}`
         , yearModel: `200` + i
         , registerDate: `200${i}-${('0' + (i + 1)).slice(-2)}-${('0' + (i + 1)).slice(-2)}`
-        , processType: i % 3
+        , processType: i % 2
         , date0: new Date()
         , createUser: 'cli' + i
         , createDate: new Date()

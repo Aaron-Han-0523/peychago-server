@@ -1,15 +1,15 @@
-const disposalRequest = require('../models').disposalrequest;
+const request = require('../models').request;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
-    return await disposalRequest
+    return await request
         .create(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
         }))
         .then(result => {
-            console.log("disposalRequest create success");
+            console.log("request create success");
             return result;
         })
         .catch((err) => {
@@ -20,7 +20,7 @@ exports.create = async (obj) => {
 
 exports.update = async (obj) => {
     console.log("update obj :", obj)
-    return await disposalRequest
+    return await request
         .update(Object.assign(obj, {
             updateUser: obj.user,
             updateDate: new Date()
@@ -28,7 +28,7 @@ exports.update = async (obj) => {
             where: { carNum: obj.id }
         })
         .then(result => {
-            console.log("disposalRequest update success");
+            console.log("request update success");
             return result.pop();
         })
         .catch(err => {
@@ -38,9 +38,9 @@ exports.update = async (obj) => {
 }
 
 exports.allRead = async (condition = {}) => {
-    // console.log('all disposalRequest read');
+    // console.log('all request read');
 
-    return await disposalRequest
+    return await request
         .findAndCountAll({
             raw: true,
             where: Object.assign(condition, {
@@ -52,7 +52,7 @@ exports.allRead = async (condition = {}) => {
             ]
         })
         .then(result => {
-            console.log("disposalRequest 'count' and 'rows' read success");
+            console.log("request 'count' and 'rows' read success");
             console.log("data count :", result.count)
             return result;
         })
@@ -63,7 +63,7 @@ exports.allRead = async (condition = {}) => {
 }
 
 exports.readOne = async (id) => {
-    return await disposalRequest
+    return await request
         .findByPk(id)
         .then(result => {
             console.log(`carNum-${id} find success`);
@@ -76,7 +76,7 @@ exports.readOne = async (id) => {
 }
 
 exports.delete = async (obj) => {
-    return await disposalRequest
+    return await request
         .update({
             deleteUser: obj.user,
             deleteDate: new Date()
@@ -84,7 +84,7 @@ exports.delete = async (obj) => {
             where: { carNum: obj.id }
         })
         .then(result => {
-            console.log("disposalRequest delete success");
+            console.log("request delete success");
             return result.pop();
         })
         .catch(err => {

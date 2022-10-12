@@ -1,4 +1,4 @@
-const exportRequest = require('../models').exportrequest;
+const exportRequest = require('../models').request;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

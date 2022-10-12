@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const disposalRequestController = require('../controllers/disposalRequest');
-const disposalRequestService = require('../services/disposalRequest');
+const disposalRequestService = require('../services/request');
 const supplierUsersService = require('../services/supplierUsers');
 const processService = require('../services/process');
 const jwt = require('../services/jwt')
@@ -53,6 +53,7 @@ router
   }))
   .post('/add', jwt.verifyToken, disposalRequestController.add)
 
+router
   .get('/edit/:id', jwt.verifyToken, async (req, res, next) => {
     const data = await disposalRequestService.readOne(req.params.id);
     const process = await processService.readOne(req.params.id);
@@ -76,10 +77,13 @@ router
   })
   .post('/edit/:id', jwt.verifyToken, disposalRequestController.edit)
 
+router
   .get('/delete/:id', jwt.verifyToken, disposalRequestController.delete)
 
+router
   .get('/search', jwt.verifyToken, disposalRequestController.search)
 
+router
   .post('/upload/:id', jwt.verifyToken,
     // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
     (req, res, next) => upload('폐차회수요청서').single('diposalRequest')(req, res, function (err) {
@@ -92,6 +96,7 @@ router
     // (req, res, next) => { console.log('disposalRequest upload file\n', req.file); next(); },
     disposalRequestController.upload)
 
+router
   .get('/:id', jwt.verifyToken, async (req, res, next) => {
     const data = await disposalRequestService.readOne(req.params.id)
     res.render('disposalRequest/detail', {

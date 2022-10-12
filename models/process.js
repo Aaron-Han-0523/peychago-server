@@ -11,11 +11,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TINYINT,
       allowNull: false,
       defaultValue: 0,
-      comment: "폐차(1)\/수출(2)"
+      comment: "폐차(0)\/수출(1)"
     },
     state: {
       type: DataTypes.TINYINT,
       allowNull: false,
+      defaultValue: 0,
       comment: "진행단계"
     },
     clients_id: {
@@ -78,10 +79,36 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "저당"
     },
+    carImagePath0: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "차량사진0"
+    },
+    carImagePath1: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "차량사진1"
+    },
+    carImagePath2: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "차량사진2"
+    },
+    carImagePath3: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "차량사진3"
+    },
     estimation: {
       type: DataTypes.INTEGER,
       allowNull: true,
       comment: "가견적"
+    },
+    exportable: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 0,
+      comment: "수출가능여부"
     },
     quotation: {
       type: DataTypes.INTEGER,

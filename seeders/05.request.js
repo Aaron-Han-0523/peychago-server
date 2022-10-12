@@ -15,11 +15,8 @@ module.exports = {
 
         let datas = [];
         for (let i = 0; i < 10; i++) {
-            if (i % 3 != 1) continue;
             let obj = {
                 carNum: `${i}${i} 가 ${i}${i}${i}${i}`
-                , canDrive: i % 2 == 0 ? false : true
-                , aluminumWheel: i % 3 == 0 ? true : false
                 , deliveryDate: new Date(2022, 10, i)
                 , collectPlace: '논현' + i
                 , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
@@ -33,7 +30,7 @@ module.exports = {
             datas.push(obj)
         }
 
-        await queryInterface.bulkInsert('disposalrequest', datas, {});
+        await queryInterface.bulkInsert('request', datas, {});
     },
 
     async down(queryInterface, Sequelize) {
@@ -43,6 +40,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-        await queryInterface.bulkDelete('disposalrequest', null, {});
+        await queryInterface.bulkDelete('request', null, {});
     }
 };

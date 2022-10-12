@@ -1,4 +1,4 @@
-const disposalRequestService = require('../services/disposalRequest');
+const disposalRequestService = require('../services/request');
 const processService = require('../services/process');
 const models = require('../models');
 const Sequelize = require('sequelize');
@@ -46,14 +46,14 @@ exports.edit = async (req, res, next) => {
 exports.index = async (req, res, next) => {
 
   let query = `
-    select supplier.companyName, req.*, process.* from disposalrequest req
-    left join supplierusers supplier
-    on req.supplierUsers_id=supplier.supplierUsers_id
+    select supplier.companyName, req.*, process.* from request req
     left join process
-    on req.carNum=process.carNum
-    where (req.deleteDate is null)
+      on req.carNum=process.carNum
+    left join supplierusers supplier
+      on req.supplierUsers_id=supplier.supplierUsers_id
+    where (req.deleteDate is null) and (process.processType=1)
     order by req.createDate;
-    `
+  `
   const data = await models.sequelize.query(query)
     .then(function (results, metadata) {
       // 쿼리 실행 성공
@@ -116,12 +116,13 @@ exports.search = async (req, res, next) => {
   // let condition = {};
 
   let query = `
-    select supplier.companyName, req.*, process.* from disposalrequest req
-    left join supplierusers supplier
-    on req.supplierUsers_id=supplier.supplierUsers_id
+    select supplier.companyName, req.*, process.* from request req
     left join process
-    on req.carNum=process.carNum
-    where (req.deleteDate is null) and (process.carNum like('%${word}%') or process.ownerName like('%${word}%'))
+      on req.carNum=process.carNum
+    left join supplierusers supplier
+      on req.supplierUsers_id=supplier.supplierUsers_id
+    where (req.deleteDate is null) and (process.processType=1)
+      and (process.carNum like('%${word}%') or process.ownerName like('%${word}%'))
     order by req.createDate;
     `
   const result = await models.sequelize.query(query)

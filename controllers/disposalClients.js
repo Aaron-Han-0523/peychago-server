@@ -62,7 +62,7 @@ exports.edit = async (req, res, next) => {
 exports.index = async (req, res, next) => {
     const condition = req.query ? req.query : {};
     console.log("clients condition :", condition);
-    condition.processType = 1;
+    condition.processType = 0;
 
     let data = await processService
         .allRead(condition)
@@ -104,7 +104,7 @@ exports.delete = async (req, res, next) => {
     obj.id = id;
     obj.user = user.userid;
 
-    let result = await clientsService
+    let result = await processService
         .delete(obj)
         .catch(err => console.error(err));
 
