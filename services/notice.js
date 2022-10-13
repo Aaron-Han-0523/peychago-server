@@ -37,7 +37,7 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition = {}) => {
+exports.allRead = async (condition = {}, paging = {}) => {
     // console.log('all notice read');
 
     return await notice
@@ -49,7 +49,9 @@ exports.allRead = async (condition = {}) => {
             order: [
                 ['type', 'DESC'],
                 ['notice_id', 'DESC'],
-            ]
+            ],
+            offset: paging.skip,
+            limit: paging.limit
         })
         .then(result => {
             console.log("notice 'count' and 'rows' read success");

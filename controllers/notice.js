@@ -39,8 +39,26 @@ exports.edit = async (req, res, next) => {
 }
 
 exports.index = async (req, res, next) => {
-    let data = await noticeService
-        .allRead()
+    const page = req.query.p ? req.query.p : 1;
+    const word = req.query.q;
+    const skip = req.query.skip;
+    const limit = req.query.limit;
+
+    let paging = {
+        skip: skip ? skip : (page - 1) * 10,
+        limit: limit ? limit : 10
+    }
+    let condition = word ?
+        {
+            [Op.or]: [
+                { title: { [Op.like]: `%${word}%` } },
+                { content: { [Op.like]: `%${word}%` } }
+            ]
+        }
+        : {}
+
+    const data = await noticeService
+        .allRead(condition, paging)
         .catch(err => console.error(err));
 
     // console.log("data :", data);
@@ -48,7 +66,9 @@ exports.index = async (req, res, next) => {
     return res.render('notice/index', {
         count: data.count,
         data: data.rows,
-        user: req.userInfo
+        user: req.userInfo,
+        page: page,
+        word: word
     });
 }
 
