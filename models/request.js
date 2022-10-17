@@ -69,7 +69,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     amount1: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       comment: "차주-금액"
     },
     bankName2: {

@@ -23,9 +23,14 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "비밀번호"
     },
+    carNum: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      comment: "차량번호"
+    },
     address: {
       type: DataTypes.STRING(200),
-      allowNull: false,
+      allowNull: true,
       comment: "실거주지"
     },
     createDate: {

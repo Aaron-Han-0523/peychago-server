@@ -127,7 +127,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     date0: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "신청일"
     },
     date1: {

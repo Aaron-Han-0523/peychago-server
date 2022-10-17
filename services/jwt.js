@@ -37,6 +37,7 @@ exports.verifyToken = async (req, res, next) => {
         // console.log(decoded)
         delete decoded.iat;
         delete decoded.exp;
+        delete decoded.createDate;
         req.userInfo = decoded;
 
         const token = await this.createToken(decoded);

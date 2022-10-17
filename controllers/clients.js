@@ -36,16 +36,17 @@ exports.login = async function (req, res, next) {
       return res.redirect('/');
     } else {
       console.log('비밀번호 불일치')
-      return res.status(400).send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
+      return res.status(403).send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
     }
   } else {
     console.log('아이디 없음')
-    return res.status(400).send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
+    return res.status(403).send(`<script> alert("아이디와 비밀번호를 확인해주세요."); location.href = document.referrer; </script>`)
   }
 }
 
 exports.add = async (req, res, next) => {
   let body = req.body;
+  body.password = await encryption.hashing(body.password);
   console.log("client add", body);
 
   try {
@@ -64,9 +65,9 @@ exports.add = async (req, res, next) => {
 exports.edit = async (req, res, next) => {
   // console.log("put - clients edit")
   const user = req.userInfo;
-  const id = req.params.id;
+  const id = user.clients_id;
   let body = req.body;
-  body.user = user.userid;
+  body.user = user.clientName;
   body.id = id;
 
   let result = await clientsService

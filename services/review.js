@@ -4,10 +4,10 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await review
-        .create(Object.assign(obj, {
+        .create(Object.assign({
             createUser: obj.user,
             createDate: new Date()
-        }))
+        }, obj))
         .then(result => {
             console.log("review create success");
             return result;
@@ -21,10 +21,10 @@ exports.create = async (obj) => {
 exports.update = async (obj) => {
     console.log("update obj :", obj)
     return await review
-        .update(Object.assign(obj, {
+        .update(Object.assign({
             updateUser: obj.user,
             updateDate: new Date()
-        }), {
+        }, obj), {
             where: { review_id: obj.id }
         })
         .then(result => {
@@ -37,7 +37,7 @@ exports.update = async (obj) => {
         })
 }
 
-exports.allRead = async (condition = {}) => {
+exports.allRead = async (condition = {}, paging = {}) => {
     // console.log('all review read');
 
     return await review
@@ -48,7 +48,9 @@ exports.allRead = async (condition = {}) => {
             }),
             order: [
                 ['review_id', 'DESC']
-            ]
+            ],
+            offset: paging.skip,
+            limit: paging.limit
         })
         .then(result => {
             console.log("review 'count' and 'rows' read success");

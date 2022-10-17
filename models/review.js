@@ -111,7 +111,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     carInfo_id: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
       comment: "차량 정보 식별번호",
       references: {
         model: 'carinfo',
@@ -120,7 +120,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     supplierUsers_id: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
+      allowNull: true,
       comment: "협력사 식별번호",
       references: {
         model: 'supplierusers',

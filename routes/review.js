@@ -25,6 +25,7 @@ let storage = multer.diskStorage({
     for (let i = 0; i < basename.length; i++) {
       encoding += basename.codePointAt(i);
     }
+    encoding = encoding.slice(0, 200);
     callback(null, encoding + "-" + Date.now() + extension);
   },
 });
@@ -39,14 +40,29 @@ let upload = multer({
 });
 
 /* GET review listing. */
+// 생성
 router
   .get('/add', jwt.verifyToken, async (req, res, next) => res.render('review/add', {
     user: req.userInfo,
     car: await carInfoService.allRead(),
     supplier: await supplierUsersService.allRead(),
   }))
-  .post('/add', jwt.verifyToken, upload.array('files'), reviewController.add)
+  .post('/add', jwt.verifyToken, (req, res, next) => upload.array('files')(req, res, function (err) {
+    // console.log(req.headers)
 
+    if (err instanceof multer.MulterError) {
+      // console.error("multer error :", err); // multer 에러 확인
+      return res.status(400).json(err.message);
+    } else if (err) {
+      console.error("unknown error :", err); // unknown 에러 확인
+      return res.status(400).json(err.message);
+    }
+    next();
+  }), reviewController.add);
+
+
+// 수정
+router
   .get('/edit/:id', jwt.verifyToken, async (req, res, next) => req.api ?
     res.json({
       user: req.userInfo,
@@ -58,16 +74,47 @@ router
       car: await carInfoService.allRead(),
       supplier: await supplierUsersService.allRead(),
     }))
-  .post('/edit/:id', jwt.verifyToken, upload.array('files'), reviewController.edit)
-  .put('/edit/:id', jwt.verifyToken, upload.array('files'), reviewController.edit)
+  .post('/edit/:id', jwt.verifyToken, (req, res, next) => upload.array('files')(req, res, function (err) {
+    // console.log(req.headers)
 
+    if (err instanceof multer.MulterError) {
+      // console.error("multer error :", err); // multer 에러 확인
+      return res.status(400).json(err.message);
+    } else if (err) {
+      console.error("unknown error :", err); // unknown 에러 확인
+      return res.status(400).json(err.message);
+    }
+    next();
+  }), reviewController.edit)
+  .put('/edit/:id', jwt.verifyToken, (req, res, next) => upload.array('files')(req, res, function (err) {
+    // console.log(req.headers)
+
+    if (err instanceof multer.MulterError) {
+      // console.error("multer error :", err); // multer 에러 확인
+      return res.status(400).json(err.message);
+    } else if (err) {
+      console.error("unknown error :", err); // unknown 에러 확인
+      return res.status(400).json(err.message);
+    }
+    next();
+  }), reviewController.edit);
+
+
+// 삭제
+router
   .get('/delete/:id', jwt.verifyToken, reviewController.delete)
   .delete('/:id', jwt.verifyToken, reviewController.delete)
 
+// 검색
+router
   .get('/search', jwt.verifyToken, reviewController.search)
 
+// 조회
+router
   .get('/:id', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), reviewController.detail)
 
+// 목록 조회
+router
   .get('/', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), reviewController.index)
 
 module.exports = router;

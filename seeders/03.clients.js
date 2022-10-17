@@ -22,6 +22,7 @@ module.exports = {
         clientName: 'cli' + i
         , phoneNum: `010-${i}${i}${i}${i}-${i}${i}${i}${i}`
         , password: hashedPassword
+        , carNum: `${i}${i} 가 ${i}${i}${i}${i}`
         , address: '학동' + i
         , createDate: new Date(),
       }

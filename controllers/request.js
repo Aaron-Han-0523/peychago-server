@@ -8,11 +8,14 @@ exports.add = async (req, res, next) => {
   const user = req.userInfo;
   let body = req.body;
   body.user = user.userid || user.clientName;
+  body.carNum = user.carNum;
 
   try {
     let result = await requestService.create(body);
     // console.log("result :",result);
-    return res.status(201).redirect('/request');
+    return req.api ?
+      res.status(201).end()
+      : res.status(201).redirect('/request');
   }
   catch (e) {
     console.error(e);

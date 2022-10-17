@@ -3,7 +3,6 @@ var _carinfo = require("./carinfo");
 var _clientlog = require("./clientlog");
 var _clients = require("./clients");
 var _estimationslist = require("./estimationslist");
-var _exportrequest = require("./exportrequest");
 var _imagesetting = require("./imagesetting");
 var _notice = require("./notice");
 var _parts = require("./parts");
@@ -21,7 +20,6 @@ function initModels(sequelize) {
   var clientlog = _clientlog(sequelize, DataTypes);
   var clients = _clients(sequelize, DataTypes);
   var estimationslist = _estimationslist(sequelize, DataTypes);
-  var exportrequest = _exportrequest(sequelize, DataTypes);
   var imagesetting = _imagesetting(sequelize, DataTypes);
   var notice = _notice(sequelize, DataTypes);
   var parts = _parts(sequelize, DataTypes);
@@ -56,7 +54,6 @@ function initModels(sequelize) {
     clientlog,
     clients,
     estimationslist,
-    exportrequest,
     imagesetting,
     notice,
     parts,

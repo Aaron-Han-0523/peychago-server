@@ -118,6 +118,22 @@
 
                             <div class="row">
                               <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h6>배기량</h6>
+                              </div>
+                            </div>
+
+                            <div class="row layout-spacing">
+                              <div class="col-lg-10 col-12 ">
+                                <div class="form-group">
+                                  <label for="displacement" class="visually-hidden">Text</label>
+                                  <input id="displacement" type="text" name="displacement" placeholder=""
+                                    class="form-control" required value="<%= data.displacement %>">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                 <h6>부속품</h6>
                               </div>
                             </div>
@@ -330,7 +346,19 @@
             }
           });
 
-          document.getElementsByName('cnt')
+          let targetTable = document.getElementById('partsList');
+          // console.log(target_table.innerHTML);
+          let targets = targetTable.getElementsByTagName('tr');
+          console.log(targets);
+          for (let i = 0; i < targets.length; i++) {
+            targets[i].addEventListener('change', function (event) {
+              if (autoFlag) {
+                auto_total_price();
+              }
+            });
+          }
+
+          // document.getElementsByName('cnt')
 
           function add_part(parts_id) {
             // console.log(parts_id);
@@ -338,9 +366,6 @@
 
             let part = document.getElementById('part' + parts_id).innerText.split('\t');
             // console.log(part);
-
-            let targetTable = document.getElementById('partsList');
-            // console.log(target_table.innerHTML);
 
             let newRow = targetTable.insertRow();
             //console.log(newRow.outerHTML);

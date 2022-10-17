@@ -44,12 +44,16 @@ const upload = (fileName) => multer({
 });
 
 /* GET process listing. */
+// 생성
 router
   .get('/add', jwt.verifyToken, (req, res, next) => res.render('process/add', { user: req.userInfo }))
-  .post('/add', jwt.verifyToken, processController.add)
+  .post('/add', jwt.verifyToken, processController.add);
+
+// 수정
+router
   .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('process/edit', { user: req.userInfo }))
   .post('/edit/:id', jwt.verifyToken, processController.edit)
-  .get('/delete/:id', jwt.verifyToken, processController.delete)
+  .put('/edit', jwt.verifyToken, processController.edit)
   .post('/deregistrationPath/:id', jwt.verifyToken,
     // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
     (req, res, next) => upload('말소증').single('deregistrationPath')(req, res, function (err) {
@@ -62,7 +66,19 @@ router
     // (req, res, next) => { console.log('disposalRequest upload file\n', req.file); next(); },
     processController.edit
   )
+
+
+// 삭제
+router
+  .get('/delete/:id', jwt.verifyToken, processController.delete)
+  .delete('/', jwt.verifyToken, processController.delete)
+
+// 조회
+router
   .get('/:id', jwt.verifyToken, processController.detail)
-  .get('/', jwt.verifyToken, processController.index)
+  .get('/', jwt.verifyToken, (req, res, next) => req.api ?
+    processController.detail(req, res, next)
+    : processController.index(req, res, next)
+  )
 
 module.exports = router;

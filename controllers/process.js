@@ -3,12 +3,20 @@ const processService = require('../services/process');
 exports.add = async (req, res, next) => {
   const user = req.userInfo;
   let body = req.body;
-  body.user = user.userid;
+  body.user = user.clientName;
+
+  if (req.api) {
+    body.createUser = user.clientName;
+    body = Object.assign(user, body);
+  }
+  else body.user = user.userid;
 
   try {
     let result = await processService.create(body);
     // console.log("result :",result);
-    return res.status(201).redirect('/process');
+    return req.api ?
+      res.status(201).end()
+      : res.status(201).redirect('/process');
   }
   catch (e) {
     console.error(e);
@@ -21,9 +29,16 @@ exports.edit = async (req, res, next) => {
   const user = req.userInfo;
   const id = req.params.id;
   let body = req.body;
-  body.user = user.userid;
-  body.id = id;
 
+  if (req.api) {
+    body.createUser = user.clientName;
+    // body = Object.assign(user, body);
+    body.id = user.carNum;
+  }
+  else {
+    body.user = user.userid;
+    body.id = id;
+  }
   // console.log(req.headers);
 
   for (key in body) {
@@ -39,7 +54,9 @@ exports.edit = async (req, res, next) => {
   await processService
     .update(body)
     .then(() => {
-      res.send(`<script>history.go(-1);</script>`);
+      return req.api ?
+        res.end()
+        : res.send(`<script>history.go(-1);</script>`);
       //redirect(`/process/${id}`);
     })
     .catch(err => {
@@ -63,29 +80,26 @@ exports.index = async (req, res, next) => {
 }
 
 exports.detail = async (req, res, next) => {
-  const id = req.params.id;
-  console.log(`open one data id-${id}`)
-
   const user = req.userInfo;
+  const id = user.carNum ? user.carNum : req.params.id;
+  console.log(`open one data user-${user} / id-${id}`)
+
   let data = await processService
     .readOne(id)
     .catch(err => console.error(err));
 
   // console.log(data);
 
-  if (data) return res.json({
-    render: `(process/${id})`,
-    data: data.dataValues
-  });
+  if (data) return res.json(data)
   else res.json(`fail id:${id}`)
 }
 
 exports.delete = async (req, res, next) => {
-  const id = req.params.id;
   const user = req.userInfo;
+  const id = user.carNum ? user.carNum : req.params.id;
   let obj = {};
   obj.id = id;
-  obj.user = user.userid;
+  obj.user = user.userid || user.clientName;
 
   let result = await processService
     .delete(obj)
@@ -93,6 +107,6 @@ exports.delete = async (req, res, next) => {
 
   // console.log("delete result :", result)
 
-  if (result) return res.redirect('/process');
+  if (result) return req.api ? res.end() : res.redirect('/process');
   else res.json(`fail id:${id}`)
 }

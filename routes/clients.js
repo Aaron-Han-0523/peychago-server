@@ -9,6 +9,7 @@ router
   .post('/add', clientsController.add)
   .post('/login', clientsController.login)
   .put('/selectCompany', jwt.verifyToken, clientsController.selectCompany)
-  .get('/Info', jwt.verifyToken, clientsController.info)
+  .get('/info', jwt.verifyToken, clientsController.info)
+  .put('/edit', jwt.verifyToken, clientsController.edit)
 
 module.exports = router;

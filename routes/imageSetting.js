@@ -21,7 +21,7 @@ function formatDate(d_t) {
 // 업로드 파일 저장 설정
 const storage = (fileName) => multer.diskStorage({
     destination: function (req, file, callback) {
-        const FILES_PATH = path.join('/', process.env.UPLOADFILES_ROOT, "appImage");
+        const FILES_PATH = path.join(process.env.UPLOADFILES_ROOT, "imageSetting");
         const FOLDER_PATH = path.join(process.cwd(), FILES_PATH);
         myUtils.mkdir(FOLDER_PATH);
 
@@ -39,20 +39,26 @@ const upload = (fileName) => multer({
     storage: storage(fileName),
     // file size 제한(MB)
     limits: {
-      fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
+        fileSize: process.env.FILE_MAX_SIZE * 1024 * 1024,
     },
 });
 
 
 /* GET imageSetting listing. */
 router
-    .get('/', jwt.verifyToken, async (req, res, next) =>
-        req.api ?
-            res.status(200).json(await imageSettingService.readOne())
+    .get('/', (req, res, next) => req.api ? next() : jwt.verifyToken(req, res, next), async (req, res, next) => {
+        const data = await imageSettingService.readOne()
+            .catch(err => {
+                return res.status(400).send(err.message);
+            });
+        return req.api ? res.status(200).json(data)
             : res.render('imageSetting/index', {
                 user: req.userInfo,
-                data: await imageSettingService.readOne()
-            }))
+                data: data
+            })
+
+    })
+
     .post('/noticeImagePath', jwt.verifyToken, upload('noticeImage').single('noticeImagePath'), imageSettingController.edit)
     .post('/about1Title', jwt.verifyToken, imageSettingController.edit)
     .post('/about1URL', jwt.verifyToken, imageSettingController.edit)

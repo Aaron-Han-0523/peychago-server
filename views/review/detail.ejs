@@ -55,8 +55,8 @@
                                                         <div>
                                                             <label
                                                                 class="col-form-label form-control col-xl-4 mb-xl-0 mb-2">
-                                                                <%= car.maker +'-'+ car.model +'-'+ car.detailModel
-                                                                    +'-'+ car.yearModel %>
+                                                                <%= car ? car.maker +'-'+ car.model +'-'+
+                                                                    car.detailModel +'-'+ car.yearModel : '' %>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -65,7 +65,8 @@
                                                         </label>
                                                         <div>
                                                             <label class="form-control col-xl-4 mb-xl-0 mb-2">
-                                                                <%= supplier.companyName +'-'+ supplier.mainPhoneNum %>
+                                                                <%= supplier ? supplier.companyName +'-'+
+                                                                    supplier.mainPhoneNum : '' %>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -109,7 +110,8 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <h3 class="col-form-label col-form-label-sm form-control col-xl-4 mb-xl-0 mb-2">
+                                                        <h3
+                                                            class="col-form-label col-form-label-sm form-control col-xl-4 mb-xl-0 mb-2">
                                                             <%= data.title %>
                                                         </h3>
                                                     </div>
@@ -181,24 +183,21 @@
 
 
                                                     <div class="row layout-top-spacing">
-                                                        <div class="col-lg-6 col-12 ">
-                                                            <div class="form-group">
-                                                                <% if(user.permission2.data[0]&0b0010) { %>
-                                                                    <button type="button"
-                                                                        onclick="location.href='/review/edit/<%= data.review_id %>';"
-                                                                        class="btn btn-outline-success mb-2 me-4">수정하기</button>
-                                                                    <% } %>
-                                                                        <% if(user.permission2.data[0]&0b0001) { %>
+                                                        <div class="form-group">
+                                                            <% if(user.permission2.data[0]&0b0010) { %>
+                                                                <button type="button"
+                                                                    onclick="location.href='/review/edit/<%= data.review_id %>';"
+                                                                    class="btn btn-outline-success mb-2 me-4">수정하기</button>
+                                                                <% } %>
+                                                                    <% if(user.permission2.data[0]&0b0001) { %>
+                                                                        <button class="btn btn-outline-danger mb-2 me-4"
+                                                                            type="button"
+                                                                            onclick="location.href='/review/delete/<%= data.review_id %>';">삭제하기</button>
+                                                                        <% } %>
                                                                             <button
                                                                                 class="btn btn-outline-danger mb-2 me-4"
                                                                                 type="button"
-                                                                                onclick="location.href='/review/delete/<%= data.review_id %>';">삭제하기</button>
-                                                                            <% } %>
-                                                                                <button
-                                                                                    class="btn btn-outline-danger mb-2 me-4"
-                                                                                    type="button"
-                                                                                    onclick="location.href='/review';">뒤로가기</button>
-                                                            </div>
+                                                                                onclick="location.href='/review';">뒤로가기</button>
                                                         </div>
                                                     </div>
                                                 </div>

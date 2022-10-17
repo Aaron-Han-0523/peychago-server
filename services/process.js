@@ -44,6 +44,7 @@ exports.allRead = async (condition = {}) => {
         .findAndCountAll({
             raw: true,
             where: Object.assign(condition, {
+                date0: { [Op.ne]: null },
                 deleteDate: null
             }),
             order: [
@@ -65,7 +66,8 @@ exports.readOne = async (id) => {
     return await process
         .findByPk(id)
         .then(result => {
-            console.log(`carNum-${id} find success`);
+            console.log(`carNum-${id} find result`);
+            console.log(result.dataValues);
             return result.dataValues;
         })
         .catch(err => {
