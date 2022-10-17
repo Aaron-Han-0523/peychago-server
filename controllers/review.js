@@ -96,8 +96,8 @@ exports.index = async (req, res, next) => {
     const limit = +req.query.limit;
 
     let paging = {
-        skip: skip ? skip : (page - 1) * 10,
-        limit: limit ? limit : 10
+        skip: skip ? skip : null,    // (page - 1) * 10,
+        limit: limit ? limit : null // 10
     }
     let condition = word ?
         {
