@@ -75,10 +75,18 @@ exports.edit = async (req, res, next) => {
     .catch(err => console.error(err));
 
   // console.log('result :', result)
+  // console.log(token);
+  //  console.log('verify complete')
 
-  if (result) return req.api ?
-    res.status(200).json("client edit success")
-    : res.redirect(`/clients/${id}`);
+  if (result) {
+    user.address = body.address;
+    const token = await jwt.createToken(user);
+    res.cookie('jwt', token, req.app.get('jwt-option'))
+
+    return req.api ?
+      res.status(200).json("client edit success")
+      : res.redirect(`/clients/${id}`);
+  }
   else return res.status(400).json(`fail id:${id}`)
 }
 
@@ -165,8 +173,8 @@ exports.info = async (req, res, next) => {
 
 
 exports.search = async (req, res, next) => {
-    const user = req.userInfo;
-    let word = req.query.q;
+  const user = req.userInfo;
+  let word = req.query.q;
   console.log("search", word, "start")
 
   let result = null;
