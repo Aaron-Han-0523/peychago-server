@@ -28,9 +28,19 @@ const storage = (fileName) => multer.diskStorage({
     callback(null, FILES_PATH)
   }, filename: function (req, file, callback) {
     let extension = file.mimetype.split('/')[1];
-    const newFilename = fileName + '-' + req.userInfo.userName + '_' + formatDate(new Date) + '.' + extension;
-    console.log("save filename :", newFilename)
-    callback(null, newFilename);
+    if (req.api) {
+      let basename = path.basename(file.originalname, extension);
+      let encoding = ""
+      for (let i = 0; i < basename.length; i++) {
+        encoding += basename.codePointAt(i);
+      }
+      encoding = encoding.slice(0, 200);
+      callback(null, encoding + "-" + Date.now() + extension);
+    } else {
+      const newFilename = fileName + '-' + req.userInfo.userName + '_' + formatDate(new Date) + '.' + extension;
+      console.log("save filename :", newFilename)
+      callback(null, newFilename);
+    }
   },
 });
 
@@ -47,13 +57,13 @@ const upload = (fileName) => multer({
 // 생성
 router
   .get('/add', jwt.verifyToken, (req, res, next) => res.render('process/add', { user: req.userInfo }))
-  .post('/add', jwt.verifyToken, processController.add);
+  .post('/add', jwt.verifyToken, upload().array('carImages'), processController.add);
 
 // 수정
 router
   .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('process/edit', { user: req.userInfo }))
   .post('/edit/:id', jwt.verifyToken, processController.edit)
-  .put('/edit', jwt.verifyToken, processController.edit)
+  .put('/edit', jwt.verifyToken,upload().array('carImages'), processController.edit)
   .post('/deregistrationPath/:id', jwt.verifyToken,
     // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
     (req, res, next) => upload('말소증').single('deregistrationPath')(req, res, function (err) {

@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('process', {
     carNum: {
-      type: DataTypes.STRING(15),
+      type: DataTypes.STRING(20),
       allowNull: false,
       primaryKey: true,
       comment: "차량번호"
@@ -98,6 +98,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true,
       comment: "차량사진3"
+    },
+    carImagePath4: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      comment: "차량사진4"
     },
     estimation: {
       type: DataTypes.INTEGER,

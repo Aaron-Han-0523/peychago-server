@@ -11,6 +11,14 @@ exports.add = async (req, res, next) => {
   }
   else body.user = user.userid;
 
+  let files = req.files;
+  console.log("files :", files);
+  if (files) {
+    for (let i = 0; i < 5; i++) {
+      if (files[i]) body['carImagePath' + (i + 1)] = files[i].path;
+    }
+  }
+
   try {
     let result = await processService.create(body);
     // console.log("result :",result);
@@ -49,6 +57,14 @@ exports.edit = async (req, res, next) => {
   console.log("file :", file);
   if (file) {
     body[file.fieldname] = file.path;
+  }
+
+  let files = req.files;
+  console.log("files :", files);
+  if (files) {
+    for (let i = 0; i < 5; i++) {
+      if (files[i]) body['carImagePath' + i] = files[i].path;
+    }
   }
 
   await processService
