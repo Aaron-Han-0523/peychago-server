@@ -11,7 +11,10 @@ exports.add = async (req, res, next) => {
     let body = req.body;
 
     if (req.api) {
-        processInfo = await processService.readOne(user.carNum);
+        processInfo = await processService
+            .readOne(user.carNum)
+            .catch(err => res.status(500).json("진행상황 검색 오류"));
+        if (processInfo.state < 9) return res.status(500).json("폐차/수출 완료 후 가능합니다.")
         body.carInfo_id = processInfo.carInfo_id;
         body.createUser = user.clientName;
         body = Object.assign(user, body);
@@ -107,7 +110,7 @@ exports.index = async (req, res, next) => {
             ]
         }
         : {}
-    if(req.query.carInfo_id) condition.carInfo_id = req.query.carInfo_id;
+    if (req.query.carInfo_id) condition.carInfo_id = req.query.carInfo_id;
     // console.log("review condition :", condition);
     // console.log("review paging :", paging);
 
