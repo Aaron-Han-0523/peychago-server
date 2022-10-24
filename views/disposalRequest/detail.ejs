@@ -4,7 +4,9 @@
 <head>
     <%- include ("../partials/header.ejs") %>
 
-
+        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
+            <% let aluminumWheel=['X', 'O' , '모름' ]; %>
+                <% let collectMethod=['견인', '조기' ,'인탁' ]; %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
@@ -281,8 +283,7 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <label class="form-control" id="carCondition"
                                                                         name="carCondition">
-                                                                        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-                                                                            <%= carCondition[data.carCondition] %>
+                                                                        <%= carCondition[data.carCondition] %>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -303,7 +304,7 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <label class="form-control" id="aluminumWheel"
                                                                         name="aluminumWheel">
-                                                                        <%= data.aluminumWheel==0? "X" :"O" %>
+                                                                        <%= aluminumWheel[data.aluminumWheel] %>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -313,8 +314,7 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <label class="form-control" id="collectMethod"
                                                                         name="collectMethod">
-                                                                        <%= data.collectMethod==0? "견인"
-                                                                            :data.collectMethod==1? "조기" :"인탁" %>
+                                                                        <%= collectMethod[data.collectMethod] %>
                                                                     </label>
                                                                 </div>
                                                             </div>

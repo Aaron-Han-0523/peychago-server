@@ -4,7 +4,9 @@
 <head>
     <%- include ("../partials/header.ejs") %>
 
-
+        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
+            <% let aluminumWheel=['X', 'O', '모름' ]; %>
+                <% let collectMethod=['견인', '조기' ,'인탁' ]; %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
@@ -342,19 +344,18 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <select class="form-control" id="carCondition"
                                                                         name="carCondition" disabled>
-                                                                        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-                                                                            <% for(let i=0; i< carCondition.length; i++)
-                                                                                { %>
-                                                                                <% if(process.carCondition==i) { %>
-                                                                                    <option value="<%= i %>" selected>
+                                                                        <% for(let i=0; i< carCondition.length; i++) {
+                                                                            %>
+                                                                            <% if(process.carCondition==i) { %>
+                                                                                <option value="<%= i %>" selected>
+                                                                                    <%= carCondition[i] %>
+                                                                                </option>
+                                                                                <% } else { %>
+                                                                                    <option value="<%= i %>">
                                                                                         <%= carCondition[i] %>
                                                                                     </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>">
-                                                                                            <%= carCondition[i] %>
-                                                                                        </option>
+                                                                                    <% } %>
                                                                                         <% } %>
-                                                                                            <% } %>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -375,19 +376,18 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <select class="form-control" id="aluminumWheel"
                                                                         name="aluminumWheel" disabled>
-                                                                        <% let aluminumWheel=['X', 'O' ]; %>
-                                                                            <% for(let i=0; i< aluminumWheel.length;
-                                                                                i++) { %>
-                                                                                <% if(process.aluminumWheel==i) { %>
-                                                                                    <option value="<%= i %>" selected>
+                                                                        <% for(let i=0; i< aluminumWheel.length; i++) {
+                                                                            %>
+                                                                            <% if(process.aluminumWheel==i) { %>
+                                                                                <option value="<%= i %>" selected>
+                                                                                    <%= aluminumWheel[i] %>
+                                                                                </option>
+                                                                                <% } else { %>
+                                                                                    <option value="<%= i %>">
                                                                                         <%= aluminumWheel[i] %>
                                                                                     </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>">
-                                                                                            <%= aluminumWheel[i] %>
-                                                                                        </option>
+                                                                                    <% } %>
                                                                                         <% } %>
-                                                                                            <% } %>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -397,19 +397,19 @@
                                                                         class="visually-hidden">Text</label>
                                                                     <select class="form-select" id="collectMethod"
                                                                         name="collectMethod">
-                                                                        <% let collectMethod=['견인', '조기' ,'인탁' ]; %>
-                                                                            <% for(let i=0; i< collectMethod.length;
-                                                                                i++) { %>
-                                                                                <% if(data.collectMethod==i) { %>
-                                                                                    <option value="<%= i %>" selected>
+
+                                                                        <% for(let i=0; i< collectMethod.length; i++) {
+                                                                            %>
+                                                                            <% if(data.collectMethod==i) { %>
+                                                                                <option value="<%= i %>" selected>
+                                                                                    <%= collectMethod[i] %>
+                                                                                </option>
+                                                                                <% } else { %>
+                                                                                    <option value="<%= i %>">
                                                                                         <%= collectMethod[i] %>
                                                                                     </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>">
-                                                                                            <%= collectMethod[i] %>
-                                                                                        </option>
+                                                                                    <% } %>
                                                                                         <% } %>
-                                                                                            <% } %>
                                                                     </select>
                                                                 </div>
                                                             </div>
