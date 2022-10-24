@@ -51,7 +51,7 @@ exports.index = async (req, res, next) => {
       on req.carNum=process.carNum
     left join supplierusers supplier
       on req.supplierUsers_id=supplier.supplierUsers_id
-    where (req.deleteDate is null) and (process.processType=1)
+    where (req.deleteDate is null) and (process.processType=0)
     order by req.createDate;
   `
   const data = await models.sequelize.query(query)

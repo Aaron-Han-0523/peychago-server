@@ -13,7 +13,7 @@ module.exports = {
     */
 
     let datas = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 300; i++) {
       let obj = {
         title:`noticetitle${i}`,
         content:`noticecontent${i}`,
