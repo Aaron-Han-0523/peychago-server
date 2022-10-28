@@ -100,6 +100,24 @@
                                                         <div class="form-group row">
                                                             <div class="row">
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
+                                                                    <h6>E-mail</h6>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row layout-spacing">
+                                                                <div class="col col-xl-8 mb-xl-0 mb-2">
+                                                                    <div class="form-group">
+                                                                        <input disabled id="email" type="text"
+                                                                            name="email" placeholder=""
+                                                                            class="form-control"
+                                                                            value="<%= clients.email %>">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="row">
+                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
                                                                     <h6>차량번호</h6>
                                                                 </div>
                                                                 <div class="col col-xl-4 mb-xl-0 mb-2">
@@ -530,6 +548,44 @@
                                     </div>
                                 </div>
 
+                                <!-- 최종견적 등록 -->
+                                <div class="row layout-spacing">
+                                    <div class="col-lg-12 layout-top-spacing">
+                                        <div class="col-lg-12">
+                                            <div class="statbox widget box box-shadow">
+                                                <div class="widget-header">
+                                                    <div class="row layout-top-spacing">
+                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
+                                                            <h3 class="text-center">최종견적</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="widget-content widget-content-area">
+                                                    <form id="finalProcess" method="POST"
+                                                        action="/process/finalProcessPath/<%= process.carNum %>"
+                                                        enctype="multipart/form-data">
+                                                        <div class="d-flex col-xl-8">
+                                                            <div class="p-2 flex-grow-1">
+                                                                <input id="finalProcessInput" type="file"
+                                                                    class="form-control-file" name="finalProcessPath">
+                                                            </div>
+                                                            <div class="p-2">
+                                                                <button class="btn btn-primary">올리기</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div id="finalProcessImg" class="col-xl-8">
+                                                        <% if(process.finalProcessPath) { %>
+                                                            <img class="img-fluid"
+                                                                src="/<%= process.finalProcessPath %>" />
+                                                            <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- 말송증 등록 -->
                                 <div class="row layout-spacing">
                                     <div class="col-lg-12 layout-top-spacing">
@@ -591,13 +647,46 @@
                         });
                     });
 
-                    const deregistrationInput = document.getElementById('deregistrationInput');
-                    deregistrationInput.addEventListener('change', (event) => {
+                    const finalProcessInput = document.getElementById('finalProcessInput');
+                    finalProcessInput.addEventListener('change', (event) => {
                         console.log(event.target)
                         loadFile(event.target)
                     })
 
                     function loadFile(input) {
+                        var file = input.files[0];
+                        $('#finalProcessImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
+                    }
+
+                    finalProcess.onsubmit = async (e) => {
+                        e.preventDefault();
+
+                        if (!finalProcess[0].value) return alert("파일을 선택해주세요.");
+
+                        let response = await fetch(finalProcess.action, {
+                            method: 'POST',
+                            body: new FormData(finalProcess)
+                        }).then(res => {
+                            if (res.ok) {
+                                alert("저장되었습니다.");
+                                window.location.reload();
+                            }
+                            else {
+                                alert("전송 실패!!");
+                            }
+                            return res.json();
+                        }).then(result => {
+                            console.log(result);
+                        });
+                    }
+
+                    const deregistrationInput = document.getElementById('deregistrationInput');
+                    deregistrationInput.addEventListener('change', (event) => {
+                        console.log(event.target)
+                        loadFile2(event.target)
+                    })
+
+                    function loadFile2(input) {
                         var file = input.files[0];
                         $('#deregistrationImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
                     }

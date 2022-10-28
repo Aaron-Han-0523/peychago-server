@@ -33,6 +33,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: "실거주지"
     },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: "이메일"
+    },
     createDate: {
       type: DataTypes.DATE,
       allowNull: false,

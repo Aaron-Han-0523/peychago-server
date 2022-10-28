@@ -107,7 +107,7 @@ module.exports = function(sequelize, DataTypes) {
     estimation: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "가견적"
+      comment: "가견적 가격"
     },
     exportable: {
       type: DataTypes.TINYINT,
@@ -118,12 +118,12 @@ module.exports = function(sequelize, DataTypes) {
     quotation: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      comment: "실견적"
+      comment: "실견적 가격"
     },
-    requestPath: {
+    finalProcessPath: {
       type: DataTypes.STRING(200),
       allowNull: true,
-      comment: "회수요청서 경로"
+      comment: "최종견적서 경로"
     },
     deregistrationPath: {
       type: DataTypes.STRING(200),

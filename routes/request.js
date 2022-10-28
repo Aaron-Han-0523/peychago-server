@@ -83,18 +83,18 @@ router
 router
   .get('/search', jwt.verifyToken, requestController.search)
 
-router
-  .post('/upload/:id', jwt.verifyToken,
-    // (req, res, next) => { console.log('request body\n', req.get('content-Type')); next(); },
-    (req, res, next) => upload('폐차회수요청서').single('diposalRequest')(req, res, function (err) {
-      if (err) {
-        console.error(err); // multer 에러 확인
-        return
-      }
-      next();
-    }),
-    // (req, res, next) => { console.log('request upload file\n', req.file); next(); },
-    requestController.upload)
+// router
+//   .post('/upload/:id', jwt.verifyToken,
+//     // (req, res, next) => { console.log('request body\n', req.get('content-Type')); next(); },
+//     (req, res, next) => upload('폐차회수요청서').single('diposalRequest')(req, res, function (err) {
+//       if (err) {
+//         console.error(err); // multer 에러 확인
+//         return
+//       }
+//       next();
+//     }),
+//     // (req, res, next) => { console.log('request upload file\n', req.file); next(); },
+//     requestController.upload)
 
 router
   .get('/:id', jwt.verifyToken, async (req, res, next) => {

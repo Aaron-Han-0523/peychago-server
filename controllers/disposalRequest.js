@@ -141,28 +141,28 @@ exports.search = async (req, res, next) => {
   else res.status(400).json(`don't find ${word}`)
 }
 
-exports.upload = async (req, res, next) => {
-  const file = req.file;
-  // console.log('request file :', file);
-  if (!file) return res.status(400).json("Not found file");
+// exports.upload = async (req, res, next) => {
+//   const file = req.file;
+//   // console.log('request file :', file);
+//   if (!file) return res.status(400).json("Not found file");
 
-  let body = {};
-  body.id = req.params.id;
+//   let body = {};
+//   body.id = req.params.id;
 
-  const fieldName = 'requestPath';
+//   const fieldName = 'requestPath';
 
-  body[fieldName] = file.path;
+//   body[fieldName] = file.path;
 
-  await processService
-    .update(body)
-    .then(result => {
-      // console.log(result)
-      console.log(fieldName + ' upload complete');
-    })
-    .catch(err => {
-      console.error(err);
-      console.log(fieldName + " upload fail");
-      return res.status(400).json(err);
-    })
-  return res.json(fieldName + ' upload success')
-}
+//   await processService
+//     .update(body)
+//     .then(result => {
+//       // console.log(result)
+//       console.log(fieldName + ' upload complete');
+//     })
+//     .catch(err => {
+//       console.error(err);
+//       console.log(fieldName + " upload fail");
+//       return res.status(400).json(err);
+//     })
+//   return res.json(fieldName + ' upload success')
+// }

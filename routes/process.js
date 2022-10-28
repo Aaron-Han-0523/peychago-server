@@ -76,6 +76,18 @@ router
     // (req, res, next) => { console.log('disposalRequest upload file\n', req.file); next(); },
     processController.edit
   )
+  .post('/finalProcessPath/:id', jwt.verifyToken,
+    // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
+    (req, res, next) => upload('최종견적').single('finalProcessPath')(req, res, function (err) {
+      if (err) {
+        console.error(err); // multer 에러 확인
+        return res.status(400).json(err.message)
+      }
+      next();
+    }),
+    // (req, res, next) => { console.log('disposalRequest upload file\n', req.file); next(); },
+    processController.edit
+  )
 
 
 // 삭제
