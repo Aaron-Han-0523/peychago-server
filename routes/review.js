@@ -23,7 +23,7 @@ let storage = multer.diskStorage({
     let basename = path.basename(file.originalname, extension);
     let encoding = ""
     for (let i = 0; i < basename.length; i++) {
-      encoding += basename.codePointAt(i);
+      encoding += basename.codePointAt(i).toString(36);
     }
     encoding = encoding.slice(0, 200);
     callback(null, encoding + "-" + Date.now() + extension);
