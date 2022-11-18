@@ -11,6 +11,7 @@ exports.add = async (req, res, next) => {
   }
   else body.user = user.userid;
 
+  console.log(body);
   let files = req.files;
   console.log("files :", files);
   if (files) {
@@ -37,7 +38,7 @@ exports.edit = async (req, res, next) => {
   const user = req.userInfo;
   const id = req.params.id;
   let body = req.body;
-
+  console.log(user);
   if (req.api) {
     body.createUser = user.clientName;
     // body = Object.assign(user, body);
@@ -47,7 +48,7 @@ exports.edit = async (req, res, next) => {
     body.user = user.userid;
     body.id = id;
   }
-  // console.log(req.headers);
+  // console.log(req.userInfo);
 
   for (key in body) {
     if (body[key] === '') delete body[key];
@@ -97,7 +98,7 @@ exports.index = async (req, res, next) => {
 
 exports.detail = async (req, res, next) => {
   const user = req.userInfo;
-  const id = user.carNum ? user.carNum : req.params.id;
+  const id = user&&user.carNum ? user.carNum : req.params.id;
   console.log(`open one data user-${user} / id-${id}`)
 
   let data = await processService

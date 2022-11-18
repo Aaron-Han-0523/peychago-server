@@ -4,7 +4,7 @@ const Op = Sequelize.Op;
 
 exports.create = async (obj) => {
     return await request
-        .create(Object.assign(obj, {
+        .upsert(Object.assign(obj, {
             createUser: obj.user,
             createDate: new Date(),
         }))

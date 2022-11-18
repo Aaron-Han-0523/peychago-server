@@ -1,11 +1,21 @@
 const jwt = require('jsonwebtoken')
 const secret = process.env.JWT_SECRET_KEY
 const login_url = '/users/login'    // 로그인 분리 시 url : '/accounts/login'
+const clients = require('../models').clients;
 
 exports.verifyToken = async (req, res, next) => {
     console.log('verify token')
     console.log('Request url :', req.originalUrl)
-
+    console.log('jwt body :', req.body)
+    console.log('jwt headers :', req.headers)
+    if(req.api) {
+        // clients_id 사용자 정보 가져와서  req.userInfo
+	console.log(req.body.clients_id);
+        const id = req.body.clients_id || req.query.clients_id;
+	req.userInfo = await clients.findByPk(id,{raw:true});
+	console.log(req.userInfo);
+        next()
+    } else {
     // read the token from header or url 
     const token = req.cookies.jwt
     // console.log(token)
@@ -56,6 +66,7 @@ exports.verifyToken = async (req, res, next) => {
             res.status(403).json("접근할 수 없습니다.")
             : res.redirect(login_url)
     })
+    }
 }
 
 exports.createToken = (payload) => {
