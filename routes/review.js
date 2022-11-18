@@ -47,7 +47,7 @@ router
     car: await carInfoService.allRead(),
     supplier: await supplierUsersService.allRead(),
   }))
-  .post('/add', jwt.verifyToken, (req, res, next) => upload.array('files')(req, res, function (err) {
+  .post('/add', (req, res, next) => upload.array('files')(req, res, function (err) {
     // console.log(req.headers)
 
     if (err instanceof multer.MulterError) {
@@ -58,7 +58,7 @@ router
       return res.status(400).json(err.message);
     }
     next();
-  }), reviewController.add);
+  }), jwt.verifyToken, reviewController.add);
 
 
 // 수정

@@ -7,7 +7,8 @@ const Op = Sequelize.Op;
 exports.add = async (req, res, next) => {
   const user = req.userInfo;
   let body = req.body;
-  body.user = user.userid || user.clientName;
+  console.log(user);
+  body.user = user.clientName;
   body.carNum = user.carNum;
 
   try {

@@ -9,13 +9,17 @@ const Op = Sequelize.Op;
 exports.add = async (req, res, next) => {
     const user = req.userInfo;
     let body = req.body;
-
+    console.log(body);
+    console.log(user);
     if (req.api) {
+    console.log(1);
         processInfo = await processService
             .readOne(user.carNum)
             .catch(err => res.status(500).json("진행상황 검색 오류"));
         if (processInfo.state < 9) return res.status(500).json("폐차/수출 완료 후 가능합니다.")
+    console.log(2);
         body.carInfo_id = processInfo.carInfo_id;
+    console.log(3);
         body.createUser = user.clientName;
         body = Object.assign(user, body);
     }
@@ -37,7 +41,7 @@ exports.add = async (req, res, next) => {
         let result = await reviewService.create(body);
         // console.log("result :",result);
         return req.api ?
-            res.status(201).end()
+            res.status(201).send(result)
             : res.status(201).redirect('/review');
     }
     catch (e) {
@@ -51,13 +55,14 @@ exports.edit = async (req, res, next) => {
     const user = req.userInfo;
     const id = req.params.id;
     let body = req.body;
-
+    // console.log(user);
+    // console.log(id);
     const target = await reviewService.readOne(id).catch(err => {
         return res.status(403).json(err);
     });
     // console.log("target :", target);
     if (req.api) {
-        if (user.clients_id != target.clients_id) return res.status(403).json("작성자가 아닙니다.")
+        // if (user.clients_id != target.clients_id) return res.status(403).json("작성자가 아닙니다.")
         processInfo = await processService.readOne(user.carNum);
         body.carInfo_id = processInfo.carInfo_id;
         body.createUser = user.clientName;
@@ -72,13 +77,13 @@ exports.edit = async (req, res, next) => {
     // console.log("user :", user);
 
     let files = req.files;
-    // console.log("files :", files);
+    console.log("files :", files);
     if (files) {
         for (let i = 0; i < 3; i++) {
             if (files[i]) body['attachedFilepath' + (i + 1)] = files[i].path;
         }
     }
-    // console.log("after body :", body);
+    console.log("after body :", body);
 
     await reviewService
         .update(body)

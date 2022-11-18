@@ -21,8 +21,11 @@ exports.getUser = async function (phoneNum) {
 }
 
 exports.create = async (obj) => {
+    // exists?
+    const client = await clients.findOne({ where: { phoneNum: obj.phoneNum } })
+    if(client) {obj.clients_id=client.clients_id}
     return await clients
-        .create(Object.assign(obj, {
+        .upsert(Object.assign(obj, {
             createDate: new Date()
         }))
         .then(result => {
@@ -33,6 +36,7 @@ exports.create = async (obj) => {
             // console.error(err);
             throw (err);
         });
+    
 }
 
 exports.update = async (obj) => {

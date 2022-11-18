@@ -31,7 +31,7 @@ exports.login = async function (req, res, next) {
       //     result: 'ok',
       //     token
       // })
-      if (req.api) return res.status(200).json(`welcome ${user.clientName}`);
+      if (req.api) return res.status(200).json(`${user.clients_id}`);
       if (password == '123456') return res.redirect('/accounts/changePassword');
       return res.redirect('/');
     } else {
@@ -53,7 +53,7 @@ exports.add = async (req, res, next) => {
     let result = await clientsService.create(body);
     // console.log("result :",result);
     return req.api ?
-      res.status(201).json("client add success")
+      res.status(201).json(result[0])
       : res.status(201).redirect('/clients');
   }
   catch (e) {
@@ -80,9 +80,9 @@ exports.edit = async (req, res, next) => {
 
   if (result) {
     user.address = body.address;
-    const token = await jwt.createToken(user);
+    if (!req.api) {const token = await jwt.createToken(user);
     res.cookie('jwt', token, req.app.get('jwt-option'))
-
+}
     return req.api ?
       res.status(200).json("client edit success")
       : res.redirect(`/clients/${id}`);
