@@ -2,572 +2,505 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
+  <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
 
-    <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
-        <%- include ("../partials/nav.ejs") %>
-            <div>
-                <% formatDate=(d_t)=> { if (!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
+  <%- include ("../partials/nav.ejs") %>
+  <div>
+    <% formatDate=(d_t)=> { if (!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
                     (d_t.getMonth() + 1)).slice(-2); let day=("0" + d_t.getDate()).slice(-2); let hour=("0" +
                     d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
                     d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day; } %>
 
-                    <% const exportStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중'
+    <% const exportStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중'
                         , '실견적 확인중' , '수출 계약 작성 중' , '차량 말소 중' , '수출 완료' ]; %>
-                        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-                            <% let aluminumWheel=['X', 'O' , '모름' ]; %>
-            </div>
-            <!--  BEGIN MAIN CONTAINER  -->
-            <div class="main-container sidebar-closed " id="container">
+    <% let carCondition=['양호', '사고' , '운행불가' ]; %>
+    <% let aluminumWheel=['X', 'O' , '모름' ]; %>
+  </div>
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container sidebar-closed " id="container">
 
-                <div class="overlay"></div>
-                <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-                <%- include ("../partials/sidebar.ejs") %>
+    <%- include ("../partials/sidebar.ejs") %>
 
-                    <!--  BEGIN CONTENT AREA  -->
-                    <div id="content" class="main-content">
-                        <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                            <div class="middle-content container-xxl p-0">
-                                <!-- BREADCRUMB -->
-                                <div class="page-meta">
-                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/exportClients">수출 고객 관리</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">
-                                                <%= process.carNum %>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">수정</li>
-                                        </ol>
-                                    </nav>
-                                </div>
-                                <!-- /BREADCRUMB -->
+        <div class="middle-content container-xxl p-0">
+          <!-- BREADCRUMB -->
+          <div class="page-meta">
+            <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/exportClients">수출 고객 관리</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <%= process.carNum %>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">수정</li>
+              </ol>
+            </nav>
+          </div>
+          <!-- /BREADCRUMB -->
 
-                                <!-- 고객 정보 -->
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">고객 및 차량 정보</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="clientInfo" method="post"
-                                                        action="/process/edit/<%= process.carNum %>">
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>성함</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>연락처</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="clientName" type="text"
-                                                                            name="clientName" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= clients.clientName %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class=" col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="phoneNum" type="text"
-                                                                            name="phoneNum" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= clients.phoneNum %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+          <!-- 고객 정보 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">고객 및 차량 정보</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="clientInfo" method="post" action="/process/edit/<%= process.carNum %>">
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>성함</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>연락처</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= clients.clientName %>">
+                            </div>
+                          </div>
+                          <div class=" col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= clients.phoneNum %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>E-mail</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="email" type="text"
-                                                                            name="email" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= clients.email %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>E-mail</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-8 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="email" type="text" name="email" placeholder="" class="form-control" value="<%= clients.email %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>차량번호</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>차종</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="clientName" type="text"
-                                                                            name="clientName" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= process.carNum %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="phoneNum" type="text"
-                                                                            name="phoneNum" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= process.model %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>차량번호</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>차종</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= process.carNum %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= process.model %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>원동기 형식</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>배기량</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="clientName" type="text"
-                                                                            name="clientName" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= process.detailModel %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="phoneNum" type="text"
-                                                                            name="phoneNum" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= process.displacement %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>원동기 형식</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>배기량</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= process.detailModel %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= process.displacement %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>연식</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>최초등록일</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="clientName" type="text"
-                                                                            name="clientName" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= process.yearModel %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input disabled id="phoneNum" type="text"
-                                                                            name="phoneNum" placeholder=""
-                                                                            class="form-control"
-                                                                            value="<%= formatDate(process.registerDate) %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>연식</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>최초등록일</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= process.yearModel %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= formatDate(process.registerDate) %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <h6>차량 사진</h6>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <% if(process.carImagePath0) { %>
-                                                                            <img class="img-fluid"
-                                                                                src="/<%= process.carImagePath0 %>" />
-                                                                            <% } else { %>
-                                                                                <p>없음</p>
-                                                                                <% } %>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <% if(process.carImagePath1) { %>
-                                                                            <img src="/<%= process.carImagePath1 %>"
-                                                                                class="img-fluid" />
-                                                                            <% } else { %>
-                                                                                <p>없음</p>
-                                                                                <% } %>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-top-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <% if(process.carImagePath2) { %>
-                                                                            <img class="img-fluid"
-                                                                                src="/<%= process.carImagePath2 %>" />
-                                                                            <% } else { %>
-                                                                                <p>없음</p>
-                                                                                <% } %>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <% if(process.carImagePath3) { %>
-                                                                            <img class="img-fluid"
-                                                                                src="/<%= process.carImagePath3 %>" />
-                                                                            <% } else { %>
-                                                                                <p>없음</p>
-                                                                                <% } %>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-top-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <% if(process.carImagePath4) { %>
-                                                                            <img class="img-fluid"
-                                                                                src="/<%= process.carImagePath4 %>" />
-                                                                            <% } else { %>
-                                                                                <p>없음</p>
-                                                                                <% } %>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <h6>차량 사진</h6>
+                        </div>
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <% if(process.carImagePath0) { %>
+                              <img class="img-fluid" src="/<%= process.carImagePath0 %>" />
+                              <% } else { %>
+                              <p>없음</p>
+                              <% } %>
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <% if(process.carImagePath1) { %>
+                              <img src="/<%= process.carImagePath1 %>" class="img-fluid" />
+                              <% } else { %>
+                              <p>없음</p>
+                              <% } %>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row layout-top-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <% if(process.carImagePath2) { %>
+                              <img class="img-fluid" src="/<%= process.carImagePath2 %>" />
+                              <% } else { %>
+                              <p>없음</p>
+                              <% } %>
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <% if(process.carImagePath3) { %>
+                              <img class="img-fluid" src="/<%= process.carImagePath3 %>" />
+                              <% } else { %>
+                              <p>없음</p>
+                              <% } %>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row layout-top-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <% if(process.carImagePath4) { %>
+                              <img class="img-fluid" src="/<%= process.carImagePath4 %>" />
+                              <% } else { %>
+                              <p>없음</p>
+                              <% } %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row layout-top-spacing">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>차량상태</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>알루미늄 휠</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="carCondition"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <select class="form-select" name="carCondition">
-                                                                            <% for(let i=0; i< carCondition.length; i++)
+                      <div class="form-group row layout-top-spacing">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>차량상태</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>알루미늄 휠</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <label for="carCondition" class="visually-hidden">Text</label>
+                              <select class="form-select" name="carCondition">
+                                <% for(let i=0; i< carCondition.length; i++)
                                                                                 { %>
-                                                                                <% if(process.carCondition==i) { %>
-                                                                                    <option value="<%= i %>" selected>
-                                                                                        <%= carCondition[i] %>
-                                                                                    </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>">
-                                                                                            <%= carCondition[i] %>
-                                                                                        </option>
-                                                                                        <% } %>
-                                                                                            <% } %>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="aluminumWheel"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <select class="form-select"
-                                                                            name="aluminumWheel">
-                                                                            <% for(let i=0; i< aluminumWheel.length;
+                                <% if(process.carCondition==i) { %>
+                                <option value="<%= i %>" selected>
+                                  <%= carCondition[i] %>
+                                </option>
+                                <% } else { %>
+                                <option value="<%= i %>">
+                                  <%= carCondition[i] %>
+                                </option>
+                                <% } %>
+                                <% } %>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <label for="aluminumWheel" class="visually-hidden">Text</label>
+                              <select class="form-select" name="aluminumWheel">
+                                <% for(let i=0; i< aluminumWheel.length;
                                                                                 i++) { %>
-                                                                                <% if(process.aluminumWheel==i) { %>
-                                                                                    <option value="<%= i %>" selected>
-                                                                                        <%= aluminumWheel[i] %>
-                                                                                    </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>">
-                                                                                            <%= aluminumWheel[i] %>
-                                                                                        </option>
-                                                                                        <% } %>
-                                                                                            <% } %>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                <% if(process.aluminumWheel==i) { %>
+                                <option value="<%= i %>" selected>
+                                  <%= aluminumWheel[i] %>
+                                </option>
+                                <% } else { %>
+                                <option value="<%= i %>">
+                                  <%= aluminumWheel[i] %>
+                                </option>
+                                <% } %>
+                                <% } %>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>압류</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>저당</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing col-xl-8">
-                                                                <div class="col mb-xl-0 mb-2 row">
-                                                                    <div class="col form-group d-flex">
-                                                                        <label for="attachment"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <input class="p-2 flex-grow-1 form-control"
-                                                                            name="attachment"
-                                                                            value="<%= process.attachment %>">
-                                                                        <h6 class="p-2 align-self-end">
-                                                                            건</h6>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col mb-xl-0 mb-2 row">
-                                                                    <div class="col form-group d-flex">
-                                                                        <label for="mortgage"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <input class="p-2 form-control" name="mortgage"
-                                                                            value="<%= process.mortgage %>">
-                                                                        <h6 class="p-2 align-self-end">
-                                                                            건</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>압류</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>저당</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing col-xl-8">
+                          <div class="col mb-xl-0 mb-2 row">
+                            <div class="col form-group d-flex">
+                              <label for="attachment" class="visually-hidden">Text</label>
+                              <input class="p-2 flex-grow-1 form-control" name="attachment" value="<%= process.attachment %>">
+                              <h6 class="p-2 align-self-end">
+                                건</h6>
+                            </div>
+                          </div>
+                          <div class="col mb-xl-0 mb-2 row">
+                            <div class="col form-group d-flex">
+                              <label for="mortgage" class="visually-hidden">Text</label>
+                              <input class="p-2 form-control" name="mortgage" value="<%= process.mortgage %>">
+                              <h6 class="p-2 align-self-end">
+                                건</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col">
-                                                                <div class="form-group ">
-                                                                    <button
-                                                                        class="btn btn-outline-success me-3">저장</button>
-                                                                    <button type="button" onclick="cancel()"
-                                                                        class="btn btn-outline-danger me-3">취소</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                      <div class="row layout-top-spacing">
+                        <div class="col">
+                          <div class="form-group ">
+                            <button class="btn btn-outline-success me-3">저장</button>
+                            <button type="button" onclick="cancel()" class="btn btn-outline-danger me-3">취소</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                                <!-- 진행상황 -->
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">진행상황</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="process" method="post"
-                                                        action="/process/edit/<%= process.carNum %>">
-                                                        <div class="form-group d-flex">
-                                                            <div class="p-2 mb-xl-1 mb-4 align-self-center">
-                                                                <h6>진행단계</h6>
-                                                            </div>
-                                                            <div class="p-2 mb-xl-1 mb-4">
-                                                                <select class="form-select" type="text" id="state"
-                                                                    name="state">
-                                                                    <% for(code in exportStateCode2Text) { %>
-                                                                        <% if (process.state==code) { %>
-                                                                            <option value="<%= code %>" selected>
-                                                                                <%= exportStateCode2Text[code] %>
-                                                                            </option>
-                                                                            <% } else { %>
-                                                                                <option value="<%= code %>">
-                                                                                    <%= exportStateCode2Text[code] %>
-                                                                                </option>
-                                                                                <% } %>
-                                                                                    <% } %>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+          <!-- 진행상황 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">진행상황</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="process" method="post" action="/process/edit/<%= process.carNum %>">
+                      <div class="form-group d-flex">
+                        <div class="p-2 mb-xl-1 mb-4 align-self-center">
+                          <h6>진행단계</h6>
+                        </div>
+                        <div class="p-2 mb-xl-1 mb-4">
+                          <select class="form-select" type="text" id="state" name="state">
+                            <% for(code in disposalStateCode2Text) { %>
+                            <% if (process.state==code) { %>
+                            <option value="<%= code %>" selected>
+                              <%= disposalStateCode2Text[code] %>
+                            </option>
+                            <% } else { %>
+                            <option value="<%= code %>">
+                              <%= disposalStateCode2Text[code] %>
+                            </option>
+                            <% } %>
+                            <% } %>
+                          </select>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>접수일</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>인수일</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input class="input-date form-control"
-                                                                            type="text" name="date1"
-                                                                            value="<%= formatDate(process.date1) %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input class="input-date form-control"
-                                                                            type="text" name="date2"
-                                                                            value="<%= formatDate(process.date2) %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>가견적 발송 날짜</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>가견적 확인 날짜</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input class="input-date form-control" type="text" name="date1" disabled value="<%= formatDate(process.date1) %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input class="input-date form-control" type="text" name="date2" disabled value="<%= formatDate(process.date2) %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>차량상태 확인일</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>실견적발송일</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input class="input-date form-control"
-                                                                            type="text" name="date3"
-                                                                            value="<%= formatDate(process.date3) %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input class="input-date form-control"
-                                                                            type="text" name="date4"
-                                                                            value="<%= formatDate(process.date4) %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>인수 완료 날짜</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>실견적 발송 날짜</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input class="input-date form-control" type="text" name="date3" value="<%= formatDate(process.date3) %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input class="input-date form-control" type="text" name="date4" value="<%= formatDate(process.date4) %>" disabled>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>계약완료일</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>입금완료일</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row layout-spacing">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input class="input-date form-control"
-                                                                            type="text" name="date5"
-                                                                            value="<%= formatDate(process.date5) %>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <div class="form-group">
-                                                                        <input class="input-date form-control"
-                                                                            type="text" name="date6"
-                                                                            value="<%= formatDate(process.date6) %>">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>실견적 확인 날짜</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>폐차 완료 날짜</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input class="input-date form-control" type="text" name="date5" value="<%= formatDate(process.date5) %>" disabled>
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input class="input-date form-control" type="text" name="date6" value="<%= formatDate(process.date6) %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
+                      <div class="row layout-top-spacing">
+                        <div class="col">
+                          <div class="form-group ">
+                            <button class="btn btn-outline-success me-3">저장</button>
+                            <button type="button" onclick="cancel()" class="btn btn-outline-danger me-3">취소</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <!-- 가견적 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">가견적</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="estimation" method="post" action="/process/edit/<%= process.carNum %>">
+                      <div class="form-group d-flex col-xl-8">
+                        <h6 class="p-2 align-self-end">견적가</h6>
+                        <div class="p-2">
+                          <input class="form-control" name="estimation" value="<%= process.estimation %>">
+                        </div>
+                        <h6 class="p-2 align-self-end">원</h6>
+                        <% if(process.state==1) { %>
+                        <div class="p-2 form-group align-self-center">
+                          <button class="btn btn-outline-success me-3">저장</button>
+                        </div>
+                        <% } %>
+                      </div>
 
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col">
-                                                                <div class="form-group ">
-                                                                    <button
-                                                                        class="btn btn-outline-success me-3">저장</button>
-                                                                    <button type="button" onclick="cancel()"
-                                                                        class="btn btn-outline-danger me-3">취소</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                                <!-- 가견적 -->
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">가견적</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="estimation" method="post"
-                                                        action="/process/edit/<%= process.carNum %>">
-                                                        <div class="form-group d-flex col-xl-8">
-                                                            <h6 class="p-2 align-self-end">견적가</h6>
-                                                            <div class="p-2">
-                                                                <input class="form-control" name="estimation"
-                                                                    value="<%= process.estimation %>">
-                                                            </div>
-                                                            <h6 class="p-2 align-self-end">원</h6>
-                                                            <div class="p-2 form-group align-self-center">
-                                                                <button class="btn btn-outline-success me-3">저장</button>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col">
-
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- 회수정보 -->
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">회수 요청 정보</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="request" method="post"
-                                                        action="/request/edit/<%= request.carNum %>">
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수일시</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수연락처</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <% function formatDateTime(d_t) { let
+          <!-- 회수정보 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">회수 요청 정보</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="request" method="post" action="/request/edit/<%= request.carNum %>">
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수일시</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수연락처</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <% function formatDateTime(d_t) { let
                                                                         year=d_t.getFullYear(); let month=("0" +
                                                                         (d_t.getMonth() + 1)).slice(-2); let day=("0" +
                                                                         d_t.getDate()).slice(-2); let hour=("0" +
@@ -576,460 +509,419 @@
                                                                         d_t.getSeconds()).slice(-2); return year + "-" +
                                                                         month + "-" + day + " " + hour + ":" + minute
                                                                         + ":" + seconds } %>
-                                                                        <label for="deliveryDate"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <input id="deliveryDate" type="text"
-                                                                            name="deliveryDate" placeholder=""
-                                                                            class="form-control" required
-                                                                            value="<%= formatDateTime(request.deliveryDate) %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phoneNum"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="phoneNum" type="text" name="phoneNum"
-                                                                        placeholder="" class="form-control" required
-                                                                        value="<%= request.phoneNum %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수장소</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="collectPlace"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="collectPlace" type="text"
-                                                                        name="collectPlace" placeholder=""
-                                                                        class="form-control" required
-                                                                        value="<%= request.collectPlace %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
-                                                                <h5>[차주계좌정보]</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="bankName1">은행명</label>
-                                                                    <input id="bankName1" type="text" name="bankName1"
-                                                                        placeholder="" class="form-control" required
-                                                                        value="<%= request.bankName1 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountNum1">계좌번호</label>
-                                                                    <input id="accountNum1" type="text"
-                                                                        name="accountNum1" placeholder=""
-                                                                        class="form-control" required
-                                                                        value="<%= request.accountNum1 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountHolder1">예금주</label>
-                                                                    <input id="accountHolder1" type="text"
-                                                                        name="accountHolder1" placeholder=""
-                                                                        class="form-control" required
-                                                                        value="<%= request.accountHolder1 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="amount1">금액</label>
-                                                                    <input id="amount1" type="text" name="amount1"
-                                                                        placeholder="" class="form-control" required
-                                                                        value="<%= request.amount1 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
-                                                                <h5>[입금계좌정보]</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="bankName2">은행명</label>
-                                                                    <input id="bankName2" type="text" name="bankName2"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= request.bankName2 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountNum2">계좌번호</label>
-                                                                    <input id="accountNum2" type="text"
-                                                                        name="accountNum2" placeholder=""
-                                                                        class="form-control"
-                                                                        value="<%= request.accountNum2 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountHolder2">예금주</label>
-                                                                    <input id="accountHolder2" type="text"
-                                                                        name="accountHolder2" placeholder=""
-                                                                        class="form-control"
-                                                                        value="<%= request.accountHolder2 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="amount2">금액</label>
-                                                                    <input id="amount2" type="text" name="amount2"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= request.amount2 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col">
-                                                                <button class="btn btn-outline-success me-3">저장</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- 실견적 -->
-
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">실견적</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="quotation" method="post"
-                                                        action="/process/edit/<%= process.carNum %>">
-                                                        <div class="form-group d-flex col-xl-8">
-                                                            <h6 class="p-2 align-self-end">견적가</h6>
-                                                            <div class="p-2">
-                                                                <input class="form-control" name="quotation"
-                                                                    value="<%= process.quotation %>">
-                                                            </div>
-                                                            <h6 class="p-2 align-self-end">원</h6>
-                                                            <div class="p-2 form-group align-self-center">
-                                                                <button class="btn btn-outline-success me-3">저장</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- 최종견적 등록 -->
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">최종견적</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="finalProcess" method="POST"
-                                                        action="/process/finalProcessPath/<%= process.carNum %>"
-                                                        enctype="multipart/form-data">
-                                                        <div class="d-flex col-xl-8">
-                                                            <div class="p-2 flex-grow-1">
-                                                                <input id="finalProcessInput" type="file"
-                                                                    class="form-control-file" name="finalProcessPath">
-                                                            </div>
-                                                            <div class="p-2">
-                                                                <button class="btn btn-primary">올리기</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                    <div id="finalProcessImg" class="col-xl-8">
-                                                        <% if(process.finalProcessPath) { %>
-                                                            <img class="img-fluid"
-                                                                src="/<%= process.finalProcessPath %>" />
-                                                            <% } %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- 말송증 등록 -->
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row layout-top-spacing">
-                                                        <div class="col col-xl-8 mb-xl-0 mb-2">
-                                                            <h3 class="text-center">말소증</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content widget-content-area">
-                                                    <form id="deregistration" method="POST"
-                                                        action="/process/deregistrationPath/<%= process.carNum %>"
-                                                        enctype="multipart/form-data">
-                                                        <div class="d-flex col-xl-8">
-                                                            <div class="p-2 flex-grow-1">
-                                                                <input id="deregistrationInput" type="file"
-                                                                    class="form-control-file" name="deregistrationPath">
-                                                            </div>
-                                                            <div class="p-2">
-                                                                <button class="btn btn-primary">올리기</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                    <div id="deregistrationImg" class="col-xl-8">
-                                                        <% console.log(process.deregistrationPath);
-                                                            if(process.deregistrationPath) { %>
-                                                            <img class="img-fluid"
-                                                                src="/<%= process.deregistrationPath %>" />
-                                                            <% } %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
+                            <label for="deliveryDate" class="visually-hidden">Text</label>
+                            <input id="deliveryDate" type="text" name="deliveryDate" placeholder="" class="form-control" required value="<%= formatDateTime(request.deliveryDate) %>">
+                          </div>
                         </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="phoneNum" class="visually-hidden">Text</label>
+                            <input id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" required value="<%= request.phoneNum %>">
+                          </div>
+                        </div>
+                      </div>
 
-                        <%- include ("../partials/footer.ejs") %>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수장소</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="collectPlace" class="visually-hidden">Text</label>
+                            <input id="collectPlace" type="text" name="collectPlace" placeholder="" class="form-control" required value="<%= request.collectPlace %>">
+                          </div>
+                        </div>
+                      </div>
 
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                          <h5>[차주계좌정보]</h5>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="bankName1">은행명</label>
+                            <input id="bankName1" type="text" name="bankName1" placeholder="" class="form-control" required value="<%= request.bankName1 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountNum1">계좌번호</label>
+                            <input id="accountNum1" type="text" name="accountNum1" placeholder="" class="form-control" required value="<%= request.accountNum1 %>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountHolder1">예금주</label>
+                            <input id="accountHolder1" type="text" name="accountHolder1" placeholder="" class="form-control" required value="<%= request.accountHolder1 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="amount1">금액</label>
+                            <input id="amount1" type="text" name="amount1" placeholder="" class="form-control" required value="<%= request.amount1 %>">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                          <h5>[입금계좌정보]</h5>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="bankName2">은행명</label>
+                            <input id="bankName2" type="text" name="bankName2" placeholder="" class="form-control" value="<%= request.bankName2 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountNum2">계좌번호</label>
+                            <input id="accountNum2" type="text" name="accountNum2" placeholder="" class="form-control" value="<%= request.accountNum2 %>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountHolder2">예금주</label>
+                            <input id="accountHolder2" type="text" name="accountHolder2" placeholder="" class="form-control" value="<%= request.accountHolder2 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="amount2">금액</label>
+                            <input id="amount2" type="text" name="amount2" placeholder="" class="form-control" value="<%= request.amount2 %>">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row layout-top-spacing">
+                        <div class="col">
+                          <button class="btn btn-outline-success me-3">저장</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 실견적 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">실견적</h3>
+                      </div>
                     </div>
-                    <!--  END CONTENT AREA  -->
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="quotation" method="post" action="/process/edit/<%= process.carNum %>">
+                      <div class="form-group d-flex col-xl-8">
+                        <h6 class="p-2 align-self-end">견적가</h6>
+                        <div class="p-2">
+                          <input class="form-control" name="quotation" value="<%= process.quotation %>">
+                        </div>
+                        <h6 class="p-2 align-self-end">원</h6>
+
+                        <% if(process.state==5) { %>
+                        <div class="p-2 form-group align-self-center">
+                          <button class="btn btn-outline-success me-3">저장</button>
+                        </div>
+                        <% } %>
+                        
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- END MAIN CONTAINER -->
+          </div>
 
-            <!-- REQUEST PREVIEW -->
-            <div id="req_table">
-
+          <!-- 최종견적 등록 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">최종견적</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="finalProcess" method="POST" action="/process/finalProcessPath/<%= process.carNum %>" enctype="multipart/form-data">
+                      <div class="d-flex col-xl-8">
+                        <div class="p-2 flex-grow-1">
+                          <input id="finalProcessInput" type="file" class="form-control-file" name="finalProcessPath">
+                        </div>
+                        <div class="p-2">
+                          <button class="btn btn-primary">올리기</button>
+                        </div>
+                      </div>
+                    </form>
+                    <div id="finalProcessImg" class="col-xl-8">
+                      <% if(process.finalProcessPath) { %>
+                      <img class="img-fluid" src="/<%= process.finalProcessPath %>" />
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <%- include ("../partials/commonScrpits.ejs") %>
+          </div>
 
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                <script>
-                    $(function () {
-                        $(".input-date").datepicker({
-                        });
-                    });
+          <!-- 말송증 등록 -->
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row layout-top-spacing">
+                      <div class="col col-xl-8 mb-xl-0 mb-2">
+                        <h3 class="text-center">말소증</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content widget-content-area">
+                    <form id="deregistration" method="POST" action="/process/deregistrationPath/<%= process.carNum %>" enctype="multipart/form-data">
+                      <div class="d-flex col-xl-8">
+                        <div class="p-2 flex-grow-1">
+                          <input id="deregistrationInput" type="file" class="form-control-file" name="deregistrationPath">
+                        </div>
+                        <div class="p-2">
+                          <button class="btn btn-primary">올리기</button>
+                        </div>
+                      </div>
+                    </form>
+                    <div id="deregistrationImg" class="col-xl-8">
+                      <% if(process.deregistrationPath) { %>
+                      <img class="img-fluid" src="/<%= process.deregistrationPath %>" />
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                    const finalProcessInput = document.getElementById('finalProcessInput');
-                    finalProcessInput.addEventListener('change', (event) => {
-                        console.log(event.target)
-                        loadFile(event.target)
-                    })
+        </div>
+      </div>
 
-                    function loadFile(input) {
-                        var file = input.files[0];
-                        $('#finalProcessImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
-                    }
+      <%- include ("../partials/footer.ejs") %>
 
-                    finalProcess.onsubmit = async (e) => {
-                        e.preventDefault();
+    </div>
+    <!--  END CONTENT AREA  -->
+  </div>
+  <!-- END MAIN CONTAINER -->
 
-                        if (!finalProcess[0].value) return alert("파일을 선택해주세요.");
+  <!-- REQUEST PREVIEW -->
+  <div id="req_table">
 
-                        let response = await fetch(finalProcess.action, {
-                            method: 'POST',
-                            body: new FormData(finalProcess)
-                        }).then(res => {
-                            if (res.ok) {
-                                alert("저장되었습니다.");
-                                window.location.reload();
-                            }
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
-                    }
+  </div>
+  <%- include ("../partials/commonScrpits.ejs") %>
 
-                    const deregistrationInput = document.getElementById('deregistrationInput');
-                    deregistrationInput.addEventListener('change', (event) => {
-                        console.log(event.target)
-                        loadFile2(event.target)
-                    })
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    $(function() {
+      $(".input-date").datepicker({});
+    });
 
-                    function loadFile2(input) {
-                        var file = input.files[0];
-                        $('#deregistrationImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
-                    }
+    const finalProcessInput = document.getElementById('finalProcessInput');
+    finalProcessInput.addEventListener('change', (event) => {
+      console.log(event.target)
+      loadFile(event.target)
+    })
 
-                    deregistration.onsubmit = async (e) => {
-                        e.preventDefault();
+    function loadFile(input) {
+      var file = input.files[0];
+      $('#finalProcessImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
+    }
+  </script>
+  <script>
+    finalProcess.onsubmit = async (e) => {
+      e.preventDefault();
 
-                        if (!deregistration[0].value) return alert("파일을 선택해주세요.");
+      if (!finalProcess[0].value) return alert("파일을 선택해주세요.");
 
-                        let response = await fetch(deregistration.action, {
-                            method: 'POST',
-                            body: new FormData(deregistration)
-                        }).then(res => {
-                            if (res.ok) {
-                                alert("저장되었습니다.");
-                                window.location.reload();
-                            }
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
+      let response = await fetch(finalProcess.action, {
+        method: 'POST',
+        body: new FormData(finalProcess)
+      }).then(res => {
+        if (res.ok) {
+          alert("저장되었습니다.");
+          window.location.reload();
+        } else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+  </script>
+  <script>
+    const deregistrationInput = document.getElementById('deregistrationInput');
+    deregistrationInput.addEventListener('change', (event) => {
+      console.log(event.target)
+      loadFile2(event.target)
+    })
 
-                    }
+    function loadFile2(input) {
+      var file = input.files[0];
+      $('#deregistrationImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
+    }
 
-                    process.onsubmit = async (e) => {
-                        e.preventDefault();
+    deregistration.onsubmit = async (e) => {
+      e.preventDefault();
 
-                        let body = {};
-                        for (let [name, value] of new FormData(process)) body[name] = value;
+      if (!deregistration[0].value) return alert("파일을 선택해주세요.");
 
-                        let response = await fetch(process.action, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(body)
-                        }).then(res => {
-                            if (res.ok) alert("저장되었습니다.");
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
-                    }
+      let response = await fetch(deregistration.action, {
+        method: 'POST',
+        body: new FormData(deregistration)
+      }).then(res => {
+        if (res.ok) {
+          alert("저장되었습니다.");
+          window.location.reload();
+        } else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+  </script>
+  <script>
+    estimation.onsubmit = async (e) => {
+      e.preventDefault();
 
-                    clientInfo.onsubmit = async (e) => {
-                        e.preventDefault();
+      let body = {};
+      body.exportable = estimation[0].checked;
+      body.estimation = estimation[1].value;
+      body.date1 = new Date();
+      body.state = 2;
+      console.log(body);
 
-                        let body = {};
-                        for (let [name, value] of new FormData(clientInfo)) body[name] = value;
+      let response = await fetch(estimation.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(body)
+      }).then(res => {
+        if (res.ok) {
+          alert("저장되었습니다.");
+          window.location.reload();
+        } else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+  </script>
+  <script>
+    process.onsubmit = async (e) => {
+      e.preventDefault();
 
-                        let response = await fetch(clientInfo.action, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(body)
-                        }).then(res => {
-                            if (res.ok) alert("저장되었습니다.");
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
-                    }
+      let body = {};
+      for (let [name, value] of new FormData(process)) body[name] = value;
 
-                    estimation.onsubmit = async (e) => {
-                        e.preventDefault();
+      let response = await fetch(process.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(body)
+      }).then(res => {
+        if (res.ok) alert("저장되었습니다.");
+        else alert("전송 실패!!");
+        location.reload();
+      });
 
-                        let body = {};
-                        for (let [name, value] of new FormData(estimation)) body[name] = value;
+    }
+  </script>
+  <script>
+    clientInfo.onsubmit = async (e) => {
+      e.preventDefault();
 
-                        let response = await fetch(estimation.action, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(body)
-                        }).then(res => {
-                            if (res.ok) alert("저장되었습니다.");
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
-                    }
+      let body = {};
+      for (let [name, value] of new FormData(clientInfo)) body[name] = value;
 
-                    quotation.onsubmit = async (e) => {
-                        e.preventDefault();
+      let response = await fetch(clientInfo.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(body)
+      }).then(res => {
+        if (res.ok) alert("저장되었습니다.");
+        else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+  </script>
+  <script>
+    quotation.onsubmit = async (e) => {
+      e.preventDefault();
 
-                        let body = {};
-                        for (let [name, value] of new FormData(quotation)) body[name] = value;
+      let body = {};
+      body.quotation = quotation[0].value;
+      body.state = 6;
+      body.date4 = new Date();
 
-                        let response = await fetch(quotation.action, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(body)
-                        }).then(res => {
-                            if (res.ok) alert("저장되었습니다.");
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
-                    }
+      let response = await fetch(quotation.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(body)
+      }).then(res => {
+        if (res.ok) alert("저장되었습니다.");
+        else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+  </script>
+  <script>
+    request.onsubmit = async (e) => {
+      e.preventDefault();
 
-                    request.onsubmit = async (e) => {
-                        e.preventDefault();
+      let body = {};
+      for (let [name, value] of new FormData(request)) body[name] = value;
 
-                        let body = {};
-                        for (let [name, value] of new FormData(request)) body[name] = value;
-
-                        let response = await fetch(request.action, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(body)
-                        }).then(res => {
-                            if (res.ok) alert("저장되었습니다.");
-                            else {
-                                alert("전송 실패!!");
-                            }
-                            return res.json();
-                        }).then(result => {
-                            console.log(result);
-                        });
-                    }
-                </script>
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+      let response = await fetch(request.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(body)
+      }).then(res => {
+        if (res.ok) alert("저장되었습니다.");
+        else {
+          alert("전송 실패!!");
+        }
+        return res.json();
+      }).then(result => {
+        console.log(result);
+      });
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

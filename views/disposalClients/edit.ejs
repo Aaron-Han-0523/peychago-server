@@ -9,8 +9,7 @@
             d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
             d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day; } %>
 
-  <% const disposalStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중' , '실견적 확인중'
-                , '폐차 진행 승인' , '폐차 진행중' , '폐차 완료' ]; %>
+  <% const disposalStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중' , '실견적 확인중', '폐차 진행 승인' , '폐차 진행중' , '폐차 완료' ]; %>
 
   <% let carCondition=['양호', '사고' , '운행불가' ]; %>
 
@@ -221,8 +220,7 @@
                             <div class="form-group">
                               <label for="aluminumWheel" class="visually-hidden">Text</label>
                               <select class="form-select" name="aluminumWheel">
-                                <% for(let i=0; i< aluminumWheel.length;
-                                                                                i++) { %>
+                                <% for(let i=0; i< aluminumWheel.length; i++) { %>
                                 <% if(process.aluminumWheel==i) { %>
                                 <option value="<%= i %>" selected>
                                   <%= aluminumWheel[i] %>
@@ -404,7 +402,6 @@
             </div>
           </div>
 
-          <% if(process.state==1) { %>
           <!-- 가견적 -->
           <div class="row layout-spacing">
             <div class="col-lg-12 layout-top-spacing">
@@ -436,9 +433,9 @@
                           <input class="form-control" name="estimation" value="<%= process.estimation %>">
                         </div>
                         <h6 class="p-2 align-self-end">원</h6>
-
                       </div>
 
+                      <% if(process.state==1) { %>
                       <div class="row layout-top-spacing">
                         <div class="col">
                           <div class="form-group align-self-center">
@@ -446,15 +443,15 @@
                           </div>
                         </div>
                       </div>
+                      <% } %>
+
                     </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <% } %>
 
-          <% if(process.state==5) { %>
           <!-- 실견적 -->
           <div class="row layout-spacing">
             <div class="col-lg-12 layout-top-spacing">
@@ -475,9 +472,11 @@
                           <input class="form-control" name="quotation" value="<%= process.quotation %>">
                         </div>
                         <h6 class="p-2 align-self-end">원</h6>
+                        <% if(process.state==5) { %>
                         <div class="p-2 form-group align-self-center">
                           <button class="btn btn-outline-success me-3">저장</button>
                         </div>
+                        <% } %>
                       </div>
                     </form>
                   </div>
@@ -485,7 +484,6 @@
               </div>
             </div>
           </div>
-          <% } %>
 
           <!-- 최종견적 등록 -->
           <div class="row layout-spacing">
