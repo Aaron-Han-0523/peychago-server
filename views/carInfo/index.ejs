@@ -116,7 +116,7 @@
                                                             </td>
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">
-                                                                    <%= item.price? item.price:'0' %>
+                                                                    <%= Intl.NumberFormat().format(item.price) %>
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">

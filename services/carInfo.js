@@ -19,8 +19,8 @@ exports.create = async (obj) => {
         });
 
     // console.log(car.carInfo_id);
-    let partslist_obj = [];
     if (obj.cnt instanceof Array) {
+        let partslist_obj = [];
         for (let i = 0; i < obj.cnt.length; i++) {
             partslist_obj.push({
                 carInfo_id: car.carInfo_id,
@@ -61,24 +61,25 @@ exports.update = async (obj) => {
 
     await partslist.destroy({ where: { carInfo_id: obj.id } });
 
-    let partslist_obj = [];
-    for (let i = 0; i < obj.cnt.length; i++) {
-        partslist_obj.push({
-            carInfo_id: obj.id,
-            parts_id: obj.parts_id[i],
-            part_cnt: obj.cnt[i],
-        });
+    if (obj.cnt instanceof Array) {
+        let partslist_obj = [];
+        for (let i = 0; i < obj.cnt.length; i++) {
+            partslist_obj.push({
+                carInfo_id: obj.id,
+                parts_id: obj.parts_id[i],
+                part_cnt: obj.cnt[i],
+            });
+        }
+
+        await partslist
+            .bulkCreate(partslist_obj)
+            .then(result => {
+                // console.log(result);
+            })
+            .catch(err => {
+                throw (err)
+            });
     }
-
-    await partslist
-        .bulkCreate(partslist_obj)
-        .then(result => {
-            // console.log(result);
-        })
-        .catch(err => {
-            throw (err)
-        });
-
     return true
 }
 
