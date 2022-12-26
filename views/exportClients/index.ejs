@@ -2,171 +2,158 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
-        <% let exportStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중' , '실견적 확인중'
-            , '수출 계약 작성 중' , '차량 말소 중' , '수출 완료' ]; %>
-            <% function formatDate(d_t) { if(!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
-                (d_t.getMonth() + 1)).slice(-2); let day=("0" + d_t.getDate()).slice(-2); let hour=("0" +
-                d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
-                d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" +
-                seconds } %>
+  <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
 
-    <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
-        <%- include ("../partials/nav.ejs") %>
+  <%- include ("../partials/nav.ejs") %>
 
-            <!--  BEGIN MAIN CONTAINER  -->
-            <div class="main-container sidebar-closed " id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container sidebar-closed " id="container">
 
-                <div class="overlay"></div>
-                <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-                <%- include ("../partials/sidebar.ejs") %>
+    <%- include ("../partials/sidebar.ejs") %>
 
-                    <!--  BEGIN CONTENT AREA  -->
-                    <div id="content" class="main-content">
-                        <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                            <div class="middle-content container-xxl p-0">
-                                <!-- BREADCRUMB -->
-                                <div class="page-meta">
-                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item active" aria-current="page">수출 고객 관리</li>
-                                        </ol>
-                                    </nav>
-                                </div>
-                                <!-- /BREADCRUMB -->
+        <div class="middle-content container-xxl p-0">
+          <!-- BREADCRUMB -->
+          <div class="page-meta">
+            <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">수출 고객 관리</li>
+              </ol>
+            </nav>
+          </div>
+          <!-- /BREADCRUMB -->
 
-                                <div class="col-lg-12 layout-top-spacing">
-                                    <div class="input-group">
-                                        <input id="searchWord" type="text" class="form-control"
-                                            placeholder="검색할 차량번호 또는 차주성함을 입력해주세요."
-                                            aria-label="Recipient's username with two button addons">
-                                        <button class="btn btn-outline-primary" type="button"
-                                            onclick="searchExportClients();">검색</button>
-                                        <button class="btn btn-outline-primary" type="button"
-                                            onclick="exportExcel('exportClients_list_table','exportClients_list_file','exportClients_list_sheet');">엑셀
-                                            다운로드</button>
-                                        <!-- <button class="btn btn-outline-primary" type="button" onclick="location.href='/exportClients/add';">+ Add New</button> -->
-                                    </div>
-                                    <p id="searchCount"></p>
-                                </div>
+          <div class="col-lg-12 layout-top-spacing">
+            <div class="input-group">
+              <input id="searchWord" type="text" class="form-control" placeholder="검색할 차량번호 또는 차주성함을 입력해주세요." aria-label="Recipient's username with two button addons">
+              <button class="btn btn-outline-primary" type="button" onclick="searchExportClients();">검색</button>
+              <button class="btn btn-outline-primary" type="button" onclick="exportExcel('exportClients_list_table','exportClients_list_file','exportClients_list_sheet');">엑셀
+                다운로드</button>
+              <!-- <button class="btn btn-outline-primary" type="button" onclick="location.href='/exportClients/add';">+ Add New</button> -->
+            </div>
+            <p id="searchCount"></p>
+          </div>
 
-                                <div class="row layout-top-spacing">
+          <div class="row layout-top-spacing">
 
 
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-striped table-bordered"
-                                            id="exportClients_list_table">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th scope="col" width="5%">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped table-bordered" id="exportClients_list_table">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col" width="5%">
                                         <div class="form-check form-check-primary">
                                             <input class="form-check-input" id="custom_mixed_parent_all" type="checkbox">
                                         </div>
                                     </th> -->
-                                                    <!-- <th class="text-center" scope="col">인수업체명</th> -->
-                                                    <th class="text-center" scope="col">차량번호</th>
-                                                    <th class="text-center" scope="col">차주성함</th>
-                                                    <th class="text-center" scope="col">차명</th>
-                                                    <th class="text-center" scope="col">연식</th>
-                                                    <!-- <th class="text-center" scope="col">회수일자</th> -->
-                                                    <!-- <th class="text-center" scope="col">회수장소</th> -->
-                                                    <!-- <th class="text-center" scope="col">회수연락처</th> -->
-                                                    <th class="text-center" scope="col">수출진행단계</th>
-                                                    <th class="text-center" scope="col">신청일</th>
-                                                    <th class="text-center" scope="col">접수일</th>
-                                                    <th class="text-center" scope="col">인수일</th>
-                                                    <th class="text-center" scope="col">차량확인일</th>
-                                                    <th class="text-center" scope="col">실견적발송일</th>
-                                                    <th class="text-center" scope="col">계약완료일</th>
-                                                    <th class="text-center" scope="col">입금완료일</th>
-                                                    <th class="text-center" scope="col">수정/삭제</th>
-                                                </tr>
-                                                <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
-                                            </thead>
-                                            <tbody id="searchResults">
+                    <!-- <th class="text-center" scope="col">인수업체명</th> -->
+                    <th class="text-center" scope="col">차량번호</th>
+                    <th class="text-center" scope="col">차주성함</th>
+                    <th class="text-center" scope="col">차명</th>
+                    <th class="text-center" scope="col">연식</th>
+                    <!-- <th class="text-center" scope="col">회수일자</th> -->
+                    <!-- <th class="text-center" scope="col">회수장소</th> -->
+                    <!-- <th class="text-center" scope="col">회수연락처</th> -->
+                    <th class="text-center" scope="col">수출진행단계</th>
+                    <th class="text-center" scope="col">신청일</th>
+                    <th class="text-center" scope="col">접수일</th>
+                    <th class="text-center" scope="col">인수일</th>
+                    <th class="text-center" scope="col">차량확인일</th>
+                    <th class="text-center" scope="col">실견적발송일</th>
+                    <th class="text-center" scope="col">계약완료일</th>
+                    <th class="text-center" scope="col">입금완료일</th>
+                    <th class="text-center" scope="col">수정/삭제</th>
+                  </tr>
+                  <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
+                </thead>
+                <tbody id="searchResults">
 
-                                                <% data.forEach( function(item, index) { %>
-                                                    <tr
-                                                        onclick="location.href='/exportClients/edit/<%= item.carNum %>';">
-                                                        <!-- <td>
+                  <% data.forEach( function(item, index) { %>
+                  <tr onclick="location.href='/exportClients/edit/<%= item.carNum %>';">
+                    <!-- <td>
                                         <div class="form-check form-check-primary">
                                             <input class="form-check-input custom_mixed_child" type="checkbox">
                                         </div>
                                     </td> -->
-                                                        <!-- <td class="text-center">
+                    <!-- <td class="text-center">
                                                                 <span class="media-body align-self-center">
                                                                     <%= item.companyName %>
                                                                 </span>
                                                             </td> -->
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= item.carNum %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= item.ownerName %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= item.model %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= item.yearModel %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="badge badge-light-success">
-                                                                <%= exportStateCode2Text[item.state] %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date0) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date1) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date2) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date3) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date4) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date5) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date6) %>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="action-btns">
-                                                                <!-- <a href="javascript:void(0);"
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= item.carNum %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= item.ownerName %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= item.model %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= item.yearModel %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="badge badge-light-success">
+                        <%= codezip.exportStateCode2Text[item.state] %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date0) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date1) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date2) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date3) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date4) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date5) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <span class="media-body align-self-center">
+                        <%= myUtils.formatDate(item.date6) %>
+                      </span>
+                    </td>
+                    <td class="text-center">
+                      <div class="action-btns">
+                        <!-- <a href="javascript:void(0);"
                                                                 class="action-btn btn-view bs-tooltip me-2"
                                                                 data-toggle="tooltip" data-placement="top" title="View">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -180,102 +167,80 @@
                                                                     <circle cx="12" cy="12" r="3"></circle>
                                                                 </svg>
                                                             </a> -->
-                                                                <% if(user.permission3_2.data[0]&0b0010) { %>
-                                                                    <a href="/exportClients/edit/<%= item.carNum %>"
-                                                                        class="action-btn btn-edit bs-tooltip me-2"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        title="Edit">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                                            fill="none" stroke="currentColor"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-edit-2">
-                                                                            <path
-                                                                                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </a>
-                                                                    <% } %>
-                                                                        <% if(user.permission3_2.data[0]&0b0001) { %>
-                                                                            <a onclick="delete_(event, '/exportClients/delete/<%= item.carNum %>');"
-                                                                                class="action-btn btn-delete bs-tooltip"
-                                                                                data-toggle="tooltip"
-                                                                                data-placement="top" title="Delete">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    width="24" height="24"
-                                                                                    viewBox="0 0 24 24" fill="none"
-                                                                                    stroke="currentColor"
-                                                                                    stroke-width="2"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    class="feather feather-trash-2">
-                                                                                    <polyline points="3 6 5 6 21 6">
-                                                                                    </polyline>
-                                                                                    <path
-                                                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                                    </path>
-                                                                                    <line x1="10" y1="11" x2="10"
-                                                                                        y2="17">
-                                                                                    </line>
-                                                                                    <line x1="14" y1="11" x2="14"
-                                                                                        y2="17">
-                                                                                    </line>
-                                                                                </svg>
-                                                                            </a>
-                                                                            <% } %>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <% }); %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <%- include ("../partials/footer.ejs") %>
-
-                    </div>
-                    <!--  END CONTENT AREA  -->
+                        <% if(user.permission3_2.data[0]&0b0010) { %>
+                        <a href="/exportClients/edit/<%= item.carNum %>" class="action-btn btn-edit bs-tooltip me-2" data-toggle="tooltip" data-placement="top" title="Edit">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2">
+                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                            </path>
+                          </svg>
+                        </a>
+                        <% } %>
+                        <% if(user.permission3_2.data[0]&0b0001) { %>
+                        <a onclick="delete_(event, '/exportClients/delete/<%= item.carNum %>');" class="action-btn btn-delete bs-tooltip" data-toggle="tooltip" data-placement="top" title="Delete">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2">
+                            <polyline points="3 6 5 6 21 6">
+                            </polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                            <line x1="10" y1="11" x2="10" y2="17">
+                            </line>
+                            <line x1="14" y1="11" x2="14" y2="17">
+                            </line>
+                          </svg>
+                        </a>
+                        <% } %>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
             </div>
-            <!-- END MAIN CONTAINER -->
 
-            <%- include ("../partials/commonScrpits.ejs") %>
+          </div>
 
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                <script>
-                    async function searchExportClients() {
-                        const target_id = "searchResults";
-                        const searchWord_element = document.getElementById('searchWord');
-                        const searchWord = searchWord_element.value;
+        </div>
 
-                        const res = await fetch(`/exportClients/search?q=${searchWord}`)
-                            .then((response) => {
-                                // console.log(response.json());
-                                return response.json();
-                            })
-                        // .catch((err) => { console.error(err) });
+      </div>
 
-                        const user = res.user;
-                        const result = res.data;
+      <%- include ("../partials/footer.ejs") %>
 
-                        // console.log(typeof result.rows[0].createDate);
-                        document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
-                        searchWord_element.value = '';
+    </div>
+    <!--  END CONTENT AREA  -->
+  </div>
+  <!-- END MAIN CONTAINER -->
 
-                        const exportStateCode2Text = ['정보입력중', '정보입력완료', '가견적 확인중', '견적확인완료', '차량 인수중', '차량상태확인중', '실견적 확인중', '수출 진행 승인', '수출 진행중', '수출 완료'];
+  <%- include ("../partials/commonScrpits.ejs") %>
 
-                        let tempHTML = ''
-                        for (let i = 0; i < result.count; i++) {
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    async function searchExportClients() {
+      const target_id = "searchResults";
+      const searchWord_element = document.getElementById('searchWord');
+      const searchWord = searchWord_element.value;
 
-                            const data = result.rows[i];
+      const res = await fetch(`/exportClients/search?q=${searchWord}`)
+        .then((response) => {
+          // console.log(response.json());
+          return response.json();
+        })
+      // .catch((err) => { console.error(err) });
 
-                            tempHTML += `
+      const user = res.user;
+      const result = res.data;
+
+      // console.log(typeof result.rows[0].createDate);
+      document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
+      searchWord_element.value = '';
+
+      const exportStateCode2Text = ['정보입력중', '정보입력완료', '가견적 확인중', '견적확인완료', '차량 인수중', '차량상태확인중', '실견적 확인중', '수출 진행 승인', '수출 진행중', '수출 완료'];
+
+      let tempHTML = ''
+      for (let i = 0; i < result.count; i++) {
+
+        const data = result.rows[i];
+
+        tempHTML += `
                                 <tr onclick="location.href='/exportClients/${data.carNum}';">
                                     <td class="text-center">
                                         <span class="media-body align-self-center">
@@ -335,8 +300,8 @@
                                     <td class="text-center">
                                         <div class="action-btns">
                                             `
-                            if (user.permission3_2.data[0] & 0b0010) {
-                                tempHTML += `<a href="/exportClients/edit/${data.carNum}"
+        if (user.permission3_2.data[0] & 0b0010) {
+          tempHTML += `<a href="/exportClients/edit/${data.carNum}"
                                                 class="action-btn btn-edit bs-tooltip me-2"
                                                 data-toggle="tooltip" data-placement="top"
                                                 title="Edit">
@@ -352,10 +317,10 @@
                                                     </path>
                                                 </svg>
                                             </a>`
-                            }
+        }
 
-                            if (user.permission3_2.data[0] & 0b0001) {
-                                tempHTML += `<a onclick="delete_(event, '/exportClients/delete/${data.carNum}');"
+        if (user.permission3_2.data[0] & 0b0001) {
+          tempHTML += `<a onclick="delete_(event, '/exportClients/delete/${data.carNum}');"
                                                 class="action-btn btn-delete bs-tooltip"
                                                 data-toggle="tooltip"
                                                 data-placement="top" title="Delete">
@@ -380,16 +345,16 @@
                                                     </line>
                                                 </svg>
                                             </a>`
-                            }
-                            tempHTML += `</div>
+        }
+        tempHTML += `</div>
                                     </td >
                                 </tr >`
-                        }
+      }
 
-                        document.getElementById(target_id).innerHTML = tempHTML;
-                    }
-                </script>
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+      document.getElementById(target_id).innerHTML = tempHTML;
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

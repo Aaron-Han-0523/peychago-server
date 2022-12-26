@@ -10,17 +10,7 @@
   <%- include ("../partials/loader.ejs") %>
 
   <%- include ("../partials/nav.ejs") %>
-  <div>
-    <% formatDate=(d_t)=> { if (!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
-                    (d_t.getMonth() + 1)).slice(-2); let day=("0" + d_t.getDate()).slice(-2); let hour=("0" +
-                    d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
-                    d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day; } %>
 
-    <% const exportStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중'
-                        , '실견적 확인중' , '수출 계약 작성 중' , '차량 말소 중' , '수출 완료' ]; %>
-    <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-    <% let aluminumWheel=['X', 'O' , '모름' ]; %>
-  </div>
   <!--  BEGIN MAIN CONTAINER  -->
   <div class="main-container sidebar-closed " id="container">
 
@@ -164,7 +154,7 @@
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= formatDate(process.registerDate) %>">
+                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= myUtils.formatDate(process.registerDate) %>">
                             </div>
                           </div>
                         </div>
@@ -241,15 +231,15 @@
                             <div class="form-group">
                               <label for="carCondition" class="visually-hidden">Text</label>
                               <select class="form-select" name="carCondition">
-                                <% for(let i=0; i< carCondition.length; i++)
+                                <% for(let i=0; i< codezip.carCondition.length; i++)
                                                                                 { %>
                                 <% if(process.carCondition==i) { %>
                                 <option value="<%= i %>" selected>
-                                  <%= carCondition[i] %>
+                                  <%= codezip.carCondition[i] %>
                                 </option>
                                 <% } else { %>
                                 <option value="<%= i %>">
-                                  <%= carCondition[i] %>
+                                  <%= codezip.carCondition[i] %>
                                 </option>
                                 <% } %>
                                 <% } %>
@@ -260,15 +250,15 @@
                             <div class="form-group">
                               <label for="aluminumWheel" class="visually-hidden">Text</label>
                               <select class="form-select" name="aluminumWheel">
-                                <% for(let i=0; i< aluminumWheel.length;
+                                <% for(let i=0; i< codezip.aluminumWheel.length;
                                                                                 i++) { %>
                                 <% if(process.aluminumWheel==i) { %>
                                 <option value="<%= i %>" selected>
-                                  <%= aluminumWheel[i] %>
+                                  <%= codezip.aluminumWheel[i] %>
                                 </option>
                                 <% } else { %>
                                 <option value="<%= i %>">
-                                  <%= aluminumWheel[i] %>
+                                  <%= codezip.aluminumWheel[i] %>
                                 </option>
                                 <% } %>
                                 <% } %>
@@ -342,14 +332,14 @@
                         </div>
                         <div class="p-2 mb-xl-1 mb-4">
                           <select class="form-select" type="text" id="state" name="state">
-                            <% for(code in disposalStateCode2Text) { %>
+                            <% for(code in codezip.exportStateCode2Text) { %>
                             <% if (process.state==code) { %>
                             <option value="<%= code %>" selected>
-                              <%= disposalStateCode2Text[code] %>
+                              <%= codezip.exportStateCode2Text[code] %>
                             </option>
                             <% } else { %>
                             <option value="<%= code %>">
-                              <%= disposalStateCode2Text[code] %>
+                              <%= codezip.exportStateCode2Text[code] %>
                             </option>
                             <% } %>
                             <% } %>
@@ -369,12 +359,12 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input class="input-date form-control" type="text" name="date1" disabled value="<%= formatDate(process.date1) %>">
+                              <input class="input-date form-control" type="text" name="date1" disabled value="<%= myUtils.formatDate(process.date1) %>">
                             </div>
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input class="input-date form-control" type="text" name="date2" disabled value="<%= formatDate(process.date2) %>">
+                              <input class="input-date form-control" type="text" name="date2" disabled value="<%= myUtils.formatDate(process.date2) %>">
                             </div>
                           </div>
                         </div>
@@ -392,12 +382,12 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input class="input-date form-control" type="text" name="date3" value="<%= formatDate(process.date3) %>">
+                              <input class="input-date form-control" type="text" name="date3" value="<%= myUtils.formatDate(process.date3) %>">
                             </div>
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input class="input-date form-control" type="text" name="date4" value="<%= formatDate(process.date4) %>" disabled>
+                              <input class="input-date form-control" type="text" name="date4" value="<%= myUtils.formatDate(process.date4) %>" disabled>
                             </div>
                           </div>
                         </div>
@@ -415,12 +405,12 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input class="input-date form-control" type="text" name="date5" value="<%= formatDate(process.date5) %>" disabled>
+                              <input class="input-date form-control" type="text" name="date5" value="<%= myUtils.formatDate(process.date5) %>" disabled>
                             </div>
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input class="input-date form-control" type="text" name="date6" value="<%= formatDate(process.date6) %>">
+                              <input class="input-date form-control" type="text" name="date6" value="<%= myUtils.formatDate(process.date6) %>">
                             </div>
                           </div>
                         </div>
@@ -500,17 +490,8 @@
                       <div class="row layout-spacing">
                         <div class="col col-xl-4 mb-xl-0 mb-2">
                           <div class="form-group">
-                            <% function formatDateTime(d_t) { let
-                                                                        year=d_t.getFullYear(); let month=("0" +
-                                                                        (d_t.getMonth() + 1)).slice(-2); let day=("0" +
-                                                                        d_t.getDate()).slice(-2); let hour=("0" +
-                                                                        d_t.getHours()).slice(-2); let minute=("0" +
-                                                                        d_t.getMinutes()).slice(-2); let seconds=("0" +
-                                                                        d_t.getSeconds()).slice(-2); return year + "-" +
-                                                                        month + "-" + day + " " + hour + ":" + minute
-                                                                        + ":" + seconds } %>
                             <label for="deliveryDate" class="visually-hidden">Text</label>
-                            <input id="deliveryDate" type="text" name="deliveryDate" placeholder="" class="form-control" required value="<%= formatDateTime(request.deliveryDate) %>">
+                            <input id="deliveryDate" type="text" name="deliveryDate" placeholder="" class="form-control" required value="<%= myUtils.formatDateTime(request.deliveryDate) %>">
                           </div>
                         </div>
                         <div class="col col-xl-4 mb-xl-0 mb-2">
@@ -641,7 +622,7 @@
                           <button class="btn btn-outline-success me-3">저장</button>
                         </div>
                         <% } %>
-                        
+
                       </div>
                     </form>
                   </div>

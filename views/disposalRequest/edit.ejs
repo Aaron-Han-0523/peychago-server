@@ -2,649 +2,543 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
-
-        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-            <% let aluminumWheel=['X', 'O', '모름' ]; %>
-                <% let collectMethod=['견인', '조기' ,'인탁' ]; %>
+  <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
 
-    <!-- Begin Modal -->
-    <div class="modal fade" id="supplierModal" tabindex="-1" role="dialog" aria-labelledby="supplierModalLable"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="supplierModalLable">협력사 검색
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <svg> ... </svg>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12 layout-top-spacing">
-                            <div class="input-group">
-                                <input id="searchWord" type="text" class="form-control" placeholder="검색할 회사명을 입력해주세요."
-                                    aria-label="Recipient's username with two button addons">
-                                <button class="btn btn-outline-primary" type="button"
-                                    onclick="searchSupplier();">검색</button>
-                            </div>
-                        </div>
-                    </div>
-                    <p id="searchCount"></p>
-
-                    <div class="table-responsive layout-top-spacing">
-                        <table class="table table-hover table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" scope="col">회사명
-                                    </th>
-                                    <th class="text-center" scope="col">
-                                        대표전화번호</th>
-                                    <th class="text-center" scope="col">주소
-                                    </th>
-                                </tr>
-                                <tr aria-hidden="true" class="mt-3 d-block table-row-hidden">
-                                </tr>
-                            </thead>
-                            <tbody id="searchResults">
-                                <% supplierUsers.rows.forEach(function(item, index) { %>
-                                    <tr onclick="selectSupplier('<%= item.supplierUsers_id %>');"
-                                        id="supplier<%= item.supplierUsers_id %>">
-                                        <td class="text-center">
-                                            <span class="media-body align-self-center">
-                                                <%= item.companyName %>
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="media-body align-self-center">
-                                                <%= item.mainPhoneNum %>
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="media-body align-self-center">
-                                                <%= item.address %>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <% }); %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+  <!-- Begin Modal -->
+  <div class="modal fade" id="supplierModal" tabindex="-1" role="dialog" aria-labelledby="supplierModalLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="supplierModalLable">협력사 검색
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <svg> ... </svg>
+          </button>
         </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="input-group">
+                <input id="searchWord" type="text" class="form-control" placeholder="검색할 회사명을 입력해주세요." aria-label="Recipient's username with two button addons">
+                <button class="btn btn-outline-primary" type="button" onclick="searchSupplier();">검색</button>
+              </div>
+            </div>
+          </div>
+          <p id="searchCount"></p>
+
+          <div class="table-responsive layout-top-spacing">
+            <table class="table table-hover table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center" scope="col">회사명
+                  </th>
+                  <th class="text-center" scope="col">
+                    대표전화번호</th>
+                  <th class="text-center" scope="col">주소
+                  </th>
+                </tr>
+                <tr aria-hidden="true" class="mt-3 d-block table-row-hidden">
+                </tr>
+              </thead>
+              <tbody id="searchResults">
+                <% supplierUsers.rows.forEach(function(item, index) { %>
+                <tr onclick="selectSupplier('<%= item.supplierUsers_id %>');" id="supplier<%= item.supplierUsers_id %>">
+                  <td class="text-center">
+                    <span class="media-body align-self-center">
+                      <%= item.companyName %>
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <span class="media-body align-self-center">
+                      <%= item.mainPhoneNum %>
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <span class="media-body align-self-center">
+                      <%= item.address %>
+                    </span>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- End Modal -->
+  </div>
+  <!-- End Modal -->
 
-    <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
-        <%- include ("../partials/nav.ejs") %>
+  <%- include ("../partials/nav.ejs") %>
 
-            <!--  BEGIN MAIN CONTAINER  -->
-            <div class="main-container sidebar-closed " id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container sidebar-closed " id="container">
 
-                <div class="overlay"></div>
-                <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-                <%- include ("../partials/sidebar.ejs") %>
+    <%- include ("../partials/sidebar.ejs") %>
 
-                    <!--  BEGIN CONTENT AREA  -->
-                    <div id="content" class="main-content">
-                        <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                            <div class="middle-content container-xxl p-0">
-                                <!-- BREADCRUMB -->
-                                <div class="page-meta">
-                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/disposalClients">폐차 고객 관리</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="/disposalRequest">회수 요청 고객</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">
-                                                <%= data.carNum %>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">수정</li>
-                                        </ol>
-                                    </nav>
-                                </div>
-                                <!-- /BREADCRUMB -->
+        <div class="middle-content container-xxl p-0">
+          <!-- BREADCRUMB -->
+          <div class="page-meta">
+            <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/disposalClients">폐차 고객 관리</a>
+                </li>
+                <li class="breadcrumb-item"><a href="/disposalRequest">회수 요청 고객</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <%= data.carNum %>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">수정</li>
+              </ol>
+            </nav>
+          </div>
+          <!-- /BREADCRUMB -->
 
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h4></h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row">
+                      <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4></h4>
+                      </div>
+                    </div>
+                  </div>
 
-                                                <div class="widget-content widget-content-area">
-                                                    <form method="post">
-                                                        <div class="row form-group">
-                                                            <div class="col col-xl-8 mb-xl-1 mb-4">
-                                                                <label class="col-form-label">인수업체
-                                                                </label>
-                                                                <div class="d-flex">
-                                                                    <div class="p-2 flex-grow-1">
-                                                                        <input id="companyName" name="companyName"
-                                                                            value="<%= supplier ? supplier.companyName : null %>"
-                                                                            hidden>
-                                                                        <label id="supplierUser" class="form-control">
-                                                                            <% if (supplier) { %>
-                                                                                <%= supplier.companyName %> - <%=
+                  <div class="widget-content widget-content-area">
+                    <form method="post">
+                      <div class="row form-group">
+                        <div class="col col-xl-8 mb-xl-1 mb-4">
+                          <label class="col-form-label">인수업체
+                          </label>
+                          <div class="d-flex">
+                            <div class="p-2 flex-grow-1">
+                              <input id="companyName" name="companyName" value="<%= supplier ? supplier.companyName : null %>" hidden>
+                              <label id="supplierUser" class="form-control">
+                                <% if (supplier) { %>
+                                <%= supplier.companyName %> - <%=
                                                                                         supplier.mainPhoneNum %>
-                                                                                        <% } %>
-                                                                        </label>
-                                                                        <input id="supplierUsers_id" hidden
-                                                                            name="supplierUsers_id"
-                                                                            value="<%= supplier ? supplier.supplierUsers_id : null %>">
-                                                                    </div>
-                                                                    <div class="p-2">
-                                                                        <button class="btn btn-primary"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#supplierModal"
-                                                                            type="button">검색</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>수수료</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차대비</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="commission"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="commission" type="text" name="commission"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.commission %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="price"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="price" type="text" name="price"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.price %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                <% } %>
+                              </label>
+                              <input id="supplierUsers_id" hidden name="supplierUsers_id" value="<%= supplier ? supplier.supplierUsers_id : null %>">
+                            </div>
+                            <div class="p-2">
+                              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#supplierModal" type="button">검색</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>수수료</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차대비</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="commission" class="visually-hidden">Text</label>
+                            <input id="commission" type="text" name="commission" placeholder="" class="form-control" value="<%= data.commission %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="price" class="visually-hidden">Text</label>
+                            <input id="price" type="text" name="price" placeholder="" class="form-control" value="<%= data.price %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>손실금</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>탁송료</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="loss"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="loss" type="text" name="loss"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.loss %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="deliveryFee"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="deliveryFee" type="text"
-                                                                        name="deliveryFee" placeholder=""
-                                                                        class="form-control"
-                                                                        value="<%= data.deliveryFee %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>손실금</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>탁송료</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="loss" class="visually-hidden">Text</label>
+                            <input id="loss" type="text" name="loss" placeholder="" class="form-control" value="<%= data.loss %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="deliveryFee" class="visually-hidden">Text</label>
+                            <input id="deliveryFee" type="text" name="deliveryFee" placeholder="" class="form-control" value="<%= data.deliveryFee %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-spacing">
-                                                            <h5 class="text-center">차량정보
-                                                            </h5>
-                                                        </div>
+                      <div class="row layout-spacing">
+                        <h5 class="text-center">차량정보
+                        </h5>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차량번호</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차주 성함</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="carNum"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="carNum" type="text" name="carNum"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled value="<%= process.carNum %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="ownerName"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="ownerName" type="text" name="ownerName"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled value="<%= process.ownerName %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차량번호</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차주 성함</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="carNum" class="visually-hidden">Text</label>
+                            <input id="carNum" type="text" name="carNum" placeholder="" class="form-control" required disabled value="<%= process.carNum %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="ownerName" class="visually-hidden">Text</label>
+                            <input id="ownerName" type="text" name="ownerName" placeholder="" class="form-control" required disabled value="<%= process.ownerName %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차종</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>연식</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="model"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="model" type="text" name="model"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled value="<%= process.model %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="yearModel"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="yearModel" type="text" name="yearModel"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled value="<%= process.yearModel %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차종</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>연식</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="model" class="visually-hidden">Text</label>
+                            <input id="model" type="text" name="model" placeholder="" class="form-control" required disabled value="<%= process.model %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="yearModel" class="visually-hidden">Text</label>
+                            <input id="yearModel" type="text" name="yearModel" placeholder="" class="form-control" required disabled value="<%= process.yearModel %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>원동기형식</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>배기량</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="detailModel"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="detailModel" type="text"
-                                                                        name="detailModel" placeholder=""
-                                                                        class="form-control" required disabled
-                                                                        value="<%= process.detailModel %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="displacement"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="displacement" type="text"
-                                                                        name="displacement" placeholder=""
-                                                                        class="form-control" required disabled
-                                                                        value="<%= process.displacement %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>원동기형식</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>배기량</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="detailModel" class="visually-hidden">Text</label>
+                            <input id="detailModel" type="text" name="detailModel" placeholder="" class="form-control" required disabled value="<%= process.detailModel %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="displacement" class="visually-hidden">Text</label>
+                            <input id="displacement" type="text" name="displacement" placeholder="" class="form-control" required disabled value="<%= process.displacement %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 row">
-                                                                <div class="col">
-                                                                    <h6>압류</h6>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <h6>저당</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>사고유무</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 row">
-                                                                <div class="col form-group">
-                                                                    <label for="attachment"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input class="form-control" id="attachment"
-                                                                        name="attachment" disabled
-                                                                        value="<%= process.attachment %>">
-                                                                </div>
-                                                                <div class="col form-group">
-                                                                    <label for="mortgage"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input class="form-control" id="mortgage" disabled
-                                                                        name="mortgage" value="<%= process.mortgage %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="carCondition"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <select class="form-control" id="carCondition"
-                                                                        name="carCondition" disabled>
-                                                                        <% for(let i=0; i< carCondition.length; i++) {
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 row">
+                          <div class="col">
+                            <h6>압류</h6>
+                          </div>
+                          <div class="col">
+                            <h6>저당</h6>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>사고유무</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 row">
+                          <div class="col form-group">
+                            <label for="attachment" class="visually-hidden">Text</label>
+                            <input class="form-control" id="attachment" name="attachment" disabled value="<%= process.attachment %>">
+                          </div>
+                          <div class="col form-group">
+                            <label for="mortgage" class="visually-hidden">Text</label>
+                            <input class="form-control" id="mortgage" disabled name="mortgage" value="<%= process.mortgage %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="carCondition" class="visually-hidden">Text</label>
+                            <select class="form-control" id="carCondition" name="carCondition" disabled>
+                              <% for(let i=0; i< codezip.carCondition.length; i++) {
                                                                             %>
-                                                                            <% if(process.carCondition==i) { %>
-                                                                                <option value="<%= i %>" selected>
-                                                                                    <%= carCondition[i] %>
-                                                                                </option>
-                                                                                <% } else { %>
-                                                                                    <option value="<%= i %>">
-                                                                                        <%= carCondition[i] %>
-                                                                                    </option>
-                                                                                    <% } %>
-                                                                                        <% } %>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                              <% if(process.carCondition==i) { %>
+                              <option value="<%= i %>" selected>
+                                <%= codezip.carCondition[i] %>
+                              </option>
+                              <% } else { %>
+                              <option value="<%= i %>">
+                                <%= codezip.carCondition[i] %>
+                              </option>
+                              <% } %>
+                              <% } %>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>알루미늄 휠</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>견인/조기/인탁</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="aluminumWheel"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <select class="form-control" id="aluminumWheel"
-                                                                        name="aluminumWheel" disabled>
-                                                                        <% for(let i=0; i< aluminumWheel.length; i++) {
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>알루미늄 휠</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>견인/조기/인탁</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="aluminumWheel" class="visually-hidden">Text</label>
+                            <select class="form-control" id="aluminumWheel" name="aluminumWheel" disabled>
+                              <% for(let i=0; i< codezip.aluminumWheel.length; i++) {
                                                                             %>
-                                                                            <% if(process.aluminumWheel==i) { %>
-                                                                                <option value="<%= i %>" selected>
-                                                                                    <%= aluminumWheel[i] %>
-                                                                                </option>
-                                                                                <% } else { %>
-                                                                                    <option value="<%= i %>">
-                                                                                        <%= aluminumWheel[i] %>
-                                                                                    </option>
-                                                                                    <% } %>
-                                                                                        <% } %>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="collectMethod"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <select class="form-select" id="collectMethod"
-                                                                        name="collectMethod">
+                              <% if(process.aluminumWheel==i) { %>
+                              <option value="<%= i %>" selected>
+                                <%= codezip.aluminumWheel[i] %>
+                              </option>
+                              <% } else { %>
+                              <option value="<%= i %>">
+                                <%= codezip.aluminumWheel[i] %>
+                              </option>
+                              <% } %>
+                              <% } %>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="collectMethod" class="visually-hidden">Text</label>
+                            <select class="form-select" id="collectMethod" name="collectMethod">
 
-                                                                        <% for(let i=0; i< collectMethod.length; i++) {
+                              <% for(let i=0; i< codezip.collectMethod.length; i++) {
                                                                             %>
-                                                                            <% if(data.collectMethod==i) { %>
-                                                                                <option value="<%= i %>" selected>
-                                                                                    <%= collectMethod[i] %>
-                                                                                </option>
-                                                                                <% } else { %>
-                                                                                    <option value="<%= i %>">
-                                                                                        <%= collectMethod[i] %>
-                                                                                    </option>
-                                                                                    <% } %>
-                                                                                        <% } %>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                              <% if(data.collectMethod==i) { %>
+                              <option value="<%= i %>" selected>
+                                <%= codezip.collectMethod[i] %>
+                              </option>
+                              <% } else { %>
+                              <option value="<%= i %>">
+                                <%= codezip.collectMethod[i] %>
+                              </option>
+                              <% } %>
+                              <% } %>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-spacing">
-                                                            <h5 class="text-center">회수정보
-                                                            </h5>
-                                                        </div>
+                      <div class="row layout-spacing">
+                        <h5 class="text-center">회수정보
+                        </h5>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수일시</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수연락처</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <% function formatDate(d_t) { let
-                                                                        year=d_t.getFullYear(); let month=("0" +
-                                                                        (d_t.getMonth() + 1)).slice(-2); let day=("0" +
-                                                                        d_t.getDate()).slice(-2); let hour=("0" +
-                                                                        d_t.getHours()).slice(-2); let minute=("0" +
-                                                                        d_t.getMinutes()).slice(-2); let seconds=("0" +
-                                                                        d_t.getSeconds()).slice(-2); return year + "-" +
-                                                                        month + "-" + day + " " + hour + ":" + minute
-                                                                        + ":" + seconds } %>
-                                                                        <label for="deliveryDate"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <input id="deliveryDate" type="text"
-                                                                            name="deliveryDate" placeholder=""
-                                                                            class="form-control" required
-                                                                            value="<%= formatDate(data.deliveryDate) %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phoneNum"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="phoneNum" type="text" name="phoneNum"
-                                                                        placeholder="" class="form-control" required
-                                                                        value="<%= data.phoneNum %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수일시</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수연락처</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="deliveryDate" class="visually-hidden">Text</label>
+                            <input id="deliveryDate" type="text" name="deliveryDate" placeholder="" class="form-control" required value="<%= myUtils.formatDateTime(data.deliveryDate) %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="phoneNum" class="visually-hidden">Text</label>
+                            <input id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" required value="<%= data.phoneNum %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수장소</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="collectPlace"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="collectPlace" type="text"
-                                                                        name="collectPlace" placeholder=""
-                                                                        class="form-control" required
-                                                                        value="<%= data.collectPlace %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수장소</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="collectPlace" class="visually-hidden">Text</label>
+                            <input id="collectPlace" type="text" name="collectPlace" placeholder="" class="form-control" required value="<%= data.collectPlace %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
-                                                                <h5>[차주계좌정보]</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="bankName1">은행명</label>
-                                                                    <input id="bankName1" type="text" name="bankName1"
-                                                                        placeholder="" class="form-control" required
-                                                                        value="<%= data.bankName1 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountNum1">계좌번호</label>
-                                                                    <input id="accountNum1" type="text"
-                                                                        name="accountNum1" placeholder=""
-                                                                        class="form-control" required
-                                                                        value="<%= data.accountNum1 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountHolder1">예금주</label>
-                                                                    <input id="accountHolder1" type="text"
-                                                                        name="accountHolder1" placeholder=""
-                                                                        class="form-control" required
-                                                                        value="<%= data.accountHolder1 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="amount1">금액</label>
-                                                                    <input id="amount1" type="text" name="amount1"
-                                                                        placeholder="" class="form-control" required
-                                                                        value="<%= data.amount1 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                          <h5>[차주계좌정보]</h5>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="bankName1">은행명</label>
+                            <input id="bankName1" type="text" name="bankName1" placeholder="" class="form-control" required value="<%= data.bankName1 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountNum1">계좌번호</label>
+                            <input id="accountNum1" type="text" name="accountNum1" placeholder="" class="form-control" required value="<%= data.accountNum1 %>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountHolder1">예금주</label>
+                            <input id="accountHolder1" type="text" name="accountHolder1" placeholder="" class="form-control" required value="<%= data.accountHolder1 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="amount1">금액</label>
+                            <input id="amount1" type="text" name="amount1" placeholder="" class="form-control" required value="<%= data.amount1 %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
-                                                                <h5>[입금계좌정보]</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="bankName2">은행명</label>
-                                                                    <input id="bankName2" type="text" name="bankName2"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.bankName2 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountNum2">계좌번호</label>
-                                                                    <input id="accountNum2" type="text"
-                                                                        name="accountNum2" placeholder=""
-                                                                        class="form-control"
-                                                                        value="<%= data.accountNum2 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountHolder2">예금주</label>
-                                                                    <input id="accountHolder2" type="text"
-                                                                        name="accountHolder2" placeholder=""
-                                                                        class="form-control"
-                                                                        value="<%= data.accountHolder2 %>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="amount2">금액</label>
-                                                                    <input id="amount2" type="text" name="amount2"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.amount2 %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                          <h5>[입금계좌정보]</h5>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="bankName2">은행명</label>
+                            <input id="bankName2" type="text" name="bankName2" placeholder="" class="form-control" value="<%= data.bankName2 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountNum2">계좌번호</label>
+                            <input id="accountNum2" type="text" name="accountNum2" placeholder="" class="form-control" value="<%= data.accountNum2 %>">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountHolder2">예금주</label>
+                            <input id="accountHolder2" type="text" name="accountHolder2" placeholder="" class="form-control" value="<%= data.accountHolder2 %>">
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="amount2">금액</label>
+                            <input id="amount2" type="text" name="amount2" placeholder="" class="form-control" value="<%= data.amount2 %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>비고</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="note"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <input id="note" type="text" name="note"
-                                                                        placeholder="" class="form-control"
-                                                                        value="<%= data.note %>">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>비고</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="note" class="visually-hidden">Text</label>
+                            <input id="note" type="text" name="note" placeholder="" class="form-control" value="<%= data.note %>">
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col">
-                                                                <div class="form-group ">
-                                                                    <button
-                                                                        class="btn btn-outline-success me-3">저장</button>
-                                                                    <!-- <button type="button"
+                      <div class="row layout-top-spacing">
+                        <div class="col">
+                          <div class="form-group ">
+                            <button class="btn btn-outline-success me-3">저장</button>
+                            <!-- <button type="button"
                                                                         onclick="sendClient('<%= data.carNum %>')"
                                                                         class="btn btn-outline-success me-3">저장 및 요청서
                                                                         전송</button> -->
-                                                                    <button type="button" onclick="showImage()"
-                                                                        class="btn btn-outline-info me-3">요청서
-                                                                        미리보기</button>
-                                                                    <button type="button" onclick="downloadImage()"
-                                                                        class="btn btn-outline-info me-3">요청서
-                                                                        다운로드</button>
-                                                                    <button type="button" onclick="cancel()"
-                                                                        class="btn btn-outline-danger me-3">취소</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <%- include ("../partials/footer.ejs") %>
-
+                            <button type="button" onclick="showImage()" class="btn btn-outline-info me-3">요청서
+                              미리보기</button>
+                            <button type="button" onclick="downloadImage()" class="btn btn-outline-info me-3">요청서
+                              다운로드</button>
+                            <button type="button" onclick="cancel()" class="btn btn-outline-danger me-3">취소</button>
+                          </div>
                         </div>
-                        <!--  END CONTENT AREA  -->
-                    </div>
-                    <!-- END MAIN CONTAINER -->
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                    <!-- REQUEST PREVIEW -->
-                    <div id="req_table">
+        <%- include ("../partials/footer.ejs") %>
 
-                    </div>
-                    <%- include ("../partials/commonScrpits.ejs") %>
+      </div>
+      <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
 
-                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                        <script>
-                            async function searchSupplier() {
-                                const target_id = "searchResults";
-                                const searchWord_element = document.getElementById('searchWord');
-                                const searchWord = searchWord_element.value;
+    <!-- REQUEST PREVIEW -->
+    <div id="req_table">
 
-                                const res = await fetch(`/supplierUsers/search?q=${searchWord}`)
-                                    .then((response) => {
-                                        // console.log(response.json());
-                                        return response.json();
-                                    })
-                                // .catch((err) => { console.error(err) });
+    </div>
+    <%- include ("../partials/commonScrpits.ejs") %>
 
-                                const result = res.data;
-                                // console.log(result);
-                                document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
-                                searchWord_element.value = '';
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script>
+      async function searchSupplier() {
+        const target_id = "searchResults";
+        const searchWord_element = document.getElementById('searchWord');
+        const searchWord = searchWord_element.value;
 
-                                let tempHTML = ''
-                                result.rows.forEach(function (item, index) {
-                                    tempHTML += `
+        const res = await fetch(`/supplierUsers/search?q=${searchWord}`)
+          .then((response) => {
+            // console.log(response.json());
+            return response.json();
+          })
+        // .catch((err) => { console.error(err) });
+
+        const result = res.data;
+        // console.log(result);
+        document.getElementById('searchCount').innerText = `${searchWord} 검색결과 ${result.count}개`;
+        searchWord_element.value = '';
+
+        let tempHTML = ''
+        result.rows.forEach(function(item, index) {
+          tempHTML += `
                                     <tr onclick="selectSupplier(${item.supplierUsers_id});" id="supplier${item.supplierUsers_id}">
                                         <td class="text-center">
                                         <span class="media-body align-self-center">
@@ -663,57 +557,57 @@
                                         </td>
                                     </tr>
                                     `
-                                });
+        });
 
-                                document.getElementById(target_id).innerHTML = tempHTML;
-                            }
+        document.getElementById(target_id).innerHTML = tempHTML;
+      }
 
-                            function selectSupplier(id) {
-                                const supplier = document.getElementById('supplier' + id).innerText.split('\t');
-                                document.getElementById('supplierUsers_id').value = id;
-                                document.getElementById('supplierUser').innerText = supplier[0] + '-' + supplier[1];
-                                document.getElementById('companyName').value = supplier[0];
-                            }
+      function selectSupplier(id) {
+        const supplier = document.getElementById('supplier' + id).innerText.split('\t');
+        document.getElementById('supplierUsers_id').value = id;
+        document.getElementById('supplierUser').innerText = supplier[0] + '-' + supplier[1];
+        document.getElementById('companyName').value = supplier[0];
+      }
 
 
-                            let disposalRequest = {
-                                companyName: ""
-                                , commission: ""
-                                , price: ""
-                                , loss: ""
-                                , deliveryFee: ""
-                                , carNum: ""
-                                , ownerName: ""
-                                , model: ""
-                                , yearModel: ""
-                                , detailModel: ""
-                                , displacement: ""
-                                , mortgage: ""
-                                , carCondition: ""
-                                , aluminumWheel: ""
-                                , collectMethod: ""
-                                , deliveryDate: ""
-                                , collectPlace: ""
-                                , phoneNum: ""
-                                , bankName1: ""
-                                , accountNum1: ""
-                                , accountHolder1: ""
-                                , amount1: ""
-                                , bankName2: ""
-                                , accountNum2: ""
-                                , accountHolder2: ""
-                                , amount2: ""
-                                , note: ""
-                            }
+      let disposalRequest = {
+        companyName: "",
+        commission: "",
+        price: "",
+        loss: "",
+        deliveryFee: "",
+        carNum: "",
+        ownerName: "",
+        model: "",
+        yearModel: "",
+        detailModel: "",
+        displacement: "",
+        mortgage: "",
+        carCondition: "",
+        aluminumWheel: "",
+        collectMethod: "",
+        deliveryDate: "",
+        collectPlace: "",
+        phoneNum: "",
+        bankName1: "",
+        accountNum1: "",
+        accountHolder1: "",
+        amount1: "",
+        bankName2: "",
+        accountNum2: "",
+        accountHolder2: "",
+        amount2: "",
+        note: ""
+      }
 
-                            function sendClient(id) {
-                                const form_elements = document.forms[0].elements;
-                                for (let i = 0; i < form_elements.length; i++) {
-                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
-                                }
+      function sendClient(id) {
+        const form_elements = document.forms[0].elements;
+        for (let i = 0; i < form_elements.length; i++) {
+          if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
+        }
 
-                                const target = document.getElementById('req_table')
-                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+        const target = document.getElementById('req_table')
+        target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -917,41 +811,41 @@
                                     </table>
                                 </div>`
 
-                                domtoimage.toBlob(target)
-                                    .then(function (blob) {
-                                        // console.log(blob);
-                                        const formData = new FormData();
-                                        formData.append('diposalRequest', blob);
+        domtoimage.toBlob(target)
+          .then(function(blob) {
+            // console.log(blob);
+            const formData = new FormData();
+            formData.append('diposalRequest', blob);
 
-                                        const url = `/disposalRequest/upload/${id}`;
-                                        fetch(url, {
-                                            method: 'POST',
-                                            // headers: { 'Content-Type': 'multipart/form-data' },
-                                            body: formData
-                                        })
-                                            .then(res => {
-                                                // console.log(res)
-                                                // if (res.ok) alert("전송 성공");
-                                                if (!res.ok) throw new Error(res.statusText)
-                                                document.forms[0].submit();
-                                            })
-                                            .catch(err => {
-                                                console.error(err)
-                                                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
-                                            });
+            const url = `/disposalRequest/upload/${id}`;
+            fetch(url, {
+                method: 'POST',
+                // headers: { 'Content-Type': 'multipart/form-data' },
+                body: formData
+              })
+              .then(res => {
+                // console.log(res)
+                // if (res.ok) alert("전송 성공");
+                if (!res.ok) throw new Error(res.statusText)
+                document.forms[0].submit();
+              })
+              .catch(err => {
+                console.error(err)
+                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
+              });
 
-                                        target.innerHTML = '';
-                                    });
-                            }
+            target.innerHTML = '';
+          });
+      }
 
-                            function downloadImage() {
-                                const form_elements = document.forms[0].elements;
-                                for (let i = 0; i < form_elements.length; i++) {
-                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
-                                }
+      function downloadImage() {
+        const form_elements = document.forms[0].elements;
+        for (let i = 0; i < form_elements.length; i++) {
+          if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
+        }
 
-                                const target = document.getElementById('req_table');
-                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+        const target = document.getElementById('req_table');
+        target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1155,22 +1049,22 @@
                                     </table>
                                 </div>`
 
-                                domtoimage.toBlob(target)
-                                    .then(function (blob) {
-                                        // console.log(blob)
-                                        window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
-                                        target.innerHTML = '';
-                                    });
-                            }
+        domtoimage.toBlob(target)
+          .then(function(blob) {
+            // console.log(blob)
+            window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
+            target.innerHTML = '';
+          });
+      }
 
-                            function showImage() {
-                                const form_elements = document.forms[0].elements;
-                                for (let i = 0; i < form_elements.length; i++) {
-                                    if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
-                                }
+      function showImage() {
+        const form_elements = document.forms[0].elements;
+        for (let i = 0; i < form_elements.length; i++) {
+          if (form_elements[i].value) disposalRequest[form_elements[i].name] = form_elements[i].value;
+        }
 
-                                const target = document.getElementById('req_table');
-                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+        const target = document.getElementById('req_table');
+        target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1374,15 +1268,15 @@
                                     </table>
                                 </div>`
 
-                                domtoimage.toBlob(target)
-                                    .then((blob) => {
-                                        let url = URL.createObjectURL(blob);
-                                        window.open(url);
-                                        target.innerHTML = '';
-                                    })
-                            }
-                        </script>
-                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+        domtoimage.toBlob(target)
+          .then((blob) => {
+            let url = URL.createObjectURL(blob);
+            window.open(url);
+            target.innerHTML = '';
+          })
+      }
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

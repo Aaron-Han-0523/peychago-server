@@ -2,592 +2,513 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
-
-        <% let carCondition=['양호', '사고' , '운행불가' ]; %>
-            <% let aluminumWheel=['X', 'O' , '모름' ]; %>
-                <% let collectMethod=['견인', '조기' ,'인탁' ]; %>
+  <%- include ("../partials/header.ejs") %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
 
-    <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
-        <%- include ("../partials/nav.ejs") %>
+  <%- include ("../partials/nav.ejs") %>
 
-            <!--  BEGIN MAIN CONTAINER  -->
-            <div class="main-container sidebar-closed " id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container sidebar-closed " id="container">
 
-                <div class="overlay"></div>
-                <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-                <%- include ("../partials/sidebar.ejs") %>
+    <%- include ("../partials/sidebar.ejs") %>
 
-                    <!--  BEGIN CONTENT AREA  -->
-                    <div id="content" class="main-content">
-                        <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                            <div class="middle-content container-xxl p-0">
-                                <!-- BREADCRUMB -->
-                                <div class="page-meta">
-                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/disposalClients">폐차 고객 관리</a>
-                                            </li>
-                                            <li class="breadcrumb-item"><a href="/disposalRequest">회수 요청 고객</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">
-                                                <%= data.carNum %>
-                                            </li>
-                                        </ol>
-                                    </nav>
-                                </div>
-                                <!-- /BREADCRUMB -->
+        <div class="middle-content container-xxl p-0">
+          <!-- BREADCRUMB -->
+          <div class="page-meta">
+            <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/disposalClients">폐차 고객 관리</a>
+                </li>
+                <li class="breadcrumb-item"><a href="/disposalRequest">회수 요청 고객</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <%= data.carNum %>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <!-- /BREADCRUMB -->
 
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h4></h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                  <div class="widget-header">
+                    <div class="row">
+                      <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4></h4>
+                      </div>
+                    </div>
+                  </div>
 
-                                                <div class="widget-content widget-content-area">
-                                                    <form method="post">
-                                                        <div class="row form-group">
-                                                            <div class="col col-xl-8 mb-xl-1 mb-4">
-                                                                <label class="col-form-label">인수업체
-                                                                </label>
-                                                                <div class="d-flex">
-                                                                    <div class="p-2 flex-grow-1">
-                                                                        <label id="companyName" hidden>
-                                                                            <%= supplier ? supplier.companyName : '' %>
-                                                                        </label>
-                                                                        <label name="companyName"
-                                                                            class="col-form-label form-control">
-                                                                            <% if (supplier) { %>
-                                                                                <%= supplier.companyName %> - <%=
+                  <div class="widget-content widget-content-area">
+                    <form method="post">
+                      <div class="row form-group">
+                        <div class="col col-xl-8 mb-xl-1 mb-4">
+                          <label class="col-form-label">인수업체
+                          </label>
+                          <div class="d-flex">
+                            <div class="p-2 flex-grow-1">
+                              <label id="companyName" hidden>
+                                <%= supplier ? supplier.companyName : '' %>
+                              </label>
+                              <label name="companyName" class="col-form-label form-control">
+                                <% if (supplier) { %>
+                                <%= supplier.companyName %> - <%=
                                                                                         supplier.mainPhoneNum %>
-                                                                                        <% } %>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>수수료</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차대비</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="commission"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="commission" type="text" name="commission"
-                                                                        placeholder="" class="form-control" required>
-                                                                        <%= data.commission %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="price"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="price" type="text" name="price"
-                                                                        placeholder="" class="form-control" required>
-                                                                        <%= data.price %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                <% } %>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>수수료</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차대비</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="commission" class="visually-hidden">Text</label>
+                            <label id="commission" type="text" name="commission" placeholder="" class="form-control" required>
+                              <%= data.commission %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="price" class="visually-hidden">Text</label>
+                            <label id="price" type="text" name="price" placeholder="" class="form-control" required>
+                              <%= data.price %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>손실금</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>탁송료</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="loss"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="loss" type="text" name="loss"
-                                                                        placeholder="" class="form-control">
-                                                                        <%= data.loss %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="deliveryFee"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="deliveryFee" type="text"
-                                                                        name="deliveryFee" placeholder=""
-                                                                        class="form-control">
-                                                                        <%= data.deliveryFee %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>손실금</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>탁송료</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="loss" class="visually-hidden">Text</label>
+                            <label id="loss" type="text" name="loss" placeholder="" class="form-control">
+                              <%= data.loss %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="deliveryFee" class="visually-hidden">Text</label>
+                            <label id="deliveryFee" type="text" name="deliveryFee" placeholder="" class="form-control">
+                              <%= data.deliveryFee %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-spacing">
-                                                            <h5 class="text-center">차량정보
-                                                            </h5>
-                                                        </div>
+                      <div class="row layout-spacing">
+                        <h5 class="text-center">차량정보
+                        </h5>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차량번호</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차주 성함</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="carNum"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="carNum" type="text" name="carNum"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled>
-                                                                        <%= process.carNum %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="ownerName"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="ownerName" type="text" name="ownerName"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled>
-                                                                        <%= process.ownerName %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차량번호</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차주 성함</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="carNum" class="visually-hidden">Text</label>
+                            <label id="carNum" type="text" name="carNum" placeholder="" class="form-control" required disabled>
+                              <%= process.carNum %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="ownerName" class="visually-hidden">Text</label>
+                            <label id="ownerName" type="text" name="ownerName" placeholder="" class="form-control" required disabled>
+                              <%= process.ownerName %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>차종</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>연식</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="model"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="model" type="text" name="model"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled>
-                                                                        <%= process.model %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="yearModel"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="yearModel" type="text" name="yearModel"
-                                                                        placeholder="" class="form-control" required
-                                                                        disabled>
-                                                                        <%= process.yearModel %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>차종</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>연식</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="model" class="visually-hidden">Text</label>
+                            <label id="model" type="text" name="model" placeholder="" class="form-control" required disabled>
+                              <%= process.model %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="yearModel" class="visually-hidden">Text</label>
+                            <label id="yearModel" type="text" name="yearModel" placeholder="" class="form-control" required disabled>
+                              <%= process.yearModel %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>원동기형식</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>배기량</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="detailModel"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="detailModel" type="text"
-                                                                        name="detailModel" placeholder=""
-                                                                        class="form-control" required disabled>
-                                                                        <%= process.detailModel %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="displacement"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="displacement" type="text"
-                                                                        name="displacement" placeholder=""
-                                                                        class="form-control" required disabled>
-                                                                        <%= process.displacement %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>원동기형식</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>배기량</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="detailModel" class="visually-hidden">Text</label>
+                            <label id="detailModel" type="text" name="detailModel" placeholder="" class="form-control" required disabled>
+                              <%= process.detailModel %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="displacement" class="visually-hidden">Text</label>
+                            <label id="displacement" type="text" name="displacement" placeholder="" class="form-control" required disabled>
+                              <%= process.displacement %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 row">
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>압류</h6>
-                                                                </div>
-                                                                <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                    <h6>저당</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>사고유무</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 row">
-                                                                <div class="col form-group">
-                                                                    <label for="attachment"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label class="form-control" id="attachment"
-                                                                        name="attachment">
-                                                                        <%= process.attachment %>
-                                                                    </label>
-                                                                </div>
-                                                                <div class="col form-group">
-                                                                    <label for="mortgage"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label class="form-control" id="mortgage"
-                                                                        name="mortgage">
-                                                                        <%= process.mortgage %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="carCondition"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label class="form-control" id="carCondition"
-                                                                        name="carCondition">
-                                                                        <%= carCondition[process.carCondition] %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>압류</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>저당</h6>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>사고유무</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 row">
+                          <div class="col form-group">
+                            <label for="attachment" class="visually-hidden">Text</label>
+                            <label class="form-control" id="attachment" name="attachment">
+                              <%= process.attachment %>
+                            </label>
+                          </div>
+                          <div class="col form-group">
+                            <label for="mortgage" class="visually-hidden">Text</label>
+                            <label class="form-control" id="mortgage" name="mortgage">
+                              <%= process.mortgage %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="carCondition" class="visually-hidden">Text</label>
+                            <label class="form-control" id="carCondition" name="carCondition">
+                              <%= codezip.carCondition[process.carCondition] %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>알루미늄 휠</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>견인/조기/인탁</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="aluminumWheel"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label class="form-control" id="aluminumWheel"
-                                                                        name="aluminumWheel">
-                                                                        <%= aluminumWheel[process.aluminumWheel] %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="collectMethod"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label class="form-control" id="collectMethod"
-                                                                        name="collectMethod">
-                                                                        <%= collectMethod[data.collectMethod] %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>알루미늄 휠</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>견인/조기/인탁</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="aluminumWheel" class="visually-hidden">Text</label>
+                            <label class="form-control" id="aluminumWheel" name="aluminumWheel">
+                              <%= codezip.aluminumWheel[process.aluminumWheel] %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="collectMethod" class="visually-hidden">Text</label>
+                            <label class="form-control" id="collectMethod" name="collectMethod">
+                              <%= codezip.collectMethod[data.collectMethod] %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-spacing">
-                                                            <h5 class="text-center">회수정보
-                                                            </h5>
-                                                        </div>
+                      <div class="row layout-spacing">
+                        <h5 class="text-center">회수정보
+                        </h5>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수일시</h6>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수연락처</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <% function formatDate(d_t) { let
-                                                                        year=d_t.getFullYear(); let month=("0" +
-                                                                        (d_t.getMonth() + 1)).slice(-2); let day=("0" +
-                                                                        d_t.getDate()).slice(-2); let hour=("0" +
-                                                                        d_t.getHours()).slice(-2); let minute=("0" +
-                                                                        d_t.getMinutes()).slice(-2); let seconds=("0" +
-                                                                        d_t.getSeconds()).slice(-2); return year + "-" +
-                                                                        month + "-" + day + " " + hour + ":" + minute
-                                                                        + ":" + seconds } %>
-                                                                        <label for="deliveryDate"
-                                                                            class="visually-hidden">Text</label>
-                                                                        <label id="deliveryDate" type="text"
-                                                                            name="deliveryDate" placeholder=""
-                                                                            class="form-control" required>
-                                                                            <%= formatDate(data.deliveryDate) %>
-                                                                        </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phoneNum"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="phoneNum" type="text" name="phoneNum"
-                                                                        placeholder="" class="form-control" required>
-                                                                        <%= data.phoneNum %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수일시</h6>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수연락처</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="deliveryDate" class="visually-hidden">Text</label>
+                            <label id="deliveryDate" type="text" name="deliveryDate" placeholder="" class="form-control" required>
+                              <%= myUtils.formatDateTime(data.deliveryDate) %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="phoneNum" class="visually-hidden">Text</label>
+                            <label id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" required>
+                              <%= data.phoneNum %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>회수장소</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="collectPlace"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="collectPlace" type="text"
-                                                                        name="collectPlace" placeholder=""
-                                                                        class="form-control" required>
-                                                                        <%= data.collectPlace %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>회수장소</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="collectPlace" class="visually-hidden">Text</label>
+                            <label id="collectPlace" type="text" name="collectPlace" placeholder="" class="form-control" required>
+                              <%= data.collectPlace %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
-                                                                <h5>[차주계좌정보]</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="bankName1">은행명</label>
-                                                                    <label id="bankName1" type="text" name="bankName1"
-                                                                        placeholder="" class="form-control" required>
-                                                                        <%= data.bankName1 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountNum1">계좌번호</label>
-                                                                    <label id="accountNum1" type="text"
-                                                                        name="accountNum1" placeholder=""
-                                                                        class="form-control" required>
-                                                                        <%= data.accountNum1 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountHolder1">예금주</label>
-                                                                    <label id="accountHolder1" type="text"
-                                                                        name="accountHolder1" placeholder=""
-                                                                        class="form-control" required>
-                                                                        <%= data.accountHolder1 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="amount1">금액</label>
-                                                                    <label id="amount1" type="text" name="amount1"
-                                                                        placeholder="" class="form-control" required>
-                                                                        <%= data.amount1 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                          <h5>[차주계좌정보]</h5>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="bankName1">은행명</label>
+                            <label id="bankName1" type="text" name="bankName1" placeholder="" class="form-control" required>
+                              <%= data.bankName1 %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountNum1">계좌번호</label>
+                            <label id="accountNum1" type="text" name="accountNum1" placeholder="" class="form-control" required>
+                              <%= data.accountNum1 %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountHolder1">예금주</label>
+                            <label id="accountHolder1" type="text" name="accountHolder1" placeholder="" class="form-control" required>
+                              <%= data.accountHolder1 %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="amount1">금액</label>
+                            <label id="amount1" type="text" name="amount1" placeholder="" class="form-control" required>
+                              <%= data.amount1 %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
-                                                                <h5>[입금계좌정보]</h5>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="bankName2">은행명</label>
-                                                                    <label id="bankName2" type="text" name="bankName2"
-                                                                        placeholder="" class="form-control">
-                                                                        <%= data.bankName2 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountNum2">계좌번호</label>
-                                                                    <label id="accountNum2" type="text"
-                                                                        name="accountNum2" placeholder=""
-                                                                        class="form-control">
-                                                                        <%= data.accountNum2 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="accountHolder2">예금주</label>
-                                                                    <label id="accountHolder2" type="text"
-                                                                        name="accountHolder2" placeholder=""
-                                                                        class="form-control">
-                                                                        <%= data.accountHolder2 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="amount2">금액</label>
-                                                                    <label id="amount2" type="text" name="amount2"
-                                                                        placeholder="" class="form-control">
-                                                                        <%= data.amount2 %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2 text-center">
+                          <h5>[입금계좌정보]</h5>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="bankName2">은행명</label>
+                            <label id="bankName2" type="text" name="bankName2" placeholder="" class="form-control">
+                              <%= data.bankName2 %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountNum2">계좌번호</label>
+                            <label id="accountNum2" type="text" name="accountNum2" placeholder="" class="form-control">
+                              <%= data.accountNum2 %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="accountHolder2">예금주</label>
+                            <label id="accountHolder2" type="text" name="accountHolder2" placeholder="" class="form-control">
+                              <%= data.accountHolder2 %>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="amount2">금액</label>
+                            <label id="amount2" type="text" name="amount2" placeholder="" class="form-control">
+                              <%= data.amount2 %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <h6>비고</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row layout-spacing">
-                                                            <div class="col col-xl-4 mb-xl-0 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="note"
-                                                                        class="visually-hidden">Text</label>
-                                                                    <label id="note" type="text" name="note"
-                                                                        placeholder="" class="form-control">
-                                                                        <%= data.note %>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                      <div class="row">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <h6>비고</h6>
+                        </div>
+                      </div>
+                      <div class="row layout-spacing">
+                        <div class="col col-xl-4 mb-xl-0 mb-2">
+                          <div class="form-group">
+                            <label for="note" class="visually-hidden">Text</label>
+                            <label id="note" type="text" name="note" placeholder="" class="form-control">
+                              <%= data.note %>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
 
-                                                        <div class="row layout-top-spacing">
-                                                            <div class="col">
-                                                                <div class="form-group ">
-                                                                    <button type="button"
-                                                                        onclick="location.href='/disposalRequest/edit/<%= data.carNum %>';"
-                                                                        class="btn btn-outline-success me-3">수정하기</button>
-                                                                    <!-- <button type="button"
+                      <div class="row layout-top-spacing">
+                        <div class="col">
+                          <div class="form-group ">
+                            <button type="button" onclick="location.href='/disposalRequest/edit/<%= data.carNum %>';" class="btn btn-outline-success me-3">수정하기</button>
+                            <!-- <button type="button"
                                                                         onclick="sendClient('<%= data.carNum %>')"
                                                                         class="btn btn-outline-info me-3">요청서
                                                                         전송</button> -->
-                                                                    <button type="button" onclick="showImage()"
-                                                                        class="btn btn-outline-info me-3">요청서
-                                                                        미리보기</button>
-                                                                    <button type="button" onclick="downloadImage()"
-                                                                        class="btn btn-outline-info me-3">요청서
-                                                                        다운로드</button>
-                                                                    <button type="button"
-                                                                        onclick="location.href='/disposalRequest';"
-                                                                        class="btn btn-outline-danger me-3">목록으로</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <%- include ("../partials/footer.ejs") %>
-
+                            <button type="button" onclick="showImage()" class="btn btn-outline-info me-3">요청서
+                              미리보기</button>
+                            <button type="button" onclick="downloadImage()" class="btn btn-outline-info me-3">요청서
+                              다운로드</button>
+                            <button type="button" onclick="location.href='/disposalRequest';" class="btn btn-outline-danger me-3">목록으로</button>
+                          </div>
                         </div>
-                        <!--  END CONTENT AREA  -->
-                    </div>
-                    <!-- END MAIN CONTAINER -->
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                    <!-- REQUEST PREVIEW AREA-->
-                    <!-- <div class="row">
+        <%- include ("../partials/footer.ejs") %>
+
+      </div>
+      <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- REQUEST PREVIEW AREA-->
+    <!-- <div class="row">
                         <div class="col"></div>
                         <div class="col form-control" id="req_table" style="width: 21cm;"></div>
                     </div> -->
 
-                    <%- include ("../partials/commonScrpits.ejs") %>
-                        <!-- REQUEST PREVIEW -->
-                        <div id="req_table">
+    <%- include ("../partials/commonScrpits.ejs") %>
+    <!-- REQUEST PREVIEW -->
+    <div id="req_table">
 
-                        </div>
-                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
-                        <script>
-                            const disposalRequest = {
-                                companyName: ""
-                                , commission: ""
-                                , price: ""
-                                , loss: ""
-                                , deliveryFee: ""
-                                , carNum: ""
-                                , ownerName: ""
-                                , model: ""
-                                , yearModel: ""
-                                , engineCode: ""
-                                , displacement: ""
-                                , mortgage: ""
-                                , carCondition: ""
-                                , aluminumWheel: ""
-                                , collectMethod: ""
-                                , deliveryDate: ""
-                                , collectPlace: ""
-                                , phoneNum: ""
-                                , bankName1: ""
-                                , accountNum1: ""
-                                , accountHolder1: ""
-                                , amount1: ""
-                                , bankName2: ""
-                                , accountNum2: ""
-                                , accountHolder2: ""
-                                , amount2: ""
-                                , note: ""
-                            }
+    </div>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script>
+      const disposalRequest = {
+        companyName: "",
+        commission: "",
+        price: "",
+        loss: "",
+        deliveryFee: "",
+        carNum: "",
+        ownerName: "",
+        model: "",
+        yearModel: "",
+        engineCode: "",
+        displacement: "",
+        mortgage: "",
+        carCondition: "",
+        aluminumWheel: "",
+        collectMethod: "",
+        deliveryDate: "",
+        collectPlace: "",
+        phoneNum: "",
+        bankName1: "",
+        accountNum1: "",
+        accountHolder1: "",
+        amount1: "",
+        bankName2: "",
+        accountNum2: "",
+        accountHolder2: "",
+        amount2: "",
+        note: ""
+      }
 
-                            const labels = document.getElementsByTagName('label');
-                            for (let i = 0; i < labels.length; i++) {
-                                if (labels[i].id && labels[i].innerText) disposalRequest[labels[i].id] = labels[i].innerText;
-                            }
+      const labels = document.getElementsByTagName('label');
+      for (let i = 0; i < labels.length; i++) {
+        if (labels[i].id && labels[i].innerText) disposalRequest[labels[i].id] = labels[i].innerText;
+      }
 
-                            function sendClient(id) {
+      function sendClient(id) {
 
-                                const target = document.getElementById('req_table')
-                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+        const target = document.getElementById('req_table')
+        target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -789,36 +710,36 @@
                                     </table>
                                 </div>`
 
-                                domtoimage.toBlob(target)
-                                    .then(function (blob) {
-                                        // console.log(blob);
-                                        const formData = new FormData();
-                                        formData.append('diposalRequest', blob);
+        domtoimage.toBlob(target)
+          .then(function(blob) {
+            // console.log(blob);
+            const formData = new FormData();
+            formData.append('diposalRequest', blob);
 
-                                        const url = `/disposalRequest/upload/${id}`;
-                                        fetch(url, {
-                                            method: 'POST',
-                                            // headers: { 'Content-Type': 'multipart/form-data' },
-                                            body: formData
-                                        })
-                                            .then(res => {
-                                                // console.log(res)
-                                                if (res.ok) alert("전송 성공");
-                                                else throw new Error(res.statusText)
-                                            })
-                                            .catch(err => {
-                                                console.error(err)
-                                                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
-                                            });
+            const url = `/disposalRequest/upload/${id}`;
+            fetch(url, {
+                method: 'POST',
+                // headers: { 'Content-Type': 'multipart/form-data' },
+                body: formData
+              })
+              .then(res => {
+                // console.log(res)
+                if (res.ok) alert("전송 성공");
+                else throw new Error(res.statusText)
+              })
+              .catch(err => {
+                console.error(err)
+                alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
+              });
 
-                                        target.innerHTML = '';
-                                    });
-                            }
+            target.innerHTML = '';
+          });
+      }
 
-                            function downloadImage() {
+      function downloadImage() {
 
-                                const target = document.getElementById('req_table');
-                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+        const target = document.getElementById('req_table');
+        target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1020,18 +941,18 @@
                                     </table>
                                 </div>`
 
-                                domtoimage.toBlob(target)
-                                    .then(function (blob) {
-                                        // console.log(blob)
-                                        window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
-                                        target.innerHTML = '';
-                                    });
-                            }
+        domtoimage.toBlob(target)
+          .then(function(blob) {
+            // console.log(blob)
+            window.saveAs(blob, `${disposalRequest.ownerName}-${disposalRequest.carNum}_폐차회수요청서.png`);
+            target.innerHTML = '';
+          });
+      }
 
-                            function showImage() {
+      function showImage() {
 
-                                const target = document.getElementById('req_table');
-                                target.innerHTML = `<div class="col form-control" style="width: 21cm;">
+        const target = document.getElementById('req_table');
+        target.innerHTML = `<div class="col form-control" style="width: 21cm;">
                                     <table class="table table-bordered ">
                                         <tr>
                                             <td class="text-center" colspan="4">(주)월드리싸이클링</td>
@@ -1233,15 +1154,15 @@
                                     </table>
                                 </div>`
 
-                                domtoimage.toBlob(target)
-                                    .then((blob) => {
-                                        let url = URL.createObjectURL(blob);
-                                        window.open(url);
-                                        target.innerHTML = '';
-                                    })
-                            }
-                        </script>
-                        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+        domtoimage.toBlob(target)
+          .then((blob) => {
+            let url = URL.createObjectURL(blob);
+            window.open(url);
+            target.innerHTML = '';
+          })
+      }
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

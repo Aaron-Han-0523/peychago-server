@@ -3,12 +3,6 @@
 
 <head>
     <%- include ("../partials/header.ejs") %>
-        <% let disposalStateCode2Text=['정보입력중', '정보입력완료' , '가견적 확인중' , '견적확인완료' , '차량 인수중' , '차량상태확인중' , '실견적 확인중' , '폐차 진행 승인'
-            , '폐차 진행중' , '폐차 완료' ]; %>
-            <% function formatDate(d_t) { if(!d_t) return '' ; let year=d_t.getFullYear(); let month=("0" +
-                (d_t.getMonth() + 1)).slice(-2); let day=("0" + d_t.getDate()).slice(-2); let hour=("0" +
-                d_t.getHours()).slice(-2); let minute=("0" + d_t.getMinutes()).slice(-2); let seconds=("0" +
-                d_t.getSeconds()).slice(-2); return year + "-" + month + "-" + day;} %>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
@@ -125,42 +119,42 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="badge badge-light-success">
-                                                                <%= disposalStateCode2Text[item.state] %>
+                                                                <%= codezip.disposalStateCode2Text[item.state] %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date0) %>
+                                                                <%= myUtils.formatDate(item.date0) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date1) %>
+                                                                <%= myUtils.formatDate(item.date1) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date2) %>
+                                                                <%= myUtils.formatDate(item.date2) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date3) %>
+                                                                <%= myUtils.formatDate(item.date3) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date4) %>
+                                                                <%= myUtils.formatDate(item.date4) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date5) %>
+                                                                <%= myUtils.formatDate(item.date5) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">
                                                             <span class="media-body align-self-center">
-                                                                <%= formatDate(item.date6) %>
+                                                                <%= myUtils.formatDate(item.date6) %>
                                                             </span>
                                                         </td>
                                                         <td class="text-center">

@@ -15,13 +15,15 @@
 <body>
   <!-- 개발 서버 : https://14.35.194.170:8080/aio365/provide/ProvideContent.do -->
   <!-- 운영 서버 : https://car365.go.kr/aio365/provide/ProvideContent.do -->
-  <form id="provideHashFromFixed" name="provideHashFromFixed" method="post" action="https://14.35.194.170:8080/aio365/provide/ProvideContent.do">
-    <!-- 개발 -->
-    <!-- <form id="provideHashFromFixed" name="provideHashFromFixed" method="post" action="https://car365.go.kr/aio365/provide/ProvideContent.do"> -->
+  <!-- <form id="provideHashFromFixed" name="provideHashFromFixed" method="post" action="https://14.35.194.170:8080/aio365/provide/ProvideContent.do"> -->
+  <!-- 개발 -->
+  <form id="provideHashFromFixed" name="provideHashFromFixed" method="post" action="https://car365.go.kr/aio365/provide/ProvideContent.do">
     <!-- 운영 -->
     <% for(key of Object.keys(fixedMap)) { %>
     <input type='hidden' name='<%= key %>' id='<%= key %>' value='<%= fixedMap[key] %>'>
     <% } %>
+    <input name='carOwner' id='carOwner' placeholder="소유자명">
+    <input name='carRegNo' id='carRegNo' placeholder="차량번호">
   </form>
 
   <div>

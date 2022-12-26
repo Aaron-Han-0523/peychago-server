@@ -11,19 +11,19 @@ exports.test = (req, res, next) => {
     .createHash("sha256")
     .update(preHashValue)
     .digest("hex");
-  console.log(hashValue);
+  // console.log(hashValue);
 
   const fixedMap = {
     hashValue: hashValue,
     timeStamp: timeStamp,
     svcCodeArr: process.env.svcCodeArr,
-    svcType: "Y", // 고정방식 Y / 비고정방식 N
-    returnURLA: "https://14.35.194.170:8080/aio365/provide/returnURLA.do",
-    returnURLD: "https://14.35.194.170:8080/aio365/provide/returnURLD.do",
-    carOwner: "김무준",
-    carRegNo: "30로2083",
-    siteURL: "http://www.peachago.com/",
-    siteName: "폐차GO",
+    svcType: "N", // 고정방식 Y / 비고정방식 N
+    returnURLA: "http://52.78.243.91/aio365/provide/returnURLA.do",
+    returnURLD: "http://52.78.243.91/aio365/provide/returnURLD.do",
+    // carOwner: "김희준",
+    // carRegNo: "30로2083",
+    siteURL: "www.geotwo.com",
+    siteName: "지오투 홈페이지",
   };
 
   return res.render("api/test_ts_api", { fixedMap: fixedMap });
