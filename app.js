@@ -28,6 +28,9 @@ var supplierUsersRouter = require("./routes/supplierUsers");
 var usersRouter = require("./routes/users");
 var accountsRouter = require("./routes/accounts");
 var uploadsRouter = require("./routes/uploads");
+var apiProvideRouter = require("./routes/apiProvide");
+
+
 var apiRouter = require("./routes/api");
 const myUtils = require("./utils/myUtils");
 
@@ -100,6 +103,7 @@ app.use("/clients", clientsRouter);
 app.use("/request", requestRouter);
 app.use("/process", processRouter);
 app.use("/accounts", accountsRouter);
+app.use("/apiProvide", apiProvideRouter);
 app.use(
   path.join("/", process.env.UPLOADFILES_ROOT).replace("\\", "/"),
   //  (req, res, next) => { console.log('이미지 불러간다'); next(); },
