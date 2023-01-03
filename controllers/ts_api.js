@@ -18,8 +18,8 @@ exports.test = (req, res, next) => {
     timeStamp: timeStamp,
     svcCodeArr: process.env.svcCodeArr,
     svcType: "N", // 고정방식 Y / 비고정방식 N
-    returnURLA: "http://52.78.243.91/apiProvide/returnURLA",
-    returnURLD: "http://52.78.243.91/apiProvide/returnURLD",
+    returnURLA: "https://mjtest.ml/apiProvide/returnURLA",
+    returnURLD: "https://mjtest.ml/apiProvide/returnURLD",
     // carOwner: "김희준",
     // carRegNo: "30로2083",
     siteURL: "www.geotwo.com",
