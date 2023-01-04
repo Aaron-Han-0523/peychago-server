@@ -42,6 +42,15 @@ var app = express();
 // 헤더 정보 숨기기
 app.disable("x-powered-by");
 
+// python-requests 거부
+app.use((req, res, next) => {
+  if (req.headers["user-agent"].includes("python-requests")) {
+    return res.status(502).end()
+  } else {
+    next();
+  }
+})
+
 // -----------app settings-------------
 // 모든 출처 cors 허용
 app.use(

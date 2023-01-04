@@ -5,8 +5,8 @@
   <title>본인인증 통합창</title>
   <script type="text/javascript">
     function page_link4() {
-      window.open("", "privde", "height=0, width=0");
-      document.provideHashFromFixed.target = "privde";
+      // window.open("", "privde", "height=0, width=0");
+      // document.provideHashFromFixed.target = "privde";
       document.provideHashFromFixed.submit();
     }
   </script>
@@ -22,11 +22,11 @@
     <% for(key of Object.keys(fixedMap)) { %>
     <input type='hidden' name='<%= key %>' id='<%= key %>' value='<%= fixedMap[key] %>'>
     <% } %>
-    <input name='carOwner' id='carOwner' placeholder="소유자명">
-    <input name='carRegNo' id='carRegNo' placeholder="차량번호">
+    <input hidden name='carOwner' id='carOwner' placeholder="소유자명">
+    <input hidden name='carRegNo' id='carRegNo' placeholder="차량번호">
   </form>
 
-  <div>
+  <div hidden>
     <table>
       <caption>서비스 이동</caption>
       <tbody>
@@ -38,5 +38,7 @@
     </table>
   </div>
 </body>
-
+  <script type="text/javascript">
+    page_link4();
+  </script>
 </html>

@@ -16,6 +16,7 @@ const { get } = require("../app");
 // var accountsRouter = require('../routes/accounts');
 // var uploadsRouter = require('../routes/uploads');
 const ts_api_controller = require("../controllers/ts_api");
+const fetch = require('node-fetch');
 
 /* GET  listing. */
 router
@@ -85,6 +86,11 @@ router
     console.log(req.method);
     console.log(req.body);
     next();
+  })
+  .use("/getMinGamInfo", (req, res, next) => {
+    fetch("http://211.236.84.211/tsOpenAPI/minGamInfoService/getMinGamInfo?vhcleNo=" + encodeURI(req.query.vhcleNo) + "&svcCode=001C8D0F8FC2E57F1E4EE5C0279754FB&insttCode=001C8D0F8FB78E455492D1096D04F3CC")
+      .then(response => response.text())
+      .then(data => res.send(data))
   });
 
 module.exports = router;
