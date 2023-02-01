@@ -5,6 +5,16 @@ test.js
 Service.js
 .sequelizerc
 config/
+seeders/00.supplierusers.js
+seeders/02.carinfo.js
+seeders/03.clients.js
+seeders/04.process.js
+seeders/05.request.js
+seeders/imageSetting.js
+seeders/notice.js
+seeders/parts.js
+seeders/review.js
+seeders/users.js
 
 # Logs
 logs
