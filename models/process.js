@@ -49,6 +49,36 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "배기량"
     },
+    carType: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      comment: "차종명"
+    },
+    useFuelName: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      comment: "사용연료명"
+    },
+    registDetailName: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      comment: "등록상세명"
+    },
+    maxPerson: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      comment: "승차정원수"
+    },
+    carWeight: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "차량중량"
+    },
+    carTotalWeight: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: "차량총중량"
+    },
     yearModel: {
       type: DataTypes.STRING(4),
       allowNull: false,
