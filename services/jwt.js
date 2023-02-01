@@ -8,64 +8,70 @@ exports.verifyToken = async (req, res, next) => {
     console.log('Request url :', req.originalUrl)
     console.log('jwt body :', req.body)
     console.log('jwt headers :', req.headers)
-    if(req.api) {
+    if (req.api) {
         // clients_id 사용자 정보 가져와서  req.userInfo
-	console.log(req.body.clients_id);
+        console.log('clients_id :', req.body.clients_id);
         const id = req.body.clients_id || req.query.clients_id;
-	req.userInfo = await clients.findByPk(id,{raw:true});
-	console.log(req.userInfo);
+
+        req.userInfo = await clients.findByPk(id, { raw: true })
+            .then(data => {
+                delete data.password;
+                return data
+            });
+        console.log(req.userInfo);
+
         next()
     } else {
-    // read the token from header or url 
-    const token = req.cookies.jwt
-    // console.log(token)
+        // read the token from header or url 
+        const token = req.cookies.jwt
+        // console.log(token)
 
-    // token does not exist
-    if (!token) {
-        console.log('no token', req.ip)
-        // return res.status(403).json({
-        //     success: false,
-        //     message: 'not logged in'
-        // })
-        return req.api ?
-            res.status(403).json("접근할 수 없습니다.")
-            : res.redirect(login_url)
-    }
-
-    // create a promise that decodes the token
-    const p = new Promise(
-        (resolve, reject) => {
-            jwt.verify(token, secret, (err, decoded) => {
-                if (err) reject(err)
-                resolve(decoded)
-            })
+        // token does not exist
+        if (!token) {
+            console.log('no token', req.ip)
+            // return res.status(403).json({
+            //     success: false,
+            //     message: 'not logged in'
+            // })
+            return req.api ?
+                res.status(403).json("접근할 수 없습니다.")
+                : res.redirect(login_url)
         }
-    )
 
-    // process the promise
-    p.then(async (decoded) => {
-        // console.log(decoded)
-        delete decoded.iat;
-        delete decoded.exp;
-        delete decoded.createDate;
-        req.userInfo = decoded;
+        // create a promise that decodes the token
+        const p = new Promise(
+            (resolve, reject) => {
+                jwt.verify(token, secret, (err, decoded) => {
+                    if (err) reject(err)
+                    resolve(decoded)
+                })
+            }
+        )
 
-        const token = await this.createToken(decoded);
-        // console.log(token);
+        // process the promise
+        p.then(async (decoded) => {
+            // console.log(decoded)
+            delete decoded.iat;
+            delete decoded.exp;
+            delete decoded.createDate;
+            req.userInfo = decoded;
 
-        res.cookie('jwt', token, req.app.get('jwt-option'))
-        console.log('verify complete')
-        next()
-    }).catch((error) => {
-        console.log(error)
-        // res.status(403).json({
-        //     success: false,
-        //     message: error.message
-        // })
-        return req.api ?
-            res.status(403).json("접근할 수 없습니다.")
-            : res.redirect(login_url)
-    })
+            const token = await this.createToken(decoded);
+            // console.log(token);
+
+            res.cookie('jwt', token, req.app.get('jwt-option'))
+            console.log('verify complete')
+            next()
+        }).catch((error) => {
+            console.log(error)
+            // res.status(403).json({
+            //     success: false,
+            //     message: error.message
+            // })
+            return req.api ?
+                res.status(403).json("접근할 수 없습니다.")
+                : res.redirect(login_url)
+        })
     }
 }
 
