@@ -93,6 +93,7 @@
                         </div>
                       </div>
 
+                      <!-- 고객 차량 정보 -->
                       <div class="form-group row">
                         <div class="row">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
@@ -157,6 +158,75 @@
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
                               <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= myUtils.formatDate(process.registerDate) %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>차종명</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>사용연료명</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="carType" type="text" name="carType" placeholder="" class="form-control" value="<%= process.carType %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="useFuelName" type="text" name="useFuelName" placeholder="" class="form-control" value="<%= process.useFuelName %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>등록상세명</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>승차정원수</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="registDetailName" type="text" name="registDetailName" placeholder="" class="form-control" value="<%= process.registDetailName %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="maxPerson" type="number" name="maxPerson" placeholder="" class="form-control" value="<%= process.maxPerson %>">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <div class="row">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>차량중량</h6>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <h6>차량총중량</h6>
+                          </div>
+                        </div>
+                        <div class="row layout-spacing">
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="carWeight" type="text" name="carWeight" placeholder="" class="form-control" value="<%= process.carWeight %>">
+                            </div>
+                          </div>
+                          <div class="col col-xl-4 mb-xl-0 mb-2">
+                            <div class="form-group">
+                              <input disabled id="carTotalWeight" type="text" name="carTotalWeight" placeholder="" class="form-control" value="<%= process.carTotalWeight %>">
                             </div>
                           </div>
                         </div>
