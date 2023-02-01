@@ -67,7 +67,7 @@ exports.readOne = async (id) => {
         .findByPk(id)
         .then(result => {
             console.log(`carNum-${id} find success`);
-            return result.dataValues;
+            return result;
         })
         .catch(err => {
             // console.error(err);

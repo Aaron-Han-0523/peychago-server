@@ -91,8 +91,7 @@ exports.detail = async (req, res, next) => {
     // console.log(data);
 
     if (data) return res.render('disposalClients/detail', {
-        data: data.dataValues,
-
+        data: data,
     });
     else res.status(400).json(`fail id:${id}`)
 }
