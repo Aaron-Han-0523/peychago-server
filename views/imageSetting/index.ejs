@@ -2,218 +2,253 @@
 <html lang="ko">
 
 <head>
-    <%- include ("../partials/header.ejs") %>
+  <%- include ("../partials/header.ejs") %>
+  <style>
+    .estimate-price-form {
+      width: 20rem;
+    }
+  </style>
 </head>
 
 <body class="layout-boxed">
 
-    <%- include ("../partials/loader.ejs") %>
+  <%- include ("../partials/loader.ejs") %>
 
-        <%- include ("../partials/nav.ejs") %>
+  <%- include ("../partials/nav.ejs") %>
 
-            <!--  BEGIN MAIN CONTAINER  -->
-            <div class="main-container sidebar-closed " id="container">
+  <!--  BEGIN MAIN CONTAINER  -->
+  <div class="main-container sidebar-closed " id="container">
 
-                <div class="overlay"></div>
-                <div class="search-overlay"></div>
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
 
-                <%- include ("../partials/sidebar.ejs") %>
+    <%- include ("../partials/sidebar.ejs") %>
 
-                    <!--  BEGIN CONTENT AREA  -->
-                    <div id="content" class="main-content">
-                        <div class="layout-px-spacing">
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+      <div class="layout-px-spacing">
 
-                            <div class="middle-content container-xxl p-0">
+        <div class="middle-content container-xxl p-0">
 
-                                <!-- BREADCRUMB -->
-                                <div class="page-meta">
-                                    <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item active" aria-current="page">앱 이미지 설정</li>
-                                        </ol>
-                                    </nav>
-                                </div>
-                                <!-- /BREADCRUMB -->
+          <!-- BREADCRUMB -->
+          <div class="page-meta">
+            <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">앱 설정</li>
+              </ol>
+            </nav>
+          </div>
+          <!-- /BREADCRUMB -->
 
-                                <div class="row layout-spacing">
-                                    <div class="col-lg-12 layout-top-spacing">
-                                        <div class="col-lg-12">
-                                            <div class="statbox widget box box-shadow">
-                                                <div class="widget-header">
-                                                    <div class="row">
-                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                            <h4></h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
+          <div class="row layout-spacing">
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
 
-                                                <div class="widget-content widget-content-area">
-                                                    <form method="POST" action="/imageSetting/noticeImagePath"
-                                                        enctype="multipart/form-data">
-                                                        <h6>앱 공지 이미지</h6>
-                                                        <div class="d-flex">
-                                                            <div class="p-2 flex-grow-1">
-                                                                <input type="file" class="form-control-file"
-                                                                    name="noticeImagePath">
-                                                            </div>
-                                                            <div class="p-2">
-                                                                <button class="btn btn-primary">올리기</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                  <div class="widget-header">
+                    <div class="row">
+                      <div class="mt-5 ms-3">
+                        <h2>배너 이미지 설정</h2>
+                      </div>
+                    </div>
+                  </div>
 
-                                                    <form method="POST" action="/imageSetting/about1Title">
-                                                        <div id="about1URL" class="layout-top-spacing">
-                                                            <h6> About Us Tab 1 Title
-                                                            </h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="text" name="about1Title"
-                                                                        placeholder="TEXT" class="form-control"
-                                                                        value="<%= data.about1Title %>">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                  <div class="widget-content widget-content-area">
 
-                                                    <form method="POST" action="/imageSetting/about1URL">
-                                                        <div id="about2ImagePath" class="layout-top-spacing">
-                                                            <h6> About Us Tab 1 URL
-                                                            </h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="text" name="about1URL"
-                                                                        placeholder="URL" class="form-control"
-                                                                        value="<%= data.about1URL %>">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-
-                                                    <form method="POST" action="/imageSetting/about2Title">
-                                                        <div id="about2ImagePath" class="layout-top-spacing">
-                                                            <h6> About Us Tab 2 Title
-                                                            </h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="text" name="about2Title"
-                                                                        placeholder="TEXT" class="form-control"
-                                                                        value="<%= data.about2Title %>">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-
-                                                    <form method="POST" action="/imageSetting/about2ImagePath"
-                                                        enctype="multipart/form-data">
-                                                        <div id="privacyImagePath" class="layout-top-spacing">
-                                                            <h6>About Us Tab 2
-                                                                Image</h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="file" class="form-control-file"
-                                                                        name="about2ImagePath">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-
-                                                    <form method="POST" action="/imageSetting/privacyImagePath"
-                                                        enctype="multipart/form-data">
-                                                        <div id="termOfServicePath" class="layout-top-spacing">
-                                                            <h6>개인 정보 보호법</h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="file" class="form-control-file"
-                                                                        name="privacyImagePath">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-
-                                                    <div id="exportNoticePath" class="layout-top-spacing">
-                                                        <form method="POST" action="/imageSetting/termOfServicePath"
-                                                            enctype="multipart/form-data">
-                                                            <h6>이용약관</h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="file" class="form-control-file"
-                                                                        name="termOfServicePath">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
-                                                    <div id="exportPicturePath" class="layout-top-spacing">
-                                                        <form method="POST" action="/imageSetting/exportNoticePath"
-                                                            enctype="multipart/form-data">
-                                                            <h6>수출관리 공지</h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="file" class="form-control-file"
-                                                                        name="exportNoticePath">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
-                                                    <div class="layout-top-spacing">
-                                                        <form method="POST" action="/imageSetting/exportPicturePath"
-                                                            enctype="multipart/form-data">
-                                                            <h6>수출관리 사진 샘플</h6>
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <input type="file" class="form-control-file"
-                                                                        name="exportPicturePath">
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <button class="btn btn-primary">올리기</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                    <form id="banner1" class="banner" method="POST" action="/imageSetting/noticeImagePath" enctype="multipart/form-data">
+                      <h6>배너 이미지1</h6>
+                      <div class="image-preview">
+                        <% if (data.noticeImagePath){ %>
+                        <img class='estimate-price-form' src='/<%= data.noticeImagePath %>' />
+                        <% } %>
+                      </div>
+                      <div class="">
+                        <div class="p-2">
+                          <input type="file" class="form-control-file" name="noticeImagePath">
                         </div>
+                        <div class="p-2">
+                          <button class="btn btn-primary">업로드</button>
+                        </div>
+                      </div>
+                    </form>
 
-                        <%- include ("../partials/footer.ejs") %>
+                    <form id="banner2" class="banner" method="POST" action="/imageSetting/about2ImagePath" enctype="multipart/form-data">
+                      <div class="layout-top-spacing">
+                        <h6>배너 이미지 2</h6>
+                        <div class="image-preview">
+                          <% if (data.about2ImagePath){ %>
+                          <img class='estimate-price-form' src='/<%= data.about2ImagePath %>' />
+                          <% } %>
+                        </div>
+                        <div class="">
+                          <div class="p-2">
+                            <input type="file" class="form-control-file" name="about2ImagePath">
+                          </div>
+                          <div class="p-2">
+                            <button class="btn btn-primary">업로드</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12 layout-top-spacing">
+              <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+
+                  <div class="widget-header">
+                    <div class="row">
+                      <div class="mt-5 ms-3">
+                        <h2>중량에 따른 견적가격 설정</h2>
+                      </div>
+                    </div>
+                  </div>
+
+                  <form id="estimatePrice" method="POST" action="/imageSetting/estimatePrice">
+                    <div class="widget-content widget-content-area">
+                      <div class="layout-top-spacing">
+                        <h6>승용</h6>
+                        <div class="d-flex">
+                          <div class="p-2 flex-grow-1">
+                            <input type="text" class="form-control estimate-price-form" name="about1Title" value="<%= data.about1Title %>">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layout-top-spacing">
+                        <h6>화물</h6>
+                        <div class="d-flex">
+                          <div class="p-2 flex-grow-1">
+                            <input type="text" class="form-control estimate-price-form" name="about1URL" value="<%= data.about1URL %>">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layout-top-spacing">
+                        <h6>승합</h6>
+                        <div class="d-flex">
+                          <div class="p-2 flex-grow-1">
+                            <input type="text" class="form-control estimate-price-form" name="about2Title" value="<%= data.about2Title %>">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layout-top-spacing">
+                        <h6>특수</h6>
+                        <div class="d-flex">
+                          <div class="p-2 flex-grow-1">
+                            <input type="text" class="form-control estimate-price-form" name="custom1" value="<%= data.custom1 %>">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="layout-top-spacing">
+                        <div class="form-group">
+                          <button class="btn btn-primary mx-3">저장</button>
+                          <button class="btn btn-primary mx-3" type="button" onclick="location.reload();">취소</button>
+                        </div>
+                      </div>
 
                     </div>
-                    <!--  END CONTENT AREA  -->
+                  </form>
+
+                </div>
+              </div>
             </div>
-            <!-- END MAIN CONTAINER -->
+          </div>
 
-            <%- include ("../partials/commonScrpits.ejs") %>
+        </div>
+      </div>
 
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    </div>
 
-                <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <%- include ("../partials/footer.ejs") %>
+
+  </div>
+  <!--  END CONTENT AREA  -->
+  </div>
+  <!-- END MAIN CONTAINER -->
+
+  <%- include ("../partials/commonScrpits.ejs") %>
+
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+  <script>
+    document.querySelectorAll(".banner").forEach(el => {
+      el.addEventListener('change', (event) => {
+        console.log(event.target)
+        loadFile(event.target)
+      })
+    })
+
+
+    function loadFile(input) {
+      var file = input.files[0];
+      let image_target_el = input.parentNode.parentNode.parentNode.querySelector(".image-preview")
+      console.log(image_target_el);
+      image_target_el.innerHTML = (" <img class='form-control estimate-price-form' src='" + URL.createObjectURL(file) + "'/> ");
+    }
+
+    banner1.onsubmit = async (e) => {
+      e.preventDefault();
+
+      if (!banner1[0].value) return alert("파일을 선택해주세요.");
+
+      let response = await fetch(banner1.action, {
+        method: 'POST',
+        body: new FormData(banner1)
+      }).then(res => {
+        if (res.ok) {
+          alert("저장되었습니다.");
+          window.location.reload();
+        } else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+
+    banner2.onsubmit = async (e) => {
+      e.preventDefault();
+
+      if (!banner2[0].value) return alert("파일을 선택해주세요.");
+
+      let response = await fetch(banner2.action, {
+        method: 'POST',
+        body: new FormData(banner2)
+      }).then(res => {
+        if (res.ok) {
+          alert("저장되었습니다.");
+          window.location.reload();
+        } else {
+          alert("전송 실패!!");
+        }
+        location.reload();
+      });
+    }
+  </script>
+  <script>
+    estimatePrice.onsubmit = async (e) => {
+      e.preventDefault();
+
+      let body = new FormData(estimatePrice);
+
+      let response = await fetch(estimatePrice.action, {
+        method: 'POST',
+        body: new URLSearchParams(body)
+      }).then(res => {
+        if (res.ok) alert("저장되었습니다.");
+        else alert("전송 실패!!");
+        location.reload();
+      });
+
+    }
+  </script>
+  <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
 </html>

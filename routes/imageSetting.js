@@ -68,5 +68,6 @@ router
     .post('/termOfServicePath', jwt.verifyToken, upload('termOfService').single('termOfServicePath'), imageSettingController.edit)
     .post('/exportNoticePath', jwt.verifyToken, upload('exportNotice').single('exportNoticePath'), imageSettingController.edit)
     .post('/exportPicturePath', jwt.verifyToken, upload('exportPicture').single('exportPicturePath'), imageSettingController.edit)
+    .post('/estimatePrice', jwt.verifyToken, imageSettingController.edit)
 
 module.exports = router;
