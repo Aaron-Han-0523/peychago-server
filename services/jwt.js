@@ -20,7 +20,7 @@ exports.verifyToken = async (req, res, next) => {
             });
         console.log(req.userInfo);
 
-        next()
+        return next()
     } else {
         // read the token from header or url 
         const token = req.cookies.jwt
