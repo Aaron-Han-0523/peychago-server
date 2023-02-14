@@ -3,6 +3,12 @@
 
 <head>
   <%- include ("../partials/header.ejs") %>
+  <style>
+    @font-face {
+      font-family: "ubuntu";
+      src: url("/font/Ubuntu-Bold.ttf") format("truetype");
+    }
+  </style>
 </head>
 
 <body class="layout-boxed remove-alt-menu">
@@ -106,12 +112,12 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= process.carNum %>">
+                              <input disabled id="carNum" type="text" name="carNum" placeholder="" class="form-control" value="<%= process.carNum %>">
                             </div>
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= process.model %>">
+                              <input disabled id="model" type="text" name="model" placeholder="" class="form-control" value="<%= process.model %>">
                             </div>
                           </div>
                         </div>
@@ -129,12 +135,12 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= process.detailModel %>">
+                              <input disabled id="detailModel" type="text" name="detailModel" placeholder="" class="form-control" value="<%= process.detailModel %>">
                             </div>
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= process.displacement %>">
+                              <input disabled id="displacement" type="text" name="displacement" placeholder="" class="form-control" value="<%= process.displacement %>">
                             </div>
                           </div>
                         </div>
@@ -152,12 +158,12 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= process.yearModel %>">
+                              <input disabled id="yearModel" type="text" name="yearModel" placeholder="" class="form-control" value="<%= process.yearModel %>">
                             </div>
                           </div>
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="phoneNum" type="text" name="phoneNum" placeholder="" class="form-control" value="<%= myUtils.formatDate(process.registerDate) %>">
+                              <input disabled id="registerDate" type="text" name="registerDate" placeholder="" class="form-control" value="<%= myUtils.formatDate(process.registerDate) %>">
                             </div>
                           </div>
                         </div>
@@ -241,7 +247,7 @@
                         <div class="row layout-spacing">
                           <div class="col col-xl-8 mb-xl-0 mb-2">
                             <div class="form-group">
-                              <input disabled id="clientName" type="text" name="clientName" placeholder="" class="form-control" value="<%= clients.address %>">
+                              <input disabled id="address" type="text" name="address" placeholder="" class="form-control" value="<%= clients.address %>">
                             </div>
                           </div>
                         </div>
@@ -260,7 +266,7 @@
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
                               <label for="carCondition" class="visually-hidden">Text</label>
-                              <select class="form-select" name="carCondition">
+                              <select class="form-select" id="carCondition" name="carCondition">
                                 <% for(let i=0; i< codezip.carCondition.length; i++) { %>
                                 <% if(process.carCondition==i) { %>
                                 <option value="<%= i %>" selected>
@@ -278,7 +284,7 @@
                           <div class="col col-xl-4 mb-xl-0 mb-2">
                             <div class="form-group">
                               <label for="aluminumWheel" class="visually-hidden">Text</label>
-                              <select class="form-select" name="aluminumWheel">
+                              <select class="form-select" id="aluminumWheel" name="aluminumWheel">
                                 <% for(let i=0; i< codezip.aluminumWheel.length; i++) { %>
                                 <% if(process.aluminumWheel==i) { %>
                                 <option value="<%= i %>" selected>
@@ -309,7 +315,7 @@
                           <div class="col mb-xl-0 mb-2 row">
                             <div class="col form-group d-flex">
                               <label for="attachment" class="visually-hidden">Text</label>
-                              <input class="p-2 flex-grow-1 form-control" name="attachment" value="<%= process.attachment %>">
+                              <input class="p-2 flex-grow-1 form-control" id="attachment" name="attachment" value="<%= process.attachment %>">
                               <h6 class="p-2 align-self-end">
                                 건</h6>
                             </div>
@@ -317,7 +323,7 @@
                           <div class="col mb-xl-0 mb-2 row">
                             <div class="col form-group d-flex">
                               <label for="mortgage" class="visually-hidden">Text</label>
-                              <input class="p-2 form-control" name="mortgage" value="<%= process.mortgage %>">
+                              <input class="p-2 form-control" id="mortgage" name="mortgage" value="<%= process.mortgage %>">
                               <h6 class="p-2 align-self-end">
                                 건</h6>
                             </div>
@@ -489,7 +495,11 @@
                       <div class="form-group d-flex col-xl-8">
                         <h6 class="p-2 align-self-end">견적가</h6>
                         <div class="p-2">
+                          <% if(process.state==1) { %>
                           <input class="form-control" name="estimation" value="<%= process.estimation %>">
+                          <% }else{ %>
+                          <input class="form-control" name="estimation" value="<%= process.estimation %>" readonly>
+                          <% } %>
                         </div>
                         <h6 class="p-2 align-self-end">원</h6>
                       </div>
@@ -524,11 +534,15 @@
                     </div>
                   </div>
                   <div class="widget-content widget-content-area">
-                    <form id="quotation" method="post" action="/process/edit/<%= process.carNum %>">
+                    <form id="quotation">
                       <div class="form-group d-flex col-xl-8">
                         <h6 class="p-2 align-self-end">견적가</h6>
                         <div class="p-2">
-                          <input class="form-control" name="quotation" value="<%= process.quotation %>">
+                          <% if(process.state==5) { %>
+                          <input class="form-control" id="quotation_price" name="quotation" value="<%= process.quotation %>">
+                          <% }else{ %>
+                          <input class="form-control" id="quotation_price" name="quotation" value="<%= process.quotation %>" readonly>
+                          <% } %>
                         </div>
                         <h6 class="p-2 align-self-end">원</h6>
                         <% if(process.state==5) { %>
@@ -544,7 +558,7 @@
             </div>
           </div>
 
-          <!-- 최종견적 등록 -->
+          <!-- 최종견적서 -->
           <div class="row layout-spacing">
             <div class="col-lg-12 layout-top-spacing">
               <div class="col-lg-12">
@@ -552,22 +566,13 @@
                   <div class="widget-header">
                     <div class="row layout-top-spacing">
                       <div class="col col-xl-8 mb-xl-0 mb-2">
-                        <h3 class="text-center">최종견적</h3>
+                        <h3 class="text-center">최종견적서</h3>
                       </div>
                     </div>
                   </div>
                   <div class="widget-content widget-content-area">
-                    <form id="finalProcess" method="POST" action="/process/finalProcessPath/<%= process.carNum %>" enctype="multipart/form-data">
-                      <div class="d-flex col-xl-8">
-                        <div class="p-2 flex-grow-1">
-                          <input id="finalProcessInput" type="file" class="form-control-file" name="finalProcessPath">
-                        </div>
-                        <div class="p-2">
-                          <button class="btn btn-primary">올리기</button>
-                        </div>
-                      </div>
-                    </form>
-                    <div id="finalProcessImg" class="col-xl-8">
+                    <!-- <button type="button" onclick="showImage();">확인용</button> -->
+                    <div class="col-xl-8">
                       <% if(process.finalProcessPath) { %>
                       <img class="img-fluid" src="/<%= process.finalProcessPath %>" />
                       <% } %>
@@ -623,7 +628,7 @@
   <!-- END MAIN CONTAINER -->
 
   <!-- REQUEST PREVIEW -->
-  <div id="req_table">
+  <div id="req_table" style="width: 12cm; font-family:'ubuntu';">
 
   </div>
   <%- include ("../partials/commonScrpits.ejs") %>
@@ -633,7 +638,8 @@
     $(function() {
       $(".input-date").datepicker({});
     });
-
+  </script>
+  <!-- <script>
     const finalProcessInput = document.getElementById('finalProcessInput');
     finalProcessInput.addEventListener('change', (event) => {
       console.log(event.target)
@@ -644,8 +650,7 @@
       var file = input.files[0];
       $('#finalProcessImg').html(" <img class='form-control' src='" + URL.createObjectURL(file) + "'/> ");
     }
-  </script>
-  <script>
+
     finalProcess.onsubmit = async (e) => {
       e.preventDefault();
 
@@ -664,7 +669,7 @@
         location.reload();
       });
     }
-  </script>
+  </script> -->
   <script>
     const deregistrationInput = document.getElementById('deregistrationInput');
     deregistrationInput.addEventListener('change', (event) => {
@@ -770,27 +775,155 @@
   <script>
     quotation.onsubmit = async (e) => {
       e.preventDefault();
+      let isDarkmode = document.body.classList.contains("dark");
+      if (isDarkmode) document.body.classList.remove("dark");
 
-      let body = {};
-      body.quotation = quotation[0].value;
-      body.state = 6;
-      body.date4 = new Date();
+      let body = new FormData();
+      body.append("quotation", quotation[0].value);
+      body.append("state", 6);
+      body.append("date4", new Date());
 
-      let response = await fetch(quotation.action, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(body)
-      }).then(res => {
-        if (res.ok) alert("저장되었습니다.");
-        else {
-          alert("전송 실패!!");
-        }
-        location.reload();
-      });
+      const target = document.getElementById('req_table')
+      target.innerHTML = req_html();
+      await sleep(1);
+
+      domtoimage.toBlob(target)
+        .then(function(blob) {
+          if (isDarkmode) document.body.classList.add("dark");
+          // console.log(blob);
+          body.append('finalProcessPath', blob);
+
+          const url = "/process/finalProcess/<%= process.carNum %>";
+          fetch(url, {
+              method: 'POST',
+              body: body
+            })
+            .then(res => {
+              // console.log(res)
+              if (res.ok) alert("전송 성공");
+              else throw new Error(res.statusText)
+            })
+            .catch(err => {
+              console.error(err)
+              alert("전송에 실패하였습니다. 잠시 후에 다시 시도해주십시오.")
+            }).finally(() => {
+              location.reload();
+            });
+
+          target.innerHTML = '';
+        });
+    }
+
+    function req_data() {
+      return {
+        "model": model.value, // 차명
+        "yearModel": yearModel.value, // 연식
+        "displacement": displacement.value, // 배기량
+        "detailModel": detailModel.value, // 원동기 형식
+        "registerDate": new Date(registerDate.value), // 최초등록일
+        "carCondition": carCondition.options[carCondition.selectedIndex].text, // 차량상태
+        "aluminumWheel": aluminumWheel.options[aluminumWheel.selectedIndex].text, // 알루미늄 휠
+        "attachment": attachment.value, // 압류
+        "mortgage": mortgage.value, // 저당
+        "quotation": quotation_price.value, // 최종견적가
+      }
+    }
+
+    function req_html() {
+      const data = req_data();
+      return `<div class="form-control">
+        <div class="row my-3">
+          <div class="col"></div>
+          <div class="col-8 text-center">
+            <h3>최종견적서<h3>
+          </div>
+          <div class="col">
+            <img style="width:1.5cm;" src="/images/mark.png">
+          </div>
+        </div>
+        <table class="table table-bordered ">
+            <tr>
+                <td class="text-center">차종</td>
+                <td class="text-center" colspan="4">
+                    ${data.model}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">연식</td>
+                <td class="text-center" colspan="4">
+                    ${data.yearModel}년
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">원동기 형식</td>
+                <td class="text-center" colspan="4">
+                    ${data.detailModel}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">최초등록일</td>
+                <td class="text-center" colspan="4">
+                    ${data.registerDate.getFullYear()}년 ${data.registerDate.getMonth()+1}월 ${data.registerDate.getDate()}일
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">배기량</td>
+                <td class="text-center" colspan="4">
+                    ${Intl.NumberFormat().format(data.displacement)} cc
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">압류/저당</td>
+                <td class="text-center" colspan="4">
+                    ${data.attachment ? data.attachment : 0} 건 / ${data.mortgage ? data.mortgage : 0} 건
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">차량상태</td>
+                <td class="text-center" colspan="4">
+                    ${data.carCondition}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">알루미늄 휠</td>
+                <td class="text-center" colspan="4">
+                    ${data.aluminumWheel}
+                </td>
+            </tr>
+            <tr>
+              <td class="text-center" colspan="5">
+                  <div class="mt-4 mb-3">최종견적가 : ${Intl.NumberFormat().format(data.quotation)} 원</div>
+                  <div class="text-end" style="font-size:10px">정품촉매 기준가격이며 가품 일시 가격변동 됩니다.</div>
+              </td>
+          </tr>
+        </table>
+    </div>`
+    }
+
+    function sleep(sec) {
+      return new Promise(resolve => setTimeout(resolve, sec * 1000));
     }
   </script>
+  <!-- <script>
+    async function showImage() {
+      let isDarkmode = document.body.classList.contains("dark");
+      if (isDarkmode) document.body.classList.remove("dark");
+
+      const target = document.getElementById('req_table');
+      target.innerHTML = req_html();
+      await sleep(1);
+
+      domtoimage.toBlob(target)
+        .then((blob) => {
+          let url = URL.createObjectURL(blob);
+          window.open(url);
+          target.innerHTML = '';
+        }).finally(() => {
+          if (isDarkmode) document.body.classList.add("dark");
+        });
+
+    }
+  </script> -->
   <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 </body>
 
