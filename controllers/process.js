@@ -98,7 +98,7 @@ exports.index = async (req, res, next) => {
 
 exports.detail = async (req, res, next) => {
   const user = req.userInfo;
-  const id = user&&user.carNum ? user.carNum : req.params.id;
+  const id = user && user.carNum ? user.carNum : req.params.id;
   console.log(`open one data user-${user} / id-${id}`)
 
   let data = await processService
@@ -126,4 +126,15 @@ exports.delete = async (req, res, next) => {
 
   if (result) return req.api ? res.end() : res.redirect('/process');
   else res.json(`fail id:${id}`)
+}
+
+exports.check = async (req, res, next) => {
+  const id = req.params.id;
+  await processService.readOne(id).then(data => {
+    if (data) {
+      return res.status(400).send();
+    } else {
+      return res.send();
+    }
+  })
 }

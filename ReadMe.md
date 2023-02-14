@@ -1,4 +1,9 @@
 # .env 파일 설정
+- NODE_ENV
+    - 서버 실행환경(개발환경 시 생략가능)
+    - 개발환경 : development
+    - 테스트환경 : test
+    - 배포서버환경 : production
 - JWT_SECRET_KEY
     - JWT 비밀키 값(임의의 문자열)  
 - JWT_MAXAGE
@@ -16,6 +21,12 @@
     - 업로드 경로(앱경로 기준)
 - FILE_MAX_SIZE
     - 업로드 파일 크기 제한(MB)
+- insttCode
+    - 자동차 첨부형 API 제공기관 코드 (운영자 지침서 참고)
+- svcCodeArr
+    - 자동차 첨부형 API 서비스 코드 배열 (운영자 지침서 참고)
+- TS_API_SECRET_KEY
+    - 자동차 첨부형 API 암호화 키 (운영자 지침서 참고)
 
 ## 예시
 > JWT_SECRET_KEY=wewunvb34097bh%(%)9dm348n  
@@ -24,14 +35,31 @@ salt=kkkwwwzz
 stretching_num=4848  
 UPLOADFILES_ROOT=uploads  
 FILE_MAX_SIZE=5  
+insttCode=()  
+svcCodeArr=  
+TS_API_SECRET_KEY=  
 
 <br/>
 
+# config/config.json 생성  
+- config 디렉토리를 생성한 후 config.json 파일을 예시와 같이 작성하여 생성해준다.  
+## 예시
+```json
+{  
+  "NODE_ENV값": {  
+    "username": "YourUserId",  
+    "password": "YourPassword",  
+    "database": "DatabaseName",  
+    "host": "127.0.0.1",  
+    "dialect": "mysql"  
+  }  
+}
+```
 <hr/>
 
 <br/>
 
-# 테스트 서버 운용
+# 웹서버 운용
 ## 1. nginx
 - ### 설치
     - [설치 참조 링크](http://nginx.org/en/linux_packages.html#instructions)

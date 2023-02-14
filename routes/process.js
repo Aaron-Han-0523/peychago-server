@@ -63,7 +63,7 @@ router
 router
   .get('/edit/:id', jwt.verifyToken, (req, res, next) => res.render('process/edit', { user: req.userInfo }))
   .post('/edit/:id', jwt.verifyToken, processController.edit)
-  .put('/edit', jwt.verifyToken,upload().array('carImages'), processController.edit)
+  .put('/edit', jwt.verifyToken, upload().array('carImages'), processController.edit)
   .post('/deregistrationPath/:id', jwt.verifyToken,
     // (req, res, next) => { console.log('disposalRequest body\n', req.get('content-Type')); next(); },
     (req, res, next) => upload('말소증').single('deregistrationPath')(req, res, function (err) {
@@ -102,5 +102,9 @@ router
     processController.detail(req, res, next)
     : processController.index(req, res, next)
   )
+
+// 체크
+router
+  .get('/check/:id', processController.check)
 
 module.exports = router;

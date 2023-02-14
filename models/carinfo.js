@@ -14,14 +14,14 @@ module.exports = function(sequelize, DataTypes) {
       comment: "차량브랜드명"
     },
     model: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(5000),
       allowNull: false,
-      comment: "모델"
+      comment: "차명"
     },
     detailModel: {
       type: DataTypes.STRING(200),
       allowNull: false,
-      comment: "세부모델"
+      comment: "원동기형식"
     },
     displacement: {
       type: DataTypes.INTEGER,

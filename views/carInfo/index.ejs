@@ -38,7 +38,7 @@
                                 <div class="col-lg-12 layout-top-spacing">
                                     <div class="input-group">
                                         <input id="searchWord" type="text" class="form-control"
-                                            placeholder="검색할 제조사 또는 모델명을 입력해주세요."
+                                            placeholder="검색할 제조사 또는 차명을 입력해주세요."
                                             aria-label="Recipient's username with two button addons">
                                         <button class="btn btn-outline-primary" type="button"
                                             onclick="searchCarInfo();">검색</button>
@@ -67,9 +67,10 @@
                                     </div>
                                 </th> -->
                                                     <th scope="col">제조사</th>
-                                                    <th scope="col">모델명</th>
-                                                    <th class="text-center" scope="col">세부모델</th>
+                                                    <th scope="col">차명</th>
+                                                    <th class="text-center" scope="col">원동기형식</th>
                                                     <th class="text-center" scope="col">연식</th>
+                                                    <th class="text-center" scope="col">배기량</th>
                                                     <th class="text-center" scope="col">예상 견적</th>
                                                     <th class="text-center" scope="col">작성자</th>
                                                     <th class="text-center" scope="col">작성일</th>
@@ -112,6 +113,11 @@
                                                             <td class="text-center">
                                                                 <span class="media-body align-self-center">
                                                                     <%= item.yearModel %>
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="media-body align-self-center">
+                                                                    <%= Intl.NumberFormat().format(item.displacement) %> cc
                                                                 </span>
                                                             </td>
                                                             <td class="text-center">

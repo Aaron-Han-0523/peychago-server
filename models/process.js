@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
     detailModel: {
       type: DataTypes.STRING(200),
       allowNull: false,
-      comment: "세부모델"
+      comment: "원동기형식"
     },
     displacement: {
       type: DataTypes.INTEGER,
