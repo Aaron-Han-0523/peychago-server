@@ -130,11 +130,11 @@ exports.delete = async (req, res, next) => {
 
 exports.check = async (req, res, next) => {
   const id = req.params.id;
-  await processService.readOne(id).then(data => {
+  processService.readOne(id).then(data => {
     if (data) {
-      return res.status(400).send();
+      return res.json({ "isCarNum": true });
     } else {
-      return res.send();
+      return res.json({ "isCarNum": false });
     }
   })
 }
