@@ -29,6 +29,8 @@ router
 
   .get('/search', jwt.verifyToken, carInfoController.search)
 
+  .get('/match', carInfoController.index)
+
   .get('/:id', jwt.verifyToken, async (req, res, next) => res.render('carInfo/detail', {
     user: req.userInfo,
     parts: await partsService.allRead(),
